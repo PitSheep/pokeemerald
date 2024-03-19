@@ -6,8 +6,6 @@
 #include "contest_effect.h"
 #include "constants/moves.h"
 
-#define AI_ACTION_DONE (1 << 0)
-
 extern const u8 *gAIScriptPtr;
 extern const u8 *gContestAI_ScriptsTable[];
 
@@ -326,7 +324,7 @@ u8 ContestAI_GetActionToUse(void)
     {
         // Randomly choose a move index. If it's the move
         // with the highest (or tied highest) score, return
-        u8 moveIdx = MOD(Random(), MAX_MON_MOVES);
+        u8 moveIdx = Random() & (MAX_MON_MOVES - 1); // % MAX_MON_MOVES doesn't match
         u8 score = eContestAI.moveScores[moveIdx];
         int i;
         for (i = 0; i < MAX_MON_MOVES; i++)
@@ -364,9 +362,9 @@ static void ContestAI_DoAIProcessing(void)
                 else
                 {
                     eContestAI.moveScores[eContestAI.nextMoveIndex] = 0; // don't consider a move that doesn't exist.
-                    eContestAI.aiAction |= AI_ACTION_DONE;
+                    eContestAI.aiAction |= 1;
                 }
-                if (eContestAI.aiAction & AI_ACTION_DONE)
+                if (eContestAI.aiAction & 1)
                 {
                     eContestAI.nextMoveIndex++;
                     if (eContestAI.nextMoveIndex < MAX_MON_MOVES)
@@ -374,7 +372,7 @@ static void ContestAI_DoAIProcessing(void)
                     else
                         // aiState = CONTESTAI_FINISHED
                         eContestAI.aiState++;
-                    eContestAI.aiAction &= ~AI_ACTION_DONE;
+                    eContestAI.aiAction &= 0xFE; // TODO: Define action flags
                 }
                 break;
         }
@@ -1669,7 +1667,7 @@ static void ContestAICmd_call(void)
 static void ContestAICmd_end(void)
 {
     if (!AIStackPop())
-        eContestAI.aiAction |= AI_ACTION_DONE;
+        eContestAI.aiAction |= 1;
 }
 
 static void AIStackPushVar(const u8 *ptr)

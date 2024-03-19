@@ -388,17 +388,17 @@ static void AnimTask_AnimateGustTornadoPalette_Step(u8 taskId)
     {
         gTasks[taskId].data[10] = 0;
         data2 = gTasks[taskId].data[2];
-        temp = gPlttBufferFaded[OBJ_PLTT_ID(data2) + 8];
+        temp = gPlttBufferFaded[16 * data2 + 0x108];
         i = 7;
-        base = PLTT_ID(data2);
+        base = data2 * 16;
 
         do
         {
-            gPlttBufferFaded[base + OBJ_PLTT_OFFSET + 1 + i] = gPlttBufferFaded[base + OBJ_PLTT_OFFSET + i];
+            gPlttBufferFaded[base + 0x101 + i] = gPlttBufferFaded[base + 0x100 + i];
             i--;
         } while (i > 0);
 
-        gPlttBufferFaded[base + OBJ_PLTT_OFFSET + 1] = temp;
+        gPlttBufferFaded[base + 0x101] = temp;
     }
 
     if (--gTasks[taskId].data[0] == 0)
@@ -1220,7 +1220,8 @@ void AnimSkyAttackBird_Step(struct Sprite *sprite)
         DestroySpriteAndMatrix(sprite);
 }
 
-static void UNUSED AnimTask_SetAttackerVisibility(u8 taskId)
+// Unused
+static void AnimTask_SetAttackerVisibility(u8 taskId)
 {
     if (gBattleAnimArgs[0] == 0)
     {

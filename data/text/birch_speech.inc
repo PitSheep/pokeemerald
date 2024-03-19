@@ -21,11 +21,11 @@ gText_Birch_MainSpeech::
 	.string "and battle others like us.\p"
 	.string "But despite our closeness, we don't\n"
 	.string "know everything about POKéMON.\p"
-	.string "In fact, there are many, many\n"
-	.string "secrets surrounding POKéMON.\p"
-	.string "To unravel POKéMON mysteries,\n"
-	.string "I've been undertaking research.\l"
-	.string "That's what I do.\p"
+	.string "In fact, we don't know how to\n"
+	.string "command pokemon.\p"
+	.string "We can only ask them to fight\n"
+	.string "but then they will decide what\l"
+	.string "move to make.\p"
 	.string "$"
 
 gText_Birch_AndYouAre::

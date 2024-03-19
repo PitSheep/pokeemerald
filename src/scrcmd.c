@@ -76,12 +76,12 @@ void * const gNullScriptPtr = NULL;
 static const u8 sScriptConditionTable[6][3] =
 {
 //  <  =  >
-    {1, 0, 0}, // <
-    {0, 1, 0}, // =
-    {0, 0, 1}, // >
-    {1, 1, 0}, // <=
-    {0, 1, 1}, // >=
-    {1, 0, 1}, // !=
+    1, 0, 0, // <
+    0, 1, 0, // =
+    0, 0, 1, // >
+    1, 1, 0, // <=
+    0, 1, 1, // >=
+    1, 0, 1, // !=
 };
 
 static u8 * const sScriptStringVars[] =
@@ -649,12 +649,12 @@ bool8 ScrCmd_fadescreenswapbuffers(struct ScriptContext *ctx)
     case FADE_TO_BLACK:
     case FADE_TO_WHITE:
     default:
-        CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_SIZE);
+        CpuCopy32(gPlttBufferUnfaded, gPaletteDecompressionBuffer, PLTT_DECOMP_BUFFER_SIZE);
         FadeScreen(mode, 0);
         break;
     case FADE_FROM_BLACK:
     case FADE_FROM_WHITE:
-        CpuCopy32(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_SIZE);
+        CpuCopy32(gPaletteDecompressionBuffer, gPlttBufferUnfaded, PLTT_DECOMP_BUFFER_SIZE);
         FadeScreen(mode, 0);
         break;
     }
@@ -1176,7 +1176,7 @@ bool8 ScrCmd_setobjectmovementtype(struct ScriptContext *ctx)
 
 bool8 ScrCmd_createvobject(struct ScriptContext *ctx)
 {
-    u8 graphicsId = ScriptReadByte(ctx);
+    u16 graphicsId = ScriptReadByte(ctx);
     u8 virtualObjId = ScriptReadByte(ctx);
     u16 x = VarGet(ScriptReadHalfword(ctx));
     u32 y = VarGet(ScriptReadHalfword(ctx));
@@ -2304,4 +2304,86 @@ bool8 ScrCmd_warpwhitefade(struct ScriptContext *ctx)
     DoWhiteFadeWarp();
     ResetInitialPlayerAvatarState();
     return TRUE;
+}
+
+bool8 ScrCmd_pokemonfaceplayer(struct ScriptContext *ctx)
+{
+    // The script will affect the following Pokemon if no argument is passed to it.
+    if(gSpecialVar_Unused_0x8014 == OBJ_EVENT_ID_FOLLOWER)
+    {
+        ObjectEventClearHeldMovement(&gObjectEvents[gSaveBlock2Ptr->follower.objId]);
+        ObjectEventPokemonFacePlayer(&gObjectEvents[gSaveBlock2Ptr->follower.objId], &gObjectEvents[gPlayerAvatar.objectEventId]);
+    }
+    // The script will affect an event object based on the local id passed to the script.
+    else
+    {
+        gSpecialVar_Unused_0x8014 = GetObjectEventIdByLocalIdAndMap(gSpecialVar_Unused_0x8014, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        ObjectEventClearHeldMovement(&gObjectEvents[gSpecialVar_Unused_0x8014]);
+
+        #define POW2(num) (num * num)
+
+        // Checks to see whether the object is furthest away from the player along the x or y axis.
+        if(POW2((gObjectEvents[gSpecialVar_Unused_0x8014].currentCoords.x - gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x)) < POW2((gObjectEvents[gSpecialVar_Unused_0x8014].currentCoords.y - gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y)))
+        {
+            // Player is South of object
+            if(gObjectEvents[gSpecialVar_Unused_0x8014].currentCoords.y < gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.y)
+            {
+                ObjectEventSetHeldMovement(&gObjectEvents[gSpecialVar_Unused_0x8014], 159);
+            }
+            // Player is North of object
+            else
+            {
+                ObjectEventSetHeldMovement(&gObjectEvents[gSpecialVar_Unused_0x8014], 160);
+            }
+        }
+        else
+        {
+            // Player is East of object
+            if(gObjectEvents[gSpecialVar_Unused_0x8014].currentCoords.x < gObjectEvents[gPlayerAvatar.objectEventId].currentCoords.x)
+            {
+                ObjectEventSetHeldMovement(&gObjectEvents[gSpecialVar_Unused_0x8014], 162);
+            }
+            // Player is West of object
+            else
+            {
+                ObjectEventSetHeldMovement(&gObjectEvents[gSpecialVar_Unused_0x8014], 161);
+            }
+        }
+    }
+    return TRUE;
+}
+
+// follow me script commands
+#include "follow_me.h"
+bool8 ScrCmd_setfollower(struct ScriptContext *ctx)
+{
+    u8 localId = ScriptReadByte(ctx);
+    u16 flags = ScriptReadHalfword(ctx);
+
+    SetUpFollowerSprite(localId, flags);
+    return FALSE;
+}
+
+bool8 ScrCmd_destroyfollower(struct ScriptContext *ctx)
+{
+    DestroyFollower();
+    return FALSE;
+}
+
+bool8 ScrCmd_facefollower(struct ScriptContext *ctx)
+{
+    PlayerFaceFollowerSprite();
+    return FALSE;
+}
+
+bool8 ScrCmd_checkfollower(struct ScriptContext *ctx)
+{
+    CheckPlayerHasFollower();
+    return FALSE;
+}
+
+bool8 ScrCmd_isfollowervisible(struct ScriptContext *ctx)
+{
+    gSpecialVar_Result = gSaveBlock2Ptr->follower.inProgress && !gObjectEvents[gSaveBlock2Ptr->follower.objId].invisible;
+    return FALSE;
 }

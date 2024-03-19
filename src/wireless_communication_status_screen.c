@@ -222,7 +222,7 @@ static void CB2_InitWirelessCommunicationScreen(void)
     ChangeBgX(1, 0, BG_COORD_SET);
     ChangeBgY(1, 0, BG_COORD_SET);
     LoadPalette(sPalettes, BG_PLTT_ID(0), PLTT_SIZE_4BPP);
-    Menu_LoadStdPalAt(BG_PLTT_ID(15));
+    Menu_LoadStdPalAt(0xF0);
     DynamicPlaceholderTextUtil_Reset();
     FillBgTilemapBufferRect(0, 0, 0, 0, 32, 32, 15);
     CopyBgTilemapBufferToVram(1);

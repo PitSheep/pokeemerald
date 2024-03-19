@@ -21,7 +21,6 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/map_types.h"
-#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
@@ -692,9 +691,9 @@ static const struct BattleBackground sBattleTerrainTable[] =
     },
 };
 
-static void UNUSED CB2_UnusedBattleInit(void);
+static void CB2_UnusedBattleInit(void);
 
-static void UNUSED UnusedBattleInit(void)
+static void UnusedBattleInit(void)
 {
     u8 spriteId;
 
@@ -704,7 +703,7 @@ static void UNUSED UnusedBattleInit(void)
     SetMainCallback2(CB2_UnusedBattleInit);
 }
 
-static void UNUSED CB2_UnusedBattleInit(void)
+static void CB2_UnusedBattleInit(void)
 {
     AnimateSprites();
     BuildOamBuffer();
@@ -1072,7 +1071,7 @@ void InitLinkBattleVsScreen(u8 taskId)
         break;
     case 1:
         palId = AllocSpritePalette(TAG_VS_LETTERS);
-        gPlttBufferUnfaded[OBJ_PLTT_ID(palId) + 15] = gPlttBufferFaded[OBJ_PLTT_ID(palId) + 15] = RGB_WHITE;
+        gPlttBufferUnfaded[palId * 16 + 0x10F] = gPlttBufferFaded[palId * 16 + 0x10F] = 0x7FFF;
         gBattleStruct->linkBattleVsSpriteId_V = CreateSprite(&sVsLetter_V_SpriteTemplate, 111, 80, 0);
         gBattleStruct->linkBattleVsSpriteId_S = CreateSprite(&sVsLetter_S_SpriteTemplate, 129, 80, 0);
         gSprites[gBattleStruct->linkBattleVsSpriteId_V].invisible = TRUE;

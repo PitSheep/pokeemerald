@@ -481,10 +481,10 @@ static void SetDigScanlineEffect(u8 useBG1, s16 y, s16 endY)
         y++;
     }
 
-    while (y < DISPLAY_HEIGHT)
+    while (y < 160)
     {
-        gScanlineEffectRegBuffers[0][y] = bgX + DISPLAY_WIDTH;
-        gScanlineEffectRegBuffers[1][y] = bgX + DISPLAY_WIDTH;
+        gScanlineEffectRegBuffers[0][y] = bgX + 240;
+        gScanlineEffectRegBuffers[1][y] = bgX + 240;
         y++;
     }
 

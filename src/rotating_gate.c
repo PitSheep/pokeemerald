@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
+#include "field_weather.h"
 #include "sound.h"
 #include "sprite.h"
 #include "constants/songs.h"
@@ -17,10 +18,12 @@
 #define GATE_ROT_ACW(arm, longArm) GATE_ROT(ROTATE_ANTICLOCKWISE, arm, longArm)
 #define GATE_ROT_NONE 255
 
+// static functions
 static void SpriteCallback_RotatingGate(struct Sprite *sprite);
 static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY);
 static void RotatingGate_HideGatesOutsideViewport(struct Sprite *sprite);
 
+// enums
 enum
 {
     /*
@@ -178,6 +181,7 @@ enum
     PUZZLE_ROUTE110_TRICK_HOUSE_PUZZLE6,
 };
 
+// structure
 struct RotatingGatePuzzle
 {
     s16 x;
@@ -186,6 +190,7 @@ struct RotatingGatePuzzle
     u8 orientation;
 };
 
+// .rodata
 // Fortree
 static const struct RotatingGatePuzzle sRotatingGate_FortreePuzzleConfig[] =
 {
@@ -215,15 +220,6 @@ static const struct RotatingGatePuzzle sRotatingGate_TrickHousePuzzleConfig[] =
     {10, 19, GATE_SHAPE_L3, GATE_ORIENTATION_180},
 };
 
-#define MAX_GATES max(ARRAY_COUNT(sRotatingGate_FortreePuzzleConfig), \
-                      ARRAY_COUNT(sRotatingGate_TrickHousePuzzleConfig))
-
-// Rotating gate puzzles use the temp vars as a byte array to track the orientation of each gate.
-// The assert below makes sure the existing puzzles don't have too many gates, and aren't quietly
-// using vars outside the temp vars. Aside from potentially reading/writing vars being used for
-// something else, using vars that persist when exiting the map could softlock the puzzle.
-STATIC_ASSERT(MAX_GATES <= (2 * NUM_TEMP_VARS), TooManyRotatingGates)
-
 static const u8 sRotatingGateTiles_1[] = INCBIN_U8("graphics/rotating_gates/l1.4bpp");
 static const u8 sRotatingGateTiles_2[] = INCBIN_U8("graphics/rotating_gates/l2.4bpp");
 static const u8 sRotatingGateTiles_3[] = INCBIN_U8("graphics/rotating_gates/l3.4bpp");
@@ -246,7 +242,6 @@ static const struct OamData sOamData_RotatingGateLarge =
     .size = SPRITE_SIZE(64x64),
     .tileNum = 0,
     .priority = 2,
-    .paletteNum = 2,
     .affineParam = 0,
 };
 
@@ -263,7 +258,6 @@ static const struct OamData sOamData_RotatingGateRegular =
     .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 2,
-    .paletteNum = 2,
     .affineParam = 0,
 };
 
@@ -465,7 +459,7 @@ static const union AffineAnimCmd *const sSpriteAffineAnimTable_RotatingGate[] =
 static const struct SpriteTemplate sSpriteTemplate_RotatingGateLarge =
 {
     .tileTag = ROTATING_GATE_TILE_TAG,
-    .paletteTag = TAG_NONE,
+    .paletteTag = 0x1103, // OBJ_EVENT_PAL_TAG_NPC_1
     .oam = &sOamData_RotatingGateLarge,
     .anims = sSpriteAnimTable_RotatingGateLarge,
     .images = NULL,
@@ -476,7 +470,7 @@ static const struct SpriteTemplate sSpriteTemplate_RotatingGateLarge =
 static const struct SpriteTemplate sSpriteTemplate_RotatingGateRegular =
 {
     .tileTag = ROTATING_GATE_TILE_TAG,
-    .paletteTag = TAG_NONE,
+    .paletteTag = 0x1103, // OBJ_EVENT_PAL_TAG_NPC_1
     .oam = &sOamData_RotatingGateRegular,
     .anims = sSpriteAnimTable_RotatingGateRegular,
     .images = NULL,
@@ -644,7 +638,9 @@ static void RotatingGate_ResetAllGateOrientations(void)
     u8 *ptr = (u8 *)GetVarPointer(VAR_TEMP_0);
 
     for (i = 0; i < sRotatingGate_PuzzleCount; i++)
+    {
         ptr[i] = sRotatingGate_PuzzleConfig[i].orientation;
+    }
 }
 
 static s32 RotatingGate_GetGateOrientation(u8 gateId)
@@ -746,10 +742,17 @@ static u8 RotatingGate_CreateGate(u8 gateId, s16 deltaX, s16 deltaY)
 
     x = gate->x + MAP_OFFSET;
     y = gate->y + MAP_OFFSET;
+    
+    if (template.paletteTag != 0xFFFF)
+    {
+        LoadObjectEventPalette(template.paletteTag);
+        UpdatePaletteGammaType(IndexOfSpritePaletteTag(template.paletteTag), COLOR_MAP_CONTRAST);
+    }
 
     sprite = &gSprites[spriteId];
     sprite->data[0] = gateId;
     sprite->coordOffsetEnabled = 1;
+    sprite->oam.paletteNum = IndexOfSpritePaletteTag(template.paletteTag);
 
     GetMapCoordsFromSpritePos(x + deltaX, y + deltaY, &sprite->x, &sprite->y);
     RotatingGate_HideGatesOutsideViewport(sprite);

@@ -1,6 +1,3 @@
-#ifndef GUARD_CONSTANTS_GLOBAL_INC
-#define GUARD_CONSTANTS_GLOBAL_INC
-
 	.set TRUE, 1
 	.set FALSE, 0
 
@@ -23,5 +20,3 @@
 
 	.set OBJ_IMAGE_ANIM_H_FLIP, 1 << 6
 	.set OBJ_IMAGE_ANIM_V_FLIP, 1 << 7
-
-#endif @ GUARD_CONSTANTS_GLOBAL_INC
