@@ -23,9 +23,9 @@ gText_Birch_MainSpeech::
 	.string "know everything about POKéMON.\p"
 	.string "ATTENTION! We don't know how to\n"
 	.string "command pokemon.\p"
-	.string "We can only ask them to fight\n"
-	.string "but then they will decide what\l"
-	.string "move to make.\p"
+	.string "We can ONLY ASK them to fight\n"
+	.string "but then THEY WILL DECIDE what\l"
+	.string "move to make BASED ON THEY NATURE.\p"
 	.string "$"
 
 gText_Birch_AndYouAre::
@@ -51,11 +51,11 @@ gText_Birch_YourePlayer::
 
 gText_Birch_AreYouReady::
 	.string "All right, are you ready?\p"
-	.string "first of all, check your PC\n"
+	.string "FIRST OF ALL, check your PC\n"
 	.string "in your bedroom.\p"
 	.string "Take the TM which will unlock\n"
-	.string " the TM CASE in your backpack.\l"
-	.string "and much more!\p"
+	.string " the TM CASE in your BAG.\l"
+	.string "and much more to discover.\p"
 	.string "Well, I'll be expecting you later.\n"
 	.string "Come see me in my POKéMON LAB.\p"
 	.string "$"
