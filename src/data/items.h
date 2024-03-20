@@ -3016,77 +3016,70 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    // HM Items
-    [ITEM_SURFBOARD] =
+    [ITEM_0F8] =
     {
-        .name = _("SURFBOARD"),
-        .itemId = ITEM_SURFBOARD,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-		.importance = 1,
-        .description = sSurfboardDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_Surfboard,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-	[ITEM_AXE] =
+    [ITEM_0F9] =
     {
-        .name = _("AXE"),
-        .itemId = ITEM_AXE,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-		.importance = 1,
-        .description = sAxeDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_Axe,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-	[ITEM_HAMMER] =
+    [ITEM_0FA] =
     {
-        .name = _("HAMMER"),
-        .itemId = ITEM_HAMMER,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-		.importance = 1,
-        .description = sHammerDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_Hammer,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-	[ITEM_DIVING_SUIT] =
+    [ITEM_0FB] =
     {
-        .name = _("DIVING SUIT"),
-        .itemId = ITEM_DIVING_SUIT,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-		.importance = 1,
-        .description = sDivingSuitDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_DivingSuit,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-	[ITEM_LANTERN] =
+    [ITEM_0FC] =
     {
-        .name = _("LANTERN"),
-        .itemId = ITEM_LANTERN,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-		.importance = 1,
-        .description = sLanternDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_Lantern,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-	[ITEM_POWER_GLOVE] =
+    [ITEM_0FD] =
     {
-        .name = _("POWER GLOVE"),
-        .itemId = ITEM_POWER_GLOVE,
+        .name = _("????????"),
+        .itemId = ITEM_NONE,
         .price = 0,
-		.importance = 1,
-        .description = sPowerGloveDesc,
-        .pocket = POCKET_KEY_ITEMS,
-        .type = ITEM_USE_FIELD,
-        .fieldUseFunc = ItemUseOutOfBattle_PowerGlove,
+        .description = sDummyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
     [ITEM_RED_SCARF] =
