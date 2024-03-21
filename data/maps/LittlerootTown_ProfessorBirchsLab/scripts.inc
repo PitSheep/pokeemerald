@@ -695,11 +695,11 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo:
 
 LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
 	.string "PROF. BIRCH: So, {PLAYER}{KUN}.\p"
-	.string "DID YOU SEE WHAT HAPPENED?!\n"
-	.string "THE POKEMON HAS DECIDED ITSELF\n"
-	.string "WHICH MOVE TO MAKE!\n"
-	.string "you will soon understand what I mean...\n"
-	.string "let's get back to us...\n"
+	.string "DID YOU SEE WHAT HAPPENED?!\p"
+	.string "THE POKEMON HAS DECIDED ITSELF\p"
+	.string "WHICH MOVE TO MAKE!\p"
+	.string "you will soon understand what I mean...\p"
+	.string "let's get back to us...\p"
 	.string "I've heard so much about you from\n"
 	.string "your father.\p"
 	.string "I've heard that you don't have your\n"
