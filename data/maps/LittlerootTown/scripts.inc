@@ -920,7 +920,7 @@ LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "It has a quaint feel, but it seems to be\n"
 	.string "an easy place to live, don't you think?\p"
 	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
+	.string "Let's go inside and take this!.$"
 
 LittlerootTown_Text_WaitPlayer:
 	.string "MOM: Wait, {PLAYER}!$"
