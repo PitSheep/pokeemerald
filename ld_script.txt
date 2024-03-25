@@ -343,6 +343,7 @@ SECTIONS {
         src/follow_me.o(.text);
         src/tm_case.o(.text);
 		src/ui_stat_editor.o(.text);
+        src/tx_registered_items_menu.o(.text);
     } =0
 
     script_data :
@@ -708,6 +709,7 @@ SECTIONS {
         src/follow_me.o(.rodata);
         src/tm_case.o(.rodata);
 		src/ui_stat_editor.o(.rodata);
+        src/tx_registered_items_menu.o(.rodata);
     } =0
 
     song_data :

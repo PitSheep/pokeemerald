@@ -150,3 +150,4 @@
 	.include "src/rayquaza_scene.o"
 	.include "src/tm_case.o"
 	.include "src/ui_stat_editor.o"
+	.include "src/tx_registered_items_menu.o"
