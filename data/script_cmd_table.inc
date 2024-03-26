@@ -232,6 +232,8 @@ gScriptCmdTable::
 	.4byte ScrCmd_facefollower				        @ 0xe5
 	.4byte ScrCmd_checkfollower				        @ 0xe6
 	.4byte ScrCmd_isfollowervisible                 @ 0xe7
+	.4byte ScrCmd_checkpcspace           			@ 0xe3
+
 
 gScriptCmdTableEnd::
 	.4byte ScrCmd_nop

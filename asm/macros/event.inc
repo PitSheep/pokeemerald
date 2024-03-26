@@ -1756,6 +1756,14 @@
 	.byte 0xe7
 	.endm
 
+	@ Checks if the player has enough space in their PC to hold quantity more of the specified item. Sets VAR_RESULT to
+	@ TRUE if there is room, or FALSE is there is no room.
+	.macro checkpcspace itemId:req, quantity=1
+	.byte 0xe3
+	.2byte \itemId
+	.2byte \quantity
+	.endm
+
 @ Supplementary
 
 	.macro goto_if_unset flag:req, dest:req
