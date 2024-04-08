@@ -1829,3 +1829,5 @@ const u8 gText_FontShort[] =            _("{FONT_SHORT}");
 const u8 gText_TMCase_Blue[] =          _("{COLOR_HIGHLIGHT_SHADOW BLUE TRANSPARENT LIGHT_BLUE}{STR_VAR_2}");
 
 const u8 gText_StatEditor[] = _("EDIT STATS");
+
+const u8 gText_Moves_Menu[] = _("Change Moves");

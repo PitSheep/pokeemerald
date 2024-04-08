@@ -3034,5 +3034,6 @@ extern const u8 gText_TMCaseWillBePutAway[];
 extern const u8 gText_FontSmall[];
 extern const u8 gText_FontShort[];
 extern const u8 gText_TMCase_Blue[];
+extern const u8 gText_Moves_Menu[];
 
 #endif // GUARD_STRINGS_H
