@@ -207,6 +207,7 @@ void NewGameInitData(void)
     ResetTrainerHillResults();
     ResetContestLinkResults();
     memset(&gSaveBlock2Ptr->follower, 0, sizeof(gSaveBlock2Ptr->follower));
+    gSaveBlock2Ptr->expShare = 0;
 }
 
 static void ResetMiniGamesRecords(void)
