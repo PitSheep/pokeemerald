@@ -426,3 +426,38 @@ Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne:
 	.string "me, you'll be left with just one.\p"
 	.string "You will be better off if you catch\n"
 	.string "some more, I dare say.$"
+
+Route117_EventScript_StoneVendorMan::
+	lock
+	faceplayer
+	message Route117_Text_StoneVendorManSellWhatYouNeed
+	waitmessage
+	pokemart Route117_Pokemart_StoneVendorMan
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+Route117_Text_StoneVendorManSellWhatYouNeed:
+	.string "I'm the STONE GURU! I'll go for it and\n"
+	.string "sell you what you need!$"
+
+.align 2
+Route117_Pokemart_StoneVendorMan:
+	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_SUN_STONE
+	.2byte ITEM_MOON_STONE
+	.2byte ITEM_FIRE_STONE
+	.2byte ITEM_THUNDER_STONE
+	.2byte ITEM_WATER_STONE
+	.2byte ITEM_LEAF_STONE
+	.2byte ITEM_NONE
+	release
+	end
+
+Route117_EventScript_StoneVendorManInfo::
+	msgbox Route117_Text_StoneVendorManInfo, MSGBOX_SIGN
+	end
+
+Route117_Text_StoneVendorManInfo:
+	.string "TRAINER TIPS\p"
+	.string "this man nearby sells all the stones.$"
