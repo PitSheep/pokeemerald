@@ -151,7 +151,7 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	waitmovement 0
 	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
 	closemessage
-	giveitem ITEM_TM05
+	giveitem ITEM_TM_CASE
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachDoor
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
 	waitmovement 0
@@ -920,7 +920,7 @@ LittlerootTown_Text_OurNewHomeLetsGoInside:
 	.string "It has a quaint feel, but it seems to be\n"
 	.string "an easy place to live, don't you think?\p"
 	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside and take this!.$"
+	.string "Take this and Let's go inside!.$"
 
 LittlerootTown_Text_WaitPlayer:
 	.string "MOM: Wait, {PLAYER}!$"
