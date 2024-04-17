@@ -311,6 +311,7 @@ EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex:
 EverGrandeCity_ChampionsRoom_Text_BirchCongratulations:
 	.string "PROF. BIRCH: Anyways,\n"
 	.string "congratulations!\p"
+	.string "Now you can train POKéMON up to level 100.\p"
 	.string "Now, go proudly into the final room!$"
 
 EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe:
