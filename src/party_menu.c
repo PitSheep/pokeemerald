@@ -5047,7 +5047,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
 
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL)
+    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL && GetMonData(mon, MON_DATA_LEVEL) != currentLvlCap())
     {
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, *itemPtr, 0);
@@ -6515,5 +6515,40 @@ void IsLastMonThatKnowsSurf(void)
         }
         if (AnyStorageMonWithMove(move) != TRUE)
             gSpecialVar_Result = TRUE;
+    }
+}
+
+//PIT RULES: lvl cap by badge
+u8 currentLvlCap(void)
+{
+    if(!FlagGet(FLAG_BADGE01_GET)){
+        return 16;
+    }
+    else if(!FlagGet(FLAG_BADGE02_GET)){
+        return 20;
+    }
+    else if(!FlagGet(FLAG_BADGE03_GET)){
+        return 25;
+    }
+    else if(!FlagGet(FLAG_BADGE04_GET)){
+        return 30;
+    }
+    else if(!FlagGet(FLAG_BADGE05_GET)){
+        return 32;
+    }
+    else if(!FlagGet(FLAG_BADGE06_GET)){
+        return 36;
+    }
+    else if(!FlagGet(FLAG_BADGE07_GET)){
+        return 43;
+    }
+    else if(!FlagGet(FLAG_BADGE08_GET)){
+        return 50;
+    }
+    else if(!FlagGet(FLAG_IS_CHAMPION)){
+        return 60;
+    }
+    else{
+        return 100;
     }
 }
