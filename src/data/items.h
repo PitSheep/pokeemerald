@@ -2384,7 +2384,7 @@ const struct Item gItems[] =
     {
         .name = _("EVERSTONE"),
         .itemId = ITEM_EVERSTONE,
-        .price = 200,
+        .price = 100,
         .holdEffect = HOLD_EFFECT_PREVENT_EVOLVE,
         .description = sEverstoneDesc,
         .pocket = POCKET_ITEMS,
@@ -2396,7 +2396,7 @@ const struct Item gItems[] =
     {
         .name = _("FOCUS BAND"),
         .itemId = ITEM_FOCUS_BAND,
-        .price = 200,
+        .price = 100,
         .holdEffect = HOLD_EFFECT_FOCUS_BAND,
         .holdEffectParam = 10,
         .description = sFocusBandDesc,
@@ -2446,7 +2446,7 @@ const struct Item gItems[] =
     {
         .name = _("LEFTOVERS"),
         .itemId = ITEM_LEFTOVERS,
-        .price = 200,
+        .price = 100,
         .holdEffect = HOLD_EFFECT_LEFTOVERS,
         .holdEffectParam = 10,
         .description = sLeftoversDesc,
@@ -2640,7 +2640,7 @@ const struct Item gItems[] =
     {
         .name = _("CHARCOAL"),
         .itemId = ITEM_CHARCOAL,
-        .price = 9800,
+        .price = 100,
         .holdEffect = HOLD_EFFECT_FIRE_POWER,
         .holdEffectParam = 10,
         .description = sCharcoalDesc,
@@ -2691,7 +2691,7 @@ const struct Item gItems[] =
     {
         .name = _("SHELL BELL"),
         .itemId = ITEM_SHELL_BELL,
-        .price = 200,
+        .price = 100,
         .holdEffect = HOLD_EFFECT_SHELL_BELL,
         .holdEffectParam = 8,
         .description = sShellBellDesc,
