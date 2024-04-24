@@ -1149,1256 +1149,1256 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize5::
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start1::
-	setwildbattle 1,1
+	setwildbattle SPECIES_BULBASAUR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start2::
-	setwildbattle 2,1
+	setwildbattle SPECIES_IVYSAUR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start3::
-	setwildbattle 3,1
+	setwildbattle SPECIES_VENUSAUR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start4::
-	setwildbattle 4,1
+	setwildbattle SPECIES_CHARMANDER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start5::
-	setwildbattle 5,1
+	setwildbattle SPECIES_CHARMELEON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start6::
-	setwildbattle 6,1
+	setwildbattle SPECIES_CHARIZARD,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start7::
-	setwildbattle 7,1
+	setwildbattle SPECIES_SQUIRTLE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start8::
-	setwildbattle 8,1
+	setwildbattle SPECIES_WARTORTLE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start9::
-	setwildbattle 9,1
+	setwildbattle SPECIES_BLASTOISE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start10::
-	setwildbattle 10,1
+	setwildbattle SPECIES_CATERPIE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start11::
-	setwildbattle 11,1
+	setwildbattle SPECIES_METAPOD,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start12::
-	setwildbattle 12,1
+	setwildbattle SPECIES_BUTTERFREE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start13::
-	setwildbattle 13,1
+	setwildbattle SPECIES_WEEDLE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start14::
-	setwildbattle 14,1
+	setwildbattle SPECIES_KAKUNA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start15::
-	setwildbattle 15,1
+	setwildbattle SPECIES_BEEDRILL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start16::
-	setwildbattle 16,1
+	setwildbattle SPECIES_PIDGEY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start17::
-	setwildbattle 17,1
+	setwildbattle SPECIES_PIDGEOTTO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start18::
-	setwildbattle 18,1
+	setwildbattle SPECIES_PIDGEOT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start19::
-	setwildbattle 19,1
+	setwildbattle SPECIES_RATTATA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start20::
-	setwildbattle 20,1
+	setwildbattle SPECIES_RATICATE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start21::
-	setwildbattle 21,1
+	setwildbattle SPECIES_SPEAROW,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start22::
-	setwildbattle 22,1
+	setwildbattle SPECIES_FEAROW,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start23::
-	setwildbattle 23,1
+	setwildbattle SPECIES_EKANS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start24::
-	setwildbattle 24,1
+	setwildbattle SPECIES_ARBOK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start25::
-	setwildbattle 25,1
+	setwildbattle SPECIES_PIKACHU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start26::
-	setwildbattle 26,1
+	setwildbattle SPECIES_RAICHU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start27::
-	setwildbattle 27,1
+	setwildbattle SPECIES_SANDSHREW,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start28::
-	setwildbattle 28,1
+	setwildbattle SPECIES_SANDSLASH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start29::
-	setwildbattle 29,1
+	setwildbattle SPECIES_NIDORAN_F,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start30::
-	setwildbattle 30,1
+	setwildbattle SPECIES_NIDORINA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start31::
-	setwildbattle 31,1
+	setwildbattle SPECIES_NIDOQUEEN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start32::
-	setwildbattle 32,1
+	setwildbattle SPECIES_NIDORAN_M,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start33::
-	setwildbattle 33,1
+	setwildbattle SPECIES_NIDORINO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start34::
-	setwildbattle 34,1
+	setwildbattle SPECIES_NIDOKING,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start35::
-	setwildbattle 35,1
+	setwildbattle SPECIES_CLEFAIRY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start36::
-	setwildbattle 36,1
+	setwildbattle SPECIES_CLEFABLE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start37::
-	setwildbattle 37,1
+	setwildbattle SPECIES_VULPIX,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start38::
-	setwildbattle 38,1
+	setwildbattle SPECIES_NINETALES,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start39::
-	setwildbattle 39,1
+	setwildbattle SPECIES_JIGGLYPUFF,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start40::
-	setwildbattle 40,1
+	setwildbattle SPECIES_WIGGLYTUFF,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start41::
-	setwildbattle 41,1
+	setwildbattle SPECIES_ZUBAT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start42::
-	setwildbattle 42,1
+	setwildbattle SPECIES_GOLBAT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start43::
-	setwildbattle 43,1
+	setwildbattle SPECIES_ODDISH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start44::
-	setwildbattle 44,1
+	setwildbattle SPECIES_GLOOM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start45::
-	setwildbattle 45,1
+	setwildbattle SPECIES_VILEPLUME,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start46::
-	setwildbattle 46,1
+	setwildbattle SPECIES_PARAS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start47::
-	setwildbattle 47,1
+	setwildbattle SPECIES_PARASECT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start48::
-	setwildbattle 48,1
+	setwildbattle SPECIES_VENONAT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start49::
-	setwildbattle 49,1
+	setwildbattle SPECIES_VENOMOTH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start50::
-	setwildbattle 50,1
+	setwildbattle SPECIES_DIGLETT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start51::
-	setwildbattle 51,1
+	setwildbattle SPECIES_DUGTRIO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start52::
-	setwildbattle 52,1
+	setwildbattle SPECIES_MEOWTH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start53::
-	setwildbattle 53,1
+	setwildbattle SPECIES_PERSIAN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start54::
-	setwildbattle 54,1
+	setwildbattle SPECIES_PSYDUCK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start55::
-	setwildbattle 55,1
+	setwildbattle SPECIES_GOLDUCK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start56::
-	setwildbattle 56,1
+	setwildbattle SPECIES_MANKEY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start57::
-	setwildbattle 57,1
+	setwildbattle SPECIES_PRIMEAPE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start58::
-	setwildbattle 58,1
+	setwildbattle SPECIES_GROWLITHE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start59::
-	setwildbattle 59,1
+	setwildbattle SPECIES_ARCANINE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start60::
-	setwildbattle 60,1
+	setwildbattle SPECIES_POLIWAG,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start61::
-	setwildbattle 61,1
+	setwildbattle SPECIES_POLIWHIRL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start62::
-	setwildbattle 62,1
+	setwildbattle SPECIES_POLIWRATH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start63::
-	setwildbattle 63,1
+	setwildbattle SPECIES_ABRA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start64::
-	setwildbattle 64,1
+	setwildbattle SPECIES_KADABRA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start65::
-	setwildbattle 65,1
+	setwildbattle SPECIES_ALAKAZAM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start66::
-	setwildbattle 66,1
+	setwildbattle SPECIES_MACHOP,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start67::
-	setwildbattle 67,1
+	setwildbattle SPECIES_MACHOKE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start68::
-	setwildbattle 68,1
+	setwildbattle SPECIES_MACHAMP,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start69::
-	setwildbattle 69,1
+	setwildbattle SPECIES_BELLSPROUT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start70::
-	setwildbattle 70,1
+	setwildbattle SPECIES_WEEPINBELL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start71::
-	setwildbattle 71,1
+	setwildbattle SPECIES_VICTREEBEL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start72::
-	setwildbattle 72,1
+	setwildbattle SPECIES_TENTACOOL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start73::
-	setwildbattle 73,1
+	setwildbattle SPECIES_TENTACRUEL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start74::
-	setwildbattle 74,1
+	setwildbattle SPECIES_GEODUDE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start75::
-	setwildbattle 75,1
+	setwildbattle SPECIES_GRAVELER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start76::
-	setwildbattle 76,1
+	setwildbattle SPECIES_GOLEM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start77::
-	setwildbattle 77,1
+	setwildbattle SPECIES_PONYTA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start78::
-	setwildbattle 78,1
+	setwildbattle SPECIES_RAPIDASH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start79::
-	setwildbattle 79,1
+	setwildbattle SPECIES_SLOWPOKE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start80::
-	setwildbattle 80,1
+	setwildbattle SPECIES_SLOWBRO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start81::
-	setwildbattle 81,1
+	setwildbattle SPECIES_MAGNEMITE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start82::
-	setwildbattle 82,1
+	setwildbattle SPECIES_MAGNETON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start83::
-	setwildbattle 83,1
+	setwildbattle SPECIES_FARFETCHD,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start84::
-	setwildbattle 84,1
+	setwildbattle SPECIES_DODUO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start85::
-	setwildbattle 85,1
+	setwildbattle SPECIES_DODRIO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start86::
-	setwildbattle 86,1
+	setwildbattle SPECIES_SEEL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start87::
-	setwildbattle 87,1
+	setwildbattle SPECIES_DEWGONG,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start88::
-	setwildbattle 88,1
+	setwildbattle SPECIES_GRIMER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start89::
-	setwildbattle 89,1
+	setwildbattle SPECIES_MUK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start90::
-	setwildbattle 90,1
+	setwildbattle SPECIES_SHELLDER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start91::
-	setwildbattle 91,1
+	setwildbattle SPECIES_CLOYSTER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start92::
-	setwildbattle 92,1
+	setwildbattle SPECIES_GASTLY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start93::
-	setwildbattle 93,1
+	setwildbattle SPECIES_HAUNTER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start94::
-	setwildbattle 94,1
+	setwildbattle SPECIES_GENGAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start95::
-	setwildbattle 95,1
+	setwildbattle SPECIES_ONIX,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start96::
-	setwildbattle 96,1
+	setwildbattle SPECIES_DROWZEE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start97::
-	setwildbattle 97,1
+	setwildbattle SPECIES_HYPNO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start98::
-	setwildbattle 98,1
+	setwildbattle SPECIES_KRABBY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start99::
-	setwildbattle 99,1
+	setwildbattle SPECIES_KINGLER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start100::
-	setwildbattle 100,1
+	setwildbattle SPECIES_VOLTORB,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start101::
-	setwildbattle 101,1
+	setwildbattle SPECIES_ELECTRODE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start102::
-	setwildbattle 102,1
+	setwildbattle SPECIES_EXEGGCUTE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start103::
-	setwildbattle 103,1
+	setwildbattle SPECIES_EXEGGUTOR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start104::
-	setwildbattle 104,1
+	setwildbattle SPECIES_CUBONE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start105::
-	setwildbattle 105,1
+	setwildbattle SPECIES_MAROWAK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start106::
-	setwildbattle 106,1
+	setwildbattle SPECIES_HITMONLEE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start107::
-	setwildbattle 107,1
+	setwildbattle SPECIES_HITMONCHAN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start108::
-	setwildbattle 108,1
+	setwildbattle SPECIES_LICKITUNG,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start109::
-	setwildbattle 109,1
+	setwildbattle SPECIES_KOFFING,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start110::
-	setwildbattle 110,1
+	setwildbattle SPECIES_WEEZING,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start111::
-	setwildbattle 111,1
+	setwildbattle SPECIES_RHYHORN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start112::
-	setwildbattle 112,1
+	setwildbattle SPECIES_RHYDON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start113::
-	setwildbattle 113,1
+	setwildbattle SPECIES_CHANSEY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start114::
-	setwildbattle 114,1
+	setwildbattle SPECIES_TANGELA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start115::
-	setwildbattle 115,1
+	setwildbattle SPECIES_KANGASKHAN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start116::
-	setwildbattle 116,1
+	setwildbattle SPECIES_HORSEA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start117::
-	setwildbattle 117,1
+	setwildbattle SPECIES_SEADRA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start118::
-	setwildbattle 118,1
+	setwildbattle SPECIES_GOLDEEN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start119::
-	setwildbattle 119,1
+	setwildbattle SPECIES_SEAKING,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start120::
-	setwildbattle 120,1
+	setwildbattle SPECIES_STARYU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start121::
-	setwildbattle 121,1
+	setwildbattle SPECIES_STARMIE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start122::
-	setwildbattle 122,1
+	setwildbattle SPECIES_MR_MIME,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start123::
-	setwildbattle 123,1
+	setwildbattle SPECIES_SCYTHER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start124::
-	setwildbattle 124,1
+	setwildbattle SPECIES_JYNX,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start125::
-	setwildbattle 125,1
+	setwildbattle SPECIES_ELECTABUZZ,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start126::
-	setwildbattle 126,1
+	setwildbattle SPECIES_MAGMAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start127::
-	setwildbattle 127,1
+	setwildbattle SPECIES_PINSIR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start128::
-	setwildbattle 128,1
+	setwildbattle SPECIES_TAUROS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start129::
-	setwildbattle 129,1
+	setwildbattle SPECIES_MAGIKARP,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start130::
-	setwildbattle 130,1
+	setwildbattle SPECIES_GYARADOS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start131::
-	setwildbattle 131,1
+	setwildbattle SPECIES_LAPRAS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start132::
-	setwildbattle 132,1
+	setwildbattle SPECIES_DITTO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start133::
-	setwildbattle 133,1
+	setwildbattle SPECIES_EEVEE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start134::
-	setwildbattle 134,1
+	setwildbattle SPECIES_VAPOREON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start135::
-	setwildbattle 135,1
+	setwildbattle SPECIES_JOLTEON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start136::
-	setwildbattle 136,1
+	setwildbattle SPECIES_FLAREON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start137::
-	setwildbattle 137,1
+	setwildbattle SPECIES_PORYGON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start138::
-	setwildbattle 138,1
+	setwildbattle SPECIES_OMANYTE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start139::
-	setwildbattle 139,1
+	setwildbattle SPECIES_OMASTAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start140::
-	setwildbattle 140,1
+	setwildbattle SPECIES_KABUTO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start141::
-	setwildbattle 141,1
+	setwildbattle SPECIES_KABUTOPS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start142::
-	setwildbattle 142,1
+	setwildbattle SPECIES_AERODACTYL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start143::
-	setwildbattle 143,1
+	setwildbattle SPECIES_SNORLAX,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start144::
-	setwildbattle 144,1
+	setwildbattle SPECIES_ARTICUNO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start145::
-	setwildbattle 145,1
+	setwildbattle SPECIES_ZAPDOS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start146::
-	setwildbattle 146,1
+	setwildbattle SPECIES_MOLTRES,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start147::
-	setwildbattle 147,1
+	setwildbattle SPECIES_DRATINI,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start148::
-	setwildbattle 148,1
+	setwildbattle SPECIES_DRAGONAIR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start149::
-	setwildbattle 149,1
+	setwildbattle SPECIES_DRAGONITE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start150::
-	setwildbattle 150,1
+	setwildbattle SPECIES_MEWTWO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start151::
-	setwildbattle 151,1
+	setwildbattle SPECIES_MEW,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start152::
-	setwildbattle 152,1
+	setwildbattle SPECIES_CHIKORITA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start153::
-	setwildbattle 153,1
+	setwildbattle SPECIES_BAYLEEF,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start154::
-	setwildbattle 154,1
+	setwildbattle SPECIES_MEGANIUM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start155::
-	setwildbattle 155,1
+	setwildbattle SPECIES_CYNDAQUIL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start156::
-	setwildbattle 156,1
+	setwildbattle SPECIES_QUILAVA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start157::
-	setwildbattle 157,1
+	setwildbattle SPECIES_TYPHLOSION,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start158::
-	setwildbattle 158,1
+	setwildbattle SPECIES_TOTODILE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start159::
-	setwildbattle 159,1
+	setwildbattle SPECIES_CROCONAW,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start160::
-	setwildbattle 160,1
+	setwildbattle SPECIES_FERALIGATR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start161::
-	setwildbattle 161,1
+	setwildbattle SPECIES_SENTRET,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start162::
-	setwildbattle 162,1
+	setwildbattle SPECIES_FURRET,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start163::
-	setwildbattle 163,1
+	setwildbattle SPECIES_HOOTHOOT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start164::
-	setwildbattle 164,1
+	setwildbattle SPECIES_NOCTOWL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start165::
-	setwildbattle 165,1
+	setwildbattle SPECIES_LEDYBA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start166::
-	setwildbattle 166,1
+	setwildbattle SPECIES_LEDIAN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start167::
-	setwildbattle 167,1
+	setwildbattle SPECIES_SPINARAK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start168::
-	setwildbattle 168,1
+	setwildbattle SPECIES_ARIADOS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start169::
-	setwildbattle 169,1
+	setwildbattle SPECIES_CROBAT,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start170::
-	setwildbattle 170,1
+	setwildbattle SPECIES_CHINCHOU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start171::
-	setwildbattle 171,1
+	setwildbattle SPECIES_LANTURN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start172::
-	setwildbattle 172,1
+	setwildbattle SPECIES_PICHU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start173::
-	setwildbattle 173,1
+	setwildbattle SPECIES_CLEFFA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start174::
-	setwildbattle 174,1
+	setwildbattle SPECIES_IGGLYBUFF,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start175::
-	setwildbattle 175,1
+	setwildbattle SPECIES_TOGEPI,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start176::
-	setwildbattle 176,1
+	setwildbattle SPECIES_TOGETIC,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start177::
-	setwildbattle 177,1
+	setwildbattle SPECIES_NATU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start178::
-	setwildbattle 178,1
+	setwildbattle SPECIES_XATU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start179::
-	setwildbattle 179,1
+	setwildbattle SPECIES_MAREEP,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start180::
-	setwildbattle 180,1
+	setwildbattle SPECIES_FLAAFFY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start181::
-	setwildbattle 181,1
+	setwildbattle SPECIES_AMPHAROS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start182::
-	setwildbattle 182,1
+	setwildbattle SPECIES_BELLOSSOM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start183::
-	setwildbattle 183,1
+	setwildbattle SPECIES_MARILL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start184::
-	setwildbattle 184,1
+	setwildbattle SPECIES_AZUMARILL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start185::
-	setwildbattle 185,1
+	setwildbattle SPECIES_SUDOWOODO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start186::
-	setwildbattle 186,1
+	setwildbattle SPECIES_POLITOED,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start187::
-	setwildbattle 187,1
+	setwildbattle SPECIES_HOPPIP,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start188::
-	setwildbattle 188,1
+	setwildbattle SPECIES_SKIPLOOM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start189::
-	setwildbattle 189,1
+	setwildbattle SPECIES_JUMPLUFF,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start190::
-	setwildbattle 190,1
+	setwildbattle SPECIES_AIPOM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start191::
-	setwildbattle 191,1
+	setwildbattle SPECIES_SUNKERN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start192::
-	setwildbattle 192,1
+	setwildbattle SPECIES_SUNFLORA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start193::
-	setwildbattle 193,1
+	setwildbattle SPECIES_YANMA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start194::
-	setwildbattle 194,1
+	setwildbattle SPECIES_WOOPER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start195::
-	setwildbattle 195,1
+	setwildbattle SPECIES_QUAGSIRE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start196::
-	setwildbattle 196,1
+	setwildbattle SPECIES_ESPEON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start197::
-	setwildbattle 197,1
+	setwildbattle SPECIES_UMBREON,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start198::
-	setwildbattle 198,1
+	setwildbattle SPECIES_MURKROW,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start199::
-	setwildbattle 199,1
+	setwildbattle SPECIES_SLOWKING,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start200::
-	setwildbattle 200,1
+	setwildbattle SPECIES_MISDREAVUS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start201::
-	setwildbattle 201,1
+	setwildbattle SPECIES_UNOWN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start202::
-	setwildbattle 202,1
+	setwildbattle SPECIES_WOBBUFFET,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start203::
-	setwildbattle 203,1
+	setwildbattle SPECIES_GIRAFARIG,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start204::
-	setwildbattle 204,1
+	setwildbattle SPECIES_PINECO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start205::
-	setwildbattle 205,1
+	setwildbattle SPECIES_FORRETRESS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start206::
-	setwildbattle 206,1
+	setwildbattle SPECIES_DUNSPARCE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start207::
-	setwildbattle 207,1
+	setwildbattle SPECIES_GLIGAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start208::
-	setwildbattle 208,1
+	setwildbattle SPECIES_STEELIX,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start209::
-	setwildbattle 209,1
+	setwildbattle SPECIES_SNUBBULL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start210::
-	setwildbattle 210,1
+	setwildbattle SPECIES_GRANBULL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start211::
-	setwildbattle 211,1
+	setwildbattle SPECIES_QWILFISH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start212::
-	setwildbattle 212,1
+	setwildbattle SPECIES_SCIZOR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start213::
-	setwildbattle 213,1
+	setwildbattle SPECIES_SHUCKLE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start214::
-	setwildbattle 214,1
+	setwildbattle SPECIES_HERACROSS,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start215::
-	setwildbattle 215,1
+	setwildbattle SPECIES_SNEASEL,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start216::
-	setwildbattle 216,1
+	setwildbattle SPECIES_TEDDIURSA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start217::
-	setwildbattle 217,1
+	setwildbattle SPECIES_URSARING,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start218::
-	setwildbattle 218,1
+	setwildbattle SPECIES_SLUGMA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start219::
-	setwildbattle 219,1
+	setwildbattle SPECIES_MAGCARGO,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start220::
-	setwildbattle 220,1
+	setwildbattle SPECIES_SWINUB,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start221::
-	setwildbattle 221,1
+	setwildbattle SPECIES_PILOSWINE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start222::
-	setwildbattle 222,1
+	setwildbattle SPECIES_CORSOLA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start223::
-	setwildbattle 223,1
+	setwildbattle SPECIES_REMORAID,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start224::
-	setwildbattle 224,1
+	setwildbattle SPECIES_OCTILLERY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start225::
-	setwildbattle 225,1
+	setwildbattle SPECIES_DELIBIRD,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start226::
-	setwildbattle 226,1
+	setwildbattle SPECIES_MANTINE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start227::
-	setwildbattle 227,1
+	setwildbattle SPECIES_SKARMORY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start228::
-	setwildbattle 228,1
+	setwildbattle SPECIES_HOUNDOUR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start229::
-	setwildbattle 229,1
+	setwildbattle SPECIES_HOUNDOOM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start230::
-	setwildbattle 230,1
+	setwildbattle SPECIES_KINGDRA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start231::
-	setwildbattle 231,1
+	setwildbattle SPECIES_PHANPY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start232::
-	setwildbattle 232,1
+	setwildbattle SPECIES_DONPHAN,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start233::
-	setwildbattle 233,1
+	setwildbattle SPECIES_PORYGON2,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start234::
-	setwildbattle 234,1
+	setwildbattle SPECIES_STANTLER,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start235::
-	setwildbattle 235,1
+	setwildbattle SPECIES_SMEARGLE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start236::
-	setwildbattle 236,1
+	setwildbattle SPECIES_TYROGUE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start237::
-	setwildbattle 237,1
+	setwildbattle SPECIES_HITMONTOP,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start238::
-	setwildbattle 238,1
+	setwildbattle SPECIES_SMOOCHUM,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start239::
-	setwildbattle 239,1
+	setwildbattle SPECIES_ELEKID,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start240::
-	setwildbattle 240,1
+	setwildbattle SPECIES_MAGBY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start241::
-	setwildbattle 241,1
+	setwildbattle SPECIES_MILTANK,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start242::
-	setwildbattle 242,1
+	setwildbattle SPECIES_BLISSEY,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start243::
-	setwildbattle 243,1
+	setwildbattle SPECIES_RAIKOU,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start244::
-	setwildbattle 244,1
+	setwildbattle SPECIES_ENTEI,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start245::
-	setwildbattle 245,1
+	setwildbattle SPECIES_SUICUNE,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start246::
-	setwildbattle 246,1
+	setwildbattle SPECIES_LARVITAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start247::
-	setwildbattle 247,1
+	setwildbattle SPECIES_PUPITAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start248::
-	setwildbattle 248,1
+	setwildbattle SPECIES_TYRANITAR,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start249::
-	setwildbattle 249,1
+	setwildbattle SPECIES_LUGIA,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start250::
-	setwildbattle 250,1
+	setwildbattle SPECIES_HO_OH,1
 	dowildbattle
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start251::
-	setwildbattle 251,1
+	setwildbattle SPECIES_CELEBI,1
 	dowildbattle
 	end
