@@ -61,6 +61,12 @@ EventScript_TryDoRematchBattle::
 	waitbuttonpress
 	special BattleSetup_StartRematchBattle
 	waitstate
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
 	releaseall
 	end
 
@@ -79,6 +85,12 @@ EventScript_TryDoDoubleRematchBattle::
 	waitbuttonpress
 	special BattleSetup_StartRematchBattle
 	waitstate
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
 	releaseall
 	end
 
