@@ -2337,7 +2337,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_BF_EXCHANGE_POKEMON_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 6;
+        task->tNumItems = 7;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2485,6 +2485,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_Pokemon1001501BP,
         gText_Pokemon1502001BP,
         gText_Pokemon2002511BP,
+        gText_PokemonSafari1BP,
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =

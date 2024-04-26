@@ -17,6 +17,12 @@ EventScript_TryGetTrainerScript::
 	end
 
 EventScript_GotoTrainerScript::
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end

@@ -1162,6 +1162,7 @@ const u8 gText_Pokemon501001BP[] = _("50-100{CLEAR_TO 0x64}1BP");
 const u8 gText_Pokemon1001501BP[] = _("100-150{CLEAR_TO 0x64}1BP");
 const u8 gText_Pokemon1502001BP[] = _("150-200{CLEAR_TO 0x64}1BP");
 const u8 gText_Pokemon2002511BP[] = _("200-251{CLEAR_TO 0x64}1BP");
+const u8 gText_PokemonSafari1BP[] = _("SAFARI{CLEAR_TO 0x64}1BP");
 const u8 gText_Leftovers48BP[] = _("LEFTOVERS{CLEAR_TO 0x5E}48BP");
 const u8 gText_WhiteHerb48BP[] = _("WHITE HERB{CLEAR_TO 0x5E}48BP");
 const u8 gText_QuickClaw48BP[] = _("QUICK CLAW{CLEAR_TO 0x5E}48BP");

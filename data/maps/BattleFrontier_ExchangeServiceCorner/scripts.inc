@@ -743,7 +743,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseWildPokemon::
 	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Wild3
 	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Wild4
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Wild5
-	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_Wild6
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 	end
 
@@ -765,6 +766,10 @@ BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild4:
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild5:
 	.string "You've chosen 200-251 POKéDEX POKéMON.\n"
+	.string "Is that correct?$"
+
+BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild6:
+	.string "You've chosen SAFARI ZONE POKéMON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Wild1::
@@ -805,6 +810,14 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Wild5::
 	setvar VAR_0x8008, 1
 	setvar VAR_0x8009, ITEM_PROTEIN
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize5
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Wild6::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild6, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseWildPokemon
+	setvar VAR_0x8008, 1
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize6
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize1::
@@ -850,6 +863,16 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize4::
 BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize5::
 	specialvar VAR_TEMP_1, GetFrontierBattlePoints
 	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize5
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_DECOR1_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_DECOR2_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseWildPokemon
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseWildPokemon
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize6::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize6
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
 	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_DECOR1_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1
 	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_DECOR2_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2
@@ -1146,6 +1169,46 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize5::
 	case 48, BattleFrontier_ExchangeServiceCorner_EventScript_Start249
 	case 49, BattleFrontier_ExchangeServiceCorner_EventScript_Start250
 	case 50, BattleFrontier_ExchangeServiceCorner_EventScript_Start251
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize6::
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	random 32
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Start25
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_Start54
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Start55
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Start84
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Start85
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_Start111
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_Start118
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_Start119
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_Start127
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_Start163
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_Start165
+	case 11, BattleFrontier_ExchangeServiceCorner_EventScript_Start167
+	case 12, BattleFrontier_ExchangeServiceCorner_EventScript_Start177
+	case 13, BattleFrontier_ExchangeServiceCorner_EventScript_Start178
+	case 14, BattleFrontier_ExchangeServiceCorner_EventScript_Start179
+	case 15, BattleFrontier_ExchangeServiceCorner_EventScript_Start190
+	case 16, BattleFrontier_ExchangeServiceCorner_EventScript_Start191
+	case 17, BattleFrontier_ExchangeServiceCorner_EventScript_Start194
+	case 18, BattleFrontier_ExchangeServiceCorner_EventScript_Start195
+	case 19, BattleFrontier_ExchangeServiceCorner_EventScript_Start203
+	case 20, BattleFrontier_ExchangeServiceCorner_EventScript_Start204
+	case 21, BattleFrontier_ExchangeServiceCorner_EventScript_Start207
+	case 22, BattleFrontier_ExchangeServiceCorner_EventScript_Start209
+	case 23, BattleFrontier_ExchangeServiceCorner_EventScript_Start213
+	case 24, BattleFrontier_ExchangeServiceCorner_EventScript_Start214
+	case 25, BattleFrontier_ExchangeServiceCorner_EventScript_Start216
+	case 26, BattleFrontier_ExchangeServiceCorner_EventScript_Start223
+	case 27, BattleFrontier_ExchangeServiceCorner_EventScript_Start224
+	case 28, BattleFrontier_ExchangeServiceCorner_EventScript_Start228
+	case 29, BattleFrontier_ExchangeServiceCorner_EventScript_Start231
+	case 30, BattleFrontier_ExchangeServiceCorner_EventScript_Start234
+	case 31, BattleFrontier_ExchangeServiceCorner_EventScript_Start241
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_Start1::

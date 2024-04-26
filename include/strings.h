@@ -697,6 +697,7 @@ extern const u8 gText_Pokemon501001BP[];
 extern const u8 gText_Pokemon1001501BP[];
 extern const u8 gText_Pokemon1502001BP[];
 extern const u8 gText_Pokemon2002511BP[];
+extern const u8 gText_PokemonSafari1BP[];
 
 extern const u8 gText_Leftovers48BP[];
 extern const u8 gText_WhiteHerb48BP[];
