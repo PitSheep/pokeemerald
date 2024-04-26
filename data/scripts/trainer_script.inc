@@ -22,7 +22,6 @@ EventScript_GotoTrainerScript::
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end

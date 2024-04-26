@@ -66,7 +66,6 @@ EventScript_TryDoRematchBattle::
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
 	releaseall
 	end
 
@@ -85,7 +84,6 @@ EventScript_TryDoDoubleRematchBattle::
 	waitbuttonpress
 	special BattleSetup_StartRematchBattle
 	waitstate
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
@@ -131,7 +129,6 @@ EventScript_DoTrainerBattle::
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, EventScript_EndTrainerBattle
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, EventScript_EndTrainerBattle
 EventScript_EndTrainerBattle::
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints

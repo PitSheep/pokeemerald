@@ -729,7 +729,7 @@ BattleFrontier_EventScript_ChooseWildPokemon::
 	lock
 	faceplayer
 	setvar VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
-	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
+	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcomeWildPokemon
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseWildPokemon
 	end
 
@@ -744,28 +744,50 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ChooseWildPokemon::
 	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Wild4
 	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Wild5
 	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_Wild6
-	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbyeWildPokemon
+	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbyeWildPokemon
 	end
+
+BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPointsWildPokemon:
+	.string "Happy hunting manager.\p"
+	.string "Come back and see me if you\n"
+	.string "want to try your luck again.$"
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbyeWildPokemon::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPointsWildPokemon, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+
+BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrizeWildPokemon:
+	.string "Hi, it's me, Red!\p"
+	.string "In exchange the Battle Points,\n"
+	.string "I can summon pokemon from my Region.\p"
+	.string "Please choose a prize from this list.$"
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcomeWildPokemon::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrizeWildPokemon, MSGBOX_DEFAULT
+	special ShowBattlePointsWindow
+	return
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild1:
 	.string "You've chosen 1-50 POKéDEX POKéMON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild2:
-	.string "You've chosen 50-100 POKéDEX POKéMON.\n"
+	.string "You've chosen 51-100 POKéDEX POKéMON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild3:
-	.string "You've chosen 100-150 POKéDEX POKéMON.\n"
+	.string "You've chosen 101-150 POKéDEX POKéMON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild4:
-	.string "You've chosen 150-200 POKéDEX POKéMON.\n"
+	.string "You've chosen 151-200 POKéDEX POKéMON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild5:
-	.string "You've chosen 200-251 POKéDEX POKéMON.\n"
+	.string "You've chosen 201-251 POKéDEX POKéMON.\n"
 	.string "Is that correct?$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmWild6:
