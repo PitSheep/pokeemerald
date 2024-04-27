@@ -1314,7 +1314,8 @@ static void BufferBattleFacilityStats(void)
     case CARD_TYPE_EMERALD:
         if (sData->trainerCard.frontierBP)
         {
-            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.frontierBP, STR_CONV_MODE_RIGHT_ALIGN, 5);
+            ConvertIntToDecimalStringN(gStringVar2, gSaveBlock2Ptr->frontier.battlePoints, STR_CONV_MODE_RIGHT_ALIGN, 4);
+            ConvertIntToDecimalStringN(gStringVar1, sData->trainerCard.frontierBP, STR_CONV_MODE_RIGHT_ALIGN, 4);
             StringExpandPlaceholders(sData->textBattleFacilityStat, gText_NumBP);
         }
         break;
