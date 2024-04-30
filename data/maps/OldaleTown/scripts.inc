@@ -399,3 +399,24 @@ OldaleTown_Text_TownSign:
 	.string "OLDALE TOWN\n"
 	.string "“Where things start off scarce.”$"
 
+OldaleTown_EventScript_Guard::
+	msgbox OldaleTown_Text_Guard, MSGBOX_NPC
+	end
+
+OldaleTown_Text_Guard:
+	.string "This is CHAMPION GYM,\n"
+	.string "can access ONLY CHAMPIONS.\p"
+	.string "Let me check....\p"
+	.string "You are {PLAYER}....\p"
+	.string "Nope, you can't enter yet...\p"
+	.string "Come back when you become\p"
+	.string "the CHAMPION!$"
+
+OldaleTown_EventScript_GymSign::
+	msgbox OldaleTown_Text_GymSign, MSGBOX_SIGN
+	end
+
+OldaleTown_Text_GymSign:
+	.string "OLDALE TOWN POKéMON GYM\n"
+	.string "LEADER:\l"
+	.string "CHAMPION OF POKéMON LEAGUE$"

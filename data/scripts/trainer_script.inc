@@ -17,6 +17,7 @@ EventScript_TryGetTrainerScript::
 	end
 
 EventScript_GotoTrainerScript::
+	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints

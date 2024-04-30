@@ -408,7 +408,11 @@ PlayersHouse_1F_Text_PortsInSlateportLilycove:
 PlayersHouse_1F_Text_BetterGetBackToGym:
 	.string "I'd better get back to PETALBURG GYM.\p"
 	.string "MOM, thanks for looking after the house\n"
-	.string "while I'm away.$"
+	.string "while I'm away.\p"
+	.string "And reminds {PLAYER} to visit.\p"
+	.string "the GYM of CHAMPIONS\p"
+	.string "at\p"
+	.string "OLDALE TOWN!$"
 
 PlayersHouse_1F_Text_DadShouldStayLonger:
 	.string "MOM: That DAD of yours…\p"

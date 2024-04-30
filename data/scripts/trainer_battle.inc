@@ -61,6 +61,7 @@ EventScript_TryDoRematchBattle::
 	waitbuttonpress
 	special BattleSetup_StartRematchBattle
 	waitstate
+	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
@@ -84,6 +85,7 @@ EventScript_TryDoDoubleRematchBattle::
 	waitbuttonpress
 	special BattleSetup_StartRematchBattle
 	waitstate
+	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
@@ -129,6 +131,7 @@ EventScript_DoTrainerBattle::
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, EventScript_EndTrainerBattle
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, EventScript_EndTrainerBattle
 EventScript_EndTrainerBattle::
+	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
@@ -144,3 +147,147 @@ Std_MsgboxAutoclose::
 	waitbuttonpress
 	release
 	return
+
+Flag_Battle_Gym_up::
+	goto_if_set FLAG_BATTLE_GYM_1, Flag_Battle_Gym_up1
+	goto_if_set FLAG_BATTLE_GYM_2, Flag_Battle_Gym_up2
+	goto_if_set FLAG_BATTLE_GYM_3, Flag_Battle_Gym_up3
+	goto_if_set FLAG_BATTLE_GYM_4, Flag_Battle_Gym_up4
+	goto_if_set FLAG_BATTLE_GYM_5, Flag_Battle_Gym_up5
+	goto_if_set FLAG_BATTLE_GYM_6, Flag_Battle_Gym_up6
+	goto_if_set FLAG_BATTLE_GYM_7, Flag_Battle_Gym_up7
+	goto_if_set FLAG_BATTLE_GYM_8, Flag_Battle_Gym_up8
+	goto_if_set FLAG_BATTLE_GYM_9, Flag_Battle_Gym_up9
+	goto_if_set FLAG_BATTLE_GYM_REWARD, Flag_Battle_Gym_upReward
+	end
+
+Flag_Battle_Gym_up1::
+	setflag FLAG_BATTLE_GYM_2
+	clearflag FLAG_BATTLE_GYM_1
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up2::
+	setflag FLAG_BATTLE_GYM_3
+	clearflag FLAG_BATTLE_GYM_2
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up3::
+	setflag FLAG_BATTLE_GYM_4
+	clearflag FLAG_BATTLE_GYM_3
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up4::
+	setflag FLAG_BATTLE_GYM_5
+	clearflag FLAG_BATTLE_GYM_4
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up5::
+	setflag FLAG_BATTLE_GYM_6
+	clearflag FLAG_BATTLE_GYM_5
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up6::
+	setflag FLAG_BATTLE_GYM_7
+	clearflag FLAG_BATTLE_GYM_6
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up7::
+	setflag FLAG_BATTLE_GYM_8
+	clearflag FLAG_BATTLE_GYM_7
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up8::
+	setflag FLAG_BATTLE_GYM_9
+	clearflag FLAG_BATTLE_GYM_8
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_up9::
+	setflag FLAG_BATTLE_GYM_REWARD
+	clearflag FLAG_BATTLE_GYM_9
+	clearflag FLAG_BATTLE_GYM
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+Flag_Battle_Gym_upReward::
+	setflag FLAG_BATTLE_GYM_1
+	clearflag FLAG_BATTLE_GYM_REWARD
+	clearflag FLAG_BATTLE_GYM
+	giveitem ITEM_MASTER_BALL
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
