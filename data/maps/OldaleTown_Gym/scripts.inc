@@ -84,7 +84,7 @@ OldaleTown_Gym_Text_SingleBattleIntro_a:
 
 OldaleTown_Gym_EventScript_SingleBattle1::
 	setflag FLAG_BATTLE_GYM_1
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_a
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_a
@@ -93,13 +93,6 @@ OldaleTown_Gym_EventScript_SingleBattle1::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_a
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_a
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_a
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_a
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_a
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_a
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_a
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_a
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_a
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_a
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_a::
@@ -144,53 +137,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_a::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_a::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_a::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_a::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_a::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_a::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_a::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_a::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_b:
 	.string "Second Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle2::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_b
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_b
@@ -199,13 +150,6 @@ OldaleTown_Gym_EventScript_SingleBattle2::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_b
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_b
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_b
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_b
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_b
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_b
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_b
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_b
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_b
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_b
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_b::
@@ -250,53 +194,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_b::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_b::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_b::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_b::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_b::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_b::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_b::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_b::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_c:
 	.string "Third Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle3::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_c
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_c
@@ -305,13 +207,6 @@ OldaleTown_Gym_EventScript_SingleBattle3::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_c
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_c
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_c
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_c
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_c
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_c
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_c
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_c
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_c
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_c
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_c::
@@ -356,53 +251,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_c::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_c::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_c::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_c::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_c::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_c::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_c::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_c::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_d:
 	.string "Fourth Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle4::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_d
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_d
@@ -411,13 +264,6 @@ OldaleTown_Gym_EventScript_SingleBattle4::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_d
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_d
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_d
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_d
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_d
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_d
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_d
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_d
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_d
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_d
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_d::
@@ -462,53 +308,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_d::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_d::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_d::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_d::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_d::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_d::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_d::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_d::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_e:
 	.string "Fifth Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle5::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_e
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_e
@@ -517,13 +321,6 @@ OldaleTown_Gym_EventScript_SingleBattle5::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_e
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_e
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_e
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_e
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_e
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_e
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_e
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_e
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_e
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_e
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_e::
@@ -568,53 +365,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_e::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_e::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_e::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_e::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_e::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_e::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_e::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_e::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_f:
 	.string "Sixth Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle6::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_f
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_f
@@ -623,13 +378,6 @@ OldaleTown_Gym_EventScript_SingleBattle6::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_f
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_f
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_f
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_f
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_f
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_f
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_f
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_f
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_f
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_f
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_f::
@@ -674,53 +422,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_f::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_f::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_f::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_f::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_f::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_f::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_f::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_f::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_g:
 	.string "Seventh Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle7::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_g
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_g
@@ -729,13 +435,6 @@ OldaleTown_Gym_EventScript_SingleBattle7::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_g
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_g
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_g
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_g
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_g
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_g
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_g
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_g
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_g
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_g
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_g::
@@ -780,53 +479,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_g::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_g::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_g::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_g::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_g::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_g::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_g::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_g::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_h:
 	.string "Eighth Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle8::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_h
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_h
@@ -835,13 +492,6 @@ OldaleTown_Gym_EventScript_SingleBattle8::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_h
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_h
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_h
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_h
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_h
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_h
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_h
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_h
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_h
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_h
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_h::
@@ -886,53 +536,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_h::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_h::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_h::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_h::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_h::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_h::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_h::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_h::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_i:
 	.string "Ninth Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle9::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_i
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_i
@@ -941,13 +549,6 @@ OldaleTown_Gym_EventScript_SingleBattle9::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_i
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_i
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_i
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_i
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_i
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_i
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_i
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_i
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_i
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_i
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_i::
@@ -992,53 +593,11 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_i::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_i::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_i::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_i::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_i::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_i::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_i::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_i::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_Text_SingleBattleIntro_l:
 	.string "Final Battle! Get ready!$"
 
 OldaleTown_Gym_EventScript_SingleBattle10::
-	random 14
+	random 7
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_l
 	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_l
@@ -1047,13 +606,6 @@ OldaleTown_Gym_EventScript_SingleBattle10::
 	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_l
 	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_l
 	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_l
-	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_l
-	case 8, OldaleTown_Gym_EventScript_SingleBattleStart9_l
-	case 9, OldaleTown_Gym_EventScript_SingleBattleStart10_l
-	case 10, OldaleTown_Gym_EventScript_SingleBattleStart11_l
-	case 11, OldaleTown_Gym_EventScript_SingleBattleStart12_l
-	case 12, OldaleTown_Gym_EventScript_SingleBattleStart13_l
-	case 13, OldaleTown_Gym_EventScript_SingleBattleStart14_l
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_l::
@@ -1098,48 +650,6 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_l::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
-OldaleTown_Gym_EventScript_SingleBattleStart8_l::
-	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart9_l::
-	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart10_l::
-	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart11_l::
-	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart12_l::
-	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart13_l::
-	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-	
-OldaleTown_Gym_EventScript_SingleBattleStart14_l::
-	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
-	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
-	end
-
 OldaleTown_Gym_EventScript_DuoBattle::
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1D
@@ -1157,9 +667,16 @@ OldaleTown_Gym_EventScript_DuoBattle::
 
 OldaleTown_Gym_EventScript_SingleBattle1D::
 	setflag FLAG_BATTLE_GYM_1
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_ad
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_ad
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_ad
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_ad
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_ad
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_ad
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_ad
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_ad
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_ad::
@@ -1168,10 +685,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_ad::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_ad::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_ad::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_ad::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_ad::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_ad::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_ad::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_ad::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle2D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_bd
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_bd
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_bd
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_bd
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_bd
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_bd
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_bd
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_bd
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_bd::
@@ -1180,10 +746,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_bd::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_bd::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_bd::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_bd::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_bd::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_bd::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_bd::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_bd::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle3D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_cd
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_cd
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_cd
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_cd
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_cd
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_cd
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_cd
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_cd
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_cd::
@@ -1192,10 +807,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_cd::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_cd::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_cd::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_cd::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_cd::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_cd::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_cd::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_cd::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle4D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_dd
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_dd
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_dd
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_dd
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_dd
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_dd
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_dd
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_dd
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_dd::
@@ -1204,10 +868,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_dd::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_dd::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_dd::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_dd::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_dd::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_dd::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_dd::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_dd::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle5D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_ed
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_ed
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_ed
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_ed
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_ed
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_ed
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_ed
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_ed
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_ed::
@@ -1216,10 +929,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_ed::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_ed::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_ed::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_ed::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_ed::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_ed::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_ed::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_ed::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle6D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_fd
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_fd
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_fd
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_fd
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_fd
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_fd
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_fd
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_fd
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_fd::
@@ -1228,10 +990,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_fd::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_fd::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_fd::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_fd::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_fd::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_fd::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_fd::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_fd::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle7D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_gd
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_gd
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_gd
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_gd
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_gd
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_gd
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_gd
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_gd
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_gd::
@@ -1240,10 +1051,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_gd::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_gd::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_gd::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_gd::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_gd::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_gd::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_gd::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_gd::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle8D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_hd
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_hd
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_hd
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_hd
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_hd
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_hd
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_hd
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_hd
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_hd::
@@ -1252,11 +1112,59 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_hd::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_hd::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_hd::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_hd::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_hd::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_hd::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_hd::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_hd::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
 
 OldaleTown_Gym_EventScript_SingleBattle9D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_id
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_id
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_id
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_id
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_id
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_id
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_id
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_id
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_id::
@@ -1265,14 +1173,105 @@ OldaleTown_Gym_EventScript_SingleBattleStart1_id::
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
+OldaleTown_Gym_EventScript_SingleBattleStart2_id::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_id::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_id::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_id::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_id::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_id::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_id::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle10D::
-	random 1
+	random 8
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattleStart1_ld
+	case 1, OldaleTown_Gym_EventScript_SingleBattleStart2_ld
+	case 2, OldaleTown_Gym_EventScript_SingleBattleStart3_ld
+	case 3, OldaleTown_Gym_EventScript_SingleBattleStart4_ld
+	case 4, OldaleTown_Gym_EventScript_SingleBattleStart5_ld
+	case 5, OldaleTown_Gym_EventScript_SingleBattleStart6_ld
+	case 6, OldaleTown_Gym_EventScript_SingleBattleStart7_ld
+	case 7, OldaleTown_Gym_EventScript_SingleBattleStart8_ld
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_ld::
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
 	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+
+OldaleTown_Gym_EventScript_SingleBattleStart2_ld::
+	cleartrainerflag TRAINER_ROXANNE_5
+	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart3_ld::
+	cleartrainerflag TRAINER_BRAWLY_5
+	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart4_ld::
+	cleartrainerflag TRAINER_WATTSON_5
+	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart5_ld::
+	cleartrainerflag TRAINER_FLANNERY_5
+	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart6_ld::
+	cleartrainerflag TRAINER_NORMAN_5
+	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart7_ld::
+	cleartrainerflag TRAINER_WINONA_5
+	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
+	end
+	
+OldaleTown_Gym_EventScript_SingleBattleStart8_ld::
+	cleartrainerflag TRAINER_JUAN_5
+	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
