@@ -1,6 +1,48 @@
 OldaleTown_Gym_MapScripts::
 	.byte 0
 
+OldaleTown_Gym_EventScript_HideOpponent::
+	lockall
+	setflag FLAG_BATTLE_GYM_OPPONENT
+	releaseall
+	end
+
+OldaleTown_Gym_EventScript_MoveOpponentIn::
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	walk_up
+	face_up
+	step_end
+
+OldaleTown_Gym_EventScript_MoveOpponentAway::
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	walk_down
+	step_end
+
+OldaleTown_Gym_EventScript_MoveOpponentDisappear::
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentAway
+	waitmovement 0
+	removeobject VAR_CURRENT_TRAINER
+	end
+
+OldaleTown_Gym_EventScript_GymArtist::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice:
+	.string "I really don't know\p"
+	.string "why I'm here...$"
+
 OldaleTown_Gym_EventScript_GymGuide::
 	lock
 	faceplayer
@@ -64,6 +106,10 @@ OldaleTown_Gym_Text_SingleBattlePostBattle:
 	.string "You win!\n"
 	.string "Go after that BADGE!$"
 
+OldaleTown_Gym_Text_DoubleBattleNoPokemon:
+	.string "You don't even have two POKéMON.\n"
+	.string "You can't expect to beat me like that.$"
+
 OldaleTown_Gym_EventScript_SingleBattle::
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1
@@ -96,44 +142,72 @@ OldaleTown_Gym_EventScript_SingleBattle1::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_a::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_a::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_a::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_a::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_a::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_a::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_a::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -153,44 +227,72 @@ OldaleTown_Gym_EventScript_SingleBattle2::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_b::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_b::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_b::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_b::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_b::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_b::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_b::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -210,44 +312,72 @@ OldaleTown_Gym_EventScript_SingleBattle3::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_c::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_c::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_c::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_c::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_c::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_c::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_c::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -267,44 +397,72 @@ OldaleTown_Gym_EventScript_SingleBattle4::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_d::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_d::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_d::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_d::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_d::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_d::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_d::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -324,44 +482,72 @@ OldaleTown_Gym_EventScript_SingleBattle5::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_e::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_e::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_e::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_e::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_e::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_e::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_e::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -381,44 +567,72 @@ OldaleTown_Gym_EventScript_SingleBattle6::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_f::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_f::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_f::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_f::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_f::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_f::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_f::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -438,44 +652,72 @@ OldaleTown_Gym_EventScript_SingleBattle7::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_g::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_g::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_g::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_g::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_g::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_g::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_g::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -495,44 +737,72 @@ OldaleTown_Gym_EventScript_SingleBattle8::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_h::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_h::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_h::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_h::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_h::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_h::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_h::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -552,44 +822,72 @@ OldaleTown_Gym_EventScript_SingleBattle9::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_i::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_i::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_i::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_i::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_i::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_i::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_i::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -609,44 +907,72 @@ OldaleTown_Gym_EventScript_SingleBattle10::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_l::
+	setvar VAR_CURRENT_TRAINER, 9
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_SIDNEY
-	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_SIDNEY, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_l::
+	setvar VAR_CURRENT_TRAINER, 10
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_STEVEN
-	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_STEVEN, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart3_l::
+	setvar VAR_CURRENT_TRAINER, 11
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_PHOEBE
-	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_PHOEBE, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart4_l::
+	setvar VAR_CURRENT_TRAINER, 12
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_GLACIA
-	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_GLACIA, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart5_l::
+	setvar VAR_CURRENT_TRAINER, 13
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_DRAKE
-	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_DRAKE, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart6_l::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_1
-	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WINONA_1, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_l::
+	setvar VAR_CURRENT_TRAINER, 15
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WALLACE
-	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_single TRAINER_WALLACE, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -680,50 +1006,82 @@ OldaleTown_Gym_EventScript_SingleBattle1D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_ad::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_ad::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_ad::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_ad::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_ad::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_ad::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_ad::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_ad::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_a, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -741,50 +1099,82 @@ OldaleTown_Gym_EventScript_SingleBattle2D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_bd::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_bd::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_bd::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_bd::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_bd::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_bd::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_bd::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_bd::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_b, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -802,50 +1192,82 @@ OldaleTown_Gym_EventScript_SingleBattle3D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_cd::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_cd::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_cd::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_cd::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_cd::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_cd::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_cd::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_cd::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_c, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -863,50 +1285,82 @@ OldaleTown_Gym_EventScript_SingleBattle4D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_dd::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_dd::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_dd::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_dd::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_dd::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_dd::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_dd::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_dd::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_d, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -924,50 +1378,82 @@ OldaleTown_Gym_EventScript_SingleBattle5D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_ed::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_ed::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_ed::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_ed::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_ed::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_ed::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_ed::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_ed::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_e, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -985,50 +1471,82 @@ OldaleTown_Gym_EventScript_SingleBattle6D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_fd::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_fd::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_fd::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_fd::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_fd::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_fd::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_fd::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_fd::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_f, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -1046,50 +1564,82 @@ OldaleTown_Gym_EventScript_SingleBattle7D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_gd::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_gd::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_gd::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_gd::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_gd::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_gd::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_gd::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_gd::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_g, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -1107,50 +1657,82 @@ OldaleTown_Gym_EventScript_SingleBattle8D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_hd::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_hd::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_hd::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_hd::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_hd::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_hd::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_hd::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_hd::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_h, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -1168,50 +1750,82 @@ OldaleTown_Gym_EventScript_SingleBattle9D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_id::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_id::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_id::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_id::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_id::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_id::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_id::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_id::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_i, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
@@ -1229,49 +1843,81 @@ OldaleTown_Gym_EventScript_SingleBattle10D::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart1_ld::
+	setvar VAR_CURRENT_TRAINER, 22
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_TATE_AND_LIZA_5
-	trainerbattle_single TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_TATE_AND_LIZA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 
 OldaleTown_Gym_EventScript_SingleBattleStart2_ld::
+	setvar VAR_CURRENT_TRAINER, 16
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_ROXANNE_5
-	trainerbattle_single TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_ROXANNE_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart3_ld::
+	setvar VAR_CURRENT_TRAINER, 17
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_BRAWLY_5
-	trainerbattle_single TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_BRAWLY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart4_ld::
+	setvar VAR_CURRENT_TRAINER, 18
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WATTSON_5
-	trainerbattle_single TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WATTSON_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart5_ld::
+	setvar VAR_CURRENT_TRAINER, 19
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_FLANNERY_5
-	trainerbattle_single TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_FLANNERY_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart6_ld::
+	setvar VAR_CURRENT_TRAINER, 20
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_NORMAN_5
-	trainerbattle_single TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_NORMAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart7_ld::
+	setvar VAR_CURRENT_TRAINER, 14
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_WINONA_5
-	trainerbattle_single TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_WINONA_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
 	
 OldaleTown_Gym_EventScript_SingleBattleStart8_ld::
+	setvar VAR_CURRENT_TRAINER, 21
+	addobject VAR_CURRENT_TRAINER
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
 	cleartrainerflag TRAINER_JUAN_5
-	trainerbattle_single TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat
+	trainerbattle_double TRAINER_JUAN_5, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
