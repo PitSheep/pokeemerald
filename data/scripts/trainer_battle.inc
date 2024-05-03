@@ -64,9 +64,6 @@ EventScript_TryDoRematchBattle::
 	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	releaseall
 	end
 
@@ -86,9 +83,6 @@ EventScript_TryDoDoubleRematchBattle::
 	special BattleSetup_StartRematchBattle
 	waitstate
 	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	releaseall
@@ -134,9 +128,6 @@ EventScript_EndTrainerBattle::
 	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end
@@ -167,9 +158,6 @@ Flag_Battle_Gym_up1::
 	clearflag FLAG_BATTLE_GYM
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end
@@ -178,9 +166,6 @@ Flag_Battle_Gym_up2::
 	setflag FLAG_BATTLE_GYM_3
 	clearflag FLAG_BATTLE_GYM_2
 	clearflag FLAG_BATTLE_GYM
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	gotobeatenscript
@@ -193,9 +178,6 @@ Flag_Battle_Gym_up3::
 	clearflag FLAG_BATTLE_GYM
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end
@@ -204,9 +186,6 @@ Flag_Battle_Gym_up4::
 	setflag FLAG_BATTLE_GYM_5
 	clearflag FLAG_BATTLE_GYM_4
 	clearflag FLAG_BATTLE_GYM
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	gotobeatenscript
@@ -219,9 +198,6 @@ Flag_Battle_Gym_up5::
 	clearflag FLAG_BATTLE_GYM
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end
@@ -230,9 +206,6 @@ Flag_Battle_Gym_up6::
 	setflag FLAG_BATTLE_GYM_7
 	clearflag FLAG_BATTLE_GYM_6
 	clearflag FLAG_BATTLE_GYM
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	gotobeatenscript
@@ -245,9 +218,6 @@ Flag_Battle_Gym_up7::
 	clearflag FLAG_BATTLE_GYM
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end
@@ -256,9 +226,6 @@ Flag_Battle_Gym_up8::
 	setflag FLAG_BATTLE_GYM_9
 	clearflag FLAG_BATTLE_GYM_8
 	clearflag FLAG_BATTLE_GYM
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	gotobeatenscript
@@ -271,9 +238,6 @@ Flag_Battle_Gym_up9::
 	clearflag FLAG_BATTLE_GYM
 	frontier_givepoints
 	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	gotobeatenscript
 	releaseall
 	end
@@ -283,9 +247,6 @@ Flag_Battle_Gym_upReward::
 	clearflag FLAG_BATTLE_GYM_REWARD
 	clearflag FLAG_BATTLE_GYM
 	giveitem ITEM_MASTER_BALL
-	frontier_givepoints
-	frontier_givepoints
-	frontier_givepoints
 	frontier_givepoints
 	frontier_givepoints
 	gotobeatenscript
