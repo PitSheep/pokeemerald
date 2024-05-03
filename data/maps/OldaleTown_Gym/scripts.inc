@@ -51,16 +51,16 @@ OldaleTown_Gym_EventScript_GymGuide::
 	end
 
 OldaleTown_Gym_Text_GymGuideAdvice:
-	.string "Good morning champion.\p"
+	.string "Good morning champion.\n"
 	.string "Welcome to YOUR GYM.\p"
-	.string "There are no limitations\p"
+	.string "There are no limitations\n"
 	.string "on the species or level\p"
 	.string "of POKéMON you can use.\p"
-	.string "Defend the gym by single trainer\p"
+	.string "Defend the gym by single trainer\n"
 	.string "or by trainers in duo.\p"
-	.string "Every 10 battles you win,\p"
+	.string "Every 10 battles you win,\n"
 	.string "you will be rewarded with a MASTER BALL.\p"
-	.string "Talk to your followers\p"
+	.string "Talk to your followers\n"
 	.string "to receive more information.\p"
 	.string "Have a good fight!$"
 
@@ -72,12 +72,12 @@ OldaleTown_Gym_EventScript_GymFollowerSingle::
 	end
 
 OldaleTown_Gym_Text_GymFollowerSingleAdvice:
-	.string "Good morning leader.\p"
+	.string "Good morning leader.\n"
 	.string "Things are simple:\p"
-	.string "talk to the lone fighter\p"
+	.string "talk to the lone fighter\n"
 	.string "on the left to defend the gym\p"
 	.string "from a single trainer.\p"
-	.string "Win 10 battles and you will receive\p"
+	.string "Win 10 battles and you will receive\n"
 	.string "a MASTER BALL.\p"
 	.string "Have a good fight!$"
 
@@ -89,12 +89,12 @@ OldaleTown_Gym_EventScript_GymFollowerDuo::
 	end
 
 OldaleTown_Gym_Text_GymFollowerDuoAdvice:
-	.string "Good morning leader.\p"
+	.string "Good morning leader.\n"
 	.string "Things are simple:\p"
-	.string "talk to the paired fighters\p"
+	.string "talk to the paired fighters\n"
 	.string "on the right to defend the gym\p"
 	.string "from a pair of trainers.\p"
-	.string "Win 10 battles and you will receive\p"
+	.string "Win 10 battles and you will receive\n"
 	.string "a MASTER BALL.\p"
 	.string "Have a good fight!$"
 

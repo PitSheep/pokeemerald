@@ -408,6 +408,8 @@ OldaleTown_Text_Guard:
 	.string "can access ONLY CHAMPIONS.\p"
 	.string "Let me check....\p"
 	.string "You are {PLAYER}....\p"
+	.string "..........\p"
+	.string "................\p"
 	.string "Nope, you can't enter yet...\p"
 	.string "Come back when you become\p"
 	.string "the CHAMPION!$"
