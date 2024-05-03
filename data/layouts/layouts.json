@@ -4417,7 +4417,7 @@
       "width": 9,
       "height": 20,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_PetalburgGym",
+      "secondary_tileset": "gTileset_BattleDome",
       "border_filepath": "data/layouts/OldaleTown_Gym/border.bin",
       "blockdata_filepath": "data/layouts/OldaleTown_Gym/map.bin"
     }

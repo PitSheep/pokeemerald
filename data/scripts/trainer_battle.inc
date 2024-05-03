@@ -247,6 +247,7 @@ Flag_Battle_Gym_upReward::
 	clearflag FLAG_BATTLE_GYM_REWARD
 	clearflag FLAG_BATTLE_GYM
 	giveitem ITEM_MASTER_BALL
+	closemessage
 	frontier_givepoints
 	frontier_givepoints
 	gotobeatenscript

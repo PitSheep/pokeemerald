@@ -126,7 +126,8 @@ OldaleTown_Gym_EventScript_SingleBattle::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_a:
-	.string "First battle! Get ready!$"
+	.string "First battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle1::
 	setflag FLAG_BATTLE_GYM_1
@@ -212,7 +213,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_a::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_b:
-	.string "Second Battle! Get ready!$"
+	.string "Second battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle2::
 	random 7
@@ -297,7 +299,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_b::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_c:
-	.string "Third Battle! Get ready!$"
+	.string "Third battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle3::
 	random 7
@@ -382,7 +385,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_c::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_d:
-	.string "Fourth Battle! Get ready!$"
+	.string "Fourth battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle4::
 	random 7
@@ -467,7 +471,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_d::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_e:
-	.string "Fifth Battle! Get ready!$"
+	.string "Fifth battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle5::
 	random 7
@@ -552,7 +557,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_e::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_f:
-	.string "Sixth Battle! Get ready!$"
+	.string "Sixth battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle6::
 	random 7
@@ -637,7 +643,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_f::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_g:
-	.string "Seventh Battle! Get ready!$"
+	.string "Seventh battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle7::
 	random 7
@@ -722,7 +729,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_g::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_h:
-	.string "Eighth Battle! Get ready!$"
+	.string "Eighth battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle8::
 	random 7
@@ -807,7 +815,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_h::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_i:
-	.string "Ninth Battle! Get ready!$"
+	.string "Ninth battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle9::
 	random 7
@@ -892,7 +901,8 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_i::
 	end
 
 OldaleTown_Gym_Text_SingleBattleIntro_l:
-	.string "Final Battle! Get ready!$"
+	.string "Final battle!\n"
+	.string "Defend your gym!$"
 
 OldaleTown_Gym_EventScript_SingleBattle10::
 	random 7
