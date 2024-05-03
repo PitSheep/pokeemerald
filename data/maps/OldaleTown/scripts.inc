@@ -413,6 +413,7 @@ OldaleTown_Text_Guard:
 	.string "the CHAMPION!$"
 
 OldaleTown_EventScript_GymSign::
+	goto_if_set FLAG_IS_CHAMPION, OldaleTown_EventScript_GymSign_Champion
 	msgbox OldaleTown_Text_GymSign, MSGBOX_SIGN
 	end
 
@@ -420,3 +421,11 @@ OldaleTown_Text_GymSign:
 	.string "OLDALE TOWN POKéMON GYM\n"
 	.string "LEADER:\l"
 	.string "CHAMPION OF POKéMON LEAGUE$"
+
+OldaleTown_EventScript_GymSign_Champion::
+	msgbox OldaleTown_Text_GymSign_Champion, MSGBOX_SIGN
+	end
+
+OldaleTown_Text_GymSign_Champion:
+	.string "OLDALE TOWN POKéMON GYM\n"
+	.string "LEADER: {PLAYER}$"
