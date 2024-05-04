@@ -110,7 +110,58 @@ OldaleTown_Gym_Text_DoubleBattleNoPokemon:
 	.string "You don't even have two POKéMON.\n"
 	.string "You can't expect to beat me like that.$"
 
+OldaleTown_Gym_Text_Single_Start_Yes_No:
+	.string "Hi Master, do you want\n"
+	.string "to defend the gym\p"
+	.string "in a single battle?$"
+
+OldaleTown_Gym_EventScript_SingleBattle_No::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_Single_Start_No, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_Single_Start_No:
+	.string "well, come back when\n"
+	.string "you feel ready$"
+
+OldaleTown_Gym_EventScript_SingleBattle_Yes_No::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_Single_Start_Yes_No, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_SingleBattle_No
+	goto OldaleTown_Gym_EventScript_SingleBattle
+	release
+	end
+
+OldaleTown_Gym_Text_Duo_Start_Yes_No:
+	.string "Hi Master, do you want\n"
+	.string "to defend the gym\p"
+	.string "in a Duo battle?$"
+
+OldaleTown_Gym_EventScript_DuoBattle_No::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_Duo_Start_No, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_Duo_Start_No:
+	.string "well, come back when\n"
+	.string "you feel ready$"
+
+OldaleTown_Gym_EventScript_DuoBattle_Yes_No::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_Duo_Start_Yes_No, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_DuoBattle_No
+	goto OldaleTown_Gym_EventScript_DuoBattle
+	release
+	end
+
 OldaleTown_Gym_EventScript_SingleBattle::
+	closemessage
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1
 	goto_if_set FLAG_BATTLE_GYM_2, OldaleTown_Gym_EventScript_SingleBattle2
@@ -987,6 +1038,7 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_l::
 	end
 
 OldaleTown_Gym_EventScript_DuoBattle::
+	closemessage
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1D
 	goto_if_set FLAG_BATTLE_GYM_2, OldaleTown_Gym_EventScript_SingleBattle2D
