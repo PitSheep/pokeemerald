@@ -40,8 +40,11 @@ OldaleTown_Gym_EventScript_GymArtist::
 	end
 
 OldaleTown_Gym_Text_GymArtistAdvice:
-	.string "I really don't know\p"
-	.string "why I'm here...$"
+	.string "Hi Master!\p"
+	.string "Remember to visit\n"
+	.string "the HUNTER HOUSE!\p"
+	.string "It's right nearby,\n"
+	.string "further down from your gym$"
 
 OldaleTown_Gym_EventScript_GymGuide::
 	lock
