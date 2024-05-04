@@ -4420,6 +4420,16 @@
       "secondary_tileset": "gTileset_BattleDome",
       "border_filepath": "data/layouts/OldaleTown_Gym/border.bin",
       "blockdata_filepath": "data/layouts/OldaleTown_Gym/map.bin"
+    },
+    {
+      "id": "LAYOUT_OLDALE_TOWN_HUNTER_HOUSE",
+      "name": "OldaleTown_Hunter_House_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_CableClub",
+      "border_filepath": "data/layouts/OldaleTown_Hunter_House/border.bin",
+      "blockdata_filepath": "data/layouts/OldaleTown_Hunter_House/map.bin"
     }
   ]
 }

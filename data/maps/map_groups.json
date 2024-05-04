@@ -107,7 +107,8 @@
     "OldaleTown_PokemonCenter_1F",
     "OldaleTown_PokemonCenter_2F",
     "OldaleTown_Mart",
-    "OldaleTown_Gym"
+    "OldaleTown_Gym",
+    "OldaleTown_Hunter_House"
   ],
   "gMapGroup_IndoorDewford": [
     "DewfordTown_House1",

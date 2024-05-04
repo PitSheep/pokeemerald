@@ -431,3 +431,11 @@ OldaleTown_EventScript_GymSign_Champion::
 OldaleTown_Text_GymSign_Champion:
 	.string "OLDALE TOWN POKéMON GYM\n"
 	.string "LEADER: {PLAYER}$"
+
+OldaleTown_EventScript_TownSign_HunterHouse::
+	msgbox OldaleTown_Text_TownSign_HunterHouse, MSGBOX_SIGN
+	end
+
+OldaleTown_Text_TownSign_HunterHouse:
+	.string "HUNTER HOUSE:\n"
+	.string "Follow the path downwards.$"

@@ -1058,3 +1058,5 @@ Common_EventScript_LegendaryFlewAway::
 	.include "data/text/birch_speech.inc"
 
 	.include "data/maps/OldaleTown_Gym/scripts.inc"
+
+	.include "data/maps/OldaleTown_Hunter_House/scripts.inc"
