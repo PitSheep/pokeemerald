@@ -1,12 +1,6 @@
 OldaleTown_Gym_MapScripts::
 	.byte 0
 
-OldaleTown_Gym_EventScript_HideOpponent::
-	lockall
-	setflag FLAG_BATTLE_GYM_OPPONENT
-	releaseall
-	end
-
 OldaleTown_Gym_EventScript_MoveOpponentIn::
 	walk_up
 	walk_up

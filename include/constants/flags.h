@@ -56,23 +56,23 @@
 #define FLAG_BATTLE_GYM_9    0x2B
 #define FLAG_BATTLE_GYM_REWARD    0x2C
 #define FLAG_BATTLE_GYM_OPPONENT    0x2D
-#define FLAG_UNUSED_0x02E    0x2E // Unused Flag
-#define FLAG_UNUSED_0x02F    0x2F // Unused Flag
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
-#define FLAG_UNUSED_0x031    0x31 // Unused Flag
-#define FLAG_UNUSED_0x032    0x32 // Unused Flag
-#define FLAG_UNUSED_0x033    0x33 // Unused Flag
-#define FLAG_UNUSED_0x034    0x34 // Unused Flag
-#define FLAG_UNUSED_0x035    0x35 // Unused Flag
-#define FLAG_UNUSED_0x036    0x36 // Unused Flag
-#define FLAG_UNUSED_0x037    0x37 // Unused Flag
-#define FLAG_UNUSED_0x038    0x38 // Unused Flag
-#define FLAG_UNUSED_0x039    0x39 // Unused Flag
-#define FLAG_UNUSED_0x03A    0x3A // Unused Flag
-#define FLAG_UNUSED_0x03B    0x3B // Unused Flag
-#define FLAG_UNUSED_0x03C    0x3C // Unused Flag
-#define FLAG_UNUSED_0x03D    0x3D // Unused Flag
-#define FLAG_UNUSED_0x03E    0x3E // Unused Flag
+#define FLAG_HUNTER_HOUSE_1    0x2E
+#define FLAG_HUNTER_HOUSE_2    0x2F
+#define FLAG_HUNTER_HOUSE_3    0x30
+#define FLAG_HUNTER_HOUSE_4    0x31
+#define FLAG_HUNTER_HOUSE_5    0x32
+#define FLAG_HUNTER_HOUSE_6    0x33
+#define FLAG_HUNTER_HOUSE_7    0x34
+#define FLAG_HUNTER_HOUSE_8    0x35
+#define FLAG_HUNTER_HOUSE_9    0x36
+#define FLAG_HUNTER_HOUSE_10    0x37
+#define FLAG_HUNTER_HOUSE_11    0x38
+#define FLAG_HUNTER_HOUSE_12    0x39
+#define FLAG_HUNTER_HOUSE_13    0x3A
+#define FLAG_HUNTER_HOUSE_14    0x3B
+#define FLAG_HUNTER_HOUSE_15    0x3C
+#define FLAG_HUNTER_HOUSE_16    0x3D
+#define FLAG_HUNTER_HOUSE_IN_PROGRESS   0x3E
 #define FLAG_UNUSED_0x03F    0x3F // Unused Flag
 #define FLAG_UNUSED_0x040    0x40 // Unused Flag
 #define FLAG_UNUSED_0x041    0x41 // Unused Flag

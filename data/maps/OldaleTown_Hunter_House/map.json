@@ -245,7 +245,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_Hunter_House_EventScript_Guide",
+      "script": "OldaleTown_Hunter_House_EventScript_Reception",
       "flag": "0"
     },
     {
@@ -258,7 +258,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_Hunter_House_EventScript_Guide",
+      "script": "OldaleTown_Hunter_House_EventScript_Reception",
       "flag": "0"
     },
     {
@@ -271,7 +271,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_Hunter_House_EventScript_Guide",
+      "script": "OldaleTown_Hunter_House_EventScript_Reception",
       "flag": "0"
     },
     {
@@ -284,7 +284,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_Hunter_House_EventScript_Guide",
+      "script": "OldaleTown_Hunter_House_EventScript_Reception",
       "flag": "0"
     }
   ],
@@ -314,7 +314,127 @@
       "y": 4,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "OldaleTown_Hunter_House_EventScript_Monster1"
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_1"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_2"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_3"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_4"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_5"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_6"
+    },
+    {
+      "type": "sign",
+      "x": 43,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_7"
+    },
+    {
+      "type": "sign",
+      "x": 49,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_8"
+    },
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_9"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_10"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_11"
+    },
+    {
+      "type": "sign",
+      "x": 21,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_12"
+    },
+    {
+      "type": "sign",
+      "x": 31,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_13"
+    },
+    {
+      "type": "sign",
+      "x": 37,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_14"
+    },
+    {
+      "type": "sign",
+      "x": 43,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_15"
+    },
+    {
+      "type": "sign",
+      "x": 49,
+      "y": 8,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Hunter_House_EventScript_Monster_16"
     }
   ]
 }

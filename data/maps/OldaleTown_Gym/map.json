@@ -318,60 +318,7 @@
     }
   ],
   "coord_events": [
-    {
-      "type": "trigger",
-      "x": 4,
-      "y": 18,
-      "elevation": 0,
-      "var": "VAR_BATTLE_GYM_OPPONENT",
-      "var_value": "0",
-      "script": "OldaleTown_Gym_EventScript_HideOpponent"
-    },
-    {
-      "type": "trigger",
-      "x": 5,
-      "y": 18,
-      "elevation": 0,
-      "var": "VAR_BATTLE_GYM_OPPONENT",
-      "var_value": "0",
-      "script": "OldaleTown_Gym_EventScript_HideOpponent"
-    },
-    {
-      "type": "trigger",
-      "x": 6,
-      "y": 18,
-      "elevation": 0,
-      "var": "VAR_BATTLE_GYM_OPPONENT",
-      "var_value": "0",
-      "script": "OldaleTown_Gym_EventScript_HideOpponent"
-    },
-    {
-      "type": "trigger",
-      "x": 3,
-      "y": 18,
-      "elevation": 0,
-      "var": "VAR_BATTLE_GYM_OPPONENT",
-      "var_value": "0",
-      "script": "OldaleTown_Gym_EventScript_HideOpponent"
-    },
-    {
-      "type": "trigger",
-      "x": 3,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_BATTLE_GYM_OPPONENT",
-      "var_value": "0",
-      "script": "OldaleTown_Gym_EventScript_HideOpponent"
-    },
-    {
-      "type": "trigger",
-      "x": 6,
-      "y": 19,
-      "elevation": 0,
-      "var": "VAR_BATTLE_GYM_OPPONENT",
-      "var_value": "0",
-      "script": "OldaleTown_Gym_EventScript_HideOpponent"
-    }
+
   ],
   "bg_events": [
 

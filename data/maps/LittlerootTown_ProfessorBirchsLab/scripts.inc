@@ -140,6 +140,23 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
 	msgbox LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou, MSGBOX_DEFAULT
 	giveitem ITEM_EXP_SHARE
 	clearflag FLAG_HIDE_ROUTE_101_BOY
+	setflag FLAG_BATTLE_GYM_OPPONENT
+	setflag FLAG_HUNTER_HOUSE_1
+	setflag FLAG_HUNTER_HOUSE_2
+	setflag FLAG_HUNTER_HOUSE_3
+	setflag FLAG_HUNTER_HOUSE_4
+	setflag FLAG_HUNTER_HOUSE_5
+	setflag FLAG_HUNTER_HOUSE_6
+	setflag FLAG_HUNTER_HOUSE_7
+	setflag FLAG_HUNTER_HOUSE_8
+	setflag FLAG_HUNTER_HOUSE_9
+	setflag FLAG_HUNTER_HOUSE_10
+	setflag FLAG_HUNTER_HOUSE_11
+	setflag FLAG_HUNTER_HOUSE_12
+	setflag FLAG_HUNTER_HOUSE_13
+	setflag FLAG_HUNTER_HOUSE_14
+	setflag FLAG_HUNTER_HOUSE_15
+	setflag FLAG_HUNTER_HOUSE_16
 	setvar VAR_BIRCH_LAB_STATE, 3
 	addobject 7
     hideobjectat 7, MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
