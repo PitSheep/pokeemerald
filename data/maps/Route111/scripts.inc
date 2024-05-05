@@ -727,3 +727,22 @@ Route111_Text_TrainerHillSign:
 	.string "“Scale the heights, you hot-blooded\n"
 	.string "TRAINERS!”$"
 
+Route111_EventScript_HunterHouse_Battle_16::
+	playmoncry SPECIES_SUICUNE, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_16
+	removeobject 47
+	setwildbattle SPECIES_SUICUNE, 40
+	dowildbattle
+	end
+
+Route111_EventScript_HunterHouse_Battle_15::
+	playmoncry SPECIES_RAIKOU, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_15
+	removeobject 48
+	setwildbattle SPECIES_RAIKOU, 40
+	dowildbattle
+	end

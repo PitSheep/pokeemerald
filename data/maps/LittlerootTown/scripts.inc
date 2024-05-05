@@ -151,6 +151,23 @@ LittlerootTown_EventScript_GoInsideWithMom::
 	waitmovement 0
 	msgbox LittlerootTown_Text_OurNewHomeLetsGoInside, MSGBOX_DEFAULT
 	closemessage
+	setflag FLAG_BATTLE_GYM_OPPONENT
+	setflag FLAG_HUNTER_HOUSE_1
+	setflag FLAG_HUNTER_HOUSE_2
+	setflag FLAG_HUNTER_HOUSE_3
+	setflag FLAG_HUNTER_HOUSE_4
+	setflag FLAG_HUNTER_HOUSE_5
+	setflag FLAG_HUNTER_HOUSE_6
+	setflag FLAG_HUNTER_HOUSE_7
+	setflag FLAG_HUNTER_HOUSE_8
+	setflag FLAG_HUNTER_HOUSE_9
+	setflag FLAG_HUNTER_HOUSE_10
+	setflag FLAG_HUNTER_HOUSE_11
+	setflag FLAG_HUNTER_HOUSE_12
+	setflag FLAG_HUNTER_HOUSE_13
+	setflag FLAG_HUNTER_HOUSE_14
+	setflag FLAG_HUNTER_HOUSE_15
+	setflag FLAG_HUNTER_HOUSE_16
 	giveitem ITEM_TM_CASE
 	applymovement LOCALID_MOM, LittlerootTown_Movement_MomApproachDoor
 	applymovement OBJ_EVENT_ID_PLAYER, LittlerootTown_Movement_PlayerApproachDoor
@@ -1020,3 +1037,12 @@ LittlerootTown_Text_BirchSomethingToShowYouAtLab:
 	.string "I have something to show you.\n"
 	.string "Let's go to my LAB.$"
 
+OldaleTown_EventScript_HunterHouse_Battle_1::
+	playmoncry SPECIES_MEWTWO, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_1
+	removeobject 9
+	setwildbattle SPECIES_MEWTWO, 40
+	dowildbattle
+	end

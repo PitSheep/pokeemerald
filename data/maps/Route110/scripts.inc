@@ -992,3 +992,12 @@ Route110_Text_KeepAnEyeOutForRival:
 	.string "Well, I had better get going.\n"
 	.string "See you again, {PLAYER}{KUN}!$"
 
+Route110_EventScript_HunterHouse_Battle_9::
+	playmoncry SPECIES_CELEBI, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_9
+	removeobject 37
+	setwildbattle SPECIES_CELEBI, 40
+	dowildbattle
+	end

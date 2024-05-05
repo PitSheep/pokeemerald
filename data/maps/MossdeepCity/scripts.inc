@@ -433,3 +433,12 @@ MossdeepCity_Text_SootopolisNewGymLeader:
 	.string "People tell me the new LEADER once\n"
 	.string "mentored WALLACE.$"
 
+MossdeepCity_EventScript_HunterHouse_Battle_13::
+	playmoncry SPECIES_DEOXYS, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_13
+	removeobject 18
+	setwildbattle SPECIES_DEOXYS, 40
+	dowildbattle
+	end

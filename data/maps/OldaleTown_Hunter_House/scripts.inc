@@ -346,7 +346,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_1:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_1:
-	.string "Hunting Mewtwo$"
+	.string "Hunting Mewtwo:\p"
+	.string "I see home...\n"
+	.string "I see a corner...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_2::
 	lock
@@ -373,7 +376,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_2:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_2:
-	.string "Hunting Mew$"
+	.string "Hunting Mew:\p"
+	.string "close to 4...\n"
+	.string "lose to the champion...\p"
+	.string "I can see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_3::
 	lock
@@ -562,7 +568,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_9:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_9:
-	.string "Hunting CELEBI$"
+	.string "Hunting CELEBI:\p"
+	.string "I see two wheels...\n"
+	.string "I see many wheels...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_10::
 	lock
@@ -643,7 +652,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_12:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_12:
-	.string "Hunting JIRACHI$"
+	.string "Hunting JIRACHI:\p"
+	.string "I see the sky above...\n"
+	.string "I see below the DEPARTMENT STORE...\p"
+	.string "I see!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_13::
 	lock
@@ -670,7 +682,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_13:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_13:
-	.string "Hunting DEOXYS$"
+	.string "Hunting DEOXYS:\p"
+	.string "I can clearly hear a...\n"
+	.string "rocket launch...\p"
+	.string "I can hear it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_14::
 	lock
@@ -697,7 +712,9 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_14:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_14:
-	.string "Hunting ENTEI$"
+	.string "Hunting ENTEI:\p"
+	.string "You need to CUT in the\n"
+	.string "first ....Woods$"
 
 OldaleTown_Hunter_House_EventScript_Monster_15::
 	lock
@@ -724,7 +741,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_15:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_15:
-	.string "Hunting RAIKOU$"
+	.string "Hunting RAIKOU:\p"
+	.string "I see a mirage...\n"
+	.string "I see a sandstorm...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_16::
 	lock
@@ -751,4 +771,7 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_16:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_16:
-	.string "Hunting SUICUNE$"
+	.string "Hunting SUICUNE:\p"
+	.string "I see the Winstrate family...\n"
+	.string "then I see some water...\p"
+	.string "then I see him...$"
