@@ -57,6 +57,8 @@ OldaleTown_Gym_Text_GymGuideAdvice:
 	.string "or by trainers in duo.\p"
 	.string "Every 10 battles you win,\n"
 	.string "you will be rewarded with a MASTER BALL.\p"
+	.string "Your challenger's level\n"
+	.string "is based on yours POKéMON level.\p"
 	.string "Talk to your followers\n"
 	.string "to receive more information.\p"
 	.string "Have a good fight!$"
@@ -76,6 +78,8 @@ OldaleTown_Gym_Text_GymFollowerSingleAdvice:
 	.string "from a single trainer.\p"
 	.string "Win 10 battles and you will receive\n"
 	.string "a MASTER BALL.\p"
+	.string "Your challenger's level\n"
+	.string "is based on yours POKéMON level.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_EventScript_GymFollowerDuo::
@@ -93,6 +97,8 @@ OldaleTown_Gym_Text_GymFollowerDuoAdvice:
 	.string "from a pair of trainers.\p"
 	.string "Win 10 battles and you will receive\n"
 	.string "a MASTER BALL.\p"
+	.string "Your challenger's level\n"
+	.string "is based on yours POKéMON level.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_Text_SingleBattleDefeat:
