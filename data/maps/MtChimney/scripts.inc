@@ -844,3 +844,12 @@ MtChimney_Text_SawyerPostRematch:
 	.string "Actually, it really is hot here.\n"
 	.string "I'm overdressed for these parts.$"
 
+MtChimney_EventScript_HunterHouse_Battle_6::
+	playmoncry SPECIES_LATIAS, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_6
+	removeobject 31
+	setwildbattle SPECIES_LATIAS, 40
+	dowildbattle
+	end

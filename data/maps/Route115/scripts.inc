@@ -143,3 +143,12 @@ Route115_Text_MeteorFallsSign:
 	.string "METEOR FALLS\n"
 	.string "FALLARBOR TOWN THROUGH HERE$"
 
+Route115_EventScript_HunterHouse_Battle_11::
+	playmoncry SPECIES_RAYQUAZA, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_11
+	removeobject 24
+	setwildbattle SPECIES_RAYQUAZA, 40
+	dowildbattle
+	end

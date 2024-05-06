@@ -746,3 +746,13 @@ Route111_EventScript_HunterHouse_Battle_15::
 	setwildbattle SPECIES_RAIKOU, 40
 	dowildbattle
 	end
+
+Route111_EventScript_HunterHouse_Battle_3::
+	playmoncry SPECIES_REGIROCK, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_3
+	removeobject 49
+	setwildbattle SPECIES_REGIROCK, 40
+	dowildbattle
+	end

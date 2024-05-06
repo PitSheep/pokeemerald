@@ -430,3 +430,13 @@ Route120_Text_RouteSignFortree:
 Route120_Text_RouteSign121:
 	.string "{RIGHT_ARROW} ROUTE 121\n"
 	.string "{LEFT_ARROW} ROUTE 120$"
+
+Route120_EventScript_HunterHouse_Battle_5::
+	playmoncry SPECIES_REGISTEEL, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_5
+	removeobject 45
+	setwildbattle SPECIES_REGISTEEL, 40
+	dowildbattle
+	end

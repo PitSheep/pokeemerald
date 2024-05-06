@@ -471,3 +471,12 @@ Route116_Text_TrainerTipsBagHasPockets:
 	.string "No TRAINER can afford to be without\n"
 	.string "a BAG of their own.$"
 
+Route116_EventScript_HunterHouse_Battle_10::
+	playmoncry SPECIES_GROUDON, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_10
+	removeobject 29
+	setwildbattle SPECIES_GROUDON, 40
+	dowildbattle
+	end

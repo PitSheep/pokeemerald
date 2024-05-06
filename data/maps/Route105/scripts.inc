@@ -95,3 +95,13 @@ Route104_Text_DadPokenavCall:
 Route104_Text_RegisteredDadInPokenav:
 	.string "Registered DAD NORMAN\n"
 	.string "in the POKéNAV.$"
+
+Route104_EventScript_HunterHouse_Battle_4::
+	playmoncry SPECIES_REGICE, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_4
+	removeobject 9
+	setwildbattle SPECIES_REGICE, 40
+	dowildbattle
+	end

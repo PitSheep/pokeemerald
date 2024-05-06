@@ -623,3 +623,12 @@ MtPyre_Summit_Text_HoennTrioTale:
 	.string "Then, its duty done, the green POKéMON\n"
 	.string "flew off into the wild blue yonder…$"
 
+MtPyre_Summit_EventScript_HunterHouse_Battle_7::
+	playmoncry SPECIES_LATIOS, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_7
+	removeobject 9
+	setwildbattle SPECIES_LATIOS, 40
+	dowildbattle
+	end

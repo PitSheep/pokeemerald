@@ -44,3 +44,13 @@ EverGrandeCity_EventScript_HunterHouse_Battle_2::
 	setwildbattle SPECIES_MEW, 40
 	dowildbattle
 	end
+
+EverGrandeCity_EventScript_HunterHouse_Battle_8::
+	playmoncry SPECIES_KYOGRE, CRY_MODE_ENCOUNTER
+	delay 40
+	clearflag FLAG_HUNTER_HOUSE_IN_PROGRESS
+	setflag FLAG_HUNTER_HOUSE_8
+	removeobject 2
+	setwildbattle SPECIES_KYOGRE, 40
+	dowildbattle
+	end

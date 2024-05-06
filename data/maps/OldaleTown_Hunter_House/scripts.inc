@@ -406,7 +406,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_3:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_3:
-	.string "Hunting REGIROCK$"
+	.string "Hunting REGIROCK:\p"
+	.string "I see six rocks and an entrance.\n"
+	.string "I see his puzzle to solve...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_4::
 	lock
@@ -433,7 +436,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_4:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_4:
-	.string "Hunting REGICE$"
+	.string "Hunting REGICE:\p"
+	.string "I see six rocks and an entrance.\n"
+	.string "I see his puzzle to solve...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_5::
 	lock
@@ -460,7 +466,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_5:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_5:
-	.string "Hunting REGISTEEL$"
+	.string "Hunting REGISTEEL:\p"
+	.string "I see six rocks and an entrance.\n"
+	.string "I see his puzzle to solve...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_6::
 	lock
@@ -487,7 +496,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_6:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_6:
-	.string "Hunting LATIAS$"
+	.string "Hunting LATIAS:$"
+	.string "I see red water...\n"
+	.string "I see Cable Car Station...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_7::
 	lock
@@ -514,7 +526,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_7:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_7:
-	.string "Hunting LATIOS$"
+	.string "Hunting LATIOS:\p"
+	.string "I see the sky above...\n"
+	.string "I see under many gravestones...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_8::
 	lock
@@ -541,7 +556,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_8:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_8:
-	.string "Hunting KYOGRE$"
+	.string "Hunting KYOGRE:\p"
+	.string "I see it close to 4...\n"
+	.string "I see a huge waterfall...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_9::
 	lock
@@ -598,7 +616,11 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_10:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_10:
-	.string "Hunting GROUDON$"
+	.string "Hunting GROUDON:\p"
+	.string "I see a tunnel nearby with\n"
+	.string "a passage that was closed...\p"
+	.string "I see a Blackglasses...\n"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_11::
 	lock
@@ -625,7 +647,10 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_11:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_11:
-	.string "Hunting RAYQUAZA$"
+	.string "Hunting RAYQUAZA:\p"
+	.string "I see tall grass surrounded by trees.\n"
+	.string "I see TM01...\p"
+	.string "I see it!$"
 
 OldaleTown_Hunter_House_EventScript_Monster_12::
 	lock
