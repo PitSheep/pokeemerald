@@ -29,16 +29,151 @@ OldaleTown_Gym_EventScript_MoveOpponentDisappear::
 OldaleTown_Gym_EventScript_GymArtist::
 	lock
 	faceplayer
-	msgbox OldaleTown_Gym_Text_GymArtistAdvice, MSGBOX_DEFAULT
+	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_GymArtist_1
+	goto_if_set FLAG_BATTLE_GYM_2, OldaleTown_Gym_EventScript_GymArtist_2
+	goto_if_set FLAG_BATTLE_GYM_3, OldaleTown_Gym_EventScript_GymArtist_3
+	goto_if_set FLAG_BATTLE_GYM_4, OldaleTown_Gym_EventScript_GymArtist_4
+	goto_if_set FLAG_BATTLE_GYM_5, OldaleTown_Gym_EventScript_GymArtist_5
+	goto_if_set FLAG_BATTLE_GYM_6, OldaleTown_Gym_EventScript_GymArtist_6
+	goto_if_set FLAG_BATTLE_GYM_7, OldaleTown_Gym_EventScript_GymArtist_7
+	goto_if_set FLAG_BATTLE_GYM_8, OldaleTown_Gym_EventScript_GymArtist_8
+	goto_if_set FLAG_BATTLE_GYM_9, OldaleTown_Gym_EventScript_GymArtist_9
+	goto_if_set FLAG_BATTLE_GYM_REWARD, OldaleTown_Gym_EventScript_GymArtist_10
+	goto OldaleTown_Gym_EventScript_GymArtist_0
 	release
 	end
 
-OldaleTown_Gym_Text_GymArtistAdvice:
+OldaleTown_Gym_EventScript_GymArtist_0::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_0, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_0:
 	.string "Hi Master!\p"
-	.string "Remember to visit\n"
-	.string "the HUNTER HOUSE!\p"
-	.string "It's right nearby,\n"
-	.string "further down from your gym$"
+	.string "You haven't defended\n"
+	.string "the CHAMPION GYM yet.$"
+
+OldaleTown_Gym_EventScript_GymArtist_1::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_1, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_1:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 1 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_2::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_2, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_2:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 2 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_3::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_3, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_3:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 3 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_4::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_4, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_4:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 4 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_5::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_5, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_5:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 5 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_6::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_6, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_6:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 6 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_7::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_7, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_7:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 7 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_8::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_8, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_8:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 8 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_9::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_9, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_9:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 9 of 10$"
+
+OldaleTown_Gym_EventScript_GymArtist_10::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_GymArtistAdvice_10, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_GymArtistAdvice_10:
+	.string "Hi Master!\p"
+	.string "Gym defense fight:\n"
+	.string "Current 10 of 10$"
 
 OldaleTown_Gym_EventScript_GymGuide::
 	lock
@@ -61,6 +196,8 @@ OldaleTown_Gym_Text_GymGuideAdvice:
 	.string "is based on yours POKéMON level.\p"
 	.string "Talk to your followers\n"
 	.string "to receive more information.\p"
+	.string "Talk to reporter to know\n"
+	.string "the number of the current battle.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_EventScript_GymFollowerSingle::
@@ -80,6 +217,8 @@ OldaleTown_Gym_Text_GymFollowerSingleAdvice:
 	.string "a MASTER BALL.\p"
 	.string "Your challenger's level\n"
 	.string "is based on yours POKéMON level.\p"
+	.string "Talk to reporter to know\n"
+	.string "the number of the current battle.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_EventScript_GymFollowerDuo::
@@ -99,6 +238,8 @@ OldaleTown_Gym_Text_GymFollowerDuoAdvice:
 	.string "a MASTER BALL.\p"
 	.string "Your challenger's level\n"
 	.string "is based on yours POKéMON level.\p"
+	.string "Talk to reporter to know\n"
+	.string "the number of the current battle.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_Text_SingleBattleDefeat:
