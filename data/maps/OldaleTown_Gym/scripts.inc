@@ -295,12 +295,25 @@ OldaleTown_Gym_Text_Duo_Start_No:
 	.string "well, come back when\n"
 	.string "you feel ready$"
 
+OldaleTown_Gym_EventScript_DuoBattle_NoPokemon::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_Duo_Start_NoPokemon, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_Duo_Start_NoPokemon:
+	.string "You don't even have two POKéMON.\n"
+	.string "You can't expect to beat me like that.$"
+
 OldaleTown_Gym_EventScript_DuoBattle_Yes_No::
 	lock
 	faceplayer
 	msgbox OldaleTown_Gym_Text_Duo_Start_Yes_No, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_DuoBattle_No
-	goto OldaleTown_Gym_EventScript_DuoBattle
+	getpartysize
+	goto_if_ge VAR_RESULT, 2, OldaleTown_Gym_EventScript_DuoBattle
+	goto OldaleTown_Gym_EventScript_DuoBattle_NoPokemon
 	release
 	end
 
