@@ -1335,8 +1335,10 @@ static void CB2_EndTrainerBattle(void)
     {
         if (InBattlePyramid() || InTrainerHillChallenge())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        else
+        else{
             SetMainCallback2(CB2_WhiteOut);
+            FlagClear(FLAG_BATTLE_GYM);
+            }
     }
     else
     {
@@ -1359,6 +1361,7 @@ static void CB2_EndRematchBattle(void)
     else if (IsPlayerDefeated(gBattleOutcome) == TRUE)
     {
         SetMainCallback2(CB2_WhiteOut);
+        FlagClear(FLAG_BATTLE_GYM);
     }
     else
     {
