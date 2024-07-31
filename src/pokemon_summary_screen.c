@@ -3523,7 +3523,13 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
             text = gStringVar1;
         }
 
-        PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 1, 0, 0);
+        if(gBattleMoves[moveIndex].category == MOVE_CATEGORY_SPECIAL){
+           PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 1, 0, 3);
+        }if(gBattleMoves[moveIndex].category == MOVE_CATEGORY_PHYSICAL){
+           PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 1, 0, 2);
+        }if(gBattleMoves[moveIndex].category == MOVE_CATEGORY_STATUS){
+            PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 1, 0, 1);
+        }
 
         if (gBattleMoves[moveIndex].accuracy == 0)
         {
@@ -3535,7 +3541,13 @@ static void PrintMovePowerAndAccuracy(u16 moveIndex)
             text = gStringVar1;
         }
 
-        PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 17, 0, 0);
+        if(gBattleMoves[moveIndex].category == MOVE_CATEGORY_SPECIAL){
+            PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 17, 0, 3);
+        }if(gBattleMoves[moveIndex].category == MOVE_CATEGORY_PHYSICAL){
+            PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 17, 0, 2);
+        }if(gBattleMoves[moveIndex].category == MOVE_CATEGORY_STATUS){
+            PrintTextOnWindow(PSS_LABEL_WINDOW_MOVES_POWER_ACC, text, 53, 17, 0, 1);
+        }
     }
 }
 

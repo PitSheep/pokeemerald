@@ -1035,7 +1035,18 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].power, STR_CONV_MODE_RIGHT_ALIGN, 3);
             str = gStringVar1;
         }
+        
+        if(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL){
+        AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 12, 0, 0, 0xFF, 35);
+        }if(gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL){
+        AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 12, 0, 0, 0xFF, 9);
+        }if(gBattleMoves[move].category == MOVE_CATEGORY_STATUS){
         AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 12, 0, 0, 0xFF, 3);
+        }
+        
+       // AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 12, 0, 0, 0xFF, 3);
+
+
         if (gBattleMoves[move].accuracy == 0)
             str = gText_ThreeDashes;
         else
@@ -1043,9 +1054,27 @@ static void TMCase_MoveCursor_UpdatePrintedTMInfo(u16 itemId)
             ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].accuracy, STR_CONV_MODE_RIGHT_ALIGN, 3);
             str = gStringVar1;
         }
+
+        if(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL){
+        AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 24, 0, 0, 0xFF, 35);
+        }if(gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL){
+        AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 24, 0, 0, 0xFF, 9);
+        }if(gBattleMoves[move].category == MOVE_CATEGORY_STATUS){
         AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 24, 0, 0, 0xFF, 3);
+        }
+        //AddTextPrinterParameterized_ColorByIndex(5, 3, str, 7, 24, 0, 0, 0xFF, 3);
+
         ConvertIntToDecimalStringN(gStringVar1, gBattleMoves[move].pp, STR_CONV_MODE_RIGHT_ALIGN, 3);
+        
+        if(gBattleMoves[move].category == MOVE_CATEGORY_SPECIAL){
+        AddTextPrinterParameterized_ColorByIndex(5, 3, gStringVar1, 7, 36, 0, 0, 0xFF, 35);
+        }if(gBattleMoves[move].category == MOVE_CATEGORY_PHYSICAL){
+        AddTextPrinterParameterized_ColorByIndex(5, 3, gStringVar1, 7, 36, 0, 0, 0xFF, 9);
+        }if(gBattleMoves[move].category == MOVE_CATEGORY_STATUS){
         AddTextPrinterParameterized_ColorByIndex(5, 3, gStringVar1, 7, 36, 0, 0, 0xFF, 3);
+        }
+        //AddTextPrinterParameterized_ColorByIndex(5, 3, gStringVar1, 7, 36, 0, 0, 0xFF, 3);
+
         CopyWindowToVram(5, 2);
     }
 }
