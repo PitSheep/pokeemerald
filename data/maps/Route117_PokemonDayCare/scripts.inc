@@ -6,3 +6,6 @@ Route117_PokemonDayCare_OnTransition:
 	setflag FLAG_LANDMARK_POKEMON_DAYCARE
 	end
 
+Route117_EventScript_name_rate::
+call SlateportCity_NameRatersHouse_EventScript_NameRater
+end
