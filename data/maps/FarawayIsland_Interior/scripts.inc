@@ -139,12 +139,16 @@ FarawayIsland_Interior_EventScript_Mew::
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, FarawayIsland_Interior_EventScript_PlayerOrMewRan
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, FarawayIsland_Interior_EventScript_PlayerOrMewRan
 	goto_if_eq VAR_RESULT, B_OUTCOME_MON_TELEPORTED, FarawayIsland_Interior_EventScript_PlayerOrMewRan
-	setflag FLAG_CAUGHT_MEW
+	removeitem ITEM_OLD_SEA_MAP
+	clearflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	clearflag FLAG_SHOWN_OLD_SEA_MAP
 	release
 	end
 
 FarawayIsland_Interior_EventScript_MewDefeated::
-	setflag FLAG_DEFEATED_MEW
+	removeitem ITEM_OLD_SEA_MAP
+	clearflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	clearflag FLAG_SHOWN_OLD_SEA_MAP
 	setvar VAR_0x8004, SPECIES_MEW
 	goto Common_EventScript_LegendaryFlewAway
 	end

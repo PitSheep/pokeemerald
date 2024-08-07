@@ -62,12 +62,16 @@ NavelRock_Bottom_EventScript_Lugia::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Bottom_EventScript_DefeatedLugia
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Bottom_EventScript_RanFromLugia
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Bottom_EventScript_RanFromLugia
-	setflag FLAG_CAUGHT_LUGIA
+	removeitem ITEM_MYSTIC_TICKET
+	clearflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	clearflag FLAG_SHOWN_MYSTIC_TICKET
 	release
 	end
 
 NavelRock_Bottom_EventScript_DefeatedLugia::
-	setflag FLAG_DEFEATED_LUGIA
+	removeitem ITEM_MYSTIC_TICKET
+	clearflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	clearflag FLAG_SHOWN_MYSTIC_TICKET
 	setvar VAR_0x8004, SPECIES_LUGIA
 	goto Common_EventScript_LegendaryFlewAway
 	end

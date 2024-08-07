@@ -67,12 +67,16 @@ NavelRock_Top_EventScript_HoOh::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, NavelRock_Top_EventScript_DefeatedHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, NavelRock_Top_EventScript_RanFromHoOh
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, NavelRock_Top_EventScript_RanFromHoOh
-	setflag FLAG_CAUGHT_HO_OH
+	removeitem ITEM_MYSTIC_TICKET
+	clearflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	clearflag FLAG_SHOWN_MYSTIC_TICKET
 	releaseall
 	end
 
 NavelRock_Top_EventScript_DefeatedHoOh::
-	setflag FLAG_DEFEATED_HO_OH
+	removeitem ITEM_MYSTIC_TICKET
+	clearflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	clearflag FLAG_SHOWN_MYSTIC_TICKET
 	setvar VAR_0x8004, SPECIES_HO_OH
 	goto Common_EventScript_LegendaryFlewAway
 	end

@@ -800,3 +800,138 @@ OldaleTown_Hunter_House_Text_Start_Hunt_16:
 	.string "I see the Winstrate family...\n"
 	.string "then I see some water...\p"
 	.string "then I see him...$"
+
+
+OldaleTown_Hunter_House_Buy_Ticket_Answer_No:
+	msgbox OldaleTown_Hunter_House_Text_Answer_No, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Ticket_Thx:
+	.string "Thank you for your purchase.\p"
+	.string "Happy Adventure!$"
+
+OldaleTown_Hunter_House_Ticket_Already:
+	msgbox OldaleTown_Hunter_House_Text_Ticket_Already, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Ticket_Already:
+	.string "You've already this Ticket.\n"
+	.string "Use it before buying another one.$"
+
+OldaleTown_Hunter_House_EventScript_Ticket_1::
+	lock
+	goto_if_set FLAG_SHOWN_EON_TICKET, OldaleTown_Hunter_House_Ticket_Already
+	msgbox OldaleTown_Hunter_House_Text_Buy_Ticket_1, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_Buy_Ticket_Answer_No
+	goto OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_1
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Buy_Ticket_1:
+	.string "Wanna buy Eon Ticket?\n"
+	.string "Costs 1 MASTER BALL!$"
+
+OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_1:
+	checkitem ITEM_MASTER_BALL
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_Hunter_House_EventScript_Give_Ticket_1
+	msgbox OldaleTown_Hunter_House_Text_Monster_NoMasterball, MSGBOX_DEFAULT
+	release
+	end
+	
+OldaleTown_Hunter_House_EventScript_Give_Ticket_1:
+	removeitem ITEM_MASTER_BALL
+	setflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	setflag FLAG_SHOWN_EON_TICKET
+	giveitem ITEM_EON_TICKET
+	msgbox OldaleTown_Hunter_House_Text_Ticket_Thx, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_Ticket_2::
+	lock
+	goto_if_set FLAG_SHOWN_AURORA_TICKET, OldaleTown_Hunter_House_Ticket_Already
+	msgbox OldaleTown_Hunter_House_Text_Buy_Ticket_2, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_Buy_Ticket_Answer_No
+	goto OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_2
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Buy_Ticket_2:
+	.string "Wanna buy Aurora Ticket?\n"
+	.string "Costs 1 MASTER BALL!$"
+
+OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_2:
+	checkitem ITEM_MASTER_BALL
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_Hunter_House_EventScript_Give_Ticket_2
+	msgbox OldaleTown_Hunter_House_Text_Monster_NoMasterball, MSGBOX_DEFAULT
+	release
+	end
+	
+OldaleTown_Hunter_House_EventScript_Give_Ticket_2:
+	removeitem ITEM_MASTER_BALL
+	setflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	setflag FLAG_SHOWN_AURORA_TICKET
+	giveitem ITEM_AURORA_TICKET
+	msgbox OldaleTown_Hunter_House_Text_Ticket_Thx, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_Ticket_3::
+	lock
+	goto_if_set FLAG_SHOWN_MYSTIC_TICKET, OldaleTown_Hunter_House_Ticket_Already
+	msgbox OldaleTown_Hunter_House_Text_Buy_Ticket_3, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_Buy_Ticket_Answer_No
+	goto OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_3
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Buy_Ticket_3:
+	.string "Wanna buy Mystic Ticket?\n"
+	.string "Costs 1 MASTER BALL!$"
+
+OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_3:
+	checkitem ITEM_MASTER_BALL
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_Hunter_House_EventScript_Give_Ticket_3
+	msgbox OldaleTown_Hunter_House_Text_Monster_NoMasterball, MSGBOX_DEFAULT
+	release
+	end
+	
+OldaleTown_Hunter_House_EventScript_Give_Ticket_3:
+	removeitem ITEM_MASTER_BALL
+	setflag FLAG_ENABLE_SHIP_NAVEL_ROCK
+	setflag FLAG_SHOWN_MYSTIC_TICKET
+	giveitem ITEM_MYSTIC_TICKET
+	msgbox OldaleTown_Hunter_House_Text_Ticket_Thx, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_Ticket_4::
+	lock
+	goto_if_set FLAG_SHOWN_OLD_SEA_MAP, OldaleTown_Hunter_House_Ticket_Already
+	msgbox OldaleTown_Hunter_House_Text_Buy_Ticket_4, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_Buy_Ticket_Answer_No
+	goto OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_4
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Buy_Ticket_4:
+	.string "Wanna buy Old Sea Map?\n"
+	.string "Costs 1 MASTER BALL!$"
+
+OldaleTown_Hunter_House_EventScript_Buy_Ticket_Answer_Yes_4:
+	checkitem ITEM_MASTER_BALL
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_Hunter_House_EventScript_Give_Ticket_4
+	msgbox OldaleTown_Hunter_House_Text_Monster_NoMasterball, MSGBOX_DEFAULT
+	release
+	end
+	
+OldaleTown_Hunter_House_EventScript_Give_Ticket_4:
+	removeitem ITEM_MASTER_BALL
+	setflag FLAG_ENABLE_SHIP_FARAWAY_ISLAND
+	setflag FLAG_SHOWN_OLD_SEA_MAP
+	giveitem ITEM_OLD_SEA_MAP
+	msgbox OldaleTown_Hunter_House_Text_Ticket_Thx, MSGBOX_DEFAULT
+	release
+	end

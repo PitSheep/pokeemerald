@@ -84,12 +84,16 @@ SouthernIsland_Interior_EventScript_Lati::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, SouthernIsland_Interior_EventScript_LatiDefeated
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, SouthernIsland_Interior_EventScript_RanFromLati
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, SouthernIsland_Interior_EventScript_RanFromLati
-	setflag FLAG_CAUGHT_LATIAS_OR_LATIOS
+	removeitem ITEM_EON_TICKET
+	clearflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	clearflag FLAG_SHOWN_EON_TICKET
 	releaseall
 	end
 
 SouthernIsland_Interior_EventScript_LatiDefeated::
-	setflag FLAG_DEFEATED_LATIAS_OR_LATIOS
+	removeitem ITEM_EON_TICKET
+	clearflag FLAG_ENABLE_SHIP_SOUTHERN_ISLAND
+	clearflag FLAG_SHOWN_EON_TICKET
 	copyvar VAR_0x8004, VAR_TEMP_4
 	goto Common_EventScript_LegendaryFlewAway
 	end

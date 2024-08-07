@@ -94,12 +94,16 @@ BirthIsland_Exterior_EventScript_Deoxys::
 	goto_if_eq VAR_RESULT, B_OUTCOME_WON, BirthIsland_Exterior_EventScript_DefeatedDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BirthIsland_Exterior_EventScript_RanFromDeoxys
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BirthIsland_Exterior_EventScript_RanFromDeoxys
-	setflag FLAG_BATTLED_DEOXYS
+	removeitem ITEM_AURORA_TICKET
+	clearflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	clearflag FLAG_SHOWN_AURORA_TICKET
 	release
 	end
 
 BirthIsland_Exterior_EventScript_DefeatedDeoxys::
-	setflag FLAG_DEFEATED_DEOXYS
+	removeitem ITEM_AURORA_TICKET
+	clearflag FLAG_ENABLE_SHIP_BIRTH_ISLAND
+	clearflag FLAG_SHOWN_AURORA_TICKET
 	setvar VAR_0x8004, SPECIES_DEOXYS
 	goto Common_EventScript_LegendaryFlewAway
 	end
