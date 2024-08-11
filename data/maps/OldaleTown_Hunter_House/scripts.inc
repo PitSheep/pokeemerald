@@ -935,3 +935,7 @@ OldaleTown_Hunter_House_EventScript_Give_Ticket_4:
 	msgbox OldaleTown_Hunter_House_Text_Ticket_Thx, MSGBOX_DEFAULT
 	release
 	end
+
+OldaleTown_Hunter_House_EventScript_name_rate::
+call SlateportCity_NameRatersHouse_EventScript_NameRater
+end
