@@ -756,6 +756,7 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     const struct BattleMove *move;
     u8 buffer[32];
     const u8 *str;
+    const u8 *cat;
 
     FillWindowPixelBuffer(RELEARNERWIN_DESC_BATTLE, PIXEL_FILL(1));
     str = gText_MoveRelearnerBattleMoves;
@@ -781,6 +782,19 @@ static void MoveRelearnerLoadBattleMoveDescription(u32 chosenMove)
     move = &gBattleMoves[chosenMove];
     str = gTypeNames[move->type];
     AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_NORMAL, str, 4, 25, TEXT_SKIP_DRAW, NULL);
+    if(move->category == MOVE_CATEGORY_PHYSICAL){
+        cat = gText_Category_Physical;
+        AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL_NARROW, cat, 3, 0x10, TEXT_SKIP_DRAW, NULL);
+    }
+    if(move->category == MOVE_CATEGORY_SPECIAL){
+        cat = gText_Category_Special;
+        AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL_NARROW, cat, 3, 0x10, TEXT_SKIP_DRAW, NULL);
+    }
+    if(move->category == MOVE_CATEGORY_STATUS){
+        cat = gText_Category_Status;
+        AddTextPrinterParameterized(RELEARNERWIN_DESC_BATTLE, FONT_SMALL_NARROW, cat, 3, 0x10, TEXT_SKIP_DRAW, NULL);
+    }
+
 
     x = 4 + GetStringWidth(FONT_NORMAL, gText_MoveRelearnerPP, 0);
     ConvertIntToDecimalStringN(buffer, move->pp, STR_CONV_MODE_LEFT_ALIGN, 2);

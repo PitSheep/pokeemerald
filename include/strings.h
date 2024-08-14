@@ -3046,4 +3046,8 @@ extern const u8 gText_Moves_Menu[];
 extern const u8 gText_ExpShareOn[];
 extern const u8 gText_ExpShareOff[];
 
+// move category
+extern const u8 gText_Category_Special[];
+extern const u8 gText_Category_Physical[];
+extern const u8 gText_Category_Status[];
 #endif // GUARD_STRINGS_H
