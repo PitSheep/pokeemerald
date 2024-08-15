@@ -1,6 +1,24 @@
 OldaleTown_Hunter_House_MapScripts::
 	.byte 0
 
+OldaleTown_Hunter_House_EventScript_Totem::
+	msgbox OldaleTown_Hunter_House_Text_Totem, MSGBOX_DEFAULT
+	releaseall
+	end
+
+OldaleTown_Hunter_House_Text_Totem:
+	.string "Good morning {PLAYER}.\n"
+	.string "Welcome to HUNTER HOUSE.\p"
+	.string "In the Hunter's House\n"
+	.string "you can find:\p"
+	.string "RED\p"
+	.string "Name Rater\p"
+	.string "2 Move Tutor\p"
+	.string "4 Event Ticket Vendor\p"
+	.string "The Receptionist\p"
+	.string "PC\p"
+	.string "Have a good hunting!$"
+
 OldaleTown_Hunter_House_EventScript_Guide::
 	lock
 	faceplayer
