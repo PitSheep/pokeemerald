@@ -273,6 +273,7 @@ OldaleTown_Gym_Text_Single_Start_No:
 OldaleTown_Gym_EventScript_SingleBattle_Yes_No::
 	lock
 	faceplayer
+	special HealPlayerParty
 	msgbox OldaleTown_Gym_Text_Single_Start_Yes_No, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_SingleBattle_No
 	goto OldaleTown_Gym_EventScript_SingleBattle
@@ -309,6 +310,7 @@ OldaleTown_Gym_Text_Duo_Start_NoPokemon:
 OldaleTown_Gym_EventScript_DuoBattle_Yes_No::
 	lock
 	faceplayer
+	special HealPlayerParty
 	msgbox OldaleTown_Gym_Text_Duo_Start_Yes_No, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_DuoBattle_No
 	getpartysize
