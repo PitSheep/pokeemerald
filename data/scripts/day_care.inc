@@ -496,3 +496,37 @@ Route117_EventScript_ToolVendorManInfo::
 Route117_Text_ToolVendorManInfo:
 	.string "TRAINER TIPS\p"
 	.string "this man nearby sells good tools.$"
+
+Route117_EventScript_EvoVendorMan::
+	lock
+	faceplayer
+	message Route117_Text_EvoVendorManSellWhatYouNeed
+	waitmessage
+	pokemart Route117_Pokemart_EvoVendorMan
+	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
+	release
+	end
+
+Route117_Text_EvoVendorManSellWhatYouNeed:
+	.string "I'm the EVO GURU! I'll go for it and\n"
+	.string "sell you what you need!$"
+
+.align 2
+Route117_Pokemart_EvoVendorMan:
+	.2byte ITEM_KINGS_ROCK
+	.2byte ITEM_DRAGON_SCALE
+	.2byte ITEM_METAL_COAT
+	.2byte ITEM_UP_GRADE
+	.2byte ITEM_DEEP_SEA_TOOTH
+	.2byte ITEM_DEEP_SEA_SCALE
+	.2byte ITEM_NONE
+	release
+	end
+
+Route117_EventScript_EvoVendorManInfo::
+	msgbox Route117_Text_EvoVendorManInfo, MSGBOX_SIGN
+	end
+
+Route117_Text_EvoVendorManInfo:
+	.string "TRAINER TIPS\p"
+	.string "this man nearby sells Evolution Items.$"
