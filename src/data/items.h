@@ -2348,7 +2348,7 @@ const struct Item gItems[] =
     {
         .name = _("DEEPSEATOOTH"),
         .itemId = ITEM_DEEP_SEA_TOOTH,
-        .price = 100,
+        .price = 200,
         .holdEffect = HOLD_EFFECT_DEEP_SEA_TOOTH,
         .description = sDeepSeaToothDesc,
         .pocket = POCKET_ITEMS,
@@ -2360,7 +2360,7 @@ const struct Item gItems[] =
     {
         .name = _("DEEPSEASCALE"),
         .itemId = ITEM_DEEP_SEA_SCALE,
-        .price = 100,
+        .price = 200,
         .holdEffect = HOLD_EFFECT_DEEP_SEA_SCALE,
         .description = sDeepSeaScaleDesc,
         .pocket = POCKET_ITEMS,
@@ -2459,7 +2459,7 @@ const struct Item gItems[] =
     {
         .name = _("DRAGON SCALE"),
         .itemId = ITEM_DRAGON_SCALE,
-        .price = 100,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_DRAGON_SCALE,
         .holdEffectParam = 10,
         .description = sDragonScaleDesc,
@@ -2679,7 +2679,7 @@ const struct Item gItems[] =
     {
         .name = _("UP-GRADE"),
         .itemId = ITEM_UP_GRADE,
-        .price = 100,
+        .price = 2100,
         .holdEffect = HOLD_EFFECT_UP_GRADE,
         .description = sUpGradeDesc,
         .pocket = POCKET_ITEMS,
