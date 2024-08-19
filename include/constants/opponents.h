@@ -861,7 +861,21 @@
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT                      855
+//inizio aggiunta trainer di Pit
+//aggiungo 8 trainer. Rimane 1 spazio vuot0 per 1 trainer:
+#define TRAINER_PIT_S                         855
+#define TRAINER_PIT_D                         856
+#define TRAINER_ALE_S                         857
+#define TRAINER_ALE_D                         858
+#define TRAINER_LEO_S                         859
+#define TRAINER_LEO_D                         860
+#define TRAINER_RICK_S                        861
+#define TRAINER_RICK_D                        862
+//porto il TRAINERS_COUNT da 855 a 863
+//#define TRAINERS_COUNT                      855
+#define TRAINERS_COUNT                      863
+//fine
+
 #define MAX_TRAINERS_COUNT                  864
 
 #endif  // GUARD_CONSTANTS_OPPONENTS_H
