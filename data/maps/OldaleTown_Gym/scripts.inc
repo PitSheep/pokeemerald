@@ -2708,6 +2708,8 @@ OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Welcome_Text:
 	.string "or New Elite 4?$"
 
 OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Choose::
+	special HealPlayerParty
+	updatefollowerpokemongraphic
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_NORMAL_ELITE
 	special ShowScrollableMultichoice
 	waitstate
@@ -3395,6 +3397,8 @@ OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Welcome_Text:
 	.string "or New Elite 4?$"
 
 OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Choose::
+	special HealPlayerParty
+	updatefollowerpokemongraphic
 	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_NORMAL_ELITE
 	special ShowScrollableMultichoice
 	waitstate
