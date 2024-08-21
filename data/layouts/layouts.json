@@ -4415,7 +4415,7 @@
       "id": "LAYOUT_OLDALE_TOWN_GYM",
       "name": "OldaleTown_Gym_Layout",
       "width": 11,
-      "height": 23,
+      "height": 25,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_BattleDome",
       "border_filepath": "data/layouts/OldaleTown_Gym/border.bin",

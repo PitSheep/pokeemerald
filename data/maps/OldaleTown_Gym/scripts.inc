@@ -246,7 +246,7 @@ OldaleTown_Gym_EventScript_GymGuide::
 	end
 
 OldaleTown_Gym_Text_GymGuideAdvice:
-	.string "Good morning champion.\n"
+	.string "Good morning champion {PLAYER}.\n"
 	.string "Welcome to YOUR GYM.\p"
 	.string "There are no limitations\n"
 	.string "on the species or level\p"
@@ -271,7 +271,7 @@ OldaleTown_Gym_EventScript_GymFollowerSingle::
 	end
 
 OldaleTown_Gym_Text_GymFollowerSingleAdvice:
-	.string "Good morning leader.\n"
+	.string "Good morning leader {PLAYER}.\n"
 	.string "Things are simple:\p"
 	.string "talk to the lone fighter\n"
 	.string "on the left to defend the gym\p"
@@ -280,8 +280,8 @@ OldaleTown_Gym_Text_GymFollowerSingleAdvice:
 	.string "a MASTER BALL.\p"
 	.string "Your challenger's level\n"
 	.string "is based on yours POKéMON level.\p"
-	.string "Talk to reporter to know\n"
-	.string "the number of the current battle.\p"
+	.string "Before every battle,\n"
+	.string "we heal your pokemon party.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_EventScript_GymFollowerDuo::
@@ -292,7 +292,7 @@ OldaleTown_Gym_EventScript_GymFollowerDuo::
 	end
 
 OldaleTown_Gym_Text_GymFollowerDuoAdvice:
-	.string "Good morning leader.\n"
+	.string "Good morning leader {PLAYER}.\n"
 	.string "Things are simple:\p"
 	.string "talk to the paired fighters\n"
 	.string "on the right to defend the gym\p"
@@ -301,8 +301,8 @@ OldaleTown_Gym_Text_GymFollowerDuoAdvice:
 	.string "a MASTER BALL.\p"
 	.string "Your challenger's level\n"
 	.string "is based on yours POKéMON level.\p"
-	.string "Talk to reporter to know\n"
-	.string "the number of the current battle.\p"
+	.string "Before every battle,\n"
+	.string "we heal your pokemon party.\p"
 	.string "Have a good fight!$"
 
 OldaleTown_Gym_EventScript_GymFollowerNE4::
@@ -313,7 +313,7 @@ OldaleTown_Gym_EventScript_GymFollowerNE4::
 	end
 
 OldaleTown_Gym_Text_GymFollowerNE4Advice:
-	.string "Good morning leader.\n"
+	.string "Good morning leader {PLAYER}.\n"
 	.string "I heard that:\p"
 	.string "new trainers will come to challenge you!\p"
 	.string "It's said around,\n"

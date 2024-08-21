@@ -29,8 +29,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
-      "x": 3,
-      "y": 20,
+      "x": 4,
+      "y": 22,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
@@ -340,7 +340,7 @@
       "flag": "FLAG_BATTLE_GYM_OPPONENT"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "graphics_id": "OBJ_EVENT_GFX_NINJA_BOY",
       "x": 5,
       "y": 13,
       "elevation": 3,
@@ -351,19 +351,32 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "NULL",
       "flag": "FLAG_BATTLE_GYM_OPPONENT"
+    },
+    {
+      "graphics_id": "OBJ_EVENT_GFX_UNION_ROOM_NURSE",
+      "x": 9,
+      "y": 11,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "Route111_OldLadysRestStop_EventScript_OldLady",
+      "flag": "0"
     }
   ],
   "warp_events": [
     {
       "x": 5,
-      "y": 22,
+      "y": 24,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_TOWN",
       "dest_warp_id": "4"
     },
     {
       "x": 6,
-      "y": 22,
+      "y": 24,
       "elevation": 0,
       "dest_map": "MAP_OLDALE_TOWN",
       "dest_warp_id": "4"
@@ -373,14 +386,6 @@
 
   ],
   "bg_events": [
-    {
-      "type": "sign",
-      "x": 2,
-      "y": 9,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "OldaleTown_Gym_EventScript_GymArtist"
-    },
     {
       "type": "sign",
       "x": 8,
