@@ -699,6 +699,17 @@ extern const u8 gText_Pokemon1502001BP[];
 extern const u8 gText_Pokemon2002511BP[];
 extern const u8 gText_PokemonSafari1BP[];
 
+extern const u8 gText_TutorSwagger50BP[];
+extern const u8 gText_TutorRolluout50BP[];
+extern const u8 gText_TutorFuryCutter50BP[];
+extern const u8 gText_TutorMimic50BP[];
+extern const u8 gText_TutorMetronome50BP[];
+extern const u8 gText_TutorSleepTalk50BP[];
+extern const u8 gText_TutorSubstitute50BP[];
+extern const u8 gText_TutorDynamicPunch50BP[];
+extern const u8 gText_TutorDoubleEdge50BP[];
+extern const u8 gText_TutorExplosion50BP[];
+
 extern const u8 gText_NormalTrainer[];
 extern const u8 gText_Elite4Trainer[];
 

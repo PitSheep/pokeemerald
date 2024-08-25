@@ -12628,7 +12628,7 @@ static const struct TrainerMonItemCustomMoves sParty_Leo_S[] = {
     .lvl = 100,
     .species = SPECIES_TAUROS,
     .heldItem = ITEM_CHOICE_BAND,
-    .moves = {MOVE_RETURN, MOVE_DOUBLE_EDGE, MOVE_THRASH, MOVE_TAKE_DOWN}
+    .moves = {MOVE_FRUSTRATION, MOVE_DOUBLE_EDGE, MOVE_THRASH, MOVE_TAKE_DOWN}
     },
     {
     .iv = 255,
@@ -12649,7 +12649,7 @@ static const struct TrainerMonItemCustomMoves sParty_Leo_S[] = {
     .lvl = 100,
     .species = SPECIES_CELEBI,
     .heldItem = ITEM_LEFTOVERS,
-    .moves = {MOVE_GIGA_DRAIN, MOVE_TOXIC, MOVE_RECOVER, MOVE_PROTECT}
+    .moves = {MOVE_GIGA_DRAIN, MOVE_TOXIC, MOVE_RECOVER, MOVE_LEECH_SEED}
     },
     {
     .iv = 255,
@@ -12673,7 +12673,7 @@ static const struct TrainerMonItemCustomMoves sParty_Leo_D[] = {
     .lvl = 100,
     .species = SPECIES_TAUROS,
     .heldItem = ITEM_CHOICE_BAND,
-    .moves = {MOVE_RETURN, MOVE_DOUBLE_EDGE, MOVE_THRASH, MOVE_TAKE_DOWN}
+    .moves = {MOVE_FRUSTRATION, MOVE_DOUBLE_EDGE, MOVE_THRASH, MOVE_TAKE_DOWN}
     },
     {
     .iv = 255,
@@ -12694,7 +12694,7 @@ static const struct TrainerMonItemCustomMoves sParty_Leo_D[] = {
     .lvl = 100,
     .species = SPECIES_CELEBI,
     .heldItem = ITEM_LEFTOVERS,
-    .moves = {MOVE_GIGA_DRAIN, MOVE_TOXIC, MOVE_RECOVER, MOVE_PROTECT}
+    .moves = {MOVE_GIGA_DRAIN, MOVE_TOXIC, MOVE_RECOVER, MOVE_LEECH_SEED}
     },
     {
     .iv = 255,

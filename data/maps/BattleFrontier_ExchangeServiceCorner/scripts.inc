@@ -2487,3 +2487,358 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Start251::
 	setwildbattle SPECIES_CELEBI,1
 	dowildbattle
 	end
+
+
+
+
+
+
+
+BattleFrontier_EventScript_ChooseTutorMove::
+	lock
+	faceplayer
+	setvar VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
+	call BattleFrontier_ExchangeServiceCorner_EventScript_WelcomeTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_WelcomeTutorMove::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChooseTutorMovePrize, MSGBOX_DEFAULT
+	special ShowBattlePointsWindow
+	return
+	
+BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChooseTutorMovePrize:
+	.string "Hi, i'm Big Brother Tutor!\p"
+	.string "In exchange the Battle Points,\n"
+	.string "you can lear all unique Tutor Move.\p"
+	.string "Please choose a prize from this list.$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove::
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_TUTOR_VENDOR
+	special ShowScrollableMultichoice
+	waitstate
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Swagger
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Rollout
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_FuryCutter
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Mimic
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Metronome
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_SleepTalk
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Substitute
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_DynamicPunch
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_DoubleEdge
+	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Explosion
+	case 10, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitTutorMove, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitTutorMove:
+	.string "Happy hunting manager.\p"
+	.string "Come back and see me if you\n"
+	.string "want to learmn some move.$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Swagger::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_Swagger, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Swagger
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_Swagger:
+	.string "You've chosen to learn SWAGGER.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Swagger::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_Swagger
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_Swagger::
+	setvar VAR_0x8005, TUTOR_MOVE_SWAGGER
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Rollout::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_Rollout, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Rollout
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_Rollout:
+	.string "You've chosen to learn ROLLOUT.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Rollout::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_Rollout
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_Rollout::
+	setvar VAR_0x8005, TUTOR_MOVE_ROLLOUT
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_FuryCutter::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_FuryCutter, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_FuryCutter
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_FuryCutter:
+	.string "You've chosen to learn FURY CUTTERR.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_FuryCutter::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_FuryCutter
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_FuryCutter::
+	setvar VAR_0x8005, TUTOR_MOVE_FURY_CUTTER
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Mimic::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_Mimic, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Mimic
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_Mimic:
+	.string "You've chosen to learn MIMIC.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Mimic::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_Mimic
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_Mimic::
+	setvar VAR_0x8005, TUTOR_MOVE_MIMIC
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Metronome::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_Metronome, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Metronome
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_Metronome:
+	.string "You've chosen to learn METRONOME.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Metronome::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_Metronome
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_Metronome::
+	setvar VAR_0x8005, TUTOR_MOVE_METRONOME
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_SleepTalk::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_SleepTalk, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_SleepTalk
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_SleepTalk:
+	.string "You've chosen to learn SPLEEP TALK.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_SleepTalk::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_SleepTalk
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_SleepTalk::
+	setvar VAR_0x8005, TUTOR_MOVE_SLEEP_TALK
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Substitute::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_Substitute, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Substitute
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_Substitute:
+	.string "You've chosen to learn SUBSTITUTE.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Substitute::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_Substitute
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_Substitute::
+	setvar VAR_0x8005, TUTOR_MOVE_SUBSTITUTE
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_DynamicPunch::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_DynamicPunch, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_DynamicPunch
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_DynamicPunch:
+	.string "You've chosen to learn DYNAMIC PUNCH.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_DynamicPunch::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_DynamicPunch
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_DynamicPunch::
+	setvar VAR_0x8005, TUTOR_MOVE_DYNAMIC_PUNCH
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_DoubleEdge::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_DoubleEdge, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_DoubleEdge
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_DoubleEdge:
+	.string "You've chosen to learn DOUBLE EDGE.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_DoubleEdge::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_DoubleEdge
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_DoubleEdge::
+	setvar VAR_0x8005, TUTOR_MOVE_DOUBLE_EDGE
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_Learn_Explosion::
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_Confirm_Explosion, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	setvar VAR_0x8008, 50
+	setvar VAR_0x8009, ITEM_PROTEIN
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Explosion
+	end
+	
+BattleFrontier_ExchangeServiceCorner_Text_Confirm_Explosion:
+	.string "You've chosen to learn EXPLOSION.\n"
+	.string "Is that correct?$"
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchase_Explosion::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, BattleFrontier_ExchangeServiceCorner_EventScript_Try_Explosion
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseTutorMove
+	end
+	
+BattleFrontier_ExchangeServiceCorner_EventScript_Try_Explosion::
+	setvar VAR_0x8005, TUTOR_MOVE_EXPLOSION
+	call MoveTutor_EventScript_OpenPartyMenu
+	goto_if_eq VAR_RESULT, 0, BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	copyvar VAR_0x8004, VAR_0x8008
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_GoodbyeTutorMove
+	end
