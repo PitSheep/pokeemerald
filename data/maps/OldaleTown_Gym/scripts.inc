@@ -4058,3 +4058,46 @@ OldaleTown_Gym_EventScript_DuoBattleStart4_l_Elite::
 	trainerbattle_double TRAINER_RICK_D, OldaleTown_Gym_Text_SingleBattleIntro_l, OldaleTown_Gym_Text_SingleBattleDefeat, OldaleTown_Gym_Text_DoubleBattleNoPokemon, OldaleTown_Gym_EventScript_MoveOpponentDisappear
 	msgbox OldaleTown_Gym_Text_SingleBattlePostBattle, MSGBOX_AUTOCLOSE
 	end
+
+
+
+
+
+
+
+
+
+
+OldaleTown_Gym_EventScript_OldLady::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_RestUpHere, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, YES, OldaleTown_Gym_EventScript_Rest
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_DeclineRest
+	end
+
+OldaleTown_Gym_Text_RestUpHere:
+	.string "Oh, Master.\n"
+	.string "Aren't your POKéMON exhausted?\p"
+	.string "If you'd like, rest up here.\n"
+	.string "That's a fine idea! You should do that.$"
+	
+OldaleTown_Gym_EventScript_Rest::
+	msgbox OldaleTown_Gym_Text_TakeYourTimeRestUp, MSGBOX_DEFAULT
+	closemessage
+	call Common_EventScript_OutOfCenterPartyHeal
+	updatefollowerpokemongraphic
+	end
+	
+OldaleTown_Gym_Text_TakeYourTimeRestUp:
+	.string "That's right Master.\n"
+	.string "Take your time and rest up!$"
+
+OldaleTown_Gym_EventScript_DeclineRest::
+	msgbox OldaleTown_Gym_Text_DontNeedToBeShy, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_DontNeedToBeShy:
+	.string "Is that so Masrter?\n"
+	.string "You don't need to be shy about it.$"

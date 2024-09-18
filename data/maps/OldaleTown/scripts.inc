@@ -363,7 +363,9 @@ OldaleTown_Text_ThisIsAPokemonMart:
 OldaleTown_Text_PotionExplanation:
 	.string "A POTION can be used anytime, so it's\n"
 	.string "even more useful than a POKéMON CENTER\l"
-	.string "in certain situations.$"
+	.string "in certain situations.\p"
+	.string "REMENBER: visit the HUNTER HOUSE,\n"
+	.string "follow the path to the right!$"
 
 OldaleTown_Text_WaitDontComeInHere:
 	.string "Aaaaah! Wait!\n"
@@ -371,13 +373,17 @@ OldaleTown_Text_WaitDontComeInHere:
 	.string "I just discovered the footprints of\n"
 	.string "a rare POKéMON!\p"
 	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "them, okay?\p"
+	.string "visit the HUNTER HOUSE\n"
+	.string "in the meantime!$"
 
 OldaleTown_Text_DiscoveredFootprints:
 	.string "I just discovered the footprints of\n"
 	.string "a rare POKéMON!\p"
 	.string "Wait until I finish sketching\n"
-	.string "them, okay?$"
+	.string "them, okay?\p"
+	.string "visit the HUNTER HOUSE\n"
+	.string "in the meantime!$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
 	.string "I finished sketching the footprints of\n"
@@ -439,6 +445,14 @@ OldaleTown_EventScript_TownSign_HunterHouseTips::
 OldaleTown_Text_TownSign_HunterHouseTips:
 	.string "HUNTER HOUSE:\n"
 	.string "Follow the path downwards.$"
+
+OldaleTown_EventScript_TownSign_HunterHouseTips2::
+	msgbox OldaleTown_Text_TownSign_HunterHouseTips2, MSGBOX_SIGN
+	end
+
+OldaleTown_Text_TownSign_HunterHouseTips2:
+	.string "HUNTER HOUSE:\n"
+	.string "Follow the path to the right.$"
 
 OldaleTown_EventScript_TownSign_HunterHouse::
 	msgbox OldaleTown_Text_TownSign_HunterHouse, MSGBOX_SIGN

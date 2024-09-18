@@ -13,8 +13,9 @@ OldaleTown_Hunter_House_Text_Totem:
 	.string "you can find:\p"
 	.string "RED\p"
 	.string "Name Rater\p"
-	.string "2 Move Tutor\p"
+	.string "3 Move Tutor\p"
 	.string "4 Event Ticket Vendor\p"
+	.string "ABILITY GURU\p"
 	.string "The Receptionist\p"
 	.string "PC\p"
 	.string "Have a good hunting!$"
@@ -957,3 +958,79 @@ OldaleTown_Hunter_House_EventScript_Give_Ticket_4:
 OldaleTown_Hunter_House_EventScript_name_rate::
 call SlateportCity_NameRatersHouse_EventScript_NameRater
 end
+
+
+
+
+
+
+
+
+
+
+OldaleTown_Hunter_House_EventScript_AbilityChange::
+	special ShowBattlePointsWindow
+	setvar VAR_0x8008, 50
+	msgbox OldaleTown_Hunter_House_EventScript_AbilityChange_intro_text, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_EventScript_AbilityChange_cancel
+	goto OldaleTown_Hunter_House_EventScript_AbilityChange_yes
+	release
+	end
+
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_yes::
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, VAR_0x8008, OldaleTown_Hunter_House_EventScript_AbilityChange_chose
+	msgbox OldaleTown_Hunter_House_EventScript_AbilityChange_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_Text_DontHaveEnoughPoints:
+	.string "I'm so sorry…\n"
+	.string "You don't have enough Battle Points…$"
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_chose::
+	special ChoosePartyMon
+	waitstate
+	goto_if_ne VAR_0x8004, PARTY_NOTHING_CHOSEN, OldaleTown_Hunter_House_EventScript_AbilityChange_success
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, OldaleTown_Hunter_House_EventScript_AbilityChange_cancel
+	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_cancel::
+	lock
+	faceplayer
+	msgbox OldaleTown_Hunter_House_EventScript_AbilityChange_cancel_text, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_cancel_text:
+	.string "Oh, have you cange idea?!\p"
+	.string "no problem...\n"
+	.string "come back any time.$"
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_intro_text:
+	.string "Hi {PLAYER},\n"
+	.string "I'm the ABILITY GURU!,\p"
+	.string "I can change the special ability\n"
+	.string "of the pokemon you want,\p"
+	.string "in exchange for 50 BP, of course.\n"
+	.string "do you like the exchange?.$"
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_success::
+	special SwitchMonAbility
+	copyvar VAR_0x8004, VAR_0x8008
+	special ShowBattlePointsWindow
+	special TakeFrontierBattlePoints
+	special UpdateBattlePointsWindow
+	lock
+	faceplayer
+	msgbox OldaleTown_Hunter_House_EventScript_AbilityChange_success_text, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_success_text:
+	.string "thanks for the deal!\n"
+	.string "come back any time.$"
