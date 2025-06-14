@@ -56,3 +56,11 @@ InsideOfTruck_Text_BoxPrintedWithMonLogo:
 	.string "It's a POKéMON brand moving and\n"
 	.string "delivery service.$"
 
+InsideOfTruck_Give_CraftBundle::
+	lock
+	goto_if_eq VAR_TEMP_0, 1, InsideOfTruck_OnResume @end
+	giveitem ITEM_CRAFT_BUNDLE
+	closemessage
+	setvar VAR_TEMP_0, 1
+	release
+	end

@@ -308,9 +308,6 @@ static void BuildNormalStartMenu(void)
     {
         AddStartMenuAction(MENU_ACTION_POKENAV);
     }
-    
-    //AddStartMenuAction(MENU_ACTION_STAT_EDITOR);
-
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_SAVE);
     AddStartMenuAction(MENU_ACTION_OPTION);
@@ -428,14 +425,15 @@ static void RemoveExtraStartMenuWindows(void)
 }
 
 static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
-{
+{   //prints 2 items per frame, saves location w/ index aka "sInitStartMenuData[1]"
     s8 index = *pIndex;
 
     do
     {
         if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback)
         {
-            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
+            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text,
+                8, (index << 4) + 9); //where  "a << b" is "a * 2^b"
         }
         else
         {
@@ -857,7 +855,7 @@ static bool8 BattlePyramidRetireCallback(void)
 
 static void InitSave(void)
 {
-    SaveMapView();
+    SaveMapView(); // Camera position for Continue on startup menu screen
     sSaveDialogCallback = SaveConfirmSaveCallback;
     sSavingComplete = FALSE;
 }

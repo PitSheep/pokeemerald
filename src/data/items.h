@@ -2774,15 +2774,17 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-    [ITEM_0E2] =
+    [ITEM_CRAFT_BUNDLE] =
     {
-        .name = _("????????"),
-        .itemId = ITEM_NONE,
+        .name = _("CRAFT BUNDLE"),
+        .itemId = ITEM_CRAFT_BUNDLE,
         .price = 0,
-        .description = sDummyDesc,
-        .pocket = POCKET_ITEMS,
-        .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
+        .description = sCraftBundleDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_FIELD,
+        .fieldUseFunc = ItemUseOutOfBattle_CraftBundle,
     },
 
     [ITEM_0E3] =

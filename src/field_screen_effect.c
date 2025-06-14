@@ -35,6 +35,7 @@
 #include "constants/rgb.h"
 #include "trainer_hill.h"
 #include "fldeff.h"
+#include "craft_menu.h"
 
 static void Task_ExitNonAnimDoor(u8);
 static void Task_ExitNonDoor(u8);
@@ -456,6 +457,15 @@ static void Task_WaitForFadeShowStartMenu(u8 taskId)
     }
 }
 
+static void Task_WaitForFade_ShowCraftMenu(u8 taskId)
+{
+    if (WaitForWeatherFadeIn() == TRUE)
+    {
+        DestroyTask(taskId);
+        CreateTask(Task_ShowCraftMenu, 80);
+    }
+}
+
 void ReturnToFieldOpenStartMenu(void)
 {
     FadeInFromBlack();
@@ -463,9 +473,22 @@ void ReturnToFieldOpenStartMenu(void)
     LockPlayerFieldControls();
 }
 
+void ReturnToField_OpenCraftMenu(void)
+{
+    FadeInFromBlack();
+    CreateTask(Task_WaitForFade_ShowCraftMenu, 0x50);
+    LockPlayerFieldControls();
+}
+
 bool8 FieldCB_ReturnToFieldOpenStartMenu(void)
 {
     ShowReturnToFieldStartMenu();
+    return FALSE;
+}
+
+bool8 FieldCB_ReturnToField_OpenCraftMenu(void)
+{
+    ShowReturnToFieldCraftMenu();
     return FALSE;
 }
 

@@ -74,5 +74,32 @@ ItemUseFunc ItemId_GetFieldFunc(u16 itemId);
 u8 ItemId_GetBattleUsage(u16 itemId);
 ItemUseFunc ItemId_GetBattleFunc(u16 itemId);
 u8 ItemId_GetSecondaryId(u16 itemId);
-
 #endif // GUARD_ITEM_H
+//Thanks ghoulslash!
+#define ITEM_TAG 0x2722 //same as money label
+
+void ShowItemIconSprite(u16 item, bool8 flash, u8 screen_x, u8 screen_y);
+void DestroyItemIconSprite(void);
+
+/* Expands to:
+ * enum
+ * {
+ *   ITEM_TM_FOCUS_PUNCH,
+ *   ...
+ *   ITEM_HM_CUT,
+ *   ...
+ * }; */
+#define ENUM_TM(id) CAT(ITEM_TM_, id),
+#define ENUM_HM(id) CAT(ITEM_HM_, id),
+enum
+{
+    ENUM_TM_START_ = ITEM_TM01 - 1,
+    FOREACH_TM(ENUM_TM)
+
+    ENUM_HM_START_ = ITEM_HM01 - 1,
+    FOREACH_HM(ENUM_HM)
+};
+#undef ENUM_TM
+#undef ENUM_HM
+
+

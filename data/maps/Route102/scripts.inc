@@ -1,4 +1,5 @@
 Route102_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, Route102_OnTransition
 	.byte 0
 
 Route102_EventScript_LittleBoy::
@@ -13,7 +14,17 @@ Route102_EventScript_RouteSignPetalburg::
 	msgbox Route102_Text_RouteSignPetalburg, MSGBOX_SIGN
 	end
 
+Route102_OnTransition::
+	call_if_ne VAR_ROUTE102_STATE 3, Route102_EventScript_Boy_CraftingTutorialPos
+	end
+
+Route102_EventScript_Boy_CraftingTutorialPos::
+	setobjectxyperm 5, 37, 4
+	setobjectmovementtype 5, MOVEMENT_TYPE_LOOK_AROUND
+	return
+
 Route102_EventScript_Boy::
+	goto_if_ne VAR_ROUTE102_STATE, 0, CraftTutorial_EventScript_BoyDialogue
 	msgbox Route102_Text_CatchWholeBunchOfPokemon, MSGBOX_NPC
 	end
 
@@ -97,8 +108,8 @@ Route102_Text_ImNotVeryTall:
 	.string "Fwatchoo!$"
 
 Route102_Text_CatchWholeBunchOfPokemon:
-	.string "I'm going to catch a whole bunch of\n"
-	.string "POKéMON!$"
+	.string "I'm taking a break to try and find\n"
+	.string "some wild POKéMON!$"
 
 Route102_Text_RouteSignOldale:
 	.string "ROUTE 102\n"
