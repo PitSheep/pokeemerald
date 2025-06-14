@@ -56,6 +56,8 @@
 static const u16 Craft_Recipes[][6] = {
 //  {ITEM_1,        ITEM_2,            ITEM_3,            ITEM_4,             ||||  CRAFT_PRODUCT,          QUANTITY},    
     {0,             0,                 ITEM_POTION,       ITEM_PECHA_BERRY,         ITEM_ANTIDOTE,         3},
+    {0, 0, ITEM_FIRE_STONE, ITEM_RAWST_BERRY, ITEM_CHARCOAL, 1},
+    {0, 0, ITEM_WATER_STONE, ITEM_ORAN_BERRY, ITEM_MYSTIC_WATER, 1},
     {0,             ITEM_REPEL,        ITEM_REPEL,        ITEM_REPEL,               ITEM_SUPER_REPEL,      2},
     {0,             ITEM_SUPER_REPEL,  ITEM_SUPER_REPEL,  ITEM_SUPER_REPEL,         ITEM_MAX_REPEL,        2},
     {0,             0,                 ITEM_POKE_BALL,    ITEM_MAX_REPEL,           ITEM_SMOKE_BALL,       1},
