@@ -487,7 +487,7 @@ Route117_Text_ToolVendorManSellWhatYouNeed:
 
 .align 2
 Route117_Pokemart_ToolVendorMan:
-	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_SCOPE_LENS
 	.2byte ITEM_CHOICE_BAND
 	.2byte ITEM_FOCUS_BAND
 	.2byte ITEM_KINGS_ROCK
