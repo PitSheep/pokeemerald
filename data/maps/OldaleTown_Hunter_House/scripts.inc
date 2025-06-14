@@ -11,6 +11,8 @@ OldaleTown_Hunter_House_Text_Totem:
 	.string "Welcome to HUNTER HOUSE.\p"
 	.string "In the Hunter's House\n"
 	.string "you can find:\p"
+	.string "craftin table in the monitor\n"
+	.string "on the right that flashes\p"
 	.string "RED\p"
 	.string "Name Rater\p"
 	.string "3 Move Tutor\p"
@@ -37,6 +39,23 @@ OldaleTown_Hunter_House_Text_GuideAdvice:
 	.string "Remember that you must insert\n"
 	.string "a MASTER BALL to do this!\p"
 	.string "Have a good hunting!$"
+
+OldaleTown_Hunter_House_EventScript_Craft::
+	lock
+	faceplayer
+	msgbox OldaleTown_Hunter_House_Text_Craft, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Hunter_House_Text_Craft:
+	.string "Good morning {PLAYER}.\n"
+	.string "Welcome to HUNTER HOUSE.\p"
+	.string "the monitor nearby that is flashing\n"
+	.string "is the crafting station.\p"
+	.string "It can create many things,\n"
+	.string "try combining stones with berries\p"
+	.string "and who knows how many other\n"
+	.string "things you can combine$"
 
 OldaleTown_Hunter_House_Text_Monster_Quest_Giveup:
 	.string "Do you want to cancel\n"
