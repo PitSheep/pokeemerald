@@ -2896,6 +2896,11 @@ BattleScript_FaintedMonSendOutNew::
 BattleScript_FaintedMonEnd::
 	end2
 
+BattleScript_RunPrompt::
+	printselectionstring STRINGID_RUNPROMPT
+	forfeityesnobox BS_ATTACKER
+	endselectionscript
+
 BattleScript_LinkHandleFaintedMonMultiple::
 	openpartyscreen BS_FAINTED_LINK_MULTIPLE_1, BattleScript_LinkHandleFaintedMonMultipleStart
 BattleScript_LinkHandleFaintedMonMultipleStart::

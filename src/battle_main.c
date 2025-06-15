@@ -4358,7 +4358,21 @@ static void HandleTurnActionSelectionState(void)
                     return;
                 }
 
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+                            #ifdef BATTLE_ENGINE
+                if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                    && gBattleResources->bufferB[gActiveBattler][1] == B_ACTION_RUN_PROMPT)
+            #else
+                if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+                    && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN_PROMPT)
+            #endif
+                {
+                    gSelectionBattleScripts[gActiveBattler] = BattleScript_RunPrompt;
+                    gBattleCommunication[gActiveBattler] = STATE_SELECTION_SCRIPT_MAY_RUN;
+                    *(gBattleStruct->selectionScriptFinished + gActiveBattler) = FALSE;
+                    *(gBattleStruct->stateIdAfterSelScript + gActiveBattler) = STATE_BEFORE_ACTION_CHOSEN;
+                    return;
+                }
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
                     && gBattleBufferB[gActiveBattler][1] == B_ACTION_RUN)
                 {
