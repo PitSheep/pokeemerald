@@ -380,7 +380,33 @@
 #define STRINGID_TRAINER2WINTEXT            380
 #define STRINGID_RUNPROMPT                  381
 
-#define BATTLESTRINGS_COUNT                 382
+#define STRINGID_HARDY 382
+#define STRINGID_LONELY 383
+#define STRINGID_BRAVE 384
+#define STRINGID_ADAMANT 385
+#define STRINGID_NAUGHTY 386
+#define STRINGID_BOLD 387
+#define STRINGID_DOCILE 388
+#define STRINGID_RELAXED 389
+#define STRINGID_IMPISH 390
+#define STRINGID_LAX 391
+#define STRINGID_TIMID 392
+#define STRINGID_HASTY 393
+#define STRINGID_SERIOUS 394
+#define STRINGID_JOLLY 395
+#define STRINGID_NAIVE 396
+#define STRINGID_MODEST 397
+#define STRINGID_MILD 398
+#define STRINGID_QUIET 399
+#define STRINGID_BASHFUL 400
+#define STRINGID_RASH 401
+#define STRINGID_CALM 402
+#define STRINGID_GENTLE 403
+#define STRINGID_SASSY 404
+#define STRINGID_CAREFUL 405
+#define STRINGID_QUIRKY 406
+
+#define BATTLESTRINGS_COUNT                 407
 
 // This is the string id that gBattleStringsTable starts with.
 // String ids before this (e.g. STRINGID_INTROMSG) are not in the table,

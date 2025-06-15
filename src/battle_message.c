@@ -431,6 +431,32 @@ static const u8 sText_SpDef2[] = _("SP. DEF");
 static const u8 sText_Accuracy[] = _("accuracy");
 static const u8 sText_Evasiveness[] = _("evasiveness");
 
+static const u8 sText_Hardy[] = _("A HARDY {B_OPPONENT_MON1_NAME} appeared!\p");
+static const u8 sText_Lonely[] = _("A LONELY {B_OPPONENT_MON1_NAME} appeared!\p");
+static const u8 sText_Brave[] = _("A BRAVE {B_OPPONENT_MON1_NAME} appeared!\p");
+static const u8 sText_Adamant[] = _("A ADAMANT {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Naughty[] = _("A NAUGHTY {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Bold[] = _("A BOLD {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Docile[] = _("A DOCILE {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Relaxed[] = _("A RELAXED {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Impish[] = _("A IMPISH {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Lax[] = _("A LAX {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Timid[] = _("A TIMID {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Hasty[] = _("A HASTY {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Serious[] = _("A SERIOUS {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Jolly[] = _("A JOLLY {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Naive[] = _("A NAIVE {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Modest[] = _("A MODEST {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Mild[] = _("A MILD {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Quiet[] = _("A QUIET {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Bashful[] = _("A BASHFUL {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Rash[] = _("A RASH {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Calm[] = _("A CALM {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Gentle[] = _("A GENTLE {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Sassy[] = _("A SASSY {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Careful[] = _("A CAREFUL {B_OPPONENT_MON1_NAME} appeared\p");
+static const u8 sText_Quirky[] = _("A QUIRKY {B_OPPONENT_MON1_NAME} appeared\p");
+
 const u8 * const gStatNamesTable[NUM_BATTLE_STATS] =
 {
     [STAT_HP]      = sText_HP2,
@@ -888,6 +914,31 @@ const u8 * const gBattleStringsTable[BATTLESTRINGS_COUNT - BATTLESTRINGS_TABLE_S
     [STRINGID_PKMNBOXLANETTESPCFULL - BATTLESTRINGS_TABLE_START] = gText_PkmnTransferredLanettesPCBoxFull,
     [STRINGID_TRAINER1WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer1WinText,
     [STRINGID_TRAINER2WINTEXT - BATTLESTRINGS_TABLE_START] = sText_Trainer2WinText,
+    [STRINGID_HARDY - BATTLESTRINGS_TABLE_START] = sText_Hardy,
+    [STRINGID_LONELY - BATTLESTRINGS_TABLE_START] = sText_Lonely,
+    [STRINGID_BRAVE - BATTLESTRINGS_TABLE_START] = sText_Brave,
+    [STRINGID_ADAMANT - BATTLESTRINGS_TABLE_START] = sText_Adamant,
+    [STRINGID_NAUGHTY - BATTLESTRINGS_TABLE_START] = sText_Naughty,
+    [STRINGID_BOLD - BATTLESTRINGS_TABLE_START] = sText_Bold,
+    [STRINGID_DOCILE - BATTLESTRINGS_TABLE_START] = sText_Docile,
+    [STRINGID_RELAXED - BATTLESTRINGS_TABLE_START] = sText_Relaxed,
+    [STRINGID_IMPISH - BATTLESTRINGS_TABLE_START] = sText_Impish,
+    [STRINGID_LAX - BATTLESTRINGS_TABLE_START] = sText_Lax,
+    [STRINGID_TIMID - BATTLESTRINGS_TABLE_START] = sText_Timid,
+    [STRINGID_HASTY - BATTLESTRINGS_TABLE_START] = sText_Hasty,
+    [STRINGID_SERIOUS - BATTLESTRINGS_TABLE_START] = sText_Serious,
+    [STRINGID_JOLLY - BATTLESTRINGS_TABLE_START] = sText_Jolly,
+    [STRINGID_NAIVE - BATTLESTRINGS_TABLE_START] = sText_Naive,
+    [STRINGID_MODEST - BATTLESTRINGS_TABLE_START] = sText_Modest,
+    [STRINGID_MILD - BATTLESTRINGS_TABLE_START] = sText_Mild,
+    [STRINGID_QUIET - BATTLESTRINGS_TABLE_START] = sText_Quiet,
+    [STRINGID_BASHFUL - BATTLESTRINGS_TABLE_START] = sText_Bashful,
+    [STRINGID_RASH - BATTLESTRINGS_TABLE_START] = sText_Rash,
+    [STRINGID_CALM - BATTLESTRINGS_TABLE_START] = sText_Calm,
+    [STRINGID_GENTLE - BATTLESTRINGS_TABLE_START] = sText_Gentle,
+    [STRINGID_SASSY - BATTLESTRINGS_TABLE_START] = sText_Sassy,
+    [STRINGID_CAREFUL - BATTLESTRINGS_TABLE_START] = sText_Careful,
+    [STRINGID_QUIRKY - BATTLESTRINGS_TABLE_START] = sText_Quirky,
 };
 
 const u16 gMissStringIds[] =
@@ -1962,6 +2013,7 @@ void BufferStringBattle(u16 stringID)
 {
     s32 i;
     const u8 *stringPtr = NULL;
+    u32 personality;
 
     gBattleMsgDataPtr = (struct BattleMsgData *)(&gBattleBufferA[gActiveBattler][4]);
     gLastUsedItem = gBattleMsgDataPtr->lastItem;
@@ -2030,7 +2082,57 @@ void BufferStringBattle(u16 stringID)
             else if (gBattleTypeFlags & BATTLE_TYPE_WALLY_TUTORIAL)
                 stringPtr = sText_WildPkmnAppearedPause;
             else
-                stringPtr = sText_WildPkmnAppeared;
+                personality = GetMonData(&gEnemyParty[0], MON_DATA_PERSONALITY, 0) % NUM_NATURES;
+                if (personality == NATURE_HARDY)
+                    stringPtr = sText_Hardy;
+                else if (personality == NATURE_LONELY)
+                    stringPtr = sText_Lonely;
+                else if (personality == NATURE_BRAVE)
+                    stringPtr = sText_Brave;
+                else if (personality == NATURE_ADAMANT)
+                    stringPtr = sText_Adamant;
+                else if (personality == NATURE_NAUGHTY)
+                    stringPtr = sText_Naughty;
+                else if (personality == NATURE_BOLD)
+                    stringPtr = sText_Bold;
+                else if (personality == NATURE_DOCILE)
+                    stringPtr = sText_Docile;
+                else if (personality == NATURE_RELAXED)
+                    stringPtr = sText_Relaxed;
+                else if (personality == NATURE_IMPISH)
+                    stringPtr = sText_Impish;
+                else if (personality == NATURE_LAX)
+                    stringPtr = sText_Lax;
+                else if (personality == NATURE_TIMID)
+                    stringPtr = sText_Timid;
+                else if (personality == NATURE_HASTY)
+                    stringPtr = sText_Hasty;
+                else if (personality == NATURE_SERIOUS)
+                    stringPtr = sText_Serious;
+                else if (personality == NATURE_JOLLY)
+                    stringPtr = sText_Jolly;
+                else if (personality == NATURE_NAIVE)
+                    stringPtr = sText_Naive;
+                else if (personality == NATURE_MODEST)
+                    stringPtr = sText_Modest;
+                else if (personality == NATURE_MILD)
+                    stringPtr = sText_Mild;
+                else if (personality == NATURE_QUIET)
+                    stringPtr = sText_Quiet;
+                else if (personality == NATURE_BASHFUL)
+                    stringPtr = sText_Bashful;
+                else if (personality == NATURE_RASH)
+                    stringPtr = sText_Rash;
+                else if (personality == NATURE_CALM)
+                    stringPtr = sText_Calm;
+                else if (personality == NATURE_GENTLE)
+                    stringPtr = sText_Gentle;
+                else if (personality == NATURE_SASSY)
+                    stringPtr = sText_Sassy;
+                else if (personality == NATURE_CAREFUL)
+                    stringPtr = sText_Careful;
+                else if (personality == NATURE_QUIRKY)
+                    stringPtr = sText_Quirky;
         }
         break;
     case STRINGID_INTROSENDOUT: // poke first send-out
