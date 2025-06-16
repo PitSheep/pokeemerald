@@ -460,16 +460,14 @@ Route117_EventScript_StoneVendorManInfo::
 
 Route117_Text_StoneVendorManInfo:
 	.string "TRAINER TIPS\p"
-	.string "New evolution item from old:\p"
-	.string "KINGS ROCK > SUN STONE\n"
-	.string "DRAGON SCALE > MOON STONE\p"
-	.string "METAL COAT > THUNDER STONE\n"
-	.string "UP GRADE > FIRE STONE\p"
-	.string "DEEP SEA TOOTH > WATER STONE\n"
-	.string "DEEP SEA SCALE > LEAF STONE\p"
+	.string "New evolution item mod:\p"
+	.string "now you don't need to trade\n"
+	.string "pokemon while holding the item.\p"
+	.string "Just use the correct item \n"
+	.string "on the correct pokemon.\p"
+	.string "Craft it at the CRAFTING STATION.\p"
 	.string "FEEBAS now need only WATER STONE\n"
-	.string "to evolve into MILOTIC\p"
-	.string "this man nearby sells good stones.$"
+	.string "to evolve into MILOTIC.$"
 
 Route117_EventScript_ToolVendorMan::
 	lock
