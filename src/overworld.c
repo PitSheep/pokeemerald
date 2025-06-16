@@ -70,6 +70,7 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+#include "dns.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -2013,6 +2014,7 @@ void CB1_Overworld(void)
 
 static void OverworldBasic(void)
 {
+    DnsApplyFilters();
     ScriptContext_RunScript();
     RunTasks();
     AnimateSprites();
