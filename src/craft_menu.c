@@ -55,6 +55,7 @@
 // Otherwise just follow the template & examples below to add more recipes!
 static const u16 Craft_Recipes[][6] = {
 //  {ITEM_1,        ITEM_2,            ITEM_3,            ITEM_4,             ||||  CRAFT_PRODUCT,          QUANTITY},    
+{0, 0, ITEM_POTION, ITEM_PECHA_BERRY, ITEM_ANTIDOTE, 3},
 {0, 0, ITEM_THUNDER_STONE, ITEM_CHESTO_BERRY, ITEM_BLACK_BELT, 1},
 {0, 0, ITEM_THUNDER_STONE, ITEM_SITRUS_BERRY, ITEM_BLACK_GLASSES, 1},
 {0, 0, ITEM_SUN_STONE, ITEM_PERSIM_BERRY, ITEM_CHARCOAL, 1},

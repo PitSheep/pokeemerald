@@ -188,6 +188,8 @@ CraftTutorial_EventScript_Finish::
     msgbox CraftTutorial_Text_PlayerGaveAntidote, MSGBOX_DEFAULT
     msgbox CraftTutorial_Text_PleasureDoingBusiness, MSGBOX_DEFAULT
     closemessage
+    removeobject 10
+    setflag FLAG_CRAFTING_STATION
     applymovement 5, CraftTutorial_Movement_GoBackToGrassAfterTutorial
     waitmovement 0
     setobjectmovementtype 5, MOVEMENT_TYPE_WANDER_AROUND
@@ -380,7 +382,10 @@ CraftTutorial_Text_SpringWaterIsNice:
     .string "the best in the PETALBURG watershed.\p"
     .string "It's perfect for keeping my WORK\n"
     .string "STATION clear of all the sticky PECHA\l"
-    .string "juice...$"
+    .string "juice...\p"
+    .string "Remember, inside the HUNTER HOUSE,\n"
+    .string "You can use the Crafting Station..\p"
+    .string "FOR FREE !!!!.$"
 
 CraftTutorial_Text_ThatsIt:
     .string "That's all there is to it! As for\l"
@@ -395,13 +400,10 @@ CraftTutorial_Text_PlayerGaveAntidote:
     .string "{PLAYER} gave two ANTIDOTE as payment.$"
 
 CraftTutorial_Text_PleasureDoingBusiness:
-    .string "Pleasure doing business with ya.\p"
-    .string "Remember, if anyone asks you\n"
-    .string "where you learned this stuff,\l"
-    .string "it wasn't from me. Capiche?\p"
-    .string "...\p"
-    .string "Only joking!\p"
-    .string "I'll be around if you need me.\p"
-    .string "This may be my working spot, but I'm\n"
-    .string "also hoping to find a MARILL to train up\l"
-    .string "as my assistant!$"
+    .string "Remember, inside the HUNTER HOUSE,\n"
+    .string "You can use the Crafting Station..\p"
+    .string "FOR FREE !!!!.\p"
+    .string "Thi is MY crafting station.\n"
+    .string "I'll take it away, with your permission.\p"
+    .string "Now I'm going back to my business.\p"
+    .string "I'll be around if you need me.$"
