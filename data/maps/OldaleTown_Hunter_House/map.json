@@ -17,7 +17,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MEWTWO",
       "x": 5,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -30,7 +30,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MEW",
       "x": 11,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -43,7 +43,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_REGIROCK",
       "x": 17,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -56,7 +56,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_REGICE",
       "x": 23,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -69,7 +69,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_REGISTEEL",
       "x": 29,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -82,7 +82,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_LATIAS",
       "x": 35,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -95,7 +95,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_LATIOS",
       "x": 41,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -108,7 +108,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_KYOGRE",
       "x": 47,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -121,7 +121,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_CELEBI",
       "x": 5,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -134,7 +134,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_GROUDON_FRONT",
       "x": 11,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -147,7 +147,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_RAYQUAZA_STILL",
       "x": 17,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -160,7 +160,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_JIRACHI",
       "x": 23,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -173,7 +173,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_DEOXYS",
       "x": 29,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -186,7 +186,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_ENTEI",
       "x": 35,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -199,7 +199,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_RAIKOU",
       "x": 41,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -212,7 +212,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_SUICUNE",
       "x": 47,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -224,8 +224,8 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
-      "x": 27,
-      "y": 16,
+      "x": 25,
+      "y": 13,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_LOOK_AROUND",
       "movement_range_x": 0,
@@ -263,7 +263,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 41,
+      "x": 38,
       "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
@@ -289,7 +289,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 43,
+      "x": 40,
       "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -302,7 +302,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 45,
+      "x": 42,
       "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
@@ -315,7 +315,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SAILOR",
-      "x": 47,
+      "x": 44,
       "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
@@ -367,7 +367,7 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_CONTEST_JUDGE",
-      "x": 34,
+      "x": 11,
       "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
@@ -380,10 +380,10 @@
     },
     {
       "graphics_id": "OBJ_EVENT_GFX_SCIENTIST_1",
-      "x": 31,
-      "y": 15,
+      "x": 29,
+      "y": 13,
       "elevation": 0,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_LEFT",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN_AND_RIGHT",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
@@ -394,7 +394,7 @@
     {
       "graphics_id": "OBJ_EVENT_GFX_MOVING_BOX",
       "x": 32,
-      "y": 16,
+      "y": 15,
       "elevation": 0,
       "movement_type": "MOVEMENT_TYPE_NONE",
       "movement_range_x": 0,
@@ -428,7 +428,7 @@
     {
       "type": "sign",
       "x": 3,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_1"
@@ -436,7 +436,7 @@
     {
       "type": "sign",
       "x": 9,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_2"
@@ -444,7 +444,7 @@
     {
       "type": "sign",
       "x": 15,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_3"
@@ -452,7 +452,7 @@
     {
       "type": "sign",
       "x": 21,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_4"
@@ -460,7 +460,7 @@
     {
       "type": "sign",
       "x": 31,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_5"
@@ -468,7 +468,7 @@
     {
       "type": "sign",
       "x": 37,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_6"
@@ -476,7 +476,7 @@
     {
       "type": "sign",
       "x": 43,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_7"
@@ -484,7 +484,7 @@
     {
       "type": "sign",
       "x": 49,
-      "y": 4,
+      "y": 5,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_8"
@@ -492,7 +492,7 @@
     {
       "type": "sign",
       "x": 3,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_9"
@@ -500,7 +500,7 @@
     {
       "type": "sign",
       "x": 9,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_10"
@@ -508,7 +508,7 @@
     {
       "type": "sign",
       "x": 15,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_11"
@@ -516,7 +516,7 @@
     {
       "type": "sign",
       "x": 21,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_12"
@@ -524,7 +524,7 @@
     {
       "type": "sign",
       "x": 31,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_13"
@@ -532,7 +532,7 @@
     {
       "type": "sign",
       "x": 37,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_14"
@@ -540,7 +540,7 @@
     {
       "type": "sign",
       "x": 43,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_15"
@@ -548,7 +548,7 @@
     {
       "type": "sign",
       "x": 49,
-      "y": 8,
+      "y": 9,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Hunter_House_EventScript_Monster_16"

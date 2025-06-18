@@ -43,15 +43,39 @@ OldaleTown_Hunter_House_Text_GuideAdvice:
 OldaleTown_Hunter_House_EventScript_Craft::
 	lock
 	faceplayer
-	msgbox OldaleTown_Hunter_House_Text_Craft, MSGBOX_DEFAULT
-	release
-	end
-
+    msgbox OldaleTown_Hunter_House_Text_Craft, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, YES, OldaleTown_Hunter_House_Craft_yes
+    msgbox OldaleTown_Hunter_House_Text_Craft_no, MSGBOX_DEFAULT
+    releaseall
+    end
+	
 OldaleTown_Hunter_House_Text_Craft:
-	.string "Good morning {PLAYER}.\n"
+	.string "Good morning {PLAYER}.\p"
 	.string "Welcome to HUNTER HOUSE.\p"
 	.string "the BOX nearby...\n"
 	.string "is the crafting station.\p"
+	.string "Want some pointers on how to\n"
+    .string "craft with a WORK STATION?$"
+	
+OldaleTown_Hunter_House_Craft_yes:
+    msgbox OldaleTown_Hunter_House_Text_Craft_yes, MSGBOX_DEFAULT
+    closemessage
+    releaseall
+    end
+	
+OldaleTown_Hunter_House_Text_Craft_yes:
+    .string "When you use the WORK STATION, find an\n"
+    .string "empty space and add an item from your\l"
+    .string "BAG.\p"
+    .string "If you want to manage multiple ITEMS at\n"
+    .string "once, it can be a bit of a handful -\p"
+    .string "With one hand, HOLD open the bag. With\n"
+    .string "the other, you SELECT what you want\p"
+    .string "AND remember: add items (A for add)\n"
+    .string "or put it back in the bag (B for BAG)!\p"
+    .string "Pretty simple, right? Give it a try!$"
+	
+OldaleTown_Hunter_House_Text_Craft_no:
 	.string "It can create many things,\n"
 	.string "try combining stones with berries\p"
 	.string "and who knows how many other\n"
