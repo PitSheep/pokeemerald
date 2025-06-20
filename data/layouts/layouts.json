@@ -4417,7 +4417,7 @@
       "width": 11,
       "height": 25,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BattleDome",
+      "secondary_tileset": "gTileset_champion_gym",
       "border_filepath": "data/layouts/OldaleTown_Gym/border.bin",
       "blockdata_filepath": "data/layouts/OldaleTown_Gym/map.bin"
     },
