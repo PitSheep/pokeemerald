@@ -92,6 +92,7 @@ OldaleTown_Gym_EventScript_MoveOpponentDisappear::
 	applymovement 5, OldaleTown_Gym_EventScript_MoveSingleOut
 	applymovement 6, OldaleTown_Gym_EventScript_MoveDuoRightOut
 	applymovement 4, OldaleTown_Gym_EventScript_MoveDuoLeftOut
+	showfollower
 	end
 
 OldaleTown_Gym_EventScript_GymArtist::
@@ -411,6 +412,7 @@ OldaleTown_Gym_EventScript_DuoBattle_Yes_No::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattle::
+	followerintopokeball
 	closemessage
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1
@@ -1568,6 +1570,7 @@ OldaleTown_Gym_EventScript_SingleBattleStart7_l::
 	end
 
 OldaleTown_Gym_EventScript_DuoBattle::
+	followerintopokeball
 	closemessage
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1D
