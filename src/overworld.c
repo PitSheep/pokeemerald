@@ -2257,6 +2257,7 @@ void CB2_ReturnToFullScreenStartMenu(void)
         return;
     }
 
+    UpdateFollowerPokemonGraphic();
 	StartMenuFull_Init(CB2_ReturnToField);
 }
 
