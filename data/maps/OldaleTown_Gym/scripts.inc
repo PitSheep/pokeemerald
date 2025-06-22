@@ -2900,6 +2900,7 @@ OldaleTown_Gym_EventScript_SingleBattle_Yes_No_Elite::
 	end
 
 OldaleTown_Gym_EventScript_SingleBattle_Elite::
+	followerintopokeball
 	closemessage
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_SingleBattle1_Elite
@@ -3631,6 +3632,7 @@ OldaleTown_Gym_EventScript_DuoBattle_Yes_No_Elite::
 	end
 
 OldaleTown_Gym_EventScript_DuoBattle_Elite::
+	followerintopokeball
 	closemessage
 	setflag FLAG_BATTLE_GYM
 	goto_if_set FLAG_BATTLE_GYM_1, OldaleTown_Gym_EventScript_DuoBattle1_Elite
