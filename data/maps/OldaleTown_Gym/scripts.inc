@@ -73,10 +73,12 @@ OldaleTown_Gym_EventScript_MoveOpponentIn::
 	walk_up
 	walk_up
 	walk_up
+	walk_up
 	face_up
 	step_end
 
 OldaleTown_Gym_EventScript_MoveOpponentAway::
+	walk_down
 	walk_down
 	walk_down
 	walk_down
