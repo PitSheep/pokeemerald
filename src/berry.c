@@ -1119,7 +1119,7 @@ void BerryTreeFullUpdate(void)
     for (i = 0; i < BERRY_TREES_COUNT; i++)
     {
         tree = &gSaveBlock1Ptr->berryTrees[i];
-		
+        tree->berryYield = CalcBerryYield(tree);
 		tree->stage = BERRY_STAGE_BERRIES;
     }
 }
