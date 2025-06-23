@@ -20,6 +20,7 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "berry.h"
 
 static void CB2_WallClock(void);
 static void Task_SetClock_WaitFadeIn(u8 taskId);
@@ -891,6 +892,7 @@ static void Task_ViewClock_HandleInput(u8 taskId)
         AddTextPrinterParameterized(1, FONT_NORMAL, gText_Confirm3, 0, 1, 0, NULL);
         PutWindowTilemap(1);
         ScheduleBgCopyTilemapToVram(2);
+        BerryTreeFullUpdate();
         gTasks[taskId].func = Task_SetClock_HandleInput;
     }
 }

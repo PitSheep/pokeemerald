@@ -1111,6 +1111,19 @@ void BerryTreeTimeUpdate(s32 minutes)
     }
 }
 
+void BerryTreeFullUpdate(void)
+{
+    int i;
+    struct BerryTree *tree;
+
+    for (i = 0; i < BERRY_TREES_COUNT; i++)
+    {
+        tree = &gSaveBlock1Ptr->berryTrees[i];
+		
+		tree->stage = BERRY_STAGE_BERRIES;
+    }
+}
+
 void PlantBerryTree(u8 id, u8 berry, u8 stage, bool8 allowGrowth)
 {
     struct BerryTree *tree = GetBerryTreeInfo(id);
