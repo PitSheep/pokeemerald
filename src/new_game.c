@@ -91,17 +91,17 @@ static void InitPlayerTrainerId(void)
 // L=A isnt set here for some reason.
 static void SetDefaultOptions(void)
 {
-    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
+    gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FASTER;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
     gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
-    gSaveBlock2Ptr->optionsUnitSystem = 0;  //tx_optionsPlus
-    gSaveBlock2Ptr->optionsHpBarSpeed = 0;  //tx_optionsPlus
-    gSaveBlock2Ptr->optionsExpBarSpeed = 0; //tx_optionsPlus
+    gSaveBlock2Ptr->optionsUnitSystem = 1;  //tx_optionsPlus
+    gSaveBlock2Ptr->optionsHpBarSpeed = 5;  //tx_optionsPlus
+    gSaveBlock2Ptr->optionsExpBarSpeed = 5; //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
-    gSaveBlock2Ptr->optionsCurrentFont = 0;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsCurrentFont = 1;         //tx_optionsPlus
 }
 
 static void ClearPokedexFlags(void)
