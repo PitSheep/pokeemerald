@@ -437,7 +437,9 @@ OldaleTown_EventScript_Guard_Access::
 	msgbox OldaleTown_Text_Guard_Access, MSGBOX_NPC
 	applymovement 5, OldaleTown_EventScript_Guard_Access_Move
 	waitmovement 0
+	removeobject 5
 	setflag FLAG_GYM_CHAMPION_ACCESS
+	releaseall
 	end
 
 OldaleTown_Text_Guard_Access:
