@@ -421,6 +421,23 @@ OldaleTown_Text_Guard:
 	.string "Come back when you become\p"
 	.string "the CHAMPION!$"
 
+OldaleTown_EventScript_Guard_Access_Move_Wrong::
+	walk_right
+	walk_right
+	delay_16
+	delay_16
+	delay_16
+	delay_16
+	walk_down
+	delay_16
+	delay_16
+	walk_up
+	delay_16
+	delay_16
+	walk_left
+	walk_left
+	step_end
+
 OldaleTown_EventScript_Guard_Access_Move::
 	walk_left
 	walk_left
@@ -435,6 +452,11 @@ OldaleTown_EventScript_Guard_Access_Move::
 
 OldaleTown_EventScript_Guard_Access::
 	msgbox OldaleTown_Text_Guard_Access, MSGBOX_NPC
+	giveitem ITEM_HUNTER_TAXI
+	msgbox OldaleTown_Text_Guard_Access_Due, MSGBOX_NPC
+	applymovement 5, OldaleTown_EventScript_Guard_Access_Move_Wrong
+	waitmovement 0
+	msgbox OldaleTown_Text_Guard_Access_Wrong, MSGBOX_NPC
 	applymovement 5, OldaleTown_EventScript_Guard_Access_Move
 	waitmovement 0
 	removeobject 5
@@ -451,10 +473,20 @@ OldaleTown_Text_Guard_Access:
 	.string "................\p"
 	.string "Congratulations!\n"
 	.string "You are the new Champion!\p"
-	.string "You may enter.\n"
-	.string "Defend your gym with honor!\p"
+	.string "Now it's YOUR gym!\n"
+	.string "You have to enter!\p"
+	.string "ah, take this item.$"
+
+OldaleTown_Text_Guard_Access_Due:
+	.string "It's used to quickly return\n"
+	.string "to your gym whenever you want!\p"
+	.string "Defend your gym with honor!\n"
 	.string "My work is done here.\n"
 	.string "Goodbye {PLAYER}.$"
+
+OldaleTown_Text_Guard_Access_Wrong:
+	.string "Wrong Way...\n"
+	.string "what a fool...$"
 
 OldaleTown_EventScript_GymSign::
 	goto_if_set FLAG_IS_CHAMPION, OldaleTown_EventScript_GymSign_Champion
@@ -488,7 +520,9 @@ OldaleTown_EventScript_TownSign_HunterHouseTips2::
 
 OldaleTown_Text_TownSign_HunterHouseTips2:
 	.string "HUNTER HOUSE:\n"
-	.string "Follow the path to the right.$"
+	.string "Follow the path on the right.\p"
+	.string "GYM:\n"
+	.string "Near here on the right.$"
 
 OldaleTown_EventScript_TownSign_HunterHouse::
 	msgbox OldaleTown_Text_TownSign_HunterHouse, MSGBOX_SIGN

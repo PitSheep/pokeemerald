@@ -1554,3 +1554,8 @@ static const u8 sCraftBundleDesc[] = _(
     "A roll-out tool kit\n"
     "packed full of\n"
     "crafting supplies.");
+
+static const u8 sHunterTaxiDesc[] = _(
+    "A Taxi Service\n"
+    "to fly fast\n"
+    "in Champion GYM.");

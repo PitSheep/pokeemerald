@@ -1219,4 +1219,26 @@ void ItemUseOutOfBattle_CraftBundle(u8 taskId)
     }
 }
 
+static void ItemUseOnFieldCB_HunterTaxi(u8 taskId)
+{
+    LockPlayerFieldControls();
+    ScriptContext_SetupScript(Craft_EventScript_Hunter_Taxi);
+    DestroyTask(taskId);
+    FreeAllWindowBuffers();
+}
+
+void ItemUseOutOfBattle_HunterTaxi(u8 taskId)
+{
+    if (InBattlePyramid())
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+    else {
+        //sItemUseOnFieldCB = ItemUseOnFieldCB_HunterTaxi;
+        //SetUpItemUseOnFieldCallback(taskId);
+        sItemUseOnFieldCB = ItemUseOnFieldCB_HunterTaxi;
+        gFieldCallback = FieldCB_UseItemOnField;
+        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+}
+
 #undef tUsingRegisteredKeyItem

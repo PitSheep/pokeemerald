@@ -407,3 +407,7 @@ CraftTutorial_Text_PleasureDoingBusiness:
     .string "I'll take it away, with your permission.\p"
     .string "Now I'm going back to my business.\p"
     .string "I'll be around if you need me.$"
+
+Craft_EventScript_Hunter_Taxi::
+	warp MAP_OLDALE_TOWN, 23, 10
+	end
