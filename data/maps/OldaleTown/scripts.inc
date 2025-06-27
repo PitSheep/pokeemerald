@@ -406,6 +406,7 @@ OldaleTown_Text_TownSign:
 	.string "“Where things start off scarce.”$"
 
 OldaleTown_EventScript_Guard::
+	goto_if_set FLAG_IS_CHAMPION, OldaleTown_EventScript_Guard_Access
 	msgbox OldaleTown_Text_Guard, MSGBOX_NPC
 	end
 
@@ -419,6 +420,39 @@ OldaleTown_Text_Guard:
 	.string "Nope, you can't enter yet...\p"
 	.string "Come back when you become\p"
 	.string "the CHAMPION!$"
+
+OldaleTown_EventScript_Guard_Access_Move::
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+OldaleTown_EventScript_Guard_Access::
+	msgbox OldaleTown_Text_Guard_Access, MSGBOX_NPC
+	applymovement 5, OldaleTown_EventScript_Guard_Access_Move
+	waitmovement 0
+	setflag FLAG_GYM_CHAMPION_ACCESS
+	end
+
+OldaleTown_Text_Guard_Access:
+	.string "This is CHAMPION GYM,\n"
+	.string "can access ONLY CHAMPIONS.\p"
+	.string "Let me check....\p"
+	.string "You are {PLAYER}....\p"
+	.string "..........\p"
+	.string "................\p"
+	.string "Congratulations!\n"
+	.string "You are the new Champion!\p"
+	.string "You may enter.\n"
+	.string "Defend your gym with honor!\p"
+	.string "My work is done here.\n"
+	.string "Goodbye {PLAYER}.$"
 
 OldaleTown_EventScript_GymSign::
 	goto_if_set FLAG_IS_CHAMPION, OldaleTown_EventScript_GymSign_Champion
