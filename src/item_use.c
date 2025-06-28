@@ -1221,23 +1221,18 @@ void ItemUseOutOfBattle_CraftBundle(u8 taskId)
 
 static void ItemUseOnFieldCB_HunterTaxi(u8 taskId)
 {
-    LockPlayerFieldControls();
-    ScriptContext_SetupScript(Craft_EventScript_Hunter_Taxi);
+    FadeScreen(FADE_TO_BLACK, 0);
+    CreateTask(ItemUseOutOfBattle_HunterTaxi, 0);
     DestroyTask(taskId);
-    FreeAllWindowBuffers();
 }
 
 void ItemUseOutOfBattle_HunterTaxi(u8 taskId)
 {
-    if (InBattlePyramid())
-        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
-    else {
-        //sItemUseOnFieldCB = ItemUseOnFieldCB_HunterTaxi;
-        //SetUpItemUseOnFieldCallback(taskId);
-        sItemUseOnFieldCB = ItemUseOnFieldCB_HunterTaxi;
-        gFieldCallback = FieldCB_UseItemOnField;
-        gBagMenu->newScreenCallback = CB2_ReturnToField;
-        Task_FadeAndCloseBagMenu(taskId);
+    if (!gPaletteFade.active)
+    {
+        SetWarpDestination(MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), -1, 23, 10);
+        DoWarp();
+        DestroyTask(taskId);
     }
 }
 
