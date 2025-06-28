@@ -800,6 +800,7 @@ struct
     [MENU_MOVES] = {gText_Moves_Menu, CursorCb_Moves},
     [MENU_STAT_EDIT] = {gText_StatEditor, CursorCb_StatEdit},
     [MENU_SWITCH] = {gText_Switch2, CursorCb_Switch},
+    [MENU_SET_FOLLOWER] = {gText_SetFollower, CursorCb_Set_Follower},
     [MENU_CANCEL1] = {gText_Cancel2, CursorCb_Cancel1},
     [MENU_ITEM] = {gText_Item, CursorCb_Item},
     [MENU_GIVE] = {gMenuText_Give, CursorCb_Give},

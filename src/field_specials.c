@@ -1547,16 +1547,52 @@ u8 GetLeadMonIndex(void)
 
 u8 GetLeadMonNotFaintedIndex(void)
 {
+    u8 count = 0;
+    u8 curretFollower;
     u8 i;
     u8 partyCount = CalculatePlayerPartyCount();
+
+    if(FlagGet(FLAG_MON_PARTY_1)){
+        curretFollower = 1;
+    }
+    if(FlagGet(FLAG_MON_PARTY_2)){
+        curretFollower = 2;
+    }
+    if(FlagGet(FLAG_MON_PARTY_3)){
+        curretFollower = 3;
+    }
+    if(FlagGet(FLAG_MON_PARTY_4)){
+        curretFollower = 4;
+    }
+    if(FlagGet(FLAG_MON_PARTY_5)){
+        curretFollower = 5;
+    }
+    if(FlagGet(FLAG_MON_PARTY_6)){
+        curretFollower = 6;
+    }
+
+    for(i = 0; i < partyCount; i++)
+    {
+        if ((curretFollower == count) && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != 0
+            && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
+        {
+            count = 0;
+            return i;
+        }
+        count++;
+    }
+    
+    count = 0;
+    
     for(i = 0; i < partyCount; i++)
     {
         if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != SPECIES_EGG && GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG, NULL) != 0
             && GetMonData(&gPlayerParty[i], MON_DATA_HP, NULL) != 0)
         {
-            return i;    
+            return i;
         }
     }
+
     return 0;
 }
 

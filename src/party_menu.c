@@ -81,6 +81,7 @@ enum {
     MENU_MOVES,
     MENU_STAT_EDIT,
     MENU_SWITCH,
+    MENU_SET_FOLLOWER,
     MENU_CANCEL1,
     MENU_ITEM,
     MENU_GIVE,
@@ -462,6 +463,7 @@ static void CursorCb_Summary(u8);
 static void CursorCb_Moves(u8);
 static void CursorCb_StatEdit(u8);
 static void CursorCb_Switch(u8);
+static void CursorCb_Set_Follower(u8);
 static void CursorCb_Cancel1(u8);
 static void CursorCb_Item(u8);
 static void CursorCb_Give(u8);
@@ -2712,6 +2714,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_EDIT);
+    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SET_FOLLOWER);
 
     // Add field moves to action list
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -2933,6 +2936,43 @@ static void CursorCb_Switch(u8 taskId)
     DisplayPartyMenuStdMessage(PARTY_MSG_MOVE_TO_WHERE);
     AnimatePartySlot(gPartyMenu.slotId, 1);
     gPartyMenu.slotId2 = gPartyMenu.slotId;
+    gTasks[taskId].func = Task_HandleChooseMonInput;
+}
+
+static void CursorCb_Set_Follower(u8 taskId)
+{
+    FlagClear(FLAG_MON_PARTY_1);
+    FlagClear(FLAG_MON_PARTY_2);
+    FlagClear(FLAG_MON_PARTY_3);
+    FlagClear(FLAG_MON_PARTY_4);
+    FlagClear(FLAG_MON_PARTY_5);
+    FlagClear(FLAG_MON_PARTY_6);
+
+    gSpecialVar_0x8004 = gPartyMenu.slotId;
+    
+    if(gSpecialVar_0x8004 == 1){
+        FlagSet(FLAG_MON_PARTY_1);
+    }
+    if(gSpecialVar_0x8004 == 2){
+        FlagSet(FLAG_MON_PARTY_2);
+    }
+    if(gSpecialVar_0x8004 == 3){
+        FlagSet(FLAG_MON_PARTY_3);
+    }
+    if(gSpecialVar_0x8004 == 4){
+        FlagSet(FLAG_MON_PARTY_4);
+    }
+    if(gSpecialVar_0x8004 == 5){
+        FlagSet(FLAG_MON_PARTY_5);
+    }
+    if(gSpecialVar_0x8004 == 6){
+        FlagSet(FLAG_MON_PARTY_6);
+    }
+
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
     gTasks[taskId].func = Task_HandleChooseMonInput;
 }
 

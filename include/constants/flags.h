@@ -74,12 +74,12 @@
 #define FLAG_HUNTER_HOUSE_16    0x3D
 #define FLAG_HUNTER_HOUSE_IN_PROGRESS   0x3E
 #define FLAG_CRAFTING_STATION    0x3F
-#define FLAG_UNUSED_0x040    0x40 // Unused Flag
-#define FLAG_UNUSED_0x041    0x41 // Unused Flag
-#define FLAG_UNUSED_0x042    0x42 // Unused Flag
-#define FLAG_UNUSED_0x043    0x43 // Unused Flag
-#define FLAG_UNUSED_0x044    0x44 // Unused Flag
-#define FLAG_UNUSED_0x045    0x45 // Unused Flag
+#define FLAG_MON_PARTY_1    0x40 // set follow me pokemon party 1
+#define FLAG_MON_PARTY_2    0x41 // set follow me pokemon party 2
+#define FLAG_MON_PARTY_3    0x42 // set follow me pokemon party 3
+#define FLAG_MON_PARTY_4    0x43 // set follow me pokemon party 4
+#define FLAG_MON_PARTY_5    0x44 // set follow me pokemon party 5
+#define FLAG_MON_PARTY_6    0x45 // set follow me pokemon party 6
 #define FLAG_UNUSED_0x046    0x46 // Unused Flag
 #define FLAG_UNUSED_0x047    0x47 // Unused Flag
 #define FLAG_UNUSED_0x048    0x48 // Unused Flag
