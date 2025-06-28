@@ -1231,6 +1231,7 @@ void ItemUseOutOfBattle_HunterTaxi(u8 taskId)
     if (!gPaletteFade.active)
     {
         SetWarpDestination(MAP_GROUP(OLDALE_TOWN), MAP_NUM(OLDALE_TOWN), -1, 23, 10);
+        PlaySE(SE_WARP_IN);
         DoWarp();
         DestroyTask(taskId);
     }
