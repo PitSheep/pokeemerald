@@ -71,8 +71,6 @@ static void Task_UseRepel(u8);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
-static void Task_StartUseShinyIncense(u8);
-static void Task_UseShinyIncense(u8);
 static void ItemUsedCB_ShinyIncense(u8);
 
 // EWRAM variables
