@@ -282,6 +282,13 @@ static const struct MenuAction MultichoiceList_GameCornerCoins[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_GameCornerHunter[] =
+{
+    {gText_MasterBallAndPrice},
+    {gText_ShinyIncenseAndPrice},
+    {gText_Exit},
+};
+
 static const struct MenuAction MultichoiceList_HowsFishing[] =
 {
     {gText_Excellent2},
@@ -834,6 +841,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_UNUSED_ASH_VENDOR]          = MULTICHOICE(MultichoiceList_UnusedAshVendor),
     [MULTI_GAME_CORNER_DOLLS]          = MULTICHOICE(MultichoiceList_GameCornerDolls),
     [MULTI_GAME_CORNER_COINS]          = MULTICHOICE(MultichoiceList_GameCornerCoins),
+    [MULTI_GAME_CORNER_HUNTER]         = MULTICHOICE(MultichoiceList_GameCornerHunter),
     [MULTI_HOWS_FISHING]               = MULTICHOICE(MultichoiceList_HowsFishing),
     [MULTI_UNUSED_51]                  = MULTICHOICE(MultichoiceList_Exit),
     [MULTI_SSTIDAL_SLATEPORT_WITH_BF]  = MULTICHOICE(MultichoiceList_SSTidalSlateportWithBF),

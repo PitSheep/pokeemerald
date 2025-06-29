@@ -776,3 +776,66 @@ MauvilleCity_GameCorner_Text_CantPlayWithNoCoinCase:
 	.string "You can't play if you don't have\n"
 	.string "a COIN CASE.$"
 
+
+
+
+HH_GameCorner_EventScript_CoinsClerk::
+	lock
+	faceplayer
+	msgbox HH_GameCorner_Text_ThisIsMauvilleGameCorner, MSGBOX_DEFAULT
+	message HH_GameCorner_Text_WereYouLookingForCoins
+	waitmessage
+	showmoneybox 0, 8
+	goto HH_GameCorner_EventScript_ChooseCoinsDefault50
+
+HH_GameCorner_Text_ThisIsMauvilleGameCorner:
+	.string "This is Hunter Money Corner.$"
+
+HH_GameCorner_Text_WereYouLookingForCoins:
+	.string "Were you looking for Rare Items?\p"
+	.string "It's ¥99999 for MasterBall.\n"
+	.string "Would you like some?$"
+
+HH_GameCorner_EventScript_ChooseCoinsDefault50::
+	multichoicedefault 15, 0, MULTI_GAME_CORNER_HUNTER, 0, FALSE
+	switch VAR_RESULT
+	case 0, HH_GameCorner_EventScript_Buy50Coins
+	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
+	goto HH_GameCorner_EventScript_CancelBuyCoins
+	end
+
+HH_GameCorner_Text_DontNeedCoinsThen:
+	.string "Oh… You don't need this, then?\n"
+	.string "Good luck on your hunting!$"
+
+HH_GameCorner_EventScript_CancelBuyCoins::
+	msgbox HH_GameCorner_Text_DontNeedCoinsThen, MSGBOX_DEFAULT
+	hidemoneybox
+	release
+	end
+
+HH_GameCorner_EventScript_Buy50Coins::
+	checkmoney 99999
+	goto_if_eq VAR_RESULT, FALSE, HH_GameCorner_EventScript_NotEnoughMoney
+	giveitem ITEM_MASTER_BALL
+	removemoney 99999
+	updatemoneybox
+	playse SE_SHOP
+	msgbox HH_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
+	hidemoneybox
+	release
+	end
+
+HH_GameCorner_EventScript_NotEnoughMoney::
+	msgbox HH_GameCorner_Text_DontHaveEnoughMoney, MSGBOX_DEFAULT
+	hidemoneybox
+	release
+	end
+
+HH_GameCorner_Text_DontHaveEnoughMoney:
+	.string "Um… You don't appear to have\n"
+	.string "enough money…$"
+
+HH_GameCorner_Text_ThankYouHereAreYourCoins:
+	.string "Thank you very much!\n"
+	.string "Here are your Rare Items!$"

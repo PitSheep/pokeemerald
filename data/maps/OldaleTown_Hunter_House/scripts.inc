@@ -14,7 +14,7 @@ OldaleTown_Hunter_House_Text_Totem:
 	.string "CRAFTING STATION in the BOX\n"
 	.string "on the right.\p"
 	.string "RED.\p"
-	.string "Name Rater.\p"
+	.string "Hunter Money Corner.\p"
 	.string "3 Move Tutor.\p"
 	.string "4 Event Ticket Vendor.\p"
 	.string "ABILITY GURU.\p"
