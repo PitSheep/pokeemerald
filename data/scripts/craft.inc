@@ -411,6 +411,7 @@ CraftTutorial_Text_PleasureDoingBusiness:
 ShinyIncenseScript::
 	setflag FLAG_SHINY_CREATION
     msgbox ShinyIncenseScript_Text, MSGBOX_DEFAULT
+    removeitem ITEM_SHINY_INCENSE
     releaseall
 	end
 
