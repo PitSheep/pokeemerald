@@ -71,6 +71,9 @@ static void Task_UseRepel(u8);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
+static void Task_StartUseShinyIncense(u8);
+static void Task_UseShinyIncense(u8);
+static void ItemUsedCB_ShinyIncense(u8);
 
 // EWRAM variables
 EWRAM_DATA static void(*sItemUseOnFieldCB)(u8 taskId) = NULL;
@@ -1235,6 +1238,30 @@ void ItemUseOutOfBattle_HunterTaxi(u8 taskId)
         DoWarp();
         DestroyTask(taskId);
     }
+}
+
+extern u8 ShinyIncenseScript[];
+
+void ItemUseOutOfBattle_ShinyIncense(u8 taskId)
+{
+    if(!gTasks[taskId].tUsingRegisteredKeyItem){
+        sItemUseOnFieldCB = ItemUsedCB_ShinyIncense;
+        gFieldCallback = FieldCB_UseItemOnField;
+        gBagMenu->newScreenCallback = CB2_ReturnToField;
+        Task_FadeAndCloseBagMenu(taskId);
+    }else{
+        sItemUseOnFieldCB = ItemUsedCB_ShinyIncense;
+        SetUpItemUseOnFieldCallback(taskId);
+    }
+}
+
+void ItemUsedCB_ShinyIncense(u8 taskId)
+{
+    LockPlayerFieldControls();
+    PlaySE(SE_WARP_IN);
+    ScriptContext_SetupScript(ShinyIncenseScript);
+    DestroyTask(taskId);
+
 }
 
 #undef tUsingRegisteredKeyItem

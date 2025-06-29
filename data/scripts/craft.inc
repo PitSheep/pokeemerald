@@ -408,6 +408,12 @@ CraftTutorial_Text_PleasureDoingBusiness:
     .string "Now I'm going back to my business.\p"
     .string "I'll be around if you need me.$"
 
-Craft_EventScript_Hunter_Taxi::
-	warp MAP_OLDALE_TOWN, 23, 10
+ShinyIncenseScript::
+	setflag FLAG_SHINY_CREATION
+    msgbox ShinyIncenseScript_Text, MSGBOX_DEFAULT
+    releaseall
 	end
+
+ShinyIncenseScript_Text:
+    .string "The next Pokemon,\n"
+    .string "guaranteed to be Shiny!$"

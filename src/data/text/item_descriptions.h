@@ -1559,3 +1559,8 @@ static const u8 sHunterTaxiDesc[] = _(
     "A Taxi Service\n"
     "to fly fast\n"
     "in Champion GYM.");
+
+    static const u8 sShinyIncenseDesc[] = _(
+    "A Shiny Incense\n"
+    "guarantees the\n"
+    "next pokemon Shiny.");

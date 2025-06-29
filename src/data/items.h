@@ -4540,7 +4540,7 @@ const struct Item gItems[] =
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
     },
 
-        [ITEM_HUNTER_TAXI] =
+    [ITEM_HUNTER_TAXI] =
     {
         .name = _("Hunter Taxi"),
         .itemId = ITEM_HUNTER_TAXI,
@@ -4552,5 +4552,15 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_HunterTaxi,
     },
-
+    
+    [ITEM_SHINY_INCENSE] =
+    {
+        .name = _("Shiny Incense"),
+        .itemId = ITEM_SHINY_INCENSE,
+        .price = 0,
+        .description = sShinyIncenseDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_ShinyIncense,
+    },
 };

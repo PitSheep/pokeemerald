@@ -792,15 +792,14 @@ HH_GameCorner_Text_ThisIsMauvilleGameCorner:
 	.string "This is Hunter Money Corner.$"
 
 HH_GameCorner_Text_WereYouLookingForCoins:
-	.string "Were you looking for Rare Items?\p"
-	.string "It's ¥99999 for MasterBall.\n"
+	.string "Were you looking for Rare Items?\n"
 	.string "Would you like some?$"
 
 HH_GameCorner_EventScript_ChooseCoinsDefault50::
 	multichoicedefault 15, 0, MULTI_GAME_CORNER_HUNTER, 0, FALSE
 	switch VAR_RESULT
 	case 0, HH_GameCorner_EventScript_Buy50Coins
-	case 1, MauvilleCity_GameCorner_EventScript_Buy500Coins
+	case 1, HH_GameCorner_EventScript_Buy500Coins
 	goto HH_GameCorner_EventScript_CancelBuyCoins
 	end
 
@@ -818,6 +817,18 @@ HH_GameCorner_EventScript_Buy50Coins::
 	checkmoney 99999
 	goto_if_eq VAR_RESULT, FALSE, HH_GameCorner_EventScript_NotEnoughMoney
 	giveitem ITEM_MASTER_BALL
+	removemoney 99999
+	updatemoneybox
+	playse SE_SHOP
+	msgbox HH_GameCorner_Text_ThankYouHereAreYourCoins, MSGBOX_DEFAULT
+	hidemoneybox
+	release
+	end
+
+HH_GameCorner_EventScript_Buy500Coins::
+	checkmoney 99999
+	goto_if_eq VAR_RESULT, FALSE, HH_GameCorner_EventScript_NotEnoughMoney
+	giveitem ITEM_SHINY_INCENSE
 	removemoney 99999
 	updatemoneybox
 	playse SE_SHOP

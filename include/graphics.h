@@ -3779,6 +3779,8 @@ extern const u32 gItemIcon_DevonScope[];
 extern const u32 gItemIconPalette_DevonScope[];
 extern const u32 gItemIcon_HunterTaxi[];
 extern const u32 gItemIconPalette_HunterTaxi[];
+extern const u32 gItemIcon_ShinyIncense[];
+extern const u32 gItemIconPalette_ShinyIncense[];
 // TMs/HMs
 extern const u32 gItemIcon_TM[];
 extern const u32 gItemIconPalette_FightingTMHM[];

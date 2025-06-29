@@ -618,6 +618,9 @@ const u32 gItemIconPalette_DevonScope[] = INCBIN_U32("graphics/items/icon_palett
 const u32 gItemIcon_HunterTaxi[] = INCBIN_U32("graphics/items/icons/hunter_taxi.4bpp.lz");
 const u32 gItemIconPalette_HunterTaxi[] = INCBIN_U32("graphics/items/icon_palettes/hunter_taxi.gbapal.lz");
 
+const u32 gItemIcon_ShinyIncense[] = INCBIN_U32("graphics/items/icons/shiny_incense.4bpp.lz");
+const u32 gItemIconPalette_ShinyIncense[] = INCBIN_U32("graphics/items/icon_palettes/shiny_incense.gbapal.lz");
+
 // TMs/HMs
 
 const u32 gItemIcon_TM[] = INCBIN_U32("graphics/items/icons/tm.4bpp.lz");

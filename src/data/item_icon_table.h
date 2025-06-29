@@ -402,6 +402,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_MAGMA_EMBLEM] = {gItemIcon_MagmaEmblem, gItemIconPalette_MagmaEmblem},
     [ITEM_OLD_SEA_MAP] = {gItemIcon_OldSeaMap, gItemIconPalette_OldSeaMap},
     [ITEM_HUNTER_TAXI] = {gItemIcon_HunterTaxi, gItemIconPalette_HunterTaxi},
+    [ITEM_SHINY_INCENSE] = {gItemIcon_ShinyIncense, gItemIconPalette_ShinyIncense},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
