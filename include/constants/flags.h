@@ -80,7 +80,7 @@
 #define FLAG_MON_PARTY_4    0x43 // set follow me pokemon party 4
 #define FLAG_MON_PARTY_5    0x44 // set follow me pokemon party 5
 #define FLAG_MON_PARTY_6    0x45 // set follow me pokemon party 6
-#define FLAG_UNUSED_0x046    0x46 // Unused Flag
+#define FLAG_SHINY_CREATION    0x46 // Force Shiny Pokemon Creation
 #define FLAG_UNUSED_0x047    0x47 // Unused Flag
 #define FLAG_UNUSED_0x048    0x48 // Unused Flag
 #define FLAG_UNUSED_0x049    0x49 // Unused Flag
