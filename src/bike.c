@@ -1057,6 +1057,10 @@ void Bike_HandleBumpySlopeJump(void)
 
 bool32 IsRunningDisallowed(u8 metatile)
 {
+    //Original if:
+    //if (!gMapHeader.allowRunning || IsRunningDisallowedByMetatile(metatile) == TRUE)
+
+    //Allow running indoors
     if (IsRunningDisallowedByMetatile(metatile) == TRUE)
         return TRUE;
     else
