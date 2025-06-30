@@ -100,6 +100,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsUnitSystem = 1;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsHpBarSpeed = 5;  //tx_optionsPlus
     gSaveBlock2Ptr->optionsExpBarSpeed = 5; //tx_optionsPlus
+    gSaveBlock2Ptr->optionsBattleSpeed = 4; //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = 1;         //tx_optionsPlus
 }

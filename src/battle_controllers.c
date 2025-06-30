@@ -12,6 +12,7 @@
 #include "task.h"
 #include "util.h"
 #include "constants/abilities.h"
+#include "event_data.h"
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -1526,4 +1527,14 @@ void BtlController_EmitEndLinkBattle(u8 bufferId, u8 battleOutcome)
     sBattleBuffersTransferData[3] = gSaveBlock2Ptr->frontier.disableRecordBattle;
     sBattleBuffersTransferData[5] = sBattleBuffersTransferData[4] = RecordedBattle_BufferNewBattlerData(&sBattleBuffersTransferData[6]);
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, sBattleBuffersTransferData[4] + 6);
+}
+
+u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar)
+{
+    u8 battleSceneOption = gSaveBlock2Ptr->optionsBattleSpeed;
+    //u8 battleSceneOption = VarGet(B_BATTLE_SPEED); // Originally GetBattleSceneOption() with a saveblock stored value;
+
+
+
+    return battleSceneOption;
 }
