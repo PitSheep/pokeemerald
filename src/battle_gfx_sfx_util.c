@@ -1210,6 +1210,8 @@ void ClearBehindSubstituteBit(u8 battlerId)
 
 void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId)
 {
+
+    if(gSaveBlock2Ptr->optionsDisableBeepLH == 0){
     u16 hp = GetMonData(mon, MON_DATA_HP);
     u16 maxHP = GetMonData(mon, MON_DATA_MAX_HP);
 
@@ -1236,6 +1238,11 @@ void HandleLowHpMusicChange(struct Pokemon *mon, u8 battlerId)
             return;
         }
     }
+    }else{
+        return;
+    }
+
+
 }
 
 void BattleStopLowHpSound(void)
