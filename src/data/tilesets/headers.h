@@ -836,3 +836,14 @@ const struct Tileset gTileset_champion_gym =
     .metatileAttributes = gMetatileAttributes_champion_gym,
     .callback = NULL,
 };
+
+const struct Tileset gTileset_hunter_house =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_hunter_house,
+    .palettes = gTilesetPalettes_hunter_house,
+    .metatiles = gMetatiles_hunter_house,
+    .metatileAttributes = gMetatileAttributes_hunter_house,
+    .callback = NULL,
+};
