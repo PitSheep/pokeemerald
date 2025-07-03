@@ -4427,7 +4427,7 @@
       "width": 53,
       "height": 20,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_hunter_house",
+      "secondary_tileset": "gTileset_champion_gym",
       "border_filepath": "data/layouts/OldaleTown_Hunter_House/border.bin",
       "blockdata_filepath": "data/layouts/OldaleTown_Hunter_House/map.bin"
     }
