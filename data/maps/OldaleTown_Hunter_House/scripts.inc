@@ -32,7 +32,7 @@ OldaleTown_Hunter_House_EventScript_Guide::
 OldaleTown_Hunter_House_Text_GuideAdvice:
 	.string "Good morning {PLAYER}.\n"
 	.string "Welcome to HUNTER HOUSE.\p"
-	.string "Select a Pokemon via PC near him\n"
+	.string "Select a Pokemon via STATUE near him\n"
 	.string "to receive information\p"
 	.string "on his latest sighting.\n"
 	.string "Then go there for hunting.\p"
