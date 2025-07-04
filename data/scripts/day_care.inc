@@ -470,38 +470,3 @@ Route117_Text_StoneVendorManInfo:
 	.string "FEEBAS now need only WATER STONE\n"
 	.string "to evolve into MILOTIC\p"
 	.string "this man nearby sells good stones.$"
-
-Route117_EventScript_ToolVendorMan::
-	lock
-	faceplayer
-	message Route117_Text_ToolVendorManSellWhatYouNeed
-	waitmessage
-	pokemart Route117_Pokemart_ToolVendorMan
-	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
-	release
-	end
-
-Route117_Text_ToolVendorManSellWhatYouNeed:
-	.string "I'm the TOOL GURU! I'll go for it and\n"
-	.string "sell you what you need!$"
-
-.align 2
-Route117_Pokemart_ToolVendorMan:
-	.2byte ITEM_SCOPE_LENS
-	.2byte ITEM_CHOICE_BAND
-	.2byte ITEM_FOCUS_BAND
-	.2byte ITEM_KINGS_ROCK
-	.2byte ITEM_LEFTOVERS
-	.2byte ITEM_QUICK_CLAW
-	.2byte ITEM_SHELL_BELL
-	.2byte ITEM_NONE
-	release
-	end
-
-Route117_EventScript_ToolVendorManInfo::
-	msgbox Route117_Text_ToolVendorManInfo, MSGBOX_SIGN
-	end
-
-Route117_Text_ToolVendorManInfo:
-	.string "TRAINER TIPS\p"
-	.string "this man nearby sells good tools.$"
