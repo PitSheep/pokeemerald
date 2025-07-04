@@ -481,6 +481,14 @@
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
       "script": "OldaleTown_Gym_EventScript_GymGuide"
+    },
+    {
+      "type": "sign",
+      "x": 8,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "EventScript_PC_Lite"
     }
   ]
 }
