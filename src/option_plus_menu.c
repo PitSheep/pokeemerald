@@ -357,7 +357,7 @@ static const u8 sText_Desc_BattleHPBar[]        = _("Choose how fast the HP BAR 
 static const u8 sText_Desc_BattleExpBar[]       = _("Choose how fast the EXP BAR will get\nfilled in battles.");
 static const u8 sText_Desc_DisableBeep[]       = _("Disable Low Health Beeps in battle.");
 static const u8 sText_Desc_EnableBeep[]       = _("Enable Low Health Beeps in battle.");
-static const u8 sText_Desc_BattleSpeed[]       = _("Choose how fast the battle animations\nare displayed.");
+static const u8 sText_Desc_BattleSpeed[]       = _("Choose how fast the battle animations\nare displayed. Hold L to normal speed.");
 static const u8 sText_Desc_SurfOff[]            = _("Disables the SURF theme when\nusing SURF.");
 static const u8 sText_Desc_SurfOn[]             = _("Enables the SURF theme\nwhen using SURF.");
 static const u8 sText_Desc_BikeOff[]            = _("Disables the BIKE theme when\nusing the BIKE.");
@@ -460,12 +460,12 @@ static void VBlankCB(void)
     LoadOam();
     ProcessSpriteCopyRequests();
     TransferPlttBuffer();
-    ChangeBgY(3, 96, BG_COORD_ADD);
+    ChangeBgY(3, 90, BG_COORD_ADD);
 }
 
 static const u8 sText_TopBar_Main[]         = _("GENERAL");
-static const u8 sText_TopBar_Main_Right[]   = _("{R_BUTTON}CUSTOM");
-static const u8 sText_TopBar_Custom[]       = _("CUSTOM");
+static const u8 sText_TopBar_Main_Right[]   = _("{R_BUTTON}ADDITIONAL");
+static const u8 sText_TopBar_Custom[]       = _("ADDITIONAL");
 static const u8 sText_TopBar_Custom_Left[]  = _("{L_BUTTON}GENERAL");
 static void DrawTopBarText(void)
 {
@@ -476,7 +476,7 @@ static void DrawTopBarText(void)
     {
         case MENU_MAIN:
             AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 105, 1, color, 0, sText_TopBar_Main);
-            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 190, 1, color, 0, sText_TopBar_Main_Right);
+            AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 175, 1, color, 0, sText_TopBar_Main_Right);
             break;
         case MENU_CUSTOM:
             AddTextPrinterParameterized3(WIN_TOPBAR, FONT_SMALL, 105, 1, color, 0, sText_TopBar_Custom);

@@ -1534,7 +1534,10 @@ u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar)
     u8 battleSceneOption = gSaveBlock2Ptr->optionsBattleSpeed;
     //u8 battleSceneOption = VarGet(B_BATTLE_SPEED); // Originally GetBattleSceneOption() with a saveblock stored value;
 
-
-
+    // Hold L to slow down
+    if(JOY_HELD(L_BUTTON)){
+        return 1;
+    }
+        
     return battleSceneOption;
 }
