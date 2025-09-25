@@ -928,28 +928,27 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
+	.string "PIT: {PLAYER}, we're here, mate!\p"
 	.string "It must be tiring riding with our things\n"
 	.string "in the moving truck.\p"
 	.string "Well, this is LITTLEROOT TOWN.\p"
 	.string "How do you like it?\n"
-	.string "This is our new home!\p"
+	.string "you can stay at my house ever!\p"
 	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
+	.string "an easy place where to have adventures!\p"
 	.string "And, you get your own room, {PLAYER}!\n"
 	.string "Take this and Let's go inside!.$"
 
 LittlerootTown_Text_WaitPlayer:
-	.string "MOM: Wait, {PLAYER}!$"
+	.string "PIT: Wait, {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
+	.string "PIT: {PLAYER}! {PLAYER}! Did you\n"
 	.string "introduce yourself to PROF. BIRCH?\p"
 	.string "Oh! What an adorable POKéMON!\n"
 	.string "You got it from PROF. BIRCH. How nice!\p"
-	.string "You're your father's child, all right.\n"
 	.string "You look good together with POKéMON!\p"
-	.string "Here, honey! If you're going out on an\n"
+	.string "Here, {PLAYER}! If you're going out on an\n"
 	.string "adventure, wear these RUNNING SHOES.\p"
 	.string "They'll put a zip in your step!$"
 
@@ -958,7 +957,7 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 	.string "RUNNING SHOES.$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: {PLAYER}, those shoes came with\n"
+	.string "PIT: {PLAYER}, those shoes came with\n"
 	.string "instructions.\p"
 	.string "“Press the B Button while wearing these\n"
 	.string "RUNNING SHOES to run extra-fast!\p"

@@ -288,7 +288,7 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 	step_end
 
 PlayersHouse_1F_Text_IsntItNiceInHere:
-	.string "MOM: See, {PLAYER}?\n"
+	.string "PIT: See, {PLAYER}?\n"
 	.string "Isn't it nice in here, too?$"
 
 PlayersHouse_1F_Text_MoversPokemonGoSetClock:
@@ -296,54 +296,53 @@ PlayersHouse_1F_Text_MoversPokemonGoSetClock:
 	.string "of moving us in and cleaning up after.\l"
 	.string "This is so convenient!\p"
 	.string "{PLAYER}, your room is upstairs.\n"
-	.string "Go check it out, dear!\p"
-	.string "DAD bought you a new clock to mark\n"
+	.string "Go check it out, mate!\p"
+	.string "I bought you a new clock to mark\n"
 	.string "our move here.\l"
 	.string "Don't forget to set it!$"
 
 PlayersHouse_1F_Text_ArentYouInterestedInRoom:
-	.string "MOM: Well, {PLAYER}?\p"
+	.string "PIT: Well, {PLAYER}?\p"
 	.string "Aren't you interested in seeing your\n"
 	.string "very own room?$"
 
 PlayersHouse_1F_Text_GoSetTheClock:
-	.string "MOM: {PLAYER}.\p"
-	.string "Go set the clock in your room, honey.$"
+	.string "PIT: {PLAYER}.\p"
+	.string "Go set the clock in your room, mate.$"
 
 PlayersHouse_1F_Text_OhComeQuickly:
-	.string "MOM: Oh! {PLAYER}, {PLAYER}!\n"
+	.string "PIT: Oh! {PLAYER}, {PLAYER}!\n"
 	.string "Quick! Come quickly!$"
 
 PlayersHouse_1F_Text_MaybeDadWillBeOn:
-	.string "MOM: Look! It's PETALBURG GYM!\n"
-	.string "Maybe DAD will be on!$"
+	.string "PIT: Look! It's OLDTALE GYM!\n"
+	.string "Maybe CHAMPION will be on!$"
 
 PlayersHouse_1F_Text_ItsOverWeMissedHim:
-	.string "MOM: Oh… It's over.\p"
-	.string "I think DAD was on, but we missed him.\n"
+	.string "PIT: Oh… It's over.\p"
 	.string "Too bad.$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
 	.string "Oh, yes.\n"
-	.string "One of DAD's friends lives in town.\p"
+	.string "One of my friends lives in town.\p"
 	.string "PROF. BIRCH is his name.\p"
 	.string "He lives right next door, so you should\n"
 	.string "go over and introduce yourself.$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
-	.string "MOM: See you, honey!$"
+	.string "PIT: See you, mate!$"
 
 PlayersHouse_1F_Text_DidYouMeetProfBirch:
-	.string "MOM: Did you introduce yourself to\n"
+	.string "PIT: Did you introduce yourself to\n"
 	.string "PROF. BIRCH?$"
 
 PlayersHouse_1F_Text_YouShouldRestABit:
-	.string "MOM: How are you doing, {PLAYER}?\n"
+	.string "PIT: How are you doing, {PLAYER}?\n"
 	.string "You look a little tired.\p"
 	.string "I think you should rest a bit.$"
 
 PlayersHouse_1F_Text_TakeCareHoney:
-	.string "MOM: Take care, honey!$"
+	.string "PIT: Take care, mate!$"
 
 PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
 	.string "MOM: Oh? Did DAD give you that BADGE?\p"
@@ -355,14 +354,14 @@ PlayersHouse_1F_Text_DontPushYourselfTooHard:
 	.string "Go for it, honey!$"
 
 PlayersHouse_1F_Text_IsThatAPokenav:
-	.string "MOM: What is that, honey? A POKéNAV?\n"
+	.string "PIT: What is that, nate? A POKéNAV?\n"
 	.string "Someone from DEVON gave it to you?\p"
-	.string "Well, honey, how about registering\n"
-	.string "your mom?\p"
+	.string "Well, mate, how about registering\n"
+	.string "your mate?\p"
 	.string "… … …$"
 
 PlayersHouse_1F_Text_RegisteredMom:
-	.string "Registered MOM\n"
+	.string "Registered PIT\n"
 	.string "in the POKéNAV.$"
 
 PlayersHouse_1F_Text_Vigoroth1:
@@ -373,7 +372,7 @@ PlayersHouse_1F_Text_Vigoroth2:
 
 PlayersHouse_1F_Text_ReportFromPetalburgGym:
 	.string "INTERVIEWER: …We brought you this\n"
-	.string "report from in front of PETALBURG GYM.$"
+	.string "report from in front of OLDTALE GYM.$"
 
 PlayersHouse_1F_Text_TheresAMovieOnTV:
 	.string "There is a movie on TV.\p"
