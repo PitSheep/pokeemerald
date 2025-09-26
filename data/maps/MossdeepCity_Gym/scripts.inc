@@ -572,7 +572,7 @@ MossdeepCity_Gym_Text_ReceivedMindBadge:
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
 	.string "TATE: The MIND BADGE enhances the\n"
 	.string "SP. ATK and SP. DEF of POKéMON.\p"
-	.string "Now you can train POKéMON up to level 50.\p"
+	.string "Now you can train POKéMON up to level up.\p"
 	.string "LIZA: It also lets you use the HM move\n"
 	.string "DIVE outside of battle.\p"
 	.string "TATE: You should also take this, too.$"

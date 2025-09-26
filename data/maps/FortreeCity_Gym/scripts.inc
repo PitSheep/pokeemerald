@@ -255,7 +255,7 @@ FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
 	.string "With the FEATHER BADGE, all POKéMON up\n"
 	.string "to LV 43, even those received through\l"
 	.string "trades, will obey your every command.\p"
-	.string "Now you can train POKéMON up to level 43.\p"
+	.string "Now you can train POKéMON up to level up.\p"
 	.string "You will also be able to use\n"
 	.string "the HM move FLY outside of battle.\p"
 	.string "And this…\n"

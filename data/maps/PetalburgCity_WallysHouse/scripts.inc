@@ -89,19 +89,7 @@ PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:
 PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "{PLAYER}{KUN}! Please excuse us for\n"
 	.string "dragging you here this way.\p"
-	.string "But our WALLY's become very healthy\n"
-	.string "since he went to VERDANTURF TOWN.\p"
-	.string "We owe it all to you!\p"
-	.string "When WALLY left town, you helped\n"
-	.string "him catch a POKéMON, right?\p"
-	.string "I think that made WALLY really\n"
-	.string "happy.\p"
-	.string "Actually, not just WALLY.\n"
-	.string "It made me, his father, happy too.\p"
-	.string "Happy that he's gained such a great\n"
-	.string "friend as you.\p"
-	.string "This isn't a bribe or anything, but\n"
-	.string "I'd really like you to have this.$"
+	.string "But I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
 	.string "If your POKéMON can SURF, you'll be\n"

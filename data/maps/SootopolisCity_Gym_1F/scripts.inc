@@ -240,7 +240,7 @@ SootopolisCity_Gym_1F_Text_ExplainRainBadgeTakeThis:
 	.string "Having the RAIN BADGE, all POKéMON up\n"
 	.string "to LV 60, even those received through\l"
 	.string "trades, will obey your every command.\p"
-	.string "Now you can train POKéMON up to level 60.\p"
+	.string "Now you can train POKéMON up to level up.\p"
 	.string "The RAIN BADGE also allows the use\n"
 	.string "of the HM move WATERFALL to scale\l"
 	.string "walls of cascading water.\p"
