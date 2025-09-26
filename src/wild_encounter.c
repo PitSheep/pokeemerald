@@ -294,7 +294,7 @@ u8 fixedLVL = 0;
     // Make sure minimum level is less than maximum level
     {
         min = fixedLVL-3;
-        max = fixedLVL+3;
+        max = fixedLVL-1;
     }
 	if (min <= 0)
 		min = 1;
