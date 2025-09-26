@@ -533,6 +533,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex::
 	setvar VAR_OLDALE_TOWN_STATE, 1
 	setvar VAR_LITTLEROOT_RIVAL_STATE, 4
 	setvar VAR_LITTLEROOT_TOWN_STATE, 3
+	addvar VAR_PETALBURG_GYM_STATE, 6
 	setfollower 7, 0x7E
 	updatefollowerpokemongraphic
 	releaseall
