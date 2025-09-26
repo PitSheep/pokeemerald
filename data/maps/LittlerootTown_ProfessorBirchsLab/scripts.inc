@@ -144,6 +144,8 @@ LittlerootTown_ProfessorBirchsLab_EventScript_AgreeToSeeRival::
     hideobjectat 7, MAP_LITTLEROOT_TOWN_PROFESSOR_BIRCHS_LAB
 	setvar VAR_OLDALE_RIVAL_STATE, 2
 	setflag FLAG_HIDE_OLDALE_TOWN_RIVAL
+	setflag FLAG_DEFEATED_RIVAL_ROUTE103
+	setflag FLAG_HIDE_ROUTE_103_RIVAL
 	goto LittlerootTown_ProfessorBirchsLab_EventScript_GivePokedex
 	setfollower 7, 0x7E
 	updatefollowerpokemongraphic
