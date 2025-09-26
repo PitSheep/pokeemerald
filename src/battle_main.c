@@ -2026,7 +2026,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 max = 0;
     u8 range = 0;
     u8 rand = 0;
-    if(FlagGet(FLAG_BATTLE_GYM)){
+
 	    if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
 	    	fixedLVL = (GetMonData(&gPlayerParty[0], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[1], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[2], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[3], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[4], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[5], MON_DATA_LEVEL)) / 6;
 	    else if ((GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) == SPECIES_NONE) && (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE))
@@ -2039,7 +2039,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 	    	fixedLVL = (GetMonData(&gPlayerParty[0], MON_DATA_LEVEL)+GetMonData(&gPlayerParty[1], MON_DATA_LEVEL)) / 2;
 	    else if ((GetMonData(&gPlayerParty[1], MON_DATA_SPECIES) == SPECIES_NONE) && (GetMonData(&gPlayerParty[0], MON_DATA_SPECIES) != SPECIES_NONE))
 	    	fixedLVL = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
-    }
+    
 
     if (trainerNum == TRAINER_SECRET_BASE)
         return 0;
@@ -2097,6 +2097,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					min=1;
 					reallevel = min + rand;
                     CreateMon(&party[i], partyData[i].species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }else{
+                    min = currentLvlCap();
+					max = currentLvlCap();
+				    range = max - min + 1;
+				    rand = Random() % range;
+					if (min <=0)
+					min=1;
+					reallevel = min + rand;
+                    CreateMon(&party[i], partyData[i].species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
                 break;
             }
@@ -2113,6 +2122,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 if(FlagGet(FLAG_BATTLE_GYM)){			    
 					min = fixedLVL-0;
 					max = fixedLVL+0;
+				    range = max - min + 1;
+				    rand = Random() % range;
+					if (min <=0)
+					min=1;
+					reallevel = min + rand;
+                    CreateMon(&party[i], partyData[i].species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }else{
+                    min = currentLvlCap();
+					max = currentLvlCap();
 				    range = max - min + 1;
 				    rand = Random() % range;
 					if (min <=0)
@@ -2146,6 +2164,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 					min=1;
 					reallevel = min + rand;
                     CreateMon(&party[i], partyData[i].species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }else{
+                    min = currentLvlCap();
+					max = currentLvlCap();
+				    range = max - min + 1;
+				    rand = Random() % range;
+					if (min <=0)
+					min=1;
+					reallevel = min + rand;
+                    CreateMon(&party[i], partyData[i].species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
                 }
                 SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[i].heldItem);
                 break;
@@ -2163,6 +2190,15 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 if(FlagGet(FLAG_BATTLE_GYM)){			    
 					min = fixedLVL-0;
 					max = fixedLVL+0;
+				    range = max - min + 1;
+				    rand = Random() % range;
+					if (min <=0)
+					min=1;
+					reallevel = min + rand;
+                    CreateMon(&party[i], partyData[i].species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                }else{
+                    min = currentLvlCap();
+					max = currentLvlCap();
 				    range = max - min + 1;
 				    rand = Random() % range;
 					if (min <=0)
