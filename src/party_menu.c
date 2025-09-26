@@ -6720,34 +6720,24 @@ void IsLastMonThatKnowsSurf(void)
 //PIT RULES: lvl cap by badge
 u8 currentLvlCap(void)
 {
-    if(!FlagGet(FLAG_BADGE01_GET)){
-        return 16;
-    }
-    else if(!FlagGet(FLAG_BADGE02_GET)){
-        return 20;
-    }
-    else if(!FlagGet(FLAG_BADGE03_GET)){
-        return 25;
-    }
-    else if(!FlagGet(FLAG_BADGE04_GET)){
-        return 30;
-    }
-    else if(!FlagGet(FLAG_BADGE05_GET)){
-        return 32;
-    }
-    else if(!FlagGet(FLAG_BADGE06_GET)){
-        return 36;
-    }
-    else if(!FlagGet(FLAG_BADGE07_GET)){
-        return 43;
-    }
-    else if(!FlagGet(FLAG_BADGE08_GET)){
-        return 50;
-    }
-    else if(!FlagGet(FLAG_IS_CHAMPION)){
-        return 60;
-    }
-    else{
+    // tabella dei cap in base al numero di medaglie
+    // index 0 = nessuna medaglia, index 1 = 1 medaglia, ecc.
+    const u8 lvlCaps[9] = {16, 20, 25, 30, 32, 36, 43, 50, 60};
+    u8 badgeCount = 0;
+
+    if (FlagGet(FLAG_BADGE01_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE02_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE03_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE04_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE05_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE06_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE07_GET)) badgeCount++;
+    if (FlagGet(FLAG_BADGE08_GET)) badgeCount++;
+
+    // Se sei campione, niente limite
+    if (FlagGet(FLAG_IS_CHAMPION))
         return 100;
-    }
+
+    // Restituisci il livello dal vettore
+    return lvlCaps[badgeCount];
 }
