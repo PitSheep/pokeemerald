@@ -104,6 +104,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsDisableBeepLH = 1;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = 1;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsAutoBattle = 1;         //tx_optionsPlus
 }
 
 static void ClearPokedexFlags(void)
