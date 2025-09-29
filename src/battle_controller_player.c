@@ -35,6 +35,7 @@
 #include "constants/songs.h"
 #include "constants/trainers.h"
 #include "constants/rgb.h"
+#include "event_data.h"
 
 static void PlayerHandleGetMonData(void);
 static void PlayerHandleSetMonData(void);
@@ -2643,6 +2644,16 @@ static void AiChooseMoveInBattleAll(void)
     PlayerBufferExecCompleted();
 }
 
+u32 GetAutoBattleOption()
+{
+    u8 autoBattleOption = gSaveBlock2Ptr->optionsAutoBattle;
+    if(autoBattleOption == 0){
+        return TRUE;
+    }else{
+        return FALSE;
+    }
+}
+
 static void PlayerHandleChooseMove(void)
 {
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
@@ -2652,9 +2663,14 @@ static void PlayerHandleChooseMove(void)
     }
     else
     {
+        if(GetAutoBattleOption()){
         //PIT RULES: call random Move by nature
         *(gBattleStruct->arenaMindPoints + gActiveBattler) = 8;
         gBattlerControllerFuncs[gActiveBattler] = AiChooseMoveInBattleAll;
+        }else{
+        InitMoveSelectionsVarsAndStrings();
+        gBattlerControllerFuncs[gActiveBattler] = HandleChooseMoveAfterDma3;
+        }
     }
 }
 

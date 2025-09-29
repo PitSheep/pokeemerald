@@ -1538,6 +1538,11 @@ u32 Rogue_GetBattleSpeedScale(bool32 forHealthbar)
     if(JOY_HELD(L_BUTTON)){
         return 1;
     }
+
+    // Always run at 1x speed when player choose move
+    if(InBattleChoosingMoves()){
+        return 1;
+    }
         
     return battleSceneOption;
 }
