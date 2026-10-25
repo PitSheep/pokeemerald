@@ -29,6 +29,7 @@
 #include "trainer_see.h"
 #include "trainer_hill.h"
 #include "wild_encounter.h"
+#include "overworld_wild_mon.h"
 #include "follow_me.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
@@ -173,6 +174,7 @@ int ProcessPlayerFieldInput(struct FieldInput *input)
     {
         IncrementGameStat(GAME_STAT_STEPS);
         IncrementBirthIslandRockStepCount();
+        UpdateOverworldWildMons();
         
         if (TryStartStepBasedScript(&position, metatileBehavior, playerDirection) == TRUE)
             return TRUE;
@@ -343,6 +345,11 @@ static const u8 *GetInteractedObjectEventScript(struct MapPosition *position, u8
             script = GetFollowerScriptPointer();
         else
             return NULL;
+    }
+    else if (IsOverworldWildMonObjEvent(gObjectEvents[objectEventId].localId))
+    {
+        TriggerOverworldWildBattle(objectEventId);
+        return NULL;
     }
     else
         script = GetObjectEventScriptPointerByObjectEventId(objectEventId);

@@ -28,6 +28,7 @@
 #include "overworld.h"
 #include "field_weather.h"
 #include "battle_tower.h"
+#include "overworld_wild_mon.h"
 #include "gym_leader_rematch.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
@@ -612,6 +613,7 @@ static void CB2_EndWildBattle(void)
         SetMainCallback2(CB2_ReturnToField);
         gFieldCallback = FieldCB_ReturnToFieldNoScriptCheckMusic;
         UpdateFollowerPokemonGraphic();
+        OnReturnToFieldFromOverworldWildBattle();
     }
 }
 

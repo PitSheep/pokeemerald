@@ -77,6 +77,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
+#include "overworld_wild_mon.h"
 
 struct CableClubPlayer
 {
@@ -2043,7 +2044,10 @@ void CB2_Overworld(void)
     OverworldBasic();
     if (fading)
         SetFieldVBlankCallback();
-    
+
+    // Tick the overworld wild Pokémon refresh timer (runs every frame, independent of player steps).
+    TickOverworldWildMonTimer();
+
     // Make sure follower's sprite is properly positioned when map reloads.
     if (gSaveBlock2Ptr->follower.inProgress)
     {

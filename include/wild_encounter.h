@@ -36,5 +36,7 @@ void FishingWildEncounter(u8 rod);
 u16 GetLocalWildMon(bool8 *isWaterMon);
 u16 GetLocalWaterMon(void);
 bool8 UpdateRepelCounter(void);
+void CreateWildMon(u16 species, u8 level);
+bool8 GetWildEncounterDataForTerrain(u8 terrain, u16 *species, u8 *level);
 
 #endif // GUARD_WILD_ENCOUNTER_H

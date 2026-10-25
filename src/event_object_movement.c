@@ -27,6 +27,7 @@
 #include "trainer_hill.h"
 #include "util.h"
 #include "follow_me.h"
+#include "overworld_wild_mon.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
@@ -5127,6 +5128,8 @@ u8 GetCollisionAtCoords(struct ObjectEvent *objectEvent, s16 x, s16 y, u32 dir)
     u8 direction = dir;
     if (IsCoordOutsideObjectEventMovementRange(objectEvent, x, y))
         return COLLISION_OUTSIDE_RANGE;
+    else if (IsOverworldWildMonObjEvent(objectEvent->localId) && !MetatileBehavior_IsLandWildEncounter(MapGridGetMetatileBehaviorAt(x, y)) && !MetatileBehavior_IsWaterWildEncounter(MapGridGetMetatileBehaviorAt(x, y)))
+        return COLLISION_IMPASSABLE;
     else if (MapGridGetCollisionAt(x, y) || GetMapBorderIdAt(x, y) == CONNECTION_INVALID || IsMetatileDirectionallyImpassable(objectEvent, x, y, direction))
         return COLLISION_IMPASSABLE;
     else if (objectEvent->trackedByCamera && !CanCameraMoveInDirection(direction))
@@ -5202,7 +5205,14 @@ static bool8 DoesObjectCollideWithObjectAt(struct ObjectEvent *objectEvent, s16 
             if ((curObject->currentCoords.x == x && curObject->currentCoords.y == y) || (curObject->previousCoords.x == x && curObject->previousCoords.y == y))
             {
                 if (AreElevationsCompatible(objectEvent->currentElevation, curObject->currentElevation))
+                {
+                    if (curObject->isPlayer && IsOverworldWildMonObjEvent(objectEvent->localId))
+                    {
+                        TriggerOverworldWildBattleByObject(objectEvent);
+                        return TRUE;
+                    }
                     return TRUE;
+                }
             }
         }
     }

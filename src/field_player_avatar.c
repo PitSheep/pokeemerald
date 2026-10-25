@@ -22,6 +22,7 @@
 #include "tv.h"
 #include "follow_me.h"
 #include "wild_encounter.h"
+#include "overworld_wild_mon.h"
 #include "constants/abilities.h"
 #include "constants/event_objects.h"
 #include "constants/event_object_movement.h"
@@ -718,8 +719,13 @@ u8 CheckForObjectEventCollision(struct ObjectEvent *objectEvent, s16 x, s16 y, u
         IncrementGameStat(GAME_STAT_JUMPED_DOWN_LEDGES);
         return COLLISION_LEDGE_JUMP;
     }
-    if (collision == COLLISION_OBJECT_EVENT && TryPushBoulder(x, y, direction))
-        return COLLISION_PUSHED_BOULDER;
+    if (collision == COLLISION_OBJECT_EVENT)
+    {
+        if (TryPushBoulder(x, y, direction))
+            return COLLISION_PUSHED_BOULDER;
+        if (TryStartOverworldWildBattle(x, y))
+            return COLLISION_OBJECT_EVENT;
+    }
 
     if (collision == COLLISION_NONE)
     {
@@ -1426,6 +1432,8 @@ void InitPlayerAvatar(s16 x, s16 y, u8 direction, u8 gender)
     gPlayerAvatar.gender = gender;
     SetPlayerAvatarStateMask(PLAYER_AVATAR_FLAG_CONTROLLABLE | PLAYER_AVATAR_FLAG_ON_FOOT);
     CreateFollowerAvatar();
+    ClearOverworldWildMons();
+    TrySpawnOverworldWildMons();
 }
 
 void SetPlayerInvisibility(bool8 invisible)

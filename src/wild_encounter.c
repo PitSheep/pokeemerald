@@ -1,5 +1,6 @@
 #include "global.h"
 #include "wild_encounter.h"
+#include "overworld_wild_mon.h"
 #include "pokemon.h"
 #include "metatile_behavior.h"
 #include "fieldmap.h"
@@ -34,13 +35,6 @@ extern const u8 EventScript_RepelWoreOff[];
 #define NUM_FISHING_SPOTS_2 167
 #define NUM_FISHING_SPOTS_3 149
 #define NUM_FISHING_SPOTS (NUM_FISHING_SPOTS_1 + NUM_FISHING_SPOTS_2 + NUM_FISHING_SPOTS_3)
-
-enum {
-    WILD_AREA_LAND,
-    WILD_AREA_WATER,
-    WILD_AREA_ROCKS,
-    WILD_AREA_FISHING,
-};
 
 #define WILD_CHECK_REPEL    (1 << 0)
 #define WILD_CHECK_KEEN_EYE (1 << 1)
@@ -335,6 +329,39 @@ static u16 GetCurrentMapWildMonHeaderId(void)
     return HEADER_NONE;
 }
 
+bool8 GetWildEncounterDataForTerrain(u8 terrain, u16 *species, u8 *level)
+{
+    u16 headerId = GetCurrentMapWildMonHeaderId();
+    const struct WildPokemonInfo *info = NULL;
+    u8 slot = 0;
+
+    if (headerId == HEADER_NONE)
+        return FALSE;
+
+    if (terrain == WILD_AREA_LAND)
+    {
+        info = gWildMonHeaders[headerId].landMonsInfo;
+        if (info == NULL)
+            return FALSE;
+        slot = ChooseWildMonIndex_Land();
+    }
+    else if (terrain == WILD_AREA_WATER)
+    {
+        info = gWildMonHeaders[headerId].waterMonsInfo;
+        if (info == NULL)
+            return FALSE;
+        slot = ChooseWildMonIndex_WaterRock();
+    }
+    else
+    {
+        return FALSE;
+    }
+
+    *species = info->wildPokemon[slot].species;
+    *level = ChooseWildMonLevel(&info->wildPokemon[slot]);
+    return TRUE;
+}
+
 static u8 PickWildMonNature(void)
 {
     u8 i;
@@ -378,7 +405,7 @@ static u8 PickWildMonNature(void)
     return Random() % NUM_NATURES;
 }
 
-static void CreateWildMon(u16 species, u8 level)
+void CreateWildMon(u16 species, u8 level)
 {
     bool32 checkCuteCharm;
 
@@ -550,6 +577,10 @@ bool8 StandardWildEncounter(u16 curMetatileBehavior, u16 prevMetatileBehavior)
 {
     u16 headerId;
     struct Roamer *roamer;
+
+#if OW_WILD_DISABLE_RANDOM_ENCOUNTERS
+    return FALSE;
+#endif
 
     if (sWildEncountersDisabled == TRUE)
         return FALSE;
