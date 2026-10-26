@@ -524,6 +524,14 @@ OldaleTown_Text_TownSign_HunterHouseTips2:
 	.string "GYM:\n"
 	.string "Near here on the right.$"
 
+OldaleTown_EventScript_TownSign_HunterHouseTips3::
+	msgbox OldaleTown_Text_TownSign_HunterHouseTips3, MSGBOX_SIGN
+	end
+
+OldaleTown_Text_TownSign_HunterHouseTips3:
+	.string "Behind here, you’ll find a small\n"
+	.string "vegetable patch for your berries.$"
+
 OldaleTown_EventScript_TownSign_HunterHouse::
 	msgbox OldaleTown_Text_TownSign_HunterHouse, MSGBOX_SIGN
 	end
