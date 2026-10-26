@@ -96,6 +96,9 @@ static void PlayerCmdEnd(void);
 static void PlayerBufferRunCommand(void);
 static void HandleInputChooseTarget(void);
 static void HandleInputChooseMove(void);
+static bool8 IsQuickBallBattle(void);
+static bool8 IsQuickBallAvailable(u16 itemId);
+static bool8 ChangeLastUsedBall(s8 direction);
 static void MoveSelectionCreateCursorAt(u8, u8);
 static void MoveSelectionDestroyCursorAt(u8);
 static void MoveSelectionDisplayPpNumber(void);
@@ -120,6 +123,15 @@ static void DoSwitchOutAnimation(void);
 static void PlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8);
 static void EndDrawPartyStatusSummary(void);
+
+EWRAM_DATA static u16 sLastUsedBall = ITEM_POKE_BALL;
+EWRAM_DATA static bool8 sUseQuickBall = FALSE;
+EWRAM_DATA static bool8 sQuickBallRPressPending = FALSE;
+EWRAM_DATA static bool8 sQuickBallRPressHeldLong = FALSE;
+EWRAM_DATA static bool8 sQuickBallRUsedForSelection = FALSE;
+EWRAM_DATA static u8 sQuickBallRPressFrames = 0;
+
+#define QUICK_BALL_HOLD_THRESHOLD 8
 
 static void (*const sPlayerBufferCommands[CONTROLLER_CMDS_COUNT])(void) =
 {
@@ -231,6 +243,65 @@ static void CompleteOnBankSpritePosX_0(void)
         PlayerBufferExecCompleted();
 }
 
+static bool8 IsQuickBallBattle(void)
+{
+    return !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER
+                               | BATTLE_TYPE_LINK
+                               | BATTLE_TYPE_LINK_IN_BATTLE
+                               | BATTLE_TYPE_FIRST_BATTLE
+                               | BATTLE_TYPE_SAFARI
+                               | BATTLE_TYPE_FRONTIER));
+}
+
+static bool8 IsQuickBallAvailable(u16 itemId)
+{
+    return itemId >= FIRST_BALL
+        && itemId <= LAST_BALL
+        && itemId != ITEM_SAFARI_BALL
+        && CheckBagHasItem(itemId, 1);
+}
+
+static bool8 ChangeLastUsedBall(s8 direction)
+{
+    u8 currentPosition = BAG_POKEBALLS_COUNT;
+    u8 i;
+
+    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
+    {
+        if (BagGetItemIdByPocketPosition(BALLS_POCKET + 1, i) == sLastUsedBall
+         && IsQuickBallAvailable(sLastUsedBall))
+        {
+            currentPosition = i;
+            break;
+        }
+    }
+
+    if (direction == 0 && currentPosition < BAG_POKEBALLS_COUNT)
+        return TRUE;
+    if (direction == 0)
+        direction = 1;
+
+    for (i = 1; i <= BAG_POKEBALLS_COUNT; i++)
+    {
+        s32 candidatePosition;
+        u16 itemId;
+
+        if (currentPosition == BAG_POKEBALLS_COUNT)
+            candidatePosition = direction > 0 ? i - 1 : BAG_POKEBALLS_COUNT - i;
+        else
+            candidatePosition = (currentPosition + BAG_POKEBALLS_COUNT + direction * i) % BAG_POKEBALLS_COUNT;
+
+        itemId = BagGetItemIdByPocketPosition(BALLS_POCKET + 1, candidatePosition);
+        if (IsQuickBallAvailable(itemId))
+        {
+            sLastUsedBall = itemId;
+            return TRUE;
+        }
+    }
+
+    return FALSE;
+}
+
 static void HandleInputChooseAction(void)
 {
     u16 itemId = gBattleBufferA[gActiveBattler][2] | (gBattleBufferA[gActiveBattler][3] << 8);
@@ -243,8 +314,61 @@ static void HandleInputChooseAction(void)
     else
         gPlayerDpadHoldFrames = 0;
 
+    if (IsQuickBallBattle())
+    {
+        if (JOY_NEW(R_BUTTON))
+        {
+            sQuickBallRPressPending = TRUE;
+            sQuickBallRPressHeldLong = FALSE;
+            sQuickBallRUsedForSelection = FALSE;
+            sQuickBallRPressFrames = 0;
+        }
+
+        if (sQuickBallRPressPending)
+        {
+            if (JOY_HELD(R_BUTTON))
+            {
+                if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
+                {
+                    if (ChangeLastUsedBall(JOY_NEW(DPAD_LEFT) ? -1 : 1))
+                        PlaySE(SE_SELECT);
+                    sQuickBallRUsedForSelection = TRUE;
+                    return;
+                }
+
+                if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_UP | DPAD_DOWN | START_BUTTON | SELECT_BUTTON))
+                    sQuickBallRPressPending = FALSE;
+                else if (!sQuickBallRPressHeldLong && ++sQuickBallRPressFrames >= QUICK_BALL_HOLD_THRESHOLD)
+                    sQuickBallRPressHeldLong = TRUE;
+            }
+            else
+            {
+                bool8 useQuickBall = !sQuickBallRPressHeldLong && !sQuickBallRUsedForSelection;
+
+                sQuickBallRPressPending = FALSE;
+                sQuickBallRPressFrames = 0;
+                if (useQuickBall && ChangeLastUsedBall(0))
+                {
+                    PlaySE(SE_SELECT);
+                    sUseQuickBall = TRUE;
+                    BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_ITEM, 0);
+                    PlayerBufferExecCompleted();
+                    return;
+                }
+            }
+        }
+    }
+    else
+    {
+        sQuickBallRPressPending = FALSE;
+        sQuickBallRPressHeldLong = FALSE;
+        sQuickBallRUsedForSelection = FALSE;
+        sQuickBallRPressFrames = 0;
+    }
+
     if (JOY_NEW(A_BUTTON))
     {
+        sQuickBallRPressPending = FALSE;
         PlaySE(SE_SELECT);
 
         switch (gActionSelectionCursor[gActiveBattler])
@@ -1401,6 +1525,11 @@ static void CompleteWhenChoseItem(void)
 {
     if (gMain.callback2 == BattleMainCB2 && !gPaletteFade.active)
     {
+        if (gSpecialVar_ItemId >= FIRST_BALL
+         && gSpecialVar_ItemId <= LAST_BALL
+         && gSpecialVar_ItemId != ITEM_SAFARI_BALL)
+            sLastUsedBall = gSpecialVar_ItemId;
+
         BtlController_EmitOneReturnValue(BUFFER_B, gSpecialVar_ItemId);
         PlayerBufferExecCompleted();
     }
@@ -2629,6 +2758,11 @@ static void PlayerHandleChooseAction(void)
 {
     s32 i;
 
+    sUseQuickBall = FALSE;
+    sQuickBallRPressPending = FALSE;
+    sQuickBallRPressHeldLong = FALSE;
+    sQuickBallRUsedForSelection = FALSE;
+    sQuickBallRPressFrames = 0;
     gBattlerControllerFuncs[gActiveBattler] = HandleChooseActionAfterDma3;
     BattleTv_ClearExplosionFaintCause();
     BattlePutTextOnWindow(gText_BattleMenu, B_WIN_ACTION_MENU);
@@ -2730,6 +2864,17 @@ void InitMoveSelectionsVarsAndStrings(void)
 static void PlayerHandleChooseItem(void)
 {
     s32 i;
+
+    if (sUseQuickBall)
+    {
+        sUseQuickBall = FALSE;
+        if (IsQuickBallAvailable(sLastUsedBall))
+        {
+            BtlController_EmitOneReturnValue(BUFFER_B, sLastUsedBall);
+            PlayerBufferExecCompleted();
+            return;
+        }
+    }
 
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
     gBattlerControllerFuncs[gActiveBattler] = OpenBagAndChooseItem;
