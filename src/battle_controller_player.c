@@ -346,6 +346,7 @@ static void HandleInputChooseAction(void)
         {
             if (JOY_HELD(R_BUTTON))
             {
+                SetQuickBallPanelChangeArrowsVisible(TRUE);
                 if (JOY_NEW(DPAD_LEFT | DPAD_RIGHT))
                 {
                     if (ChangeLastUsedBall(JOY_NEW(DPAD_LEFT) ? -1 : 1))
@@ -355,7 +356,10 @@ static void HandleInputChooseAction(void)
                 }
 
                 if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_UP | DPAD_DOWN | START_BUTTON | SELECT_BUTTON))
+                {
                     sQuickBallRPressPending = FALSE;
+                    SetQuickBallPanelChangeArrowsVisible(FALSE);
+                }
                 else if (!sQuickBallRPressHeldLong && ++sQuickBallRPressFrames >= QUICK_BALL_HOLD_THRESHOLD)
                     sQuickBallRPressHeldLong = TRUE;
             }
@@ -363,6 +367,7 @@ static void HandleInputChooseAction(void)
             {
                 bool8 useQuickBall = !sQuickBallRPressHeldLong && !sQuickBallRUsedForSelection;
 
+                SetQuickBallPanelChangeArrowsVisible(FALSE);
                 sQuickBallRPressPending = FALSE;
                 sQuickBallRPressFrames = 0;
                 if (useQuickBall && ChangeLastUsedBall(0))
@@ -379,6 +384,7 @@ static void HandleInputChooseAction(void)
     }
     else
     {
+        SetQuickBallPanelChangeArrowsVisible(FALSE);
         sQuickBallRPressPending = FALSE;
         sQuickBallRPressHeldLong = FALSE;
         sQuickBallRUsedForSelection = FALSE;

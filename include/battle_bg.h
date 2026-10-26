@@ -6,6 +6,7 @@ void InitBattleBgsVideo(void);
 void LoadBattleMenuWindowGfx(void);
 void ShowQuickBallPanel(u16 itemId);
 void UpdateQuickBallPanel(u16 itemId);
+void SetQuickBallPanelChangeArrowsVisible(bool8 visible);
 void HideQuickBallPanel(void);
 void DrawMainBattleBackground(void);
 void LoadBattleTextboxAndBackground(void);

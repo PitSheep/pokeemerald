@@ -96,6 +96,7 @@ static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] =
 #define TAG_QUICK_BALL_PANEL 0xD720
 #define TAG_QUICK_BALL_ICON 0xD721
 #define TAG_QUICK_BALL_LABEL 0xD722
+#define TAG_QUICK_BALL_ARROWS 0xD723
 
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
 {
@@ -257,11 +258,79 @@ static const struct SpriteTemplate sQuickBallLabelSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
+static const u8 sQuickBallArrowGfx[] =
+{
+    0x00, 0x00, 0x30, 0x00,
+    0x00, 0x00, 0x33, 0x00,
+    0x00, 0x00, 0x33, 0x00,
+    0x30, 0x33, 0x33, 0x33,
+    0x00, 0x00, 0x33, 0x00,
+    0x00, 0x00, 0x30, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00,
+};
+
+static const struct SpriteSheet sQuickBallArrowSpriteSheet =
+{
+    .data = sQuickBallArrowGfx,
+    .size = sizeof(sQuickBallArrowGfx),
+    .tag = TAG_QUICK_BALL_ARROWS,
+};
+
+static const struct OamData sQuickBallArrowOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(8x8),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(8x8),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const union AnimCmd sQuickBallArrowAnim_Left[] =
+{
+    ANIMCMD_FRAME(0, 1, .hFlip = TRUE),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd sQuickBallArrowAnim_Right[] =
+{
+    ANIMCMD_FRAME(0, 1),
+    ANIMCMD_END,
+};
+
+static const union AnimCmd *const sQuickBallArrowAnimTable[] =
+{
+    sQuickBallArrowAnim_Left,
+    sQuickBallArrowAnim_Right,
+};
+
+static const struct SpriteTemplate sQuickBallArrowSpriteTemplate =
+{
+    .tileTag = TAG_QUICK_BALL_ARROWS,
+    .paletteTag = TAG_QUICK_BALL_PANEL,
+    .oam = &sQuickBallArrowOamData,
+    .anims = sQuickBallArrowAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
 EWRAM_DATA static u8 sQuickBallPanelSpriteId = MAX_SPRITES;
 EWRAM_DATA static u8 sQuickBallIconSpriteId = MAX_SPRITES;
 EWRAM_DATA static u8 sQuickBallLabelSpriteId = MAX_SPRITES;
+EWRAM_DATA static u8 sQuickBallLeftArrowSpriteId = MAX_SPRITES;
+EWRAM_DATA static u8 sQuickBallRightArrowSpriteId = MAX_SPRITES;
 EWRAM_DATA static bool8 sQuickBallIconCreated = FALSE;
 EWRAM_DATA static bool8 sQuickBallLabelCreated = FALSE;
+EWRAM_DATA static bool8 sQuickBallArrowsLoaded = FALSE;
 
 const struct BgTemplate gBattleBgTemplates[] =
 {
@@ -1011,6 +1080,54 @@ static void DestroyQuickBallLabel(void)
     }
 }
 
+void SetQuickBallPanelChangeArrowsVisible(bool8 visible)
+{
+    if (!IsQuickBallPanelVisible())
+        return;
+
+    if (visible && !sQuickBallArrowsLoaded)
+    {
+        LoadSpriteSheet(&sQuickBallArrowSpriteSheet);
+        sQuickBallArrowsLoaded = TRUE;
+        sQuickBallLeftArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 5, 71, 0);
+        sQuickBallRightArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 18, 71, 0);
+
+        if (sQuickBallLeftArrowSpriteId != MAX_SPRITES)
+            StartSpriteAnim(&gSprites[sQuickBallLeftArrowSpriteId], 0);
+        if (sQuickBallRightArrowSpriteId != MAX_SPRITES)
+            StartSpriteAnim(&gSprites[sQuickBallRightArrowSpriteId], 1);
+    }
+
+    if (sQuickBallLeftArrowSpriteId < MAX_SPRITES
+     && gSprites[sQuickBallLeftArrowSpriteId].inUse
+     && gSprites[sQuickBallLeftArrowSpriteId].template == &sQuickBallArrowSpriteTemplate)
+        gSprites[sQuickBallLeftArrowSpriteId].invisible = !visible;
+    if (sQuickBallRightArrowSpriteId < MAX_SPRITES
+     && gSprites[sQuickBallRightArrowSpriteId].inUse
+     && gSprites[sQuickBallRightArrowSpriteId].template == &sQuickBallArrowSpriteTemplate)
+        gSprites[sQuickBallRightArrowSpriteId].invisible = !visible;
+}
+
+static void DestroyQuickBallArrows(void)
+{
+    if (sQuickBallLeftArrowSpriteId < MAX_SPRITES
+     && gSprites[sQuickBallLeftArrowSpriteId].inUse
+     && gSprites[sQuickBallLeftArrowSpriteId].template == &sQuickBallArrowSpriteTemplate)
+        DestroySprite(&gSprites[sQuickBallLeftArrowSpriteId]);
+    if (sQuickBallRightArrowSpriteId < MAX_SPRITES
+     && gSprites[sQuickBallRightArrowSpriteId].inUse
+     && gSprites[sQuickBallRightArrowSpriteId].template == &sQuickBallArrowSpriteTemplate)
+        DestroySprite(&gSprites[sQuickBallRightArrowSpriteId]);
+
+    sQuickBallLeftArrowSpriteId = MAX_SPRITES;
+    sQuickBallRightArrowSpriteId = MAX_SPRITES;
+    if (sQuickBallArrowsLoaded)
+    {
+        FreeSpriteTilesByTag(TAG_QUICK_BALL_ARROWS);
+        sQuickBallArrowsLoaded = FALSE;
+    }
+}
+
 void UpdateQuickBallPanel(u16 itemId)
 {
     if (!IsQuickBallPanelVisible())
@@ -1045,6 +1162,9 @@ void ShowQuickBallPanel(u16 itemId)
     sQuickBallPanelSpriteId = MAX_SPRITES;
     sQuickBallLabelSpriteId = MAX_SPRITES;
     sQuickBallLabelCreated = FALSE;
+    sQuickBallLeftArrowSpriteId = MAX_SPRITES;
+    sQuickBallRightArrowSpriteId = MAX_SPRITES;
+    sQuickBallArrowsLoaded = FALSE;
     LoadSpriteSheet(&sQuickBallPanelSpriteSheet);
     LoadSpritePalette(&sQuickBallPanelSpritePalette);
     sQuickBallPanelSpriteId = CreateSprite(&sQuickBallPanelSpriteTemplate, 8, 60, 2);
@@ -1069,6 +1189,7 @@ void HideQuickBallPanel(void)
         if (gSprites[sQuickBallPanelSpriteId].inUse
          && gSprites[sQuickBallPanelSpriteId].template == &sQuickBallPanelSpriteTemplate)
         {
+            DestroyQuickBallArrows();
             DestroyQuickBallLabel();
             DestroySprite(&gSprites[sQuickBallPanelSpriteId]);
         }
