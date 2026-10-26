@@ -1408,6 +1408,11 @@ static const u8 sHM08Desc[] = _(
     "the 1st turn, then\n"
     "attacks next turn.");
 
+static const u8 sHM09Desc[] = _(
+    "An attack that\n"
+    "leavesthe target\n"
+    "with at least 1 HP.");
+
 // FireRed/LeafGreen key items
 static const u8 sOaksParcelDesc[] = _(
     "A parcel for PROF.\n"
