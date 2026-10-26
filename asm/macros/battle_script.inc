@@ -1310,6 +1310,10 @@
 	various \battler, VARIOUS_EMIT_YESNOBOX
 	.endm
 
+	.macro runpromptyesnobox battler:req
+	various \battler, VARIOUS_EMIT_RUN_PROMPT_YESNOBOX
+	.endm
+
 	.macro arenadrawreftextbox
 	various BS_ATTACKER, VARIOUS_DRAW_ARENA_REF_TEXT_BOX
 	.endm

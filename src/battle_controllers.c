@@ -1142,14 +1142,14 @@ void BtlController_EmitChooseAction(u8 bufferId, u8 action, u16 itemId)
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 
-// Only used by the forfeit prompt in the Battle Frontier
-// For other Yes/No boxes in battle, see Cmd_yesnobox
-void BtlController_EmitYesNoBox(u8 bufferId)
+// Used by the Battle Frontier forfeit prompt and the wild-battle run prompt.
+// For other Yes/No boxes in battle, see Cmd_yesnobox.
+void BtlController_EmitYesNoBox(u8 bufferId, u8 cursorPosition)
 {
     sBattleBuffersTransferData[0] = CONTROLLER_YESNOBOX;
-    sBattleBuffersTransferData[1] = CONTROLLER_YESNOBOX;
-    sBattleBuffersTransferData[2] = CONTROLLER_YESNOBOX;
-    sBattleBuffersTransferData[3] = CONTROLLER_YESNOBOX;
+    sBattleBuffersTransferData[1] = cursorPosition;
+    sBattleBuffersTransferData[2] = 0;
+    sBattleBuffersTransferData[3] = 0;
     PrepareBufferDataTransfer(bufferId, sBattleBuffersTransferData, 4);
 }
 

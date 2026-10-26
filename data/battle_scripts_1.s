@@ -2898,7 +2898,7 @@ BattleScript_FaintedMonEnd::
 
 BattleScript_RunPrompt::
 	printselectionstring STRINGID_RUNPROMPT
-	forfeityesnobox BS_ATTACKER
+	runpromptyesnobox BS_ATTACKER
 	endselectionscript
 
 BattleScript_LinkHandleFaintedMonMultiple::

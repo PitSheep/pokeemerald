@@ -6391,7 +6391,11 @@ static void Cmd_various(void)
         gDisableStructs[1].truantSwitchInHack = 1;
         break;
     case VARIOUS_EMIT_YESNOBOX:
-        BtlController_EmitYesNoBox(BUFFER_A);
+        BtlController_EmitYesNoBox(BUFFER_A, 1);
+        MarkBattlerForControllerExec(gActiveBattler);
+        break;
+    case VARIOUS_EMIT_RUN_PROMPT_YESNOBOX:
+        BtlController_EmitYesNoBox(BUFFER_A, 0);
         MarkBattlerForControllerExec(gActiveBattler);
         break;
     case VARIOUS_DRAW_ARENA_REF_TEXT_BOX:

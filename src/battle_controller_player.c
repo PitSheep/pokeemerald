@@ -2817,8 +2817,8 @@ static void PlayerHandleYesNoBox(void)
     {
         HandleBattleWindow(YESNOBOX_X_Y, 0);
         BattlePutTextOnWindow(gText_BattleYesNoChoice, B_WIN_YESNO);
-        gMultiUsePlayerCursor = 1;
-        BattleCreateYesNoCursorAt(1);
+        gMultiUsePlayerCursor = gBattleBufferA[gActiveBattler][1];
+        BattleCreateYesNoCursorAt(gMultiUsePlayerCursor);
         gBattlerControllerFuncs[gActiveBattler] = PlayerHandleYesNoInput;
     }
     else
