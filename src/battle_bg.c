@@ -125,50 +125,7 @@ static const struct CompressedSpriteSheet sVsLettersSpriteSheet =
     gVsLettersGfx, 0x1000, TAG_VS_LETTERS
 };
 
-#define PANEL_DARK_ROW  0x11, 0x11, 0x11, 0x11
-#define PANEL_FILL_ROW  0x22, 0x22, 0x22, 0x22
-#define PANEL_LEFT_ROW  0x21, 0x22, 0x22, 0x22
-#define PANEL_RIGHT_ROW 0x22, 0x22, 0x22, 0x12
-#define PANEL_TILE_TOP_LEFT  PANEL_DARK_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW
-#define PANEL_TILE_TOP       PANEL_DARK_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW
-#define PANEL_TILE_TOP_RIGHT PANEL_DARK_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW
-#define PANEL_TILE_LEFT      PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW
-#define PANEL_TILE_FILL      PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW
-#define PANEL_TILE_RIGHT     PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW
-#define PANEL_TILE_BOTTOM_LEFT  PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_DARK_ROW
-#define PANEL_TILE_BOTTOM       PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_DARK_ROW
-#define PANEL_TILE_BOTTOM_RIGHT PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_DARK_ROW
-
-static const u8 sQuickBallPanelGfx[] =
-{
-    PANEL_TILE_TOP_LEFT, PANEL_TILE_TOP, PANEL_TILE_TOP, PANEL_TILE_TOP_RIGHT,
-    PANEL_TILE_LEFT, PANEL_TILE_FILL, PANEL_TILE_FILL, PANEL_TILE_RIGHT,
-    PANEL_TILE_LEFT, PANEL_TILE_FILL, PANEL_TILE_FILL, PANEL_TILE_RIGHT,
-    PANEL_TILE_BOTTOM_LEFT, PANEL_TILE_BOTTOM, PANEL_TILE_BOTTOM, PANEL_TILE_BOTTOM_RIGHT,
-};
-
-#undef PANEL_DARK_ROW
-#undef PANEL_FILL_ROW
-#undef PANEL_LEFT_ROW
-#undef PANEL_RIGHT_ROW
-#undef PANEL_TILE_TOP_LEFT
-#undef PANEL_TILE_TOP
-#undef PANEL_TILE_TOP_RIGHT
-#undef PANEL_TILE_LEFT
-#undef PANEL_TILE_FILL
-#undef PANEL_TILE_RIGHT
-#undef PANEL_TILE_BOTTOM_LEFT
-#undef PANEL_TILE_BOTTOM
-#undef PANEL_TILE_BOTTOM_RIGHT
-
-static const u16 sQuickBallPanelPalette[] =
-{
-    RGB(0, 0, 0),
-    RGB(5, 5, 5),
-    RGB(24, 24, 24),
-    RGB(31, 31, 31),
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-};
+ALIGNED(4) EWRAM_DATA static u8 sQuickBallPanelGfx[0x200];
 
 static const struct OamData sQuickBallPanelOamData =
 {
@@ -194,9 +151,29 @@ static const struct SpriteSheet sQuickBallPanelSpriteSheet =
     .tag = TAG_QUICK_BALL_PANEL,
 };
 
+static const u8 sQuickBallPanelTileMap[] =
+{
+    0, 1, 1, 2,
+    3, 4, 4, 5,
+    3, 4, 4, 5,
+    6, 7, 7, 8,
+};
+
+static void LoadQuickBallPanelGfx(void)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(sQuickBallPanelTileMap); i++)
+        CpuCopy16(gTextWindowFrame1_Gfx + sQuickBallPanelTileMap[i] * 0x20,
+                  sQuickBallPanelGfx + i * 0x20,
+                  0x20);
+
+    LoadSpriteSheet(&sQuickBallPanelSpriteSheet);
+}
+
 static const struct SpritePalette sQuickBallPanelSpritePalette =
 {
-    .data = sQuickBallPanelPalette,
+    .data = gTextWindowFrame1_Pal,
     .tag = TAG_QUICK_BALL_PANEL,
 };
 
@@ -1047,7 +1024,7 @@ static void CreateQuickBallButton(void)
 
     LoadSpriteSheet(&sQuickBallButtonSpriteSheet);
     LoadSpritePalette(&sQuickBallButtonSpritePalette);
-    sQuickBallButtonSpriteId = CreateSprite(&sQuickBallButtonSpriteTemplate, 10, 71, 0);
+    sQuickBallButtonSpriteId = CreateSprite(&sQuickBallButtonSpriteTemplate, 10, 75, 0);
     if (sQuickBallButtonSpriteId != MAX_SPRITES)
     {
         sQuickBallButtonCreated = TRUE;
@@ -1087,8 +1064,8 @@ void SetQuickBallPanelChangeArrowsVisible(bool8 visible)
         LoadSpriteSheet(&sQuickBallArrowSpriteSheet);
         LoadSpritePalette(&sQuickBallArrowSpritePalette);
         sQuickBallArrowsLoaded = TRUE;
-        sQuickBallLeftArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 5, 71, 0);
-        sQuickBallRightArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 18, 71, 0);
+        sQuickBallLeftArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 5, 75, 0);
+        sQuickBallRightArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 18, 75, 0);
 
         if (sQuickBallLeftArrowSpriteId != MAX_SPRITES)
             StartSpriteAnim(&gSprites[sQuickBallLeftArrowSpriteId], 0);
@@ -1138,7 +1115,7 @@ void UpdateQuickBallPanel(u16 itemId)
     {
         sQuickBallIconCreated = TRUE;
         gSprites[sQuickBallIconSpriteId].x = 15;
-        gSprites[sQuickBallIconSpriteId].y = 59;
+        gSprites[sQuickBallIconSpriteId].y = 63;
         gSprites[sQuickBallIconSpriteId].oam.priority = 0;
         gSprites[sQuickBallIconSpriteId].subpriority = 1;
     }
@@ -1164,9 +1141,9 @@ void ShowQuickBallPanel(u16 itemId)
     sQuickBallLeftArrowSpriteId = MAX_SPRITES;
     sQuickBallRightArrowSpriteId = MAX_SPRITES;
     sQuickBallArrowsLoaded = FALSE;
-    LoadSpriteSheet(&sQuickBallPanelSpriteSheet);
+    LoadQuickBallPanelGfx();
     LoadSpritePalette(&sQuickBallPanelSpritePalette);
-    sQuickBallPanelSpriteId = CreateSprite(&sQuickBallPanelSpriteTemplate, 8, 60, 2);
+    sQuickBallPanelSpriteId = CreateSprite(&sQuickBallPanelSpriteTemplate, 12, 68, 2);
     if (sQuickBallPanelSpriteId == MAX_SPRITES)
     {
         FreeSpriteTilesByTag(TAG_QUICK_BALL_PANEL);
