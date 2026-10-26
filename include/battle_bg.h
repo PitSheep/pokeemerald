@@ -4,6 +4,9 @@
 void BattleInitBgsAndWindows(void);
 void InitBattleBgsVideo(void);
 void LoadBattleMenuWindowGfx(void);
+void ShowQuickBallPanel(u16 itemId);
+void UpdateQuickBallPanel(u16 itemId);
+void HideQuickBallPanel(void);
 void DrawMainBattleBackground(void);
 void LoadBattleTextboxAndBackground(void);
 void InitLinkBattleVsScreen(u8 taskId);

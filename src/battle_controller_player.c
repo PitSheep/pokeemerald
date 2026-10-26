@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_arena.h"
+#include "battle_bg.h"
 #include "battle_controllers.h"
 #include "battle_dome.h"
 #include "battle_interface.h"
@@ -98,6 +99,7 @@ static void HandleInputChooseTarget(void);
 static void HandleInputChooseMove(void);
 static bool8 IsQuickBallBattle(void);
 static bool8 IsQuickBallAvailable(u16 itemId);
+static u16 GetFirstAvailableBall(void);
 static bool8 ChangeLastUsedBall(s8 direction);
 static void MoveSelectionCreateCursorAt(u8, u8);
 static void MoveSelectionDestroyCursorAt(u8);
@@ -124,7 +126,7 @@ static void PlayerDoMoveAnimation(void);
 static void Task_StartSendOutAnim(u8);
 static void EndDrawPartyStatusSummary(void);
 
-EWRAM_DATA static u16 sLastUsedBall = ITEM_POKE_BALL;
+EWRAM_DATA static u16 sLastUsedBall = ITEM_NONE;
 EWRAM_DATA static bool8 sUseQuickBall = FALSE;
 EWRAM_DATA static bool8 sQuickBallRPressPending = FALSE;
 EWRAM_DATA static bool8 sQuickBallRPressHeldLong = FALSE;
@@ -261,6 +263,21 @@ static bool8 IsQuickBallAvailable(u16 itemId)
         && CheckBagHasItem(itemId, 1);
 }
 
+static u16 GetFirstAvailableBall(void)
+{
+    u8 i;
+
+    for (i = 0; i < BAG_POKEBALLS_COUNT; i++)
+    {
+        u16 itemId = BagGetItemIdByPocketPosition(BALLS_POCKET + 1, i);
+
+        if (IsQuickBallAvailable(itemId))
+            return itemId;
+    }
+
+    return ITEM_NONE;
+}
+
 static bool8 ChangeLastUsedBall(s8 direction)
 {
     u8 currentPosition = BAG_POKEBALLS_COUNT;
@@ -295,6 +312,7 @@ static bool8 ChangeLastUsedBall(s8 direction)
         if (IsQuickBallAvailable(itemId))
         {
             sLastUsedBall = itemId;
+            UpdateQuickBallPanel(sLastUsedBall);
             return TRUE;
         }
     }
@@ -351,6 +369,7 @@ static void HandleInputChooseAction(void)
                 {
                     PlaySE(SE_SELECT);
                     sUseQuickBall = TRUE;
+                    HideQuickBallPanel();
                     BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_USE_ITEM, 0);
                     PlayerBufferExecCompleted();
                     return;
@@ -387,6 +406,7 @@ static void HandleInputChooseAction(void)
             break;
         }
         PlayerBufferExecCompleted();
+        HideQuickBallPanel();
     }
     else if (JOY_NEW(DPAD_LEFT))
     {
@@ -438,6 +458,7 @@ static void HandleInputChooseAction(void)
         #endif
             BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_RUN_PROMPT, 0);
             PlayerBufferExecCompleted();
+            HideQuickBallPanel();
         }
         else if ((gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
          && GetBattlerPosition(gActiveBattler) == B_POSITION_PLAYER_RIGHT
@@ -455,6 +476,7 @@ static void HandleInputChooseAction(void)
             PlaySE(SE_SELECT);
             BtlController_EmitTwoReturnValues(BUFFER_B, B_ACTION_CANCEL_PARTNER, 0);
             PlayerBufferExecCompleted();
+            HideQuickBallPanel();
         }
     }
     else if (JOY_NEW(START_BUTTON))
@@ -2758,6 +2780,9 @@ static void PlayerHandleChooseAction(void)
 {
     s32 i;
 
+    if (!IsQuickBallAvailable(sLastUsedBall))
+        sLastUsedBall = GetFirstAvailableBall();
+
     sUseQuickBall = FALSE;
     sQuickBallRPressPending = FALSE;
     sQuickBallRPressHeldLong = FALSE;
@@ -2773,6 +2798,10 @@ static void PlayerHandleChooseAction(void)
     ActionSelectionCreateCursorAt(gActionSelectionCursor[gActiveBattler], 0);
     BattleStringExpandPlaceholdersToDisplayedString(gText_WhatWillPkmnDo);
     BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);
+    if (IsQuickBallBattle() && sLastUsedBall != ITEM_NONE)
+        ShowQuickBallPanel(sLastUsedBall);
+    else
+        HideQuickBallPanel();
 }
 
 static void PlayerHandleYesNoBox(void)
@@ -2868,11 +2897,15 @@ static void PlayerHandleChooseItem(void)
     if (sUseQuickBall)
     {
         sUseQuickBall = FALSE;
-        if (IsQuickBallAvailable(sLastUsedBall))
+        if (!IsPlayerPartyAndPokemonStorageFull()
+         && IsQuickBallAvailable(sLastUsedBall))
         {
-            BtlController_EmitOneReturnValue(BUFFER_B, sLastUsedBall);
-            PlayerBufferExecCompleted();
-            return;
+            if (RemoveBagItem(sLastUsedBall, 1))
+            {
+                BtlController_EmitOneReturnValue(BUFFER_B, sLastUsedBall);
+                PlayerBufferExecCompleted();
+                return;
+            }
         }
     }
 

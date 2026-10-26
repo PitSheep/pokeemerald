@@ -9,6 +9,7 @@
 #include "decompress.h"
 #include "gpu_regs.h"
 #include "graphics.h"
+#include "item_icon.h"
 #include "link.h"
 #include "main.h"
 #include "menu.h"
@@ -21,6 +22,7 @@
 #include "trig.h"
 #include "window.h"
 #include "constants/map_types.h"
+#include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
@@ -91,6 +93,8 @@ static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] =
 };
 
 #define TAG_VS_LETTERS 10000
+#define TAG_QUICK_BALL_PANEL 0xD720
+#define TAG_QUICK_BALL_ICON 0xD721
 
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
 {
@@ -118,6 +122,96 @@ static const struct CompressedSpriteSheet sVsLettersSpriteSheet =
 {
     gVsLettersGfx, 0x1000, TAG_VS_LETTERS
 };
+
+#define PANEL_DARK_ROW  0x11, 0x11, 0x11, 0x11
+#define PANEL_FILL_ROW  0x22, 0x22, 0x22, 0x22
+#define PANEL_LEFT_ROW  0x21, 0x22, 0x22, 0x22
+#define PANEL_RIGHT_ROW 0x22, 0x22, 0x22, 0x12
+#define PANEL_TILE_TOP_LEFT  PANEL_DARK_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW
+#define PANEL_TILE_TOP       PANEL_DARK_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW
+#define PANEL_TILE_TOP_RIGHT PANEL_DARK_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW
+#define PANEL_TILE_LEFT      PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW
+#define PANEL_TILE_FILL      PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW
+#define PANEL_TILE_RIGHT     PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW
+#define PANEL_TILE_BOTTOM_LEFT  PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_LEFT_ROW, PANEL_DARK_ROW
+#define PANEL_TILE_BOTTOM       PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_FILL_ROW, PANEL_DARK_ROW
+#define PANEL_TILE_BOTTOM_RIGHT PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_RIGHT_ROW, PANEL_DARK_ROW
+
+static const u8 sQuickBallPanelGfx[] =
+{
+    PANEL_TILE_TOP_LEFT, PANEL_TILE_TOP, PANEL_TILE_TOP, PANEL_TILE_TOP_RIGHT,
+    PANEL_TILE_LEFT, PANEL_TILE_FILL, PANEL_TILE_FILL, PANEL_TILE_RIGHT,
+    PANEL_TILE_LEFT, PANEL_TILE_FILL, PANEL_TILE_FILL, PANEL_TILE_RIGHT,
+    PANEL_TILE_BOTTOM_LEFT, PANEL_TILE_BOTTOM, PANEL_TILE_BOTTOM, PANEL_TILE_BOTTOM_RIGHT,
+};
+
+#undef PANEL_DARK_ROW
+#undef PANEL_FILL_ROW
+#undef PANEL_LEFT_ROW
+#undef PANEL_RIGHT_ROW
+#undef PANEL_TILE_TOP_LEFT
+#undef PANEL_TILE_TOP
+#undef PANEL_TILE_TOP_RIGHT
+#undef PANEL_TILE_LEFT
+#undef PANEL_TILE_FILL
+#undef PANEL_TILE_RIGHT
+#undef PANEL_TILE_BOTTOM_LEFT
+#undef PANEL_TILE_BOTTOM
+#undef PANEL_TILE_BOTTOM_RIGHT
+
+static const u16 sQuickBallPanelPalette[] =
+{
+    RGB(0, 0, 0),
+    RGB(5, 5, 5),
+    RGB(24, 24, 24),
+    RGB(31, 31, 31),
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
+
+static const struct OamData sQuickBallPanelOamData =
+{
+    .y = 0,
+    .affineMode = ST_OAM_AFFINE_OFF,
+    .objMode = ST_OAM_OBJ_NORMAL,
+    .mosaic = FALSE,
+    .bpp = ST_OAM_4BPP,
+    .shape = SPRITE_SHAPE(32x32),
+    .x = 0,
+    .matrixNum = 0,
+    .size = SPRITE_SIZE(32x32),
+    .tileNum = 0,
+    .priority = 0,
+    .paletteNum = 0,
+    .affineParam = 0,
+};
+
+static const struct SpriteSheet sQuickBallPanelSpriteSheet =
+{
+    .data = sQuickBallPanelGfx,
+    .size = sizeof(sQuickBallPanelGfx),
+    .tag = TAG_QUICK_BALL_PANEL,
+};
+
+static const struct SpritePalette sQuickBallPanelSpritePalette =
+{
+    .data = sQuickBallPanelPalette,
+    .tag = TAG_QUICK_BALL_PANEL,
+};
+
+static const struct SpriteTemplate sQuickBallPanelSpriteTemplate =
+{
+    .tileTag = TAG_QUICK_BALL_PANEL,
+    .paletteTag = TAG_QUICK_BALL_PANEL,
+    .oam = &sQuickBallPanelOamData,
+    .anims = gDummySpriteAnimTable,
+    .images = NULL,
+    .affineAnims = gDummySpriteAffineAnimTable,
+    .callback = SpriteCallbackDummy,
+};
+
+EWRAM_DATA static u8 sQuickBallPanelSpriteId = MAX_SPRITES;
+EWRAM_DATA static u8 sQuickBallIconSpriteId = MAX_SPRITES;
+EWRAM_DATA static bool8 sQuickBallIconCreated = FALSE;
 
 const struct BgTemplate gBattleBgTemplates[] =
 {
@@ -808,6 +902,92 @@ void LoadBattleMenuWindowGfx(void)
         gPlttBufferUnfaded[BG_PLTT_ID(7) + 6] = 0;
         CpuCopy16(&gPlttBufferUnfaded[BG_PLTT_ID(7) + 6], &gPlttBufferFaded[BG_PLTT_ID(7) + 6], PLTT_SIZEOF(1));
     }
+}
+
+static bool8 IsQuickBallPanelVisible(void)
+{
+    return sQuickBallPanelSpriteId < MAX_SPRITES
+        && gSprites[sQuickBallPanelSpriteId].inUse
+        && gSprites[sQuickBallPanelSpriteId].template == &sQuickBallPanelSpriteTemplate;
+}
+
+static void DestroyQuickBallIcon(void)
+{
+    if (sQuickBallIconCreated
+     && sQuickBallIconSpriteId < MAX_SPRITES
+     && gSprites[sQuickBallIconSpriteId].inUse)
+        DestroySprite(&gSprites[sQuickBallIconSpriteId]);
+
+    sQuickBallIconSpriteId = MAX_SPRITES;
+    if (sQuickBallIconCreated)
+    {
+        FreeSpriteTilesByTag(TAG_QUICK_BALL_ICON);
+        FreeSpritePaletteByTag(TAG_QUICK_BALL_ICON);
+        sQuickBallIconCreated = FALSE;
+    }
+}
+
+void UpdateQuickBallPanel(u16 itemId)
+{
+    if (!IsQuickBallPanelVisible())
+        return;
+
+    DestroyQuickBallIcon();
+    sQuickBallIconSpriteId = AddItemIconSprite(TAG_QUICK_BALL_ICON, TAG_QUICK_BALL_ICON, itemId);
+    if (sQuickBallIconSpriteId != MAX_SPRITES)
+    {
+        sQuickBallIconCreated = TRUE;
+        gSprites[sQuickBallIconSpriteId].x = 15;
+        gSprites[sQuickBallIconSpriteId].y = 59;
+        gSprites[sQuickBallIconSpriteId].oam.priority = 0;
+        gSprites[sQuickBallIconSpriteId].subpriority = 1;
+    }
+    else
+    {
+        sQuickBallIconCreated = FALSE;
+        FreeSpriteTilesByTag(TAG_QUICK_BALL_ICON);
+        FreeSpritePaletteByTag(TAG_QUICK_BALL_ICON);
+    }
+}
+
+void ShowQuickBallPanel(u16 itemId)
+{
+    if (IsQuickBallPanelVisible())
+    {
+        UpdateQuickBallPanel(itemId);
+        return;
+    }
+
+    sQuickBallPanelSpriteId = MAX_SPRITES;
+    LoadSpriteSheet(&sQuickBallPanelSpriteSheet);
+    LoadSpritePalette(&sQuickBallPanelSpritePalette);
+    sQuickBallPanelSpriteId = CreateSprite(&sQuickBallPanelSpriteTemplate, 8, 60, 2);
+    if (sQuickBallPanelSpriteId == MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(TAG_QUICK_BALL_PANEL);
+        FreeSpritePaletteByTag(TAG_QUICK_BALL_PANEL);
+    }
+    else
+    {
+        UpdateQuickBallPanel(itemId);
+    }
+}
+
+void HideQuickBallPanel(void)
+{
+    DestroyQuickBallIcon();
+
+    if (sQuickBallPanelSpriteId < MAX_SPRITES)
+    {
+        if (gSprites[sQuickBallPanelSpriteId].inUse
+         && gSprites[sQuickBallPanelSpriteId].template == &sQuickBallPanelSpriteTemplate)
+            DestroySprite(&gSprites[sQuickBallPanelSpriteId]);
+
+        sQuickBallPanelSpriteId = MAX_SPRITES;
+    }
+
+    FreeSpriteTilesByTag(TAG_QUICK_BALL_PANEL);
+    FreeSpritePaletteByTag(TAG_QUICK_BALL_PANEL);
 }
 
 void DrawMainBattleBackground(void)
