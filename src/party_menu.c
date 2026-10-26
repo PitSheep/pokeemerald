@@ -418,6 +418,11 @@ static void Task_DisplayLevelUpStatsPg2(u8);
 static void DisplayLevelUpStatsPg2(u8);
 static void Task_TryLearnNewMoves(u8);
 static void PartyMenuTryEvolution(u8);
+static void CB2_RareCandyAfterEvolution(void);
+static void Task_AskUseAnotherRareCandy(u8);
+static void Task_UseAnotherRareCandyYesNo(u8);
+static void Task_HandleUseAnotherRareCandyInput(u8);
+static bool8 CanUseRareCandy(struct Pokemon *);
 static void DisplayMonNeedsToReplaceMove(u8);
 static void DisplayMonLearnedMove(u8, u16);
 static void UseSacredAsh(u8);
@@ -5246,7 +5251,7 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u16 *itemPtr = &gSpecialVar_ItemId;
     bool8 cannotUseEffect;
 
-    if (GetMonData(mon, MON_DATA_LEVEL) != MAX_LEVEL && GetMonData(mon, MON_DATA_LEVEL) != currentLvlCap())
+    if (CanUseRareCandy(mon))
     {
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect_(gPartyMenu.slotId, *itemPtr, 0);
@@ -5386,13 +5391,65 @@ static void PartyMenuTryEvolution(u8 taskId)
     if (targetSpecies != SPECIES_NONE)
     {
         FreePartyPointers();
-        gCB2_AfterEvolution = gPartyMenu.exitCallback;
+        gCB2_AfterEvolution = CB2_RareCandyAfterEvolution;
         BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
         DestroyTask(taskId);
     }
     else
     {
+        gTasks[taskId].func = Task_AskUseAnotherRareCandy;
+    }
+}
+
+static void CB2_RareCandyAfterEvolution(void)
+{
+    InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_NONE,
+                  Task_AskUseAnotherRareCandy, gPartyMenu.exitCallback);
+}
+
+static bool8 CanUseRareCandy(struct Pokemon *mon)
+{
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
+
+    return level != MAX_LEVEL && level != currentLvlCap();
+}
+
+static void Task_AskUseAnotherRareCandy(u8 taskId)
+{
+    if (!CheckBagHasItem(ITEM_RARE_CANDY, 1)
+     || !CanUseRareCandy(&gPlayerParty[gPartyMenu.slotId]))
+    {
         gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        return;
+    }
+
+    DisplayPartyMenuMessage(gText_UseAnotherRareCandy, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_UseAnotherRareCandyYesNo;
+}
+
+static void Task_UseAnotherRareCandyYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandleUseAnotherRareCandyInput;
+    }
+}
+
+static void Task_HandleUseAnotherRareCandyInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        ItemUseCB_RareCandy(taskId, Task_ClosePartyMenuAfterText);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        Task_ClosePartyMenu(taskId);
+        break;
     }
 }
 
