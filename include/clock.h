@@ -4,5 +4,9 @@
 // TODO: time of day and seconds in a day defines
 
 void DoTimeBasedEvents(void);
+void StartOldaleGymFollowerTimer(void);
+void CheckOldaleGymFollowerTimer(void);
+u16 GetOldaleGymFollowerReward(void);
+void CompleteOldaleGymFollowerReward(void);
 
 #endif // GUARD_CLOCK_H

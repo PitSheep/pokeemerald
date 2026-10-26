@@ -469,6 +469,9 @@ gSpecials::
 	def_special GiveFrontierBattlePoints
 	def_special TakeFrontierBattlePoints
 	def_special GetFrontierBattlePoints
+	def_special StartOldaleGymFollowerTimer
+	def_special GetOldaleGymFollowerReward
+	def_special CompleteOldaleGymFollowerReward
 	def_special ShowFrontierExchangeCornerItemIconWindow
 	def_special CloseFrontierExchangeCornerItemIconWindow
 	def_special DisplayBerryPowderVendorMenu

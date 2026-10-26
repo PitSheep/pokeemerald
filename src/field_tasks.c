@@ -9,6 +9,7 @@
 #include "field_tasks.h"
 #include "fieldmap.h"
 #include "item.h"
+#include "match_call.h"
 #include "main.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -55,6 +56,8 @@ static void PacifidlogBridgePerStepCallback(u8);
 static void SootopolisGymIcePerStepCallback(u8);
 static void CrackedFloorPerStepCallback(u8);
 static void Task_MuddySlope(u8);
+
+extern const u8 OldaleTown_Gym_EventScript_Follower_Notification[];
 
 static const TaskFunc sPerStepCallbacks[] =
 {
@@ -141,8 +144,10 @@ static void Task_RunPerStepCallback(u8 taskId)
 #define tState           data[0]
 #define tAmbientCryState data[1]
 #define tAmbientCryDelay data[2]
+#define tFollowerTimerUpdate data[3]
 
 #define TIME_UPDATE_INTERVAL (1 << 12)
+#define FOLLOWER_TIMER_UPDATE_INTERVAL 60
 
 static void RunTimeBasedEvents(s16 *data)
 {
@@ -166,9 +171,22 @@ static void Task_RunTimeBasedEvents(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
+    if (++tFollowerTimerUpdate >= FOLLOWER_TIMER_UPDATE_INTERVAL)
+    {
+        tFollowerTimerUpdate = 0;
+        CheckOldaleGymFollowerTimer();
+    }
+
     if (!ArePlayerFieldControlsLocked())
     {
         RunTimeBasedEvents(data);
+        if (VarGet(VAR_OLDALE_GYM_FOLLOWER_TIMER_STATE) == 2
+         && !ScriptContext_IsEnabled()
+         && !IsMatchCallTaskActive())
+        {
+            VarSet(VAR_OLDALE_GYM_FOLLOWER_TIMER_STATE, 3);
+            ScriptContext_SetupScript(OldaleTown_Gym_EventScript_Follower_Notification);
+        }
         UpdateAmbientCry(&tAmbientCryState, &tAmbientCryDelay);
     }
 }

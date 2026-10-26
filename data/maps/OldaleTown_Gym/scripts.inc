@@ -4343,3 +4343,121 @@ OldaleTown_Gym_EventScript_DeclineRest::
 OldaleTown_Gym_Text_DontNeedToBeShy:
 	.string "Is that so Masrter?\n"
 	.string "You don't need to be shy about it.$"
+
+
+OldaleTown_Gym_EventScript_Follower_Guide::
+	lock
+	faceplayer
+	msgbox OldaleTown_Gym_Text_Follower_Guide, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_Follower_Guide:
+	.string "You can recruit followers to defend\n"
+	.string "your GYM while you're away.\p"
+	.string "After a while, they'll return with\n"
+	.string "a reward for you!$"
+
+
+OldaleTown_Gym_EventScript_Follower_Buy::
+	lock
+	faceplayer
+	goto_if_ge VAR_OLDALE_GYM_FOLLOWERS, 5, OldaleTown_Gym_EventScript_Follower_Buy_Max
+	buffernumberstring STR_VAR_1, VAR_OLDALE_GYM_FOLLOWERS
+	msgbox OldaleTown_Gym_Text_Follower_Buy, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_Follower_Buy_Cancel
+	specialvar VAR_TEMP_1, GetFrontierBattlePoints
+	goto_if_ge VAR_TEMP_1, 100, OldaleTown_Gym_EventScript_Follower_Buy_Confirm
+	msgbox OldaleTown_Gym_Text_Follower_Buy_NotEnoughBP, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_EventScript_Follower_Buy_Confirm::
+	setvar VAR_0x8004, 100
+	special TakeFrontierBattlePoints
+	addvar VAR_OLDALE_GYM_FOLLOWERS, 1
+	special StartOldaleGymFollowerTimer
+	buffernumberstring STR_VAR_1, VAR_OLDALE_GYM_FOLLOWERS
+	msgbox OldaleTown_Gym_Text_Follower_Buy_Success, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_EventScript_Follower_Buy_Max::
+	msgbox OldaleTown_Gym_Text_Follower_Buy_Max, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_EventScript_Follower_Buy_Cancel::
+	release
+	end
+
+OldaleTown_Gym_Text_Follower_Buy:
+	.string "Current followers: {STR_VAR_1}.\p"
+	.string "Recruit 1 follower for 100 BP?$"
+
+OldaleTown_Gym_Text_Follower_Buy_NotEnoughBP:
+	.string "You don't have enough BP.\n"
+	.string "You need 100 BP to recruit a follower.$"
+
+OldaleTown_Gym_Text_Follower_Buy_Success:
+	.string "You recruited a follower!\p"
+	.string "Current followers: {STR_VAR_1}.$"
+
+OldaleTown_Gym_Text_Follower_Buy_Max:
+	.string "You already have the maximum\n"
+	.string "number of followers.$"
+
+OldaleTown_Gym_EventScript_Follower_Reward::
+	lock
+	faceplayer
+	goto_if_eq VAR_OLDALE_GYM_FOLLOWER_TIMER_STATE, 3, OldaleTown_Gym_EventScript_Follower_Reward_Ready
+	msgbox OldaleTown_Gym_Text_Follower_Reward_NotReady, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_EventScript_Follower_Reward_Ready::
+	specialvar VAR_0x8004, GetOldaleGymFollowerReward
+	goto_if_eq VAR_0x8004, ITEM_NONE, OldaleTown_Gym_EventScript_Follower_Reward_NotReady
+	giveitem VAR_0x8004
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Gym_EventScript_Follower_Reward_BagFull
+	special CompleteOldaleGymFollowerReward
+	bufferitemname STR_VAR_2, VAR_0x8004
+	playfanfare MUS_OBTAIN_ITEM
+	msgbox OldaleTown_Gym_Text_Follower_Reward_Received, MSGBOX_DEFAULT
+	waitfanfare
+	release
+	end
+
+OldaleTown_Gym_EventScript_Follower_Reward_NotReady::
+	msgbox OldaleTown_Gym_Text_Follower_Reward_NotReady, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_EventScript_Follower_Reward_BagFull::
+	msgbox OldaleTown_Gym_Text_Follower_Reward_BagFull, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_Follower_Reward_NotReady:
+	.string "Your followers haven't returned\n"
+	.string "with a reward yet.$"
+
+OldaleTown_Gym_Text_Follower_Reward_BagFull:
+	.string "Your BAG is full!\n"
+	.string "Make room and come back for your reward.$"
+
+OldaleTown_Gym_Text_Follower_Reward_Received:
+	.string "Here is the reward your followers\n"
+	.string "earned for defending your GYM!\p"
+	.string "You received the {STR_VAR_2}!$"
+
+OldaleTown_Gym_EventScript_Follower_Notification::
+	lockall
+	pokenavcall OldaleTown_Gym_Text_Follower_Notification
+	waitmessage
+	releaseall
+	end
+
+OldaleTown_Gym_Text_Follower_Notification:
+	.string "Your followers defended your GYM!\n"
+	.string "Come collect your reward.$"

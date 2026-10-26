@@ -37,7 +37,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "OldaleTown_Gym_EventScript_GymGuide",
+      "script": "OldaleTown_Gym_EventScript_Follower_Guide",
       "flag": "0"
     },
     {
@@ -460,14 +460,6 @@
   "bg_events": [
     {
       "type": "sign",
-      "x": 2,
-      "y": 20,
-      "elevation": 0,
-      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "OldaleTown_Gym_EventScript_GymArtist"
-    },
-    {
-      "type": "sign",
       "x": 8,
       "y": 8,
       "elevation": 0,
@@ -484,11 +476,19 @@
     },
     {
       "type": "sign",
+      "x": 2,
+      "y": 20,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "OldaleTown_Gym_EventScript_Follower_Buy"
+    },
+    {
+      "type": "sign",
       "x": 8,
       "y": 20,
       "elevation": 0,
       "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
-      "script": "EventScript_PC_Lite"
+      "script": "OldaleTown_Gym_EventScript_Follower_Reward"
     }
   ]
 }
