@@ -247,7 +247,8 @@ static void CompleteOnBankSpritePosX_0(void)
 
 static bool8 IsQuickBallBattle(void)
 {
-    return !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER
+    return gSaveBlock2Ptr->optionsQuickBall
+        && !(gBattleTypeFlags & (BATTLE_TYPE_TRAINER
                                | BATTLE_TYPE_LINK
                                | BATTLE_TYPE_LINK_IN_BATTLE
                                | BATTLE_TYPE_FIRST_BATTLE

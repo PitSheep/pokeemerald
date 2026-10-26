@@ -538,6 +538,7 @@ struct SaveBlock2
              u16 optionsDisableMatchCall:1; //tx_optionsPlus
              u16 optionsCurrentFont:1;  //tx_optionsPlus
              u16 optionsAutoBattle:1; //tx_optionsPlus
+             u16 optionsQuickBall:1; //tx_optionsPlus
              //u16 padding1:4;
              //u16 padding2;
              u16 expShare:1;

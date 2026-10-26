@@ -105,6 +105,7 @@ static void SetDefaultOptions(void)
     gSaveBlock2Ptr->optionsDisableMatchCall = 0;    //tx_optionsPlus
     gSaveBlock2Ptr->optionsCurrentFont = 1;         //tx_optionsPlus
     gSaveBlock2Ptr->optionsAutoBattle = 0;         //tx_optionsPlus
+    gSaveBlock2Ptr->optionsQuickBall = 1;          //tx_optionsPlus
 }
 
 static void ClearPokedexFlags(void)
