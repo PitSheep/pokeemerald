@@ -125,7 +125,12 @@
 #define BERRY_TREE_ROUTE_123_SITRUS   88
 #define BERRY_TREE_ROUTE_123_RAWST    89
 
-// Remainder are unused
+#define BERRY_TREE_EXTRA_SOIL_1       90
+#define BERRY_TREE_EXTRA_SOIL_2       91
+#define BERRY_TREE_EXTRA_SOIL_3       92
+#define BERRY_TREE_EXTRA_SOIL_4       93
+
+// IDs 94-127 are unused
 
 #define BERRY_TREES_COUNT 128
 
