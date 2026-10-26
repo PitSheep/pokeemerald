@@ -95,7 +95,7 @@ static const union AffineAnimCmd *const sVsLetterAffineAnimTable[] =
 #define TAG_VS_LETTERS 10000
 #define TAG_QUICK_BALL_PANEL 0xD720
 #define TAG_QUICK_BALL_ICON 0xD721
-#define TAG_QUICK_BALL_LABEL 0xD722
+#define TAG_QUICK_BALL_BUTTON 0xD722
 #define TAG_QUICK_BALL_ARROWS 0xD723
 
 static const struct SpriteTemplate sVsLetter_V_SpriteTemplate =
@@ -211,69 +211,63 @@ static const struct SpriteTemplate sQuickBallPanelSpriteTemplate =
     .callback = SpriteCallbackDummy,
 };
 
-static const u8 sQuickBallLabelGfx[] =
+static const u8 sQuickBallButtonGfx[] = INCBIN_U8("graphics/union_room_chat/r_button.4bpp");
+static const u16 sQuickBallButtonPalette[] = INCBIN_U16("graphics/union_room_chat/interface.gbapal");
+
+static const struct SpriteSheet sQuickBallButtonSpriteSheet =
 {
-    0x30, 0x33, 0x00, 0x00,
-    0x30, 0x00, 0x03, 0x00,
-    0x30, 0x00, 0x03, 0x00,
-    0x30, 0x33, 0x00, 0x00,
-    0x30, 0x03, 0x00, 0x00,
-    0x30, 0x00, 0x03, 0x00,
-    0x30, 0x00, 0x03, 0x00,
-    0x00, 0x00, 0x00, 0x00,
+    .data = sQuickBallButtonGfx,
+    .size = sizeof(sQuickBallButtonGfx),
+    .tag = TAG_QUICK_BALL_BUTTON,
 };
 
-static const struct SpriteSheet sQuickBallLabelSpriteSheet =
+static const struct SpritePalette sQuickBallButtonSpritePalette =
 {
-    .data = sQuickBallLabelGfx,
-    .size = sizeof(sQuickBallLabelGfx),
-    .tag = TAG_QUICK_BALL_LABEL,
+    .data = sQuickBallButtonPalette,
+    .tag = TAG_QUICK_BALL_BUTTON,
 };
 
-static const struct OamData sQuickBallLabelOamData =
+static const struct OamData sQuickBallButtonOamData =
 {
     .y = 0,
     .affineMode = ST_OAM_AFFINE_OFF,
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(8x8),
+    .shape = SPRITE_SHAPE(16x16),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(8x8),
+    .size = SPRITE_SIZE(16x16),
     .tileNum = 0,
     .priority = 0,
     .paletteNum = 0,
     .affineParam = 0,
 };
 
-static const struct SpriteTemplate sQuickBallLabelSpriteTemplate =
+static const struct SpriteTemplate sQuickBallButtonSpriteTemplate =
 {
-    .tileTag = TAG_QUICK_BALL_LABEL,
-    .paletteTag = TAG_QUICK_BALL_PANEL,
-    .oam = &sQuickBallLabelOamData,
+    .tileTag = TAG_QUICK_BALL_BUTTON,
+    .paletteTag = TAG_QUICK_BALL_BUTTON,
+    .oam = &sQuickBallButtonOamData,
     .anims = gDummySpriteAnimTable,
     .images = NULL,
     .affineAnims = gDummySpriteAffineAnimTable,
     .callback = SpriteCallbackDummy,
 };
 
-static const u8 sQuickBallArrowGfx[] =
-{
-    0x00, 0x00, 0x30, 0x00,
-    0x00, 0x00, 0x33, 0x00,
-    0x00, 0x00, 0x33, 0x00,
-    0x30, 0x33, 0x33, 0x33,
-    0x00, 0x00, 0x33, 0x00,
-    0x00, 0x00, 0x30, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x00,
-};
+static const u8 sQuickBallArrowGfx[] = INCBIN_U8("graphics/reset_rtc_screen/arrow_right.4bpp");
+static const u16 sQuickBallArrowPalette[] = INCBIN_U16("graphics/reset_rtc_screen/arrow.gbapal");
 
 static const struct SpriteSheet sQuickBallArrowSpriteSheet =
 {
     .data = sQuickBallArrowGfx,
     .size = sizeof(sQuickBallArrowGfx),
+    .tag = TAG_QUICK_BALL_ARROWS,
+};
+
+static const struct SpritePalette sQuickBallArrowSpritePalette =
+{
+    .data = sQuickBallArrowPalette,
     .tag = TAG_QUICK_BALL_ARROWS,
 };
 
@@ -315,7 +309,7 @@ static const union AnimCmd *const sQuickBallArrowAnimTable[] =
 static const struct SpriteTemplate sQuickBallArrowSpriteTemplate =
 {
     .tileTag = TAG_QUICK_BALL_ARROWS,
-    .paletteTag = TAG_QUICK_BALL_PANEL,
+    .paletteTag = TAG_QUICK_BALL_ARROWS,
     .oam = &sQuickBallArrowOamData,
     .anims = sQuickBallArrowAnimTable,
     .images = NULL,
@@ -325,11 +319,11 @@ static const struct SpriteTemplate sQuickBallArrowSpriteTemplate =
 
 EWRAM_DATA static u8 sQuickBallPanelSpriteId = MAX_SPRITES;
 EWRAM_DATA static u8 sQuickBallIconSpriteId = MAX_SPRITES;
-EWRAM_DATA static u8 sQuickBallLabelSpriteId = MAX_SPRITES;
+EWRAM_DATA static u8 sQuickBallButtonSpriteId = MAX_SPRITES;
 EWRAM_DATA static u8 sQuickBallLeftArrowSpriteId = MAX_SPRITES;
 EWRAM_DATA static u8 sQuickBallRightArrowSpriteId = MAX_SPRITES;
 EWRAM_DATA static bool8 sQuickBallIconCreated = FALSE;
-EWRAM_DATA static bool8 sQuickBallLabelCreated = FALSE;
+EWRAM_DATA static bool8 sQuickBallButtonCreated = FALSE;
 EWRAM_DATA static bool8 sQuickBallArrowsLoaded = FALSE;
 
 const struct BgTemplate gBattleBgTemplates[] =
@@ -1046,37 +1040,40 @@ static void DestroyQuickBallIcon(void)
     }
 }
 
-static void CreateQuickBallLabel(void)
+static void CreateQuickBallButton(void)
 {
-    if (sQuickBallLabelCreated)
+    if (sQuickBallButtonCreated)
         return;
 
-    LoadSpriteSheet(&sQuickBallLabelSpriteSheet);
-    sQuickBallLabelSpriteId = CreateSprite(&sQuickBallLabelSpriteTemplate, 13, 71, 0);
-    if (sQuickBallLabelSpriteId != MAX_SPRITES)
+    LoadSpriteSheet(&sQuickBallButtonSpriteSheet);
+    LoadSpritePalette(&sQuickBallButtonSpritePalette);
+    sQuickBallButtonSpriteId = CreateSprite(&sQuickBallButtonSpriteTemplate, 10, 71, 0);
+    if (sQuickBallButtonSpriteId != MAX_SPRITES)
     {
-        sQuickBallLabelCreated = TRUE;
-        gSprites[sQuickBallLabelSpriteId].oam.priority = 0;
-        gSprites[sQuickBallLabelSpriteId].subpriority = 0;
+        sQuickBallButtonCreated = TRUE;
+        gSprites[sQuickBallButtonSpriteId].oam.priority = 0;
+        gSprites[sQuickBallButtonSpriteId].subpriority = 0;
     }
     else
     {
-        FreeSpriteTilesByTag(TAG_QUICK_BALL_LABEL);
+        FreeSpriteTilesByTag(TAG_QUICK_BALL_BUTTON);
+        FreeSpritePaletteByTag(TAG_QUICK_BALL_BUTTON);
     }
 }
 
-static void DestroyQuickBallLabel(void)
+static void DestroyQuickBallButton(void)
 {
-    if (sQuickBallLabelCreated
-     && sQuickBallLabelSpriteId < MAX_SPRITES
-     && gSprites[sQuickBallLabelSpriteId].inUse)
-        DestroySprite(&gSprites[sQuickBallLabelSpriteId]);
+    if (sQuickBallButtonCreated
+     && sQuickBallButtonSpriteId < MAX_SPRITES
+     && gSprites[sQuickBallButtonSpriteId].inUse)
+        DestroySprite(&gSprites[sQuickBallButtonSpriteId]);
 
-    sQuickBallLabelSpriteId = MAX_SPRITES;
-    if (sQuickBallLabelCreated)
+    sQuickBallButtonSpriteId = MAX_SPRITES;
+    if (sQuickBallButtonCreated)
     {
-        FreeSpriteTilesByTag(TAG_QUICK_BALL_LABEL);
-        sQuickBallLabelCreated = FALSE;
+        FreeSpriteTilesByTag(TAG_QUICK_BALL_BUTTON);
+        FreeSpritePaletteByTag(TAG_QUICK_BALL_BUTTON);
+        sQuickBallButtonCreated = FALSE;
     }
 }
 
@@ -1088,6 +1085,7 @@ void SetQuickBallPanelChangeArrowsVisible(bool8 visible)
     if (visible && !sQuickBallArrowsLoaded)
     {
         LoadSpriteSheet(&sQuickBallArrowSpriteSheet);
+        LoadSpritePalette(&sQuickBallArrowSpritePalette);
         sQuickBallArrowsLoaded = TRUE;
         sQuickBallLeftArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 5, 71, 0);
         sQuickBallRightArrowSpriteId = CreateSprite(&sQuickBallArrowSpriteTemplate, 18, 71, 0);
@@ -1124,6 +1122,7 @@ static void DestroyQuickBallArrows(void)
     if (sQuickBallArrowsLoaded)
     {
         FreeSpriteTilesByTag(TAG_QUICK_BALL_ARROWS);
+        FreeSpritePaletteByTag(TAG_QUICK_BALL_ARROWS);
         sQuickBallArrowsLoaded = FALSE;
     }
 }
@@ -1160,8 +1159,8 @@ void ShowQuickBallPanel(u16 itemId)
     }
 
     sQuickBallPanelSpriteId = MAX_SPRITES;
-    sQuickBallLabelSpriteId = MAX_SPRITES;
-    sQuickBallLabelCreated = FALSE;
+    sQuickBallButtonSpriteId = MAX_SPRITES;
+    sQuickBallButtonCreated = FALSE;
     sQuickBallLeftArrowSpriteId = MAX_SPRITES;
     sQuickBallRightArrowSpriteId = MAX_SPRITES;
     sQuickBallArrowsLoaded = FALSE;
@@ -1176,7 +1175,7 @@ void ShowQuickBallPanel(u16 itemId)
     else
     {
         UpdateQuickBallPanel(itemId);
-        CreateQuickBallLabel();
+        CreateQuickBallButton();
     }
 }
 
@@ -1190,7 +1189,7 @@ void HideQuickBallPanel(void)
          && gSprites[sQuickBallPanelSpriteId].template == &sQuickBallPanelSpriteTemplate)
         {
             DestroyQuickBallArrows();
-            DestroyQuickBallLabel();
+            DestroyQuickBallButton();
             DestroySprite(&gSprites[sQuickBallPanelSpriteId]);
         }
 
