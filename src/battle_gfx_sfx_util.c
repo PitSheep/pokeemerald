@@ -279,9 +279,11 @@ u16 ChooseMoveAndTargetInBattleAll(void)
     #define numValidMoveGroups var2
     #define validMoveGroup var2
 
-    // If battler is < 50% HP and not asleep, use second set of move group likelihoods
-    // otherwise use first set
-    i = (gBattleStruct->palaceFlags & gBitTable[gActiveBattler]) ? 2 : 0;
+    // If battler is at or below 50% HP and not asleep, use the second set of move group likelihoods.
+    // Otherwise use the first set.
+    i = (gBattleMons[gActiveBattler].hp != 0
+      && gBattleMons[gActiveBattler].hp <= gBattleMons[gActiveBattler].maxHP / 2
+      && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)) ? 2 : 0;
     minGroupNum = i;
 
     maxGroupNum = i + 2; // + 2 because there are two percentages per set of likelihoods
@@ -343,7 +345,7 @@ u16 ChooseMoveAndTargetInBattleAll(void)
                 numValidMoveGroups++;
             if ((validMoveFlags & 0xF0) > 0x1F)
                 numValidMoveGroups++;
-            if ((validMoveFlags & 0xF0) > 0x1FF)
+            if ((validMoveFlags & 0xF00) > 0x1FF)
                 numValidMoveGroups++;
 
 
@@ -365,7 +367,7 @@ u16 ChooseMoveAndTargetInBattleAll(void)
                     validMoveGroup = PALACE_MOVE_GROUP_ATTACK;
                 if ((validMoveFlags & 0xF0) > 0x1F)
                     validMoveGroup = PALACE_MOVE_GROUP_DEFENSE;
-                if ((validMoveFlags & 0xF0) > 0x1FF)
+                if ((validMoveFlags & 0xF00) > 0x1FF)
                     validMoveGroup = PALACE_MOVE_GROUP_SUPPORT;
 
                 do
