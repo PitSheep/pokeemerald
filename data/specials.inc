@@ -204,6 +204,25 @@ gSpecials::
 	def_special GetNumLevelsGainedFromDaycare
 	def_special GetDaycareCost
 	def_special TakePokemonFromDaycare
+	def_special IsIncubatorOccupied
+	def_special StoreSelectedPokemonInIncubator
+	def_special TakePokemonFromIncubator
+	def_special IsIncubatorSlot2Occupied
+	def_special StoreSelectedPokemonInIncubatorSlot2
+	def_special TakePokemonFromIncubatorSlot2
+	def_special SendIncubatorMonToPC
+	def_special SendIncubatorMon2ToPC
+	def_special CheckIncubatorCompatibility
+	def_special ShowIncubatorMonsWindow
+	def_special CloseIncubatorMonsWindow
+	def_special ShowIncubatorSlot1Info
+	def_special ShowIncubatorSlot2Info
+	def_special CloseIncubatorSlotInfo
+	def_special ShowIncubatorResultInfo
+	def_special IsIncubatorResultReady
+	def_special CreateIncubatorResult
+	def_special TakeIncubatorResult
+	def_special SendIncubatorResultToPC
 	def_special ScriptHatchMon
 	def_special EggHatch
 	def_special CheckDaycareMonReceivedMail
