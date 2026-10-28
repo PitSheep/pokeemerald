@@ -538,3 +538,10 @@ OldaleTown_EventScript_TownSign_HunterHouse::
 
 OldaleTown_Text_TownSign_HunterHouse:
 	.string "HUNTER HOUSE$"
+
+OldaleTown_EventScript_TownSign_HunterCare::
+	msgbox OldaleTown_Text_TownSign_HunterCare, MSGBOX_SIGN
+	end
+
+OldaleTown_Text_TownSign_HunterCare:
+	.string "HUNTER CARE$"
