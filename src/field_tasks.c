@@ -11,6 +11,7 @@
 #include "item.h"
 #include "match_call.h"
 #include "main.h"
+#include "map_name_popup.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
 #include "script.h"
@@ -182,7 +183,8 @@ static void Task_RunTimeBasedEvents(u8 taskId)
         RunTimeBasedEvents(data);
         if (VarGet(VAR_OLDALE_GYM_FOLLOWER_TIMER_STATE) == 2
          && !ScriptContext_IsEnabled()
-         && !IsMatchCallTaskActive())
+         && !IsMatchCallTaskActive()
+         && !IsMapNamePopupActive())
         {
             VarSet(VAR_OLDALE_GYM_FOLLOWER_TIMER_STATE, 3);
             ScriptContext_SetupScript(OldaleTown_Gym_EventScript_Follower_Notification);

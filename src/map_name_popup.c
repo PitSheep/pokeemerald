@@ -226,6 +226,11 @@ void ShowMapNamePopup(void)
     }
 }
 
+bool8 IsMapNamePopupActive(void)
+{
+    return FuncIsActiveTask(Task_MapNamePopUpWindow);
+}
+
 static void Task_MapNamePopUpWindow(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];

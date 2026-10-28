@@ -4418,13 +4418,10 @@ OldaleTown_Gym_EventScript_Follower_Reward::
 OldaleTown_Gym_EventScript_Follower_Reward_Ready::
 	specialvar VAR_0x8004, GetOldaleGymFollowerReward
 	goto_if_eq VAR_0x8004, ITEM_NONE, OldaleTown_Gym_EventScript_Follower_Reward_NotReady
+	msgbox OldaleTown_Gym_Text_Follower_Reward_Received, MSGBOX_DEFAULT
 	giveitem VAR_0x8004
 	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Gym_EventScript_Follower_Reward_BagFull
 	special CompleteOldaleGymFollowerReward
-	bufferitemname STR_VAR_2, VAR_0x8004
-	playfanfare MUS_OBTAIN_ITEM
-	msgbox OldaleTown_Gym_Text_Follower_Reward_Received, MSGBOX_DEFAULT
-	waitfanfare
 	release
 	end
 
@@ -4448,8 +4445,7 @@ OldaleTown_Gym_Text_Follower_Reward_BagFull:
 
 OldaleTown_Gym_Text_Follower_Reward_Received:
 	.string "Here is the reward your followers\n"
-	.string "earned for defending your GYM!\p"
-	.string "You received the {STR_VAR_2}!$"
+	.string "earned for defending your GYM!$"
 
 OldaleTown_Gym_EventScript_Follower_Notification::
 	lockall
