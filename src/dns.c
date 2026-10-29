@@ -57,11 +57,6 @@ const struct LightingColour gLightingColours[] =
 {
 {
     .paletteNum = 1,
-    .colourNum = 9,
-    .lightColour = RGB2(30, 30, 5),
-},
-{
-    .paletteNum = 1,
     .colourNum = 10,
     .lightColour = RGB2(30, 30, 5),
 },
