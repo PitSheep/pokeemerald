@@ -53,6 +53,7 @@ OldaleTown_EventScript_MartEmployee::
 	end
 
 OldaleTown_EventScript_GoToMartSouth::
+	followerintopokeball
 	applymovement LOCALID_MART_EMPLOYEE, OldaleTown_Movement_EmployeeSouth
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerSouth
 	waitmovement 0
@@ -60,6 +61,7 @@ OldaleTown_EventScript_GoToMartSouth::
 	end
 
 OldaleTown_EventScript_GoToMartNorth::
+	followerintopokeball
 	applymovement LOCALID_MART_EMPLOYEE, OldaleTown_Movement_EmployeeNorth
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerNorth
 	waitmovement 0
@@ -67,6 +69,7 @@ OldaleTown_EventScript_GoToMartNorth::
 	end
 
 OldaleTown_EventScript_GoToMartEast::
+	followerintopokeball
 	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_PlayerEast
 	applymovement LOCALID_MART_EMPLOYEE, OldaleTown_Movement_EmployeeEast
 	waitmovement 0
@@ -80,6 +83,7 @@ OldaleTown_EventScript_ExplainPokemonMart::
 	msgbox OldaleTown_Text_PotionExplanation, MSGBOX_DEFAULT
 	setflag FLAG_RECEIVED_POTION_OLDALE
 	fadedefaultbgm
+	updatefollowerpokemongraphic
 	release
 	end
 
