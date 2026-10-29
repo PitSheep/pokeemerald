@@ -18,6 +18,7 @@ void CloseIncubatorSlotInfo(void);
 void ShowIncubatorResultInfo(void);
 bool8 IsIncubatorResultReady(void);
 void CreateIncubatorResult(void);
+void UpdateIncubatorObjectSprites(void);
 u16 TakeIncubatorResult(void);
 bool8 SendIncubatorResultToPC(void);
 

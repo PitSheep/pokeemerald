@@ -914,6 +914,10 @@
 #define OBJ_EVENT_GFX_VAR_D  (OBJ_EVENT_GFX_VARS + 0xD)
 #define OBJ_EVENT_GFX_VAR_E  (OBJ_EVENT_GFX_VARS + 0xE)
 #define OBJ_EVENT_GFX_VAR_F  (OBJ_EVENT_GFX_VARS + 0xF) // 255
+// Extra dynamic graphics, backed by dedicated vars (see VarGetObjectEventGraphicsId)
+#define OBJ_EVENT_GFX_VAR_INCUBATOR_1      (OBJ_EVENT_GFX_VARS + 0x10)
+#define OBJ_EVENT_GFX_VAR_INCUBATOR_2      (OBJ_EVENT_GFX_VARS + 0x11)
+#define OBJ_EVENT_GFX_VAR_INCUBATOR_RESULT (OBJ_EVENT_GFX_VARS + 0x12)
 
 #define SHADOW_SIZE_S   0
 #define SHADOW_SIZE_M   1

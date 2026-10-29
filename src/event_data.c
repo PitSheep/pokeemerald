@@ -195,6 +195,15 @@ bool8 VarSet(u16 id, u16 value)
 
 u16 VarGetObjectEventGraphicsId(u8 id)
 {
+    switch (id)
+    {
+    case 0x10:
+        return VarGet(VAR_INCUBATOR_GFX_SLOT_1);
+    case 0x11:
+        return VarGet(VAR_INCUBATOR_GFX_SLOT_2);
+    case 0x12:
+        return VarGet(VAR_INCUBATOR_GFX_RESULT);
+    }
     return VarGet(VAR_OBJ_GFX_ID_0 + id);
 }
 

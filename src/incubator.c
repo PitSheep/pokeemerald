@@ -3,6 +3,9 @@
 #include "daycare.h"
 #include "incubator.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "constants/event_objects.h"
+#include "constants/maps.h"
 #include "field_effect.h"
 #include "international_string_util.h"
 #include "item.h"
@@ -126,12 +129,68 @@ static bool8 SendSlotToPC(struct DaycareMon *incubatorMon, u32 *signature)
 
 bool8 SendIncubatorMonToPC(void)
 {
-    return SendSlotToPC(&gSaveBlock1Ptr->incubatorMon, &gSaveBlock1Ptr->incubatorSignature);
+    bool8 result = SendSlotToPC(&gSaveBlock1Ptr->incubatorMon, &gSaveBlock1Ptr->incubatorSignature);
+
+    UpdateIncubatorObjectSprites();
+    return result;
 }
 
 bool8 SendIncubatorMon2ToPC(void)
 {
-    return SendSlotToPC(&gSaveBlock1Ptr->incubatorMon2, &gSaveBlock1Ptr->incubatorSignature2);
+    bool8 result = SendSlotToPC(&gSaveBlock1Ptr->incubatorMon2, &gSaveBlock1Ptr->incubatorSignature2);
+
+    UpdateIncubatorObjectSprites();
+    return result;
+}
+
+#define INCUBATOR_OBJ_LOCAL_ID_FIRST 5 // Love Ball objects on the map: slot 1, slot 2, result
+
+// Love Ball is used when the slot is empty or the species has no overworld sprite
+static u16 GetIncubatorObjectGfx(struct BoxPokemon *boxMon, bool8 present)
+{
+    u16 species;
+    u16 gfx;
+
+    if (!present)
+        return OBJ_EVENT_GFX_LOVE_BALL;
+
+    species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    gfx = species + OBJ_EVENT_GFX_BULBASAUR - 1;
+    if (species == SPECIES_NONE || gfx >= NUM_OBJ_EVENT_GFX || GetObjectEventGraphicsInfo(gfx) == NULL)
+        return OBJ_EVENT_GFX_LOVE_BALL;
+    return gfx;
+}
+
+void UpdateIncubatorObjectSprites(void)
+{
+    u16 gfx[3];
+    u8 i;
+
+    gfx[0] = GetIncubatorObjectGfx(&gSaveBlock1Ptr->incubatorMon.mon, IsIncubatorOccupied());
+    gfx[1] = GetIncubatorObjectGfx(&gSaveBlock1Ptr->incubatorMon2.mon, IsIncubatorSlot2Occupied());
+    gfx[2] = GetIncubatorObjectGfx(&gSaveBlock1Ptr->incubatorResult, IsIncubatorResultReady());
+
+    VarSet(VAR_INCUBATOR_GFX_SLOT_1, gfx[0]);
+    VarSet(VAR_INCUBATOR_GFX_SLOT_2, gfx[1]);
+    VarSet(VAR_INCUBATOR_GFX_RESULT, gfx[2]);
+
+    // Objects already on screen keep their old sprite, so refresh them too
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(OLDALE_TOWN_HOUSE2)
+     || gSaveBlock1Ptr->location.mapNum != MAP_NUM(OLDALE_TOWN_HOUSE2))
+        return;
+
+    for (i = 0; i < 3; i++)
+    {
+        u8 objectEventId;
+
+        if (!TryGetObjectEventIdByLocalIdAndMap(INCUBATOR_OBJ_LOCAL_ID_FIRST + i, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId)
+         && gObjectEvents[objectEventId].graphicsId != gfx[i])
+        {
+            // Swapping graphics in place breaks the sprite (its tiles were sized for the old image), so respawn it
+            RemoveObjectEvent(&gObjectEvents[objectEventId]);
+            TrySpawnObjectEvent(INCUBATOR_OBJ_LOCAL_ID_FIRST + i, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+        }
+    }
 }
 
 static bool8 IncubatorEggGroupsOverlap(u16 *eggGroups1, u16 *eggGroups2)
@@ -804,6 +863,7 @@ void CreateIncubatorResult(void)
     HatchIncubatorEgg(&egg, &hatched);
     gSaveBlock1Ptr->incubatorResult = hatched.box;
     gSaveBlock1Ptr->incubatorResultSignature = INCUBATOR_SIGNATURE;
+    UpdateIncubatorObjectSprites();
 }
 
 static void ClearIncubatorResult(void)
@@ -823,6 +883,7 @@ u16 TakeIncubatorResult(void)
     ClearIncubatorResult();
     CompactPartySlots();
     CalculatePlayerPartyCount();
+    UpdateIncubatorObjectSprites();
     return species;
 }
 
@@ -844,6 +905,7 @@ bool8 SendIncubatorResultToPC(void)
                 StringCopy(gStringVar2, GetBoxNamePtr(boxNo));
                 *dest = gSaveBlock1Ptr->incubatorResult;
                 ClearIncubatorResult();
+                UpdateIncubatorObjectSprites();
                 return TRUE;
             }
         }
@@ -861,11 +923,15 @@ bool8 IsIncubatorOccupied(void)
 void StoreSelectedPokemonInIncubator(void)
 {
     StoreSelectedPokemonInSlot(&gSaveBlock1Ptr->incubatorMon, &gSaveBlock1Ptr->incubatorSignature);
+    UpdateIncubatorObjectSprites();
 }
 
 u16 TakePokemonFromIncubator(void)
 {
-    return TakePokemonFromSlot(&gSaveBlock1Ptr->incubatorMon, &gSaveBlock1Ptr->incubatorSignature);
+    u16 species = TakePokemonFromSlot(&gSaveBlock1Ptr->incubatorMon, &gSaveBlock1Ptr->incubatorSignature);
+
+    UpdateIncubatorObjectSprites();
+    return species;
 }
 
 bool8 IsIncubatorSlot2Occupied(void)
@@ -876,9 +942,13 @@ bool8 IsIncubatorSlot2Occupied(void)
 void StoreSelectedPokemonInIncubatorSlot2(void)
 {
     StoreSelectedPokemonInSlot(&gSaveBlock1Ptr->incubatorMon2, &gSaveBlock1Ptr->incubatorSignature2);
+    UpdateIncubatorObjectSprites();
 }
 
 u16 TakePokemonFromIncubatorSlot2(void)
 {
-    return TakePokemonFromSlot(&gSaveBlock1Ptr->incubatorMon2, &gSaveBlock1Ptr->incubatorSignature2);
+    u16 species = TakePokemonFromSlot(&gSaveBlock1Ptr->incubatorMon2, &gSaveBlock1Ptr->incubatorSignature2);
+
+    UpdateIncubatorObjectSprites();
+    return species;
 }

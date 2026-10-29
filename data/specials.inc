@@ -221,6 +221,7 @@ gSpecials::
 	def_special ShowIncubatorResultInfo
 	def_special IsIncubatorResultReady
 	def_special CreateIncubatorResult
+	def_special UpdateIncubatorObjectSprites
 	def_special TakeIncubatorResult
 	def_special SendIncubatorResultToPC
 	def_special ScriptHatchMon

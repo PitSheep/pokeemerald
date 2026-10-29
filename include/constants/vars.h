@@ -268,9 +268,9 @@
 #define VAR_OLDALE_GYM_FOLLOWER_START_DAY                0x40F9
 #define VAR_OLDALE_GYM_FOLLOWER_START_MINUTE             0x40FA
 #define VAR_OLDALE_GYM_FOLLOWER_START_SECOND             0x40FB
-#define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
-#define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
-#define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
+#define VAR_INCUBATOR_GFX_SLOT_1                         0x40FC
+#define VAR_INCUBATOR_GFX_SLOT_2                         0x40FD
+#define VAR_INCUBATOR_GFX_RESULT                         0x40FE
 #define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
 
 #define VARS_END                                         0x40FF

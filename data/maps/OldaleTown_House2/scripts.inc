@@ -1,5 +1,10 @@
 OldaleTown_House2_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_House2_OnTransition
 	.byte 0
+
+OldaleTown_House2_OnTransition:
+	special UpdateIncubatorObjectSprites
+	end
 
 OldaleTown_House2_EventScript_Woman::
 	msgbox OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC
