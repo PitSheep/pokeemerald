@@ -16,6 +16,7 @@
 #include "field_effect.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
+#include "fldeff.h"
 #include "field_weather.h"
 #include "item.h"
 #include "item_menu.h"
@@ -1290,6 +1291,37 @@ void ItemUseOutOfBattle_Fly(u8 taskId)
         FadeScreen(FADE_TO_BLACK, 0);
         gTasks[taskId].func = Task_OpenRegisteredFlyMap;
     }
+}
+
+static void ItemUseOnFieldCB_Flash(u8 taskId)
+{
+    UseFlashFromItem();
+    DestroyTask(taskId);
+}
+
+void ItemUseOutOfBattle_Flash(u8 taskId)
+{
+    u8 i;
+
+    if (FlagGet(FLAG_BADGE02_GET) != TRUE || !CanUseFlashFromItem())
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+        return;
+    }
+
+    gPartyMenu.slotId = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        if (species != SPECIES_NONE && species != SPECIES_EGG)
+        {
+            gPartyMenu.slotId = i;
+            break;
+        }
+    }
+
+    sItemUseOnFieldCB = ItemUseOnFieldCB_Flash;
+    SetUpItemUseOnFieldCallback(taskId);
 }
 
 void ItemUseOutOfBattle_ShinyIncense(u8 taskId)

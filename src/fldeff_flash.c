@@ -90,6 +90,24 @@ bool8 SetUpFieldMove_Flash(void)
     return FALSE;
 }
 
+bool8 CanUseFlashFromItem(void)
+{
+    return ShouldDoBrailleRegisteelEffect() || (gMapHeader.cave == TRUE && !FlagGet(FLAG_SYS_USE_FLASH));
+}
+
+void UseFlashFromItem(void)
+{
+    if (ShouldDoBrailleRegisteelEffect())
+    {
+        LockPlayerFieldControls();
+        SetUpPuzzleEffectRegisteel();
+    }
+    else
+    {
+        FldEff_UseFlash();
+    }
+}
+
 static void FieldCallback_Flash(void)
 {
     u8 taskId = CreateFieldMoveTask();

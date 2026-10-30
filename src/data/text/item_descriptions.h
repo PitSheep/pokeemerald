@@ -1565,6 +1565,10 @@ static const u8 sCraftBundleDesc[] = _(
     "packed full of\n"
     "crafting supplies.");
 
+static const u8 sFlashItemDesc[] = _(
+    "Lights up dark caves\n"
+    "outside of battle.");
+
 static const u8 sFlyItemDesc[] = _(
     "Fly to any town\n"
     "you have visited.");

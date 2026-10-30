@@ -553,22 +553,51 @@ OldaleTown_Text_TownSign_HunterCare:
 OldaleTown_EventScript_Lost_Found_Item::
 	lock
 	faceplayer
-	goto_if_unset FLAG_RECEIVED_HM02, OldaleTown_EventScript_Lost_Found_Item_NotYet
-	checkitem ITEM_FLY
-	goto_if_eq VAR_RESULT, TRUE, OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
-	checkitemspace ITEM_FLY
-	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_Lost_Found_Item_BagFull
-	msgbox OldaleTown_Text_Lost_Found_Item_Found, MSGBOX_DEFAULT
-	giveitem ITEM_FLY
-	msgbox OldaleTown_Text_Lost_Found_Item_Given, MSGBOX_DEFAULT
-	release
-	end
-
-OldaleTown_EventScript_Lost_Found_Item_NotYet::
+	setvar VAR_0x8004, 0
+	call OldaleTown_EventScript_Lost_Found_Item_TryFly
+	call OldaleTown_EventScript_Lost_Found_Item_TryFlash
+	goto_if_eq VAR_0x8004, 2, OldaleTown_EventScript_Lost_Found_Item_BagFull
+	goto_if_eq VAR_0x8004, 1, OldaleTown_EventScript_Lost_Found_Item_Done
+	goto_if_set FLAG_RECEIVED_HM02, OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
+	goto_if_set FLAG_RECEIVED_HM05, OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
 	msgbox OldaleTown_Text_Lost_Found_Item_NotYet, MSGBOX_DEFAULT
 	release
 	end
 
+OldaleTown_EventScript_Lost_Found_Item_TryFly::
+	goto_if_unset FLAG_RECEIVED_HM02, OldaleTown_EventScript_Lost_Found_Item_Return
+	checkitem ITEM_FLY
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_EventScript_Lost_Found_Item_Return
+	checkitemspace ITEM_FLY
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_Lost_Found_Item_SetBagFull
+	msgbox OldaleTown_Text_Lost_Found_Item_FoundFly, MSGBOX_DEFAULT
+	giveitem ITEM_FLY
+	msgbox OldaleTown_Text_Lost_Found_Item_GivenFly, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 1
+	return
+
+OldaleTown_EventScript_Lost_Found_Item_TryFlash::
+	goto_if_unset FLAG_RECEIVED_HM05, OldaleTown_EventScript_Lost_Found_Item_Return
+	checkitem ITEM_FLASH
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_EventScript_Lost_Found_Item_Return
+	checkitemspace ITEM_FLASH
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_Lost_Found_Item_SetBagFull
+	msgbox OldaleTown_Text_Lost_Found_Item_FoundFlash, MSGBOX_DEFAULT
+	giveitem ITEM_FLASH
+	msgbox OldaleTown_Text_Lost_Found_Item_GivenFlash, MSGBOX_DEFAULT
+	setvar VAR_0x8004, 1
+	return
+
+OldaleTown_EventScript_Lost_Found_Item_SetBagFull::
+	setvar VAR_0x8004, 2
+	return
+
+OldaleTown_EventScript_Lost_Found_Item_Return::
+	return
+
+OldaleTown_EventScript_Lost_Found_Item_Done::
+	release
+	end
 OldaleTown_EventScript_Lost_Found_Item_AlreadyHave::
 	msgbox OldaleTown_Text_Lost_Found_Item_AlreadyHave, MSGBOX_DEFAULT
 	release
@@ -582,20 +611,29 @@ OldaleTown_EventScript_Lost_Found_Item_BagFull::
 OldaleTown_Text_Lost_Found_Item_NotYet:
 	.string "I run the LOST & FOUND.\p"
 	.string "Come back when you have a HM\n"
-	.string "for FLY.$"
+	.string "for FLY or FLASH.$"
 
-OldaleTown_Text_Lost_Found_Item_Found:
+OldaleTown_Text_Lost_Found_Item_FoundFly:
 	.string "Ah, {PLAYER}! Someone left a FLY\n"
 	.string "item here, and it's meant for you.$"
 
-OldaleTown_Text_Lost_Found_Item_Given:
+OldaleTown_Text_Lost_Found_Item_GivenFly:
 	.string "With it, you can use FLY outside\n"
+	.string "of battle, even if no POKéMON\l"
+	.string "knows the move.$"
+
+OldaleTown_Text_Lost_Found_Item_FoundFlash:
+	.string "Ah, {PLAYER}! Someone left a FLASH\n"
+	.string "item here, and it's meant for you.$"
+
+OldaleTown_Text_Lost_Found_Item_GivenFlash:
+	.string "With it, you can use FLASH outside\n"
 	.string "of battle, even if no POKéMON\l"
 	.string "knows the move.$"
 
 OldaleTown_Text_Lost_Found_Item_AlreadyHave:
 	.string "I have nothing else for you.\n"
-	.string "Take care of that FLY item!$"
+	.string "Take care of those items!$"
 
 OldaleTown_Text_Lost_Found_Item_BagFull:
 	.string "Your KEY ITEMS POCKET is full.\p"
