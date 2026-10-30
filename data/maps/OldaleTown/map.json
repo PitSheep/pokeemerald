@@ -280,6 +280,33 @@
       "var": "VAR_OLDALE_RIVAL_STATE",
       "var_value": "1",
       "script": "OldaleTown_EventScript_RivalTrigger3"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 19,
+      "elevation": 3,
+      "var": "VAR_OLDALE_LOST_FOUND_STATE",
+      "var_value": "0",
+      "script": "OldaleTown_EventScript_Lost_Found_Item_Trigger1"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 18,
+      "elevation": 3,
+      "var": "VAR_OLDALE_LOST_FOUND_STATE",
+      "var_value": "0",
+      "script": "OldaleTown_EventScript_Lost_Found_Item_Trigger2"
+    },
+    {
+      "type": "trigger",
+      "x": 7,
+      "y": 17,
+      "elevation": 3,
+      "var": "VAR_OLDALE_LOST_FOUND_STATE",
+      "var_value": "0",
+      "script": "OldaleTown_EventScript_Lost_Found_Item_Trigger3"
     }
   ],
   "bg_events": [

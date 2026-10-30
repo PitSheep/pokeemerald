@@ -1,6 +1,7 @@
 .set LOCALID_MART_EMPLOYEE, 2
 .set LOCALID_FOOTPRINTS_MAN, 3
 .set LOCALID_RIVAL, 4
+.set LOCALID_LOST_FOUND, 13
 
 OldaleTown_MapScripts::
 	map_script MAP_SCRIPT_ON_TRANSITION, OldaleTown_OnTransition
@@ -553,6 +554,10 @@ OldaleTown_Text_TownSign_HunterCare:
 OldaleTown_EventScript_Lost_Found_Item::
 	lock
 	faceplayer
+	goto OldaleTown_EventScript_Lost_Found_Item_Talk
+
+@ Triggers jump here: faceplayer would use a stale gSelectedObjectEvent (possibly the player)
+OldaleTown_EventScript_Lost_Found_Item_Talk::
 	setvar VAR_0x8004, 0
 	call OldaleTown_EventScript_Lost_Found_Item_TryFly
 	call OldaleTown_EventScript_Lost_Found_Item_TryFlash
@@ -646,3 +651,54 @@ OldaleTown_Text_Lost_Found_Item_BagFull:
 	.string "Your KEY ITEMS POCKET is full.\p"
 	.string "Store something on your PC,\n"
 	.string "then come back.$"
+
+OldaleTown_EventScript_Lost_Found_Item_Trigger1::
+	lockall
+	setvar VAR_OLDALE_LOST_FOUND_STATE, 1
+	call OldaleTown_EventScript_Lost_Found_Item_Notice
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_FaceLeft
+	waitmovement 0
+	followerintopokeball
+	goto OldaleTown_EventScript_Lost_Found_Item_Talk
+
+OldaleTown_EventScript_Lost_Found_Item_Trigger2::
+	lockall
+	setvar VAR_OLDALE_LOST_FOUND_STATE, 1
+	call OldaleTown_EventScript_Lost_Found_Item_Notice
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_Lost_Found_Item_PlayerDown1
+	waitmovement 0
+	followerintopokeball
+	goto OldaleTown_EventScript_Lost_Found_Item_Talk
+
+OldaleTown_EventScript_Lost_Found_Item_Trigger3::
+	lockall
+	setvar VAR_OLDALE_LOST_FOUND_STATE, 1
+	call OldaleTown_EventScript_Lost_Found_Item_Notice
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Movement_Lost_Found_Item_PlayerDown2
+	waitmovement 0
+	followerintopokeball
+	goto OldaleTown_EventScript_Lost_Found_Item_Talk
+
+OldaleTown_EventScript_Lost_Found_Item_Notice::
+	playse SE_PIN
+	applymovement LOCALID_LOST_FOUND, Common_Movement_ExclamationMark
+	waitmovement 0
+	applymovement LOCALID_LOST_FOUND, OldaleTown_Movement_Lost_Found_Item_Approach
+	waitmovement 0
+	return
+
+OldaleTown_Movement_Lost_Found_Item_Approach:
+	walk_right
+	walk_right
+	step_end
+
+OldaleTown_Movement_Lost_Found_Item_PlayerDown1:
+	walk_down
+	face_left
+	step_end
+
+OldaleTown_Movement_Lost_Found_Item_PlayerDown2:
+	walk_down
+	walk_down
+	face_left
+	step_end
