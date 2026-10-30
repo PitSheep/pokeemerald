@@ -558,7 +558,7 @@ OldaleTown_Hunter_House_EventScript_Start_Hunt_6:
 	end
 
 OldaleTown_Hunter_House_Text_Start_Hunt_6:
-	.string "Hunting LATIAS:$"
+	.string "Hunting LATIAS:\p"
 	.string "I see red water...\n"
 	.string "I see Cable Car Station...\p"
 	.string "I see it!$"
