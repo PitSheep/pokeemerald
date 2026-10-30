@@ -318,3 +318,14 @@ MauvilleCity_BikeShop_Text_Jumps:
 	.string "change directions while jumping.\p"
 	.string "Want to read a different page?$"
 
+MauvilleCity_BikeShop_EventScript_Tino::
+	msgbox MauvilleCity_BikeShop_Text_Tino_Switch, MSGBOX_NPC
+	end
+
+MauvilleCity_BikeShop_Text_Tino_Switch:
+	.string "TINO: Did you know you can change\n"
+	.string "your bike at any time from your\l"
+	.string "inventory?\p"
+	.string "Just tap on the bike and then\n"
+	.string "on SWITCH.\p"
+	.string "That was my idea!$"
