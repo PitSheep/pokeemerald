@@ -556,13 +556,20 @@ OldaleTown_EventScript_Lost_Found_Item::
 	setvar VAR_0x8004, 0
 	call OldaleTown_EventScript_Lost_Found_Item_TryFly
 	call OldaleTown_EventScript_Lost_Found_Item_TryFlash
+	call OldaleTown_EventScript_Lost_Found_Item_TryFalseSwipe
 	goto_if_eq VAR_0x8004, 2, OldaleTown_EventScript_Lost_Found_Item_BagFull
 	goto_if_eq VAR_0x8004, 1, OldaleTown_EventScript_Lost_Found_Item_Done
-	goto_if_set FLAG_RECEIVED_HM02, OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
-	goto_if_set FLAG_RECEIVED_HM05, OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
-	msgbox OldaleTown_Text_Lost_Found_Item_NotYet, MSGBOX_DEFAULT
-	release
-	end
+	goto OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
+
+OldaleTown_EventScript_Lost_Found_Item_TryFalseSwipe::
+	checkitem ITEM_HM09_FALSE_SWIPE
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_EventScript_Lost_Found_Item_Return
+	checkitemspace ITEM_HM09_FALSE_SWIPE
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_Lost_Found_Item_SetBagFull
+	msgbox OldaleTown_Text_Lost_Found_Item_FoundFalseSwipe, MSGBOX_DEFAULT
+	giveitem ITEM_HM09_FALSE_SWIPE
+	setvar VAR_0x8004, 1
+	return
 
 OldaleTown_EventScript_Lost_Found_Item_TryFly::
 	goto_if_unset FLAG_RECEIVED_HM02, OldaleTown_EventScript_Lost_Found_Item_Return
@@ -598,6 +605,7 @@ OldaleTown_EventScript_Lost_Found_Item_Return::
 OldaleTown_EventScript_Lost_Found_Item_Done::
 	release
 	end
+
 OldaleTown_EventScript_Lost_Found_Item_AlreadyHave::
 	msgbox OldaleTown_Text_Lost_Found_Item_AlreadyHave, MSGBOX_DEFAULT
 	release
@@ -607,11 +615,6 @@ OldaleTown_EventScript_Lost_Found_Item_BagFull::
 	msgbox OldaleTown_Text_Lost_Found_Item_BagFull, MSGBOX_DEFAULT
 	release
 	end
-
-OldaleTown_Text_Lost_Found_Item_NotYet:
-	.string "I run the LOST & FOUND.\p"
-	.string "Come back when you have a HM\n"
-	.string "for FLY or FLASH.$"
 
 OldaleTown_Text_Lost_Found_Item_FoundFly:
 	.string "Ah, {PLAYER}! Someone left a FLY\n"
@@ -630,6 +633,10 @@ OldaleTown_Text_Lost_Found_Item_GivenFlash:
 	.string "With it, you can use FLASH outside\n"
 	.string "of battle, even if no POKéMON\l"
 	.string "knows the move.$"
+
+OldaleTown_Text_Lost_Found_Item_FoundFalseSwipe:
+	.string "Ah, {PLAYER}! I also kept this\n"
+	.string "HM09 for you: FALSE SWIPE.$"
 
 OldaleTown_Text_Lost_Found_Item_AlreadyHave:
 	.string "I have nothing else for you.\n"

@@ -229,7 +229,6 @@ static const struct ItemSlot sNewGamePCItems[] =
     { ITEM_TM06, 1 },
     { ITEM_TM17, 1 },
     { ITEM_TM05, 1 },
-    { ITEM_HM09_FALSE_SWIPE, 1 },
     { ITEM_NONE, 0 }
 };
 

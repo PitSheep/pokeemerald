@@ -4165,7 +4165,7 @@ const struct Item gItems[] =
     {
         .name = _("HM09"),
         .itemId = ITEM_HM09_FALSE_SWIPE,
-        .price = 1,
+        .price = 0,
         .description = sHM09Desc,
         .importance = 1,
         .pocket = POCKET_TM_HM,
