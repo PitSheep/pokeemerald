@@ -4564,4 +4564,15 @@ const struct Item gItems[] =
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ShinyIncense,
     },
+
+    [ITEM_MAX_RARE_CANDY] =
+    {
+        .name = _("MAX RARECANDY"),
+        .itemId = ITEM_MAX_RARE_CANDY,
+        .price = 10,
+        .description = sMaxRareCandyDesc,
+        .pocket = POCKET_ITEMS,
+        .type = ITEM_USE_PARTY_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_MaxRareCandy,
+    },
 };

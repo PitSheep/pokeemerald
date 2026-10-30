@@ -6774,6 +6774,412 @@ void IsLastMonThatKnowsSurf(void)
     }
 }
 
+//PIT RULES: MAX RARE CANDY
+// Self-contained copy of the Rare Candy flow: raises the mon up to the level cap in one go,
+// stopping only for new moves or evolutions. Does not share state with the Rare Candy flow.
+static EWRAM_DATA s16 sMaxCandyStats[2][NUM_STATS] = {0};
+static EWRAM_DATA u8 sMaxCandyWindowId = 0;
+
+static void MaxCandy_StartLevelUp(u8 taskId);
+static void Task_MaxCandy_StatsPg1(u8 taskId);
+static void Task_MaxCandy_StatsPg2(u8 taskId);
+static void Task_MaxCandy_TryLearnMoves(u8 taskId);
+static void Task_MaxCandy_TryNextMove(u8 taskId);
+static void Task_MaxCandy_TryNextMoveAfterText(u8 taskId);
+static void MaxCandy_HandleLearnResult(u8 taskId, u16 result);
+static void MaxCandy_TryEvolution(u8 taskId);
+static void CB2_MaxCandyAfterEvolution(void);
+static void Task_MaxCandy_AskContinue(u8 taskId);
+static void Task_MaxCandy_ContinueYesNo(u8 taskId);
+static void Task_MaxCandy_HandleContinueInput(u8 taskId);
+static void MaxCandy_DisplayLearnedMove(u8 taskId, u16 move);
+static void Task_MaxCandy_LearnedFanfareAfterText(u8 taskId);
+static void Task_MaxCandy_LearnNextMove(u8 taskId);
+static void MaxCandy_DisplayNeedsToReplaceMove(u8 taskId);
+static void Task_MaxCandy_ReplaceMoveYesNo(u8 taskId);
+static void Task_MaxCandy_HandleReplaceMoveYesNoInput(u8 taskId);
+static void Task_MaxCandy_ShowSummaryScreenToForgetMove(u8 taskId);
+static void CB2_MaxCandy_ShowSummaryScreenToForgetMove(void);
+static void CB2_MaxCandy_ReturnToPartyMenuWhileLearningMove(void);
+static void Task_MaxCandy_ReturnToPartyMenuWhileLearningMove(u8 taskId);
+static void Task_MaxCandy_PartyMenuReplaceMove(u8 taskId);
+static void MaxCandy_StopLearningMovePrompt(u8 taskId);
+static void Task_MaxCandy_StopLearningMoveYesNo(u8 taskId);
+static void Task_MaxCandy_HandleStopLearningMoveYesNoInput(u8 taskId);
+
+static bool8 MaxCandy_CanUse(struct Pokemon *mon)
+{
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
+
+    return !GetMonData(mon, MON_DATA_IS_EGG) && level < MAX_LEVEL && level < currentLvlCap();
+}
+
+static bool8 MaxCandy_HasMoveToLearn(struct Pokemon *mon, u8 level)
+{
+    const u16 *learnset = gLevelUpLearnsets[GetMonData(mon, MON_DATA_SPECIES)];
+    u32 i, j;
+    u16 move;
+
+    for (i = 0; learnset[i] != LEVEL_UP_END; i++)
+    {
+        if ((learnset[i] & LEVEL_UP_MOVE_LV) != (level << 9))
+            continue;
+        move = learnset[i] & LEVEL_UP_MOVE_ID;
+        for (j = 0; j < MAX_MON_MOVES; j++)
+        {
+            if (GetMonData(mon, MON_DATA_MOVE1 + j) == move)
+                break;
+        }
+        if (j == MAX_MON_MOVES)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static void MaxCandy_RaiseLevels(struct Pokemon *mon)
+{
+    u8 level = GetMonData(mon, MON_DATA_LEVEL);
+    u8 cap = currentLvlCap();
+    u32 exp;
+
+    while (level < MAX_LEVEL && level < cap)
+    {
+        level++;
+        exp = gExperienceTables[gSpeciesInfo[GetMonData(mon, MON_DATA_SPECIES)].growthRate][level];
+        SetMonData(mon, MON_DATA_EXP, &exp);
+        CalculateMonStats(mon);
+        if (MaxCandy_HasMoveToLearn(mon, level)
+         || GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE) != SPECIES_NONE)
+            break;
+    }
+}
+
+void ItemUseCB_MaxRareCandy(u8 taskId, TaskFunc task)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    if (!MaxCandy_CanUse(mon))
+    {
+        PlaySE(SE_SELECT);
+        gPartyMenuUseExitCallback = FALSE;
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = task;
+        return;
+    }
+
+    // The item is consumed once, on the first level gained
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    MaxCandy_StartLevelUp(taskId);
+}
+
+static void MaxCandy_StartLevelUp(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    PlaySE(SE_SELECT);
+    BufferMonStatsToTaskData(mon, sMaxCandyStats[0]);
+    MaxCandy_RaiseLevels(mon);
+    BufferMonStatsToTaskData(mon, sMaxCandyStats[1]);
+    gPartyMenuUseExitCallback = TRUE;
+    PlayFanfareByFanfareNum(FANFARE_LEVEL_UP);
+    UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, mon);
+    GetMonNickname(mon, gStringVar1);
+    ConvertIntToDecimalStringN(gStringVar2, GetMonData(mon, MON_DATA_LEVEL), STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnElevatedToLvVar2);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_MaxCandy_StatsPg1;
+}
+
+static void Task_MaxCandy_StatsPg1(u8 taskId)
+{
+    if (WaitFanfare(FALSE) && IsPartyMenuTextPrinterActive() != TRUE && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
+    {
+        PlaySE(SE_SELECT);
+        sMaxCandyWindowId = CreateLevelUpStatsWindow();
+        DrawLevelUpWindowPg1(sMaxCandyWindowId, (u16 *)sMaxCandyStats[0], (u16 *)sMaxCandyStats[1], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+        CopyWindowToVram(sMaxCandyWindowId, COPYWIN_GFX);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_MaxCandy_StatsPg2;
+    }
+}
+
+static void Task_MaxCandy_StatsPg2(u8 taskId)
+{
+    if ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON)))
+    {
+        PlaySE(SE_SELECT);
+        DrawLevelUpWindowPg2(sMaxCandyWindowId, (u16 *)sMaxCandyStats[1], TEXT_COLOR_WHITE, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY);
+        CopyWindowToVram(sMaxCandyWindowId, COPYWIN_GFX);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_MaxCandy_TryLearnMoves;
+    }
+}
+
+static void Task_MaxCandy_TryLearnMoves(u8 taskId)
+{
+    if (WaitFanfare(FALSE) && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
+    {
+        RemoveLevelUpStatsWindow();
+        MaxCandy_HandleLearnResult(taskId, MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], TRUE));
+    }
+}
+
+static void Task_MaxCandy_TryNextMove(u8 taskId)
+{
+    MaxCandy_HandleLearnResult(taskId, MonTryLearningNewMove(&gPlayerParty[gPartyMenu.slotId], FALSE));
+}
+
+static void Task_MaxCandy_TryNextMoveAfterText(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+        Task_MaxCandy_TryNextMove(taskId);
+}
+
+static void MaxCandy_HandleLearnResult(u8 taskId, u16 result)
+{
+    switch (result)
+    {
+    case 0: // No moves to learn
+        MaxCandy_TryEvolution(taskId);
+        break;
+    case MON_HAS_MAX_MOVES:
+        MaxCandy_DisplayNeedsToReplaceMove(taskId);
+        break;
+    case MON_ALREADY_KNOWS_MOVE:
+        gTasks[taskId].func = Task_MaxCandy_TryNextMove;
+        break;
+    default:
+        MaxCandy_DisplayLearnedMove(taskId, result);
+        break;
+    }
+}
+
+static void MaxCandy_TryEvolution(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 targetSpecies = GetEvolutionTargetSpecies(mon, EVO_MODE_NORMAL, ITEM_NONE);
+
+    if (targetSpecies != SPECIES_NONE)
+    {
+        FreePartyPointers();
+        gCB2_AfterEvolution = CB2_MaxCandyAfterEvolution;
+        BeginEvolutionScene(mon, targetSpecies, TRUE, gPartyMenu.slotId);
+        DestroyTask(taskId);
+    }
+    else
+    {
+        gTasks[taskId].func = Task_MaxCandy_AskContinue;
+    }
+}
+
+static void CB2_MaxCandyAfterEvolution(void)
+{
+    InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, PARTY_ACTION_USE_ITEM, TRUE, PARTY_MSG_NONE,
+                  Task_MaxCandy_AskContinue, gPartyMenu.exitCallback);
+}
+
+static void Task_MaxCandy_AskContinue(u8 taskId)
+{
+    if (!MaxCandy_CanUse(&gPlayerParty[gPartyMenu.slotId]))
+    {
+        gPartyMenuUseExitCallback = TRUE;
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+        return;
+    }
+
+    DisplayPartyMenuMessage(gText_ContinueLevelUp, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_MaxCandy_ContinueYesNo;
+}
+
+static void Task_MaxCandy_ContinueYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_MaxCandy_HandleContinueInput;
+    }
+}
+
+static void Task_MaxCandy_HandleContinueInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        MaxCandy_StartLevelUp(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        gPartyMenuUseExitCallback = TRUE;
+        Task_ClosePartyMenu(taskId);
+        break;
+    }
+}
+
+static void MaxCandy_DisplayLearnedMove(u8 taskId, u16 move)
+{
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+    StringCopy(gStringVar2, gMoveNames[move]);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnLearnedMove3);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gPartyMenu.data1 = move;
+    gTasks[taskId].func = Task_MaxCandy_LearnedFanfareAfterText;
+}
+
+static void Task_MaxCandy_LearnedFanfareAfterText(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PlayFanfare(MUS_LEVEL_UP);
+        gTasks[taskId].func = Task_MaxCandy_LearnNextMove;
+    }
+}
+
+static void Task_MaxCandy_LearnNextMove(u8 taskId)
+{
+    if (IsFanfareTaskInactive() && ((JOY_NEW(A_BUTTON)) || (JOY_NEW(B_BUTTON))))
+        Task_MaxCandy_TryNextMove(taskId);
+}
+
+static void MaxCandy_DisplayNeedsToReplaceMove(u8 taskId)
+{
+    GetMonNickname(&gPlayerParty[gPartyMenu.slotId], gStringVar1);
+    StringCopy(gStringVar2, gMoveNames[gMoveToLearn]);
+    StringExpandPlaceholders(gStringVar4, gText_PkmnNeedsToReplaceMove);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gPartyMenu.data1 = gMoveToLearn;
+    gTasks[taskId].func = Task_MaxCandy_ReplaceMoveYesNo;
+}
+
+static void Task_MaxCandy_ReplaceMoveYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_MaxCandy_HandleReplaceMoveYesNoInput;
+    }
+}
+
+static void Task_MaxCandy_HandleReplaceMoveYesNoInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        DisplayPartyMenuMessage(gText_WhichMoveToForget, TRUE);
+        gTasks[taskId].func = Task_MaxCandy_ShowSummaryScreenToForgetMove;
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        MaxCandy_StopLearningMovePrompt(taskId);
+        break;
+    }
+}
+
+static void Task_MaxCandy_ShowSummaryScreenToForgetMove(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        sPartyMenuInternal->exitCallback = CB2_MaxCandy_ShowSummaryScreenToForgetMove;
+        Task_ClosePartyMenu(taskId);
+    }
+}
+
+static void CB2_MaxCandy_ShowSummaryScreenToForgetMove(void)
+{
+    ShowSelectMovePokemonSummaryScreen(gPlayerParty, gPartyMenu.slotId, gPlayerPartyCount - 1, CB2_MaxCandy_ReturnToPartyMenuWhileLearningMove, gPartyMenu.data1);
+}
+
+static void CB2_MaxCandy_ReturnToPartyMenuWhileLearningMove(void)
+{
+    InitPartyMenu(PARTY_MENU_TYPE_FIELD, PARTY_LAYOUT_SINGLE, PARTY_ACTION_CHOOSE_MON, TRUE, PARTY_MSG_NONE, Task_MaxCandy_ReturnToPartyMenuWhileLearningMove, gPartyMenu.exitCallback);
+}
+
+static void Task_MaxCandy_ReturnToPartyMenuWhileLearningMove(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+    u16 move;
+
+    if (gPaletteFade.active)
+        return;
+
+    if (GetMoveSlotToReplace() != MAX_MON_MOVES)
+    {
+        move = GetMonData(mon, MON_DATA_MOVE1 + GetMoveSlotToReplace());
+        GetMonNickname(mon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[move]);
+        DisplayLearnMoveMessage(gText_12PoofForgotMove);
+        gTasks[taskId].func = Task_MaxCandy_PartyMenuReplaceMove;
+    }
+    else
+    {
+        MaxCandy_StopLearningMovePrompt(taskId);
+    }
+}
+
+static void Task_MaxCandy_PartyMenuReplaceMove(u8 taskId)
+{
+    struct Pokemon *mon;
+
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        mon = &gPlayerParty[gPartyMenu.slotId];
+        RemoveMonPPBonus(mon, GetMoveSlotToReplace());
+        SetMonMoveSlot(mon, gPartyMenu.data1, GetMoveSlotToReplace());
+        MaxCandy_DisplayLearnedMove(taskId, gPartyMenu.data1);
+    }
+}
+
+static void MaxCandy_StopLearningMovePrompt(u8 taskId)
+{
+    StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+    StringExpandPlaceholders(gStringVar4, gText_StopLearningMove2);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    ScheduleBgCopyTilemapToVram(2);
+    gTasks[taskId].func = Task_MaxCandy_StopLearningMoveYesNo;
+}
+
+static void Task_MaxCandy_StopLearningMoveYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_MaxCandy_HandleStopLearningMoveYesNoInput;
+    }
+}
+
+static void Task_MaxCandy_HandleStopLearningMoveYesNoInput(u8 taskId)
+{
+    struct Pokemon *mon = &gPlayerParty[gPartyMenu.slotId];
+
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        GetMonNickname(mon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+        StringExpandPlaceholders(gStringVar4, gText_MoveNotLearned);
+        DisplayPartyMenuMessage(gStringVar4, TRUE);
+        gTasks[taskId].func = Task_MaxCandy_TryNextMoveAfterText;
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        GetMonNickname(mon, gStringVar1);
+        StringCopy(gStringVar2, gMoveNames[gPartyMenu.data1]);
+        DisplayLearnMoveMessage(gText_PkmnNeedsToReplaceMove);
+        gTasks[taskId].func = Task_MaxCandy_ReplaceMoveYesNo;
+        break;
+    }
+}
+
 //PIT RULES: lvl cap by badge
 u8 currentLvlCap(void)
 {

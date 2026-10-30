@@ -15,6 +15,7 @@ PetalburgCity_Mart_EventScript_Clerk::
 	.align 2
 PetalburgCity_Mart_Pokemart_Basic:
 	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_MAX_RARE_CANDY
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
@@ -39,6 +40,7 @@ PetalburgCity_Mart_EventScript_ExpandedItems::
 	.align 2
 PetalburgCity_Mart_Pokemart_Expanded:
 	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_MAX_RARE_CANDY
 	.2byte ITEM_POKE_BALL
 	.2byte ITEM_GREAT_BALL
 	.2byte ITEM_POTION

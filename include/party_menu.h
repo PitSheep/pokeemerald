@@ -59,6 +59,7 @@ bool8 MonKnowsMove(struct Pokemon *mon, u16 move);
 bool8 PlayerHasMove(u16 move);
 void ItemUseCB_TMHM(u8 taskId, TaskFunc task);
 void ItemUseCB_RareCandy(u8 taskId, TaskFunc task);
+void ItemUseCB_MaxRareCandy(u8 taskId, TaskFunc task);
 void ItemUseCB_SacredAsh(u8 taskId, TaskFunc task);
 void ItemUseCB_EvolutionStone(u8 taskId, TaskFunc task);
 u8 GetItemEffectType(u16 item);

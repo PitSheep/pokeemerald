@@ -39,6 +39,7 @@ EverGrandeCity_PokemonLeague_1F_EventScript_Clerk::
 	.align 2
 EverGrandeCity_PokemonLeague_1F_Pokemart:
 	.2byte ITEM_RARE_CANDY
+	.2byte ITEM_MAX_RARE_CANDY
 	.2byte ITEM_ULTRA_BALL
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_MAX_POTION
