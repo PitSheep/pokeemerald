@@ -98,6 +98,7 @@ enum {
     ACTION_BY_AMOUNT,
     ACTION_SELECT_BUTTON,
     ACTION_L_BUTTON,
+    ACTION_SWITCH,
     ACTION_DUMMY,
 };
 
@@ -203,6 +204,7 @@ static void BagMenu_ItemPrintCallback(u8, u32, u8);
 static void ItemMenu_UseOutOfBattle(u8);
 static void ItemMenu_Toss(u8);
 static void ItemMenu_Register(u8);
+static void ItemMenu_SwitchBike(u8);
 static void ItemMenu_Give(u8);
 static void ItemMenu_Cancel(u8);
 static void ItemMenu_UseInBattle(u8);
@@ -327,6 +329,7 @@ static const struct MenuAction sItemMenuActions[] = {
     [ACTION_BY_AMOUNT]         = {sMenuText_ByAmount, ItemMenu_SortByAmount},
     [ACTION_SELECT_BUTTON]     = {sMenuText_Select,   ItemMenu_RegisterSelect},
     [ACTION_L_BUTTON]          = {sMenuText_L,        ItemMenu_RegisterList},
+    [ACTION_SWITCH]            = {gMenuText_Switch,   ItemMenu_SwitchBike},
     [ACTION_DUMMY]             = {gText_EmptyString2, NULL}
 };
 
@@ -1845,6 +1848,8 @@ static void OpenContextMenu(u8 taskId)
                     {
                         if (TestPlayerAvatarFlags(PLAYER_AVATAR_FLAG_MACH_BIKE | PLAYER_AVATAR_FLAG_ACRO_BIKE))
                             gBagMenu->contextMenuItemsBuffer[0] = ACTION_WALK;
+                        else if (!FlagGet(FLAG_SYS_CYCLING_ROAD))
+                            gBagMenu->contextMenuItemsBuffer[2] = ACTION_SWITCH;
                     }
                 }
                 else
@@ -3702,6 +3707,22 @@ void ItemMenu_Register(u8 taskId)
 //    ScheduleBgCopyTilemapToVram(0);
 //    ItemMenu_Cancel(taskId);
 //}
+
+static const u8 sText_SwitchedBike[] = _("Switched to the {STR_VAR_1}!");
+
+static void ItemMenu_SwitchBike(u8 taskId)
+{
+    u16 newBike = (gSpecialVar_ItemId == ITEM_MACH_BIKE) ? ITEM_ACRO_BIKE : ITEM_MACH_BIKE;
+
+    RemoveContextWindow();
+    RemoveBagItem(gSpecialVar_ItemId, 1);
+    AddBagItem(newBike, 1);
+    SwapRegisteredBike();
+    gSpecialVar_ItemId = newBike;
+    CopyItemName(newBike, gStringVar1);
+    StringExpandPlaceholders(gStringVar4, sText_SwitchedBike);
+    DisplayItemMessage(taskId, FONT_NORMAL, gStringVar4, HandleErrorMessage);
+}
 
 static void ItemMenu_RegisterSelect(u8 taskId)
 {
