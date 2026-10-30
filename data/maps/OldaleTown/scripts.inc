@@ -549,3 +549,55 @@ OldaleTown_EventScript_TownSign_HunterCare::
 
 OldaleTown_Text_TownSign_HunterCare:
 	.string "HUNTER CARE$"
+
+OldaleTown_EventScript_Lost_Found_Item::
+	lock
+	faceplayer
+	goto_if_unset FLAG_RECEIVED_HM02, OldaleTown_EventScript_Lost_Found_Item_NotYet
+	checkitem ITEM_FLY
+	goto_if_eq VAR_RESULT, TRUE, OldaleTown_EventScript_Lost_Found_Item_AlreadyHave
+	checkitemspace ITEM_FLY
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_EventScript_Lost_Found_Item_BagFull
+	msgbox OldaleTown_Text_Lost_Found_Item_Found, MSGBOX_DEFAULT
+	giveitem ITEM_FLY
+	msgbox OldaleTown_Text_Lost_Found_Item_Given, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_EventScript_Lost_Found_Item_NotYet::
+	msgbox OldaleTown_Text_Lost_Found_Item_NotYet, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_EventScript_Lost_Found_Item_AlreadyHave::
+	msgbox OldaleTown_Text_Lost_Found_Item_AlreadyHave, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_EventScript_Lost_Found_Item_BagFull::
+	msgbox OldaleTown_Text_Lost_Found_Item_BagFull, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Text_Lost_Found_Item_NotYet:
+	.string "I run the LOST & FOUND.\p"
+	.string "Come back when you have a HM\n"
+	.string "for FLY.$"
+
+OldaleTown_Text_Lost_Found_Item_Found:
+	.string "Ah, {PLAYER}! Someone left a FLY\n"
+	.string "item here, and it's meant for you.$"
+
+OldaleTown_Text_Lost_Found_Item_Given:
+	.string "With it, you can use FLY outside\n"
+	.string "of battle, even if no POKéMON\l"
+	.string "knows the move.$"
+
+OldaleTown_Text_Lost_Found_Item_AlreadyHave:
+	.string "I have nothing else for you.\n"
+	.string "Take care of that FLY item!$"
+
+OldaleTown_Text_Lost_Found_Item_BagFull:
+	.string "Your KEY ITEMS POCKET is full.\p"
+	.string "Store something on your PC,\n"
+	.string "then come back.$"

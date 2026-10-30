@@ -27,6 +27,9 @@
 #include "constants/map_types.h"
 #include "constants/rgb.h"
 #include "constants/weather.h"
+#include "field_screen_effect.h"
+
+static bool8 sFlyMapFromItem;
 
 /*
  *  This file handles region maps generally, and the map used when selecting a fly destination.
@@ -1646,6 +1649,12 @@ bool32 IsEventIslandMapSecId(u8 mapSecId)
     return FALSE;
 }
 
+void CB2_OpenFlyMapFromItem(void)
+{
+    sFlyMapFromItem = TRUE;
+    SetMainCallback2(CB2_OpenFlyMap);
+}
+
 void CB2_OpenFlyMap(void)
 {
     switch (gMain.state)
@@ -1664,6 +1673,7 @@ void CB2_OpenFlyMap(void)
         sFlyMap = Alloc(sizeof(*sFlyMap));
         if (sFlyMap == NULL)
         {
+            sFlyMapFromItem = FALSE;
             SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         }
         else
@@ -2017,10 +2027,16 @@ static void CB_ExitFlyMap(void)
                 }
                 ReturnToFieldFromFlyMapSelect();
             }
+            else if (sFlyMapFromItem)
+            {
+                gFieldCallback = FieldCB_ReturnToFieldNoScript;
+                SetMainCallback2(CB2_ReturnToField);
+            }
             else
             {
                 SetMainCallback2(CB2_ReturnToPartyMenuFromFlyMap);
             }
+            sFlyMapFromItem = FALSE;
             TRY_FREE_AND_SET_NULL(sFlyMap);
             FreeAllWindowBuffers();
         }

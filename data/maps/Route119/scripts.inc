@@ -134,6 +134,8 @@ Route119_EventScript_DefeatedBrendan::
 Route119_EventScript_GiveFlyHM::
 	giveitem ITEM_HM02
 	setflag FLAG_RECEIVED_HM02
+	msgbox Route119_Text_AlsoGivingFlyItem, MSGBOX_DEFAULT
+	giveitem ITEM_FLY
 	return
 
 Route119_EventScript_RivalExitScottArrive::
@@ -510,6 +512,12 @@ Route119_Text_MayExplainFly:
 	.string "I bet your mom's worried about you,\n"
 	.string "{PLAYER}{KUN}.\p"
 	.string "Well, let's meet again somewhere!$"
+
+Route119_Text_AlsoGivingFlyItem:
+	.string "I'm also giving you the FLY item.\p"
+	.string "With it, you can use FLY anytime\n"
+	.string "outside of battle, without needing\l"
+	.string "a POKéMON that knows the move.$"
 
 Route119_Text_BrendanIntro:
 	.string "BRENDAN: {PLAYER}! So this is where\n"

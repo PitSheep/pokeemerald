@@ -4575,4 +4575,17 @@ const struct Item gItems[] =
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_MaxRareCandy,
     },
+
+    [ITEM_FLY] =
+    {
+        .name = _("FLY"),
+        .itemId = ITEM_FLY,
+        .price = 0,
+        .description = sFlyItemDesc,
+        .importance = 1,
+        .registrability = TRUE,
+        .pocket = POCKET_KEY_ITEMS,
+        .type = ITEM_USE_BAG_MENU,
+        .fieldUseFunc = ItemUseOutOfBattle_Fly,
+    },
 };

@@ -28,6 +28,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "region_map.h"
 #include "pokeblock.h"
 #include "pokemon.h"
 #include "script.h"
@@ -1245,6 +1246,51 @@ void ItemUseOutOfBattle_HunterTaxi(u8 taskId)
 }
 
 extern u8 ShinyIncenseScript[];
+
+static void Task_OpenRegisteredFlyMap(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        CleanupOverworldWindowsAndTilemaps();
+        SetMainCallback2(CB2_OpenFlyMapFromItem);
+        DestroyTask(taskId);
+    }
+}
+
+void ItemUseOutOfBattle_Fly(u8 taskId)
+{
+    u8 i;
+
+    if (FlagGet(FLAG_BADGE03_GET) != TRUE
+     || Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) != TRUE)
+    {
+        DisplayDadsAdviceCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem);
+        return;
+    }
+
+    gPartyMenu.slotId = 0;
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        u16 species = GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG);
+        if (species != SPECIES_NONE && species != SPECIES_EGG)
+        {
+            gPartyMenu.slotId = i;
+            break;
+        }
+    }
+
+    if (gTasks[taskId].tUsingRegisteredKeyItem != TRUE)
+    {
+        gBagMenu->newScreenCallback = CB2_OpenFlyMapFromItem;
+        Task_FadeAndCloseBagMenu(taskId);
+    }
+    else
+    {
+        gFieldCallback = FieldCB_ReturnToFieldNoScript;
+        FadeScreen(FADE_TO_BLACK, 0);
+        gTasks[taskId].func = Task_OpenRegisteredFlyMap;
+    }
+}
 
 void ItemUseOutOfBattle_ShinyIncense(u8 taskId)
 {

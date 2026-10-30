@@ -39,5 +39,6 @@ u8 CheckIfItemIsTMHMOrEvolutionStone(u16 itemId);
 void ItemUseOutOfBattle_CraftBundle(u8);
 void ItemUseOutOfBattle_HunterTaxi(u8);
 void ItemUseOutOfBattle_ShinyIncense(u8);
+void ItemUseOutOfBattle_Fly(u8);
 
 #endif // GUARD_ITEM_USE_H

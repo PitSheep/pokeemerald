@@ -404,6 +404,7 @@ const u32 *const gItemIconTable[ITEMS_COUNT + 1][2] =
     [ITEM_HUNTER_TAXI] = {gItemIcon_HunterTaxi, gItemIconPalette_HunterTaxi},
     [ITEM_SHINY_INCENSE] = {gItemIcon_ShinyIncense, gItemIconPalette_ShinyIncense},
     [ITEM_MAX_RARE_CANDY] = {gItemIcon_RareCandy, gItemIconPalette_RareCandy},
+    [ITEM_FLY] = {gItemIcon_HM, gItemIconPalette_FlyingTMHM},
     // Return to field arrow
     [ITEMS_COUNT] = {gItemIcon_ReturnToFieldArrow, gItemIconPalette_ReturnToFieldArrow},
 };
