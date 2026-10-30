@@ -594,10 +594,10 @@
     {
       "id": "LAYOUT_HOUSE2",
       "name": "House2_Layout",
-      "width": 17,
-      "height": 16,
+      "width": 11,
+      "height": 8,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_CableClub",
+      "secondary_tileset": "gTileset_GenericBuilding",
       "border_filepath": "data/layouts/House2/border.bin",
       "blockdata_filepath": "data/layouts/House2/map.bin"
     },
@@ -4430,6 +4430,16 @@
       "secondary_tileset": "gTileset_champion_gym",
       "border_filepath": "data/layouts/OldaleTown_Hunter_House/border.bin",
       "blockdata_filepath": "data/layouts/OldaleTown_Hunter_House/map.bin"
+    },
+    {
+      "id": "LAYOUT_OLDALE_TOWN_HOUSE2",
+      "name": "OldaleTown_House2_Layout",
+      "width": 17,
+      "height": 16,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_CableClub",
+      "border_filepath": "data/layouts/OldaleTown_House2/border.bin",
+      "blockdata_filepath": "data/layouts/OldaleTown_House2/map.bin"
     }
   ]
 }
