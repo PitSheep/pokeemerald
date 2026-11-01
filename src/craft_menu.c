@@ -33,6 +33,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "window.h"
+#include "constants/battle_palace.h"
 #include "constants/items.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -911,6 +912,252 @@ void ShowCraftRecipeBook(void)
     }
 
     InitCraftRecipeBookList(taskId);
+}
+
+// Nature tips: a list of natures and the automatic battle behavior of each one
+extern const u8 *const gNatureNamePointers[NUM_NATURES];
+extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];
+extern const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES];
+extern const s8 gNatureStatTable[][5];
+
+// IWRAM is almost full in this project, so these live in EWRAM
+EWRAM_DATA static struct ListMenuItem sNatureTipsItems[NUM_NATURES] = {0};
+EWRAM_DATA static u16 sNatureTipsScrollOffset = 0;
+EWRAM_DATA static u16 sNatureTipsCursorPos = 0;
+EWRAM_DATA static u8 sNatureTipsWindowId = 0;
+
+static const struct ListMenuTemplate sNatureTipsListMenuTemplate = {
+    .items = sNatureTipsItems,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = NUM_NATURES,
+    .maxShowed = 8,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
+    .cursorKind = CURSOR_BLACK_ARROW
+};
+
+static const u8 sText_NatureStatNames[5][9] = {
+    _("Attack"),
+    _("Defense"),
+    _("Speed"),
+    _("Sp. Atk"),
+    _("Sp. Def")
+};
+static const u8 sText_NatureTipsStats[] = _("+{STR_VAR_1}  -{STR_VAR_2}");
+static const u8 sText_NatureTipsNoStats[] = _("No stat changes");
+static const u8 sText_NatureTipsTargetStronger[] = _("Target: Highest HP");
+static const u8 sText_NatureTipsTargetWeaker[] = _("Target: Lowest HP");
+static const u8 sText_NatureTipsTargetRandom[] = _("Target: Random");
+static const u8 sText_NatureTipsHighHp[] = _("HP>50%");
+static const u8 sText_NatureTipsLowHp[] = _("HP<=50%");
+static const u8 sText_NatureTipsAttack[] = _("Attack");
+static const u8 sText_NatureTipsDefense[] = _("Defense");
+static const u8 sText_NatureTipsSupport[] = _("Support");
+static const u8 sText_NatureTipsUnavailable[] = _("The nature tips can't be opened.");
+
+static void InitNatureTipsList(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    struct ListMenuTemplate listMenuTemplate = sNatureTipsListMenuTemplate;
+
+    FillWindowPixelBuffer(sNatureTipsWindowId, PIXEL_FILL(0));
+    SetStandardWindowBorderStyle(sNatureTipsWindowId, FALSE);
+    CopyWindowToVram(sNatureTipsWindowId, COPYWIN_FULL);
+    listMenuTemplate.windowId = sNatureTipsWindowId;
+    task->data[1] = ListMenuInit(&listMenuTemplate, sNatureTipsScrollOffset, sNatureTipsCursorPos);
+    ScheduleBgCopyTilemapToVram(0);
+}
+
+static void PrintNatureTipsPercent(u8 value, u8 x, u8 y)
+{
+    u8 *end = ConvertIntToDecimalStringN(gStringVar4, value, STR_CONV_MODE_RIGHT_ALIGN, 3);
+
+    end[0] = CHAR_PERCENT;
+    end[1] = EOS;
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, gStringVar4, x, y, TEXT_SKIP_DRAW, NULL);
+}
+
+static void PrintNatureTipsRow(const u8 *label, u8 y, u8 high, u8 low)
+{
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, label, 8, y, TEXT_SKIP_DRAW, NULL);
+    PrintNatureTipsPercent(high, 104, y);
+    PrintNatureTipsPercent(low, 168, y);
+}
+
+static void PrintNatureTipsPage(u8 nature)
+{
+    const u8 *likelihood = gBattlePalaceNatureToMoveGroupLikelihood[nature];
+    const s8 *stats = gNatureStatTable[nature];
+    const u8 *target;
+    u8 y = 8;
+    u8 i;
+    s8 plus = -1;
+    s8 minus = -1;
+
+    FillWindowPixelBuffer(sNatureTipsWindowId, PIXEL_FILL(0));
+    SetStandardWindowBorderStyle(sNatureTipsWindowId, FALSE);
+
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, gNatureNamePointers[nature], 8, y, TEXT_SKIP_DRAW, NULL);
+    y += 16;
+
+    for (i = 0; i < 5; i++)
+    {
+        if (stats[i] > 0)
+            plus = i;
+        else if (stats[i] < 0)
+            minus = i;
+    }
+    if (plus >= 0 && minus >= 0)
+    {
+        StringCopy(gStringVar1, sText_NatureStatNames[plus]);
+        StringCopy(gStringVar2, sText_NatureStatNames[minus]);
+        StringExpandPlaceholders(gStringVar4, sText_NatureTipsStats);
+        AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, gStringVar4, 8, y, TEXT_SKIP_DRAW, NULL);
+    }
+    else
+    {
+        AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, sText_NatureTipsNoStats, 8, y, TEXT_SKIP_DRAW, NULL);
+    }
+    y += 16;
+
+    switch (gBattlePalaceNatureToMoveTarget[nature])
+    {
+    case PALACE_TARGET_STRONGER:
+        target = sText_NatureTipsTargetStronger;
+        break;
+    case PALACE_TARGET_WEAKER:
+        target = sText_NatureTipsTargetWeaker;
+        break;
+    default:
+        target = sText_NatureTipsTargetRandom;
+        break;
+    }
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, target, 8, y, TEXT_SKIP_DRAW, NULL);
+    y += 16;
+
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, sText_NatureTipsHighHp, 104, y, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, sText_NatureTipsLowHp, 168, y, TEXT_SKIP_DRAW, NULL);
+    y += 16;
+
+    // The table stores cumulative values: attack, attack + defense (high HP), then the same for low HP
+    PrintNatureTipsRow(sText_NatureTipsAttack, y, likelihood[0], likelihood[2]);
+    y += 16;
+    PrintNatureTipsRow(sText_NatureTipsDefense, y, likelihood[1] - likelihood[0], likelihood[3] - likelihood[2]);
+    y += 16;
+    PrintNatureTipsRow(sText_NatureTipsSupport, y, 100 - likelihood[1], 100 - likelihood[3]);
+    y += 16;
+
+    AddTextPrinterParameterized(sNatureTipsWindowId, FONT_NORMAL, sText_CraftRecipeBack, 8, y, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sNatureTipsWindowId, COPYWIN_FULL);
+}
+
+static void CloseNatureTips(u8 taskId)
+{
+    if (gTasks[taskId].data[1] != TASK_NONE)
+        DestroyListMenuTask(gTasks[taskId].data[1], NULL, NULL);
+
+    ClearStdWindowAndFrame(sNatureTipsWindowId, TRUE);
+    RemoveWindow(sNatureTipsWindowId);
+    sNatureTipsWindowId = WINDOW_NONE;
+    DestroyTask(taskId);
+    ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
+    ScriptContext_Enable();
+}
+
+static void Task_NatureTips(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (task->data[0] == 0)
+    {
+        s32 input = ListMenu_ProcessInput(task->data[1]);
+
+        ListMenuGetScrollAndRow(task->data[1], &sNatureTipsScrollOffset, &sNatureTipsCursorPos);
+        if (input == LIST_CANCEL)
+        {
+            PlaySE(SE_SELECT);
+            CloseNatureTips(taskId);
+        }
+        else if ((u32)input < NUM_NATURES)
+        {
+            PlaySE(SE_SELECT);
+            DestroyListMenuTask(task->data[1], NULL, NULL);
+            task->data[1] = TASK_NONE;
+            PrintNatureTipsPage((u8)input);
+            task->data[0] = 1;
+        }
+    }
+    else if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        task->data[0] = 0;
+        InitNatureTipsList(taskId);
+    }
+}
+
+static void ResumeNatureTipsAfterFailure(void)
+{
+    ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
+    ShowFieldMessage(sText_NatureTipsUnavailable);
+    ScriptContext_Enable();
+}
+
+void ShowNatureTips(void)
+{
+    u16 i, j;
+    struct ListMenuItem item;
+    u8 taskId;
+
+    PlayerFreeze();
+    StopPlayerAvatar();
+    ScriptContext_Stop();
+    LockPlayerFieldControls();
+
+    for (i = 0; i < NUM_NATURES; i++)
+    {
+        sNatureTipsItems[i].name = gNatureNamePointers[i];
+        sNatureTipsItems[i].id = i;
+
+        item = sNatureTipsItems[i];
+        for (j = i; j > 0 && StringCompare(item.name, sNatureTipsItems[j - 1].name) < 0; j--)
+            sNatureTipsItems[j] = sNatureTipsItems[j - 1];
+        sNatureTipsItems[j] = item;
+    }
+
+    sNatureTipsScrollOffset = 0;
+    sNatureTipsCursorPos = 0;
+    sNatureTipsWindowId = AddWindow(&sCraftRecipeBookWindowTemplate);
+    if (sNatureTipsWindowId == WINDOW_NONE)
+    {
+        ResumeNatureTipsAfterFailure();
+        return;
+    }
+
+    PutWindowTilemap(sNatureTipsWindowId);
+    taskId = CreateTask(Task_NatureTips, 0x50);
+    if (taskId == TASK_NONE)
+    {
+        ClearStdWindowAndFrame(sNatureTipsWindowId, TRUE);
+        RemoveWindow(sNatureTipsWindowId);
+        sNatureTipsWindowId = WINDOW_NONE;
+        ResumeNatureTipsAfterFailure();
+        return;
+    }
+
+    InitNatureTipsList(taskId);
 }
 
 #define sCraftDelay data[2]

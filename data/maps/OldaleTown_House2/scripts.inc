@@ -331,3 +331,12 @@ OldaleTown_House2_Text_Incubatore_Paid:
 OldaleTown_House2_Text_Incubatore_NoBP:
 	.string "You don't have enough Battle Points.\n"
 	.string "You need 8 BP.$"
+
+
+OldaleTown_House2_EventScript_Nature_Tips::
+	lock
+	faceplayer
+	special ShowNatureTips
+	waitstate
+	release
+	end
