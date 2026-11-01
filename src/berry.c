@@ -1003,15 +1003,12 @@ bool32 ObjectEventInteractionWaterBerryTree(void)
     switch (tree->stage)
     {
     case BERRY_STAGE_PLANTED:
-        tree->watered1 = TRUE;
-        break;
     case BERRY_STAGE_SPROUTED:
-        tree->watered2 = TRUE;
-        break;
     case BERRY_STAGE_TALLER:
-        tree->watered3 = TRUE;
-        break;
     case BERRY_STAGE_FLOWERING:
+        tree->watered1 = TRUE;
+        tree->watered2 = TRUE;
+        tree->watered3 = TRUE;
         tree->watered4 = TRUE;
         break;
     default:
