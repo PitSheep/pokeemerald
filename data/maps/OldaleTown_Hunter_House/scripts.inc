@@ -1077,3 +1077,11 @@ OldaleTown_Hunter_House_EventScript_AbilityChange_success::
 OldaleTown_Hunter_House_EventScript_AbilityChange_success_text:
 	.string "thanks for the deal!\n"
 	.string "come back any time.$"
+
+OldaleTown_Hunter_House_EventScript_Craft_List::
+    lock
+    faceplayer
+    special ShowCraftRecipeBook
+    waitstate
+    release
+    end

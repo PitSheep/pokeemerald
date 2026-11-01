@@ -6,6 +6,7 @@
 #include "event_object_movement.h"
 #include "event_object_lock.h"
 #include "event_scripts.h"
+#include "field_message_box.h"
 #include "fieldmap.h"
 #include "field_effect.h"
 #include "field_player_avatar.h"
@@ -15,6 +16,7 @@
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item_menu.h"
+#include "list_menu.h"
 #include "main.h"
 #include "menu.h"
 #include "overworld.h"
@@ -113,6 +115,48 @@ static const u16 Craft_Recipes[][6] = {
 {ITEM_WATER_STONE, ITEM_LEAF_STONE, ITEM_CHERI_BERRY, ITEM_GREPA_BERRY, ITEM_EVERSTONE, 1}
 };
 
+static struct ListMenuItem sCraftRecipeBookItems[ARRAY_COUNT(Craft_Recipes)];
+static u16 sCraftRecipeBookScrollOffset;
+static u16 sCraftRecipeBookCursorPos;
+static u8 sCraftRecipeBookWindowId;
+
+static const struct WindowTemplate sCraftRecipeBookWindowTemplate = {
+    .bg = 0,
+    .tilemapLeft = 1,
+    .tilemapTop = 1,
+    .width = 28,
+    .height = 18,
+    .paletteNum = 15,
+    .baseBlock = 0x64
+};
+
+static const struct ListMenuTemplate sCraftRecipeBookListMenuTemplate = {
+    .items = sCraftRecipeBookItems,
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .itemPrintFunc = NULL,
+    .totalItems = ARRAY_COUNT(Craft_Recipes),
+    .maxShowed = 8,
+    .windowId = 0,
+    .header_X = 0,
+    .item_X = 8,
+    .cursor_X = 0,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .lettersSpacing = 0,
+    .itemVerticalPadding = 0,
+    .scrollMultiple = LIST_NO_MULTIPLE_SCROLL,
+    .fontId = FONT_NORMAL,
+    .cursorKind = CURSOR_BLACK_ARROW
+};
+
+static const u8 sText_CraftRecipeProduct[] = _("Product: {STR_VAR_1}");
+static const u8 sText_CraftRecipeIngredients[] = _("Ingredients:");
+static const u8 sText_CraftRecipeQuantity[] = _("Quantity: {STR_VAR_1}");
+static const u8 sText_CraftRecipeBack[] = _("B: Back");
+static const u8 sText_CraftRecipeBookUnavailable[] = _("The recipe book can't be opened.");
+
 // Here's some flags in case you want to lock away an item due to plot progression,
 // If you want less than three just use this handy dandy NO_FLAG
 #define NO_FLAG 0x86F // This is the Littleroot Flag, it should always be true unless you're doing something cool
@@ -196,6 +240,11 @@ static bool8 CraftMenuDoOptionsReadyCallback(void);
 static void CraftMenuRemoveBagCallback(void);
 static u8 CraftMenuReadyCallback(void);
 static bool8 CraftMenuCancelCallback(void);
+static void Task_CraftRecipeBook(u8 taskId);
+static void InitCraftRecipeBookList(u8 taskId);
+static void PrintCraftRecipeBookRecipe(u16 recipeIndex);
+static void CloseCraftRecipeBook(u8 taskId);
+static void ResumeCraftRecipeBookAfterFailure(void);
 
 // Functions
 static void OrganizeCraftItems(u16 *SwapCraftOrder);
@@ -713,6 +762,155 @@ void ShowCraftMenu(void){
 
     Task_CreateCraftMenu(Task_ShowCraftMenu);
     LockPlayerFieldControls();
+}
+
+static void InitCraftRecipeBookList(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+    struct ListMenuTemplate listMenuTemplate = sCraftRecipeBookListMenuTemplate;
+
+    FillWindowPixelBuffer(sCraftRecipeBookWindowId, PIXEL_FILL(0));
+    SetStandardWindowBorderStyle(sCraftRecipeBookWindowId, FALSE);
+    CopyWindowToVram(sCraftRecipeBookWindowId, COPYWIN_FULL);
+    listMenuTemplate.windowId = sCraftRecipeBookWindowId;
+    task->data[1] = ListMenuInit(&listMenuTemplate,
+                                 sCraftRecipeBookScrollOffset,
+                                 sCraftRecipeBookCursorPos);
+    ScheduleBgCopyTilemapToVram(0);
+}
+
+static void PrintCraftRecipeBookRecipe(u16 recipeIndex)
+{
+    u8 y = 8;
+    u8 i;
+
+    FillWindowPixelBuffer(sCraftRecipeBookWindowId, PIXEL_FILL(0));
+    SetStandardWindowBorderStyle(sCraftRecipeBookWindowId, FALSE);
+
+    StringCopy(gStringVar1, ItemId_GetName(Craft_Recipes[recipeIndex][4]));
+    StringExpandPlaceholders(gStringVar4, sText_CraftRecipeProduct);
+    AddTextPrinterParameterized(sCraftRecipeBookWindowId, FONT_NORMAL, gStringVar4, 8, y, TEXT_SKIP_DRAW, NULL);
+    y += 16;
+
+    AddTextPrinterParameterized(sCraftRecipeBookWindowId, FONT_NORMAL, sText_CraftRecipeIngredients, 8, y, TEXT_SKIP_DRAW, NULL);
+    y += 16;
+
+    for (i = 0; i < 4; i++)
+    {
+        u16 itemId = Craft_Recipes[recipeIndex][i];
+
+        if (itemId != ITEM_NONE)
+        {
+            AddTextPrinterParameterized(sCraftRecipeBookWindowId, FONT_NORMAL, ItemId_GetName(itemId), 16, y, TEXT_SKIP_DRAW, NULL);
+            y += 16;
+        }
+    }
+
+    ConvertIntToDecimalStringN(gStringVar1, Craft_Recipes[recipeIndex][5], STR_CONV_MODE_LEFT_ALIGN, 3);
+    StringExpandPlaceholders(gStringVar4, sText_CraftRecipeQuantity);
+    AddTextPrinterParameterized(sCraftRecipeBookWindowId, FONT_NORMAL, gStringVar4, 8, y, TEXT_SKIP_DRAW, NULL);
+    y += 16;
+
+    AddTextPrinterParameterized(sCraftRecipeBookWindowId, FONT_NORMAL, sText_CraftRecipeBack, 8, y, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sCraftRecipeBookWindowId, COPYWIN_FULL);
+}
+
+static void ResumeCraftRecipeBookAfterFailure(void)
+{
+    ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
+    ShowFieldMessage(sText_CraftRecipeBookUnavailable);
+    ScriptContext_Enable();
+}
+
+static void CloseCraftRecipeBook(u8 taskId)
+{
+    if (gTasks[taskId].data[1] != TASK_NONE)
+        DestroyListMenuTask(gTasks[taskId].data[1], NULL, NULL);
+
+    ClearStdWindowAndFrame(sCraftRecipeBookWindowId, TRUE);
+    RemoveWindow(sCraftRecipeBookWindowId);
+    sCraftRecipeBookWindowId = WINDOW_NONE;
+    DestroyTask(taskId);
+    ScriptUnfreezeObjectEvents();
+    UnlockPlayerFieldControls();
+    ScriptContext_Enable();
+}
+
+static void Task_CraftRecipeBook(u8 taskId)
+{
+    struct Task *task = &gTasks[taskId];
+
+    if (task->data[0] == 0)
+    {
+        s32 input = ListMenu_ProcessInput(task->data[1]);
+
+        ListMenuGetScrollAndRow(task->data[1], &sCraftRecipeBookScrollOffset, &sCraftRecipeBookCursorPos);
+        if (input == LIST_CANCEL)
+        {
+            PlaySE(SE_SELECT);
+            CloseCraftRecipeBook(taskId);
+        }
+        else if ((u32)input < ARRAY_COUNT(Craft_Recipes))
+        {
+            PlaySE(SE_SELECT);
+            DestroyListMenuTask(task->data[1], NULL, NULL);
+            task->data[1] = TASK_NONE;
+            PrintCraftRecipeBookRecipe((u16)input);
+            task->data[0] = 1;
+        }
+    }
+    else if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
+    {
+        PlaySE(SE_SELECT);
+        task->data[0] = 0;
+        InitCraftRecipeBookList(taskId);
+    }
+}
+
+void ShowCraftRecipeBook(void)
+{
+    u16 i, j;
+    struct ListMenuItem item;
+    u8 taskId;
+
+    PlayerFreeze();
+    StopPlayerAvatar();
+    ScriptContext_Stop();
+    LockPlayerFieldControls();
+
+    for (i = 0; i < ARRAY_COUNT(Craft_Recipes); i++)
+    {
+        sCraftRecipeBookItems[i].name = ItemId_GetName(Craft_Recipes[i][4]);
+        sCraftRecipeBookItems[i].id = i;
+
+        item = sCraftRecipeBookItems[i];
+        for (j = i; j > 0 && StringCompare(item.name, sCraftRecipeBookItems[j - 1].name) < 0; j--)
+            sCraftRecipeBookItems[j] = sCraftRecipeBookItems[j - 1];
+        sCraftRecipeBookItems[j] = item;
+    }
+
+    sCraftRecipeBookScrollOffset = 0;
+    sCraftRecipeBookCursorPos = 0;
+    sCraftRecipeBookWindowId = AddWindow(&sCraftRecipeBookWindowTemplate);
+    if (sCraftRecipeBookWindowId == WINDOW_NONE)
+    {
+        ResumeCraftRecipeBookAfterFailure();
+        return;
+    }
+
+    PutWindowTilemap(sCraftRecipeBookWindowId);
+    taskId = CreateTask(Task_CraftRecipeBook, 0x50);
+    if (taskId == TASK_NONE)
+    {
+        ClearStdWindowAndFrame(sCraftRecipeBookWindowId, TRUE);
+        RemoveWindow(sCraftRecipeBookWindowId);
+        sCraftRecipeBookWindowId = WINDOW_NONE;
+        ResumeCraftRecipeBookAfterFailure();
+        return;
+    }
+
+    InitCraftRecipeBookList(taskId);
 }
 
 #define sCraftDelay data[2]

@@ -560,4 +560,5 @@ gSpecials::
 	def_special TrySetBattleTowerLinkType
 	def_special SwitchMonAbility
 	def_special ShowCraftMenu
+	def_special ShowCraftRecipeBook
 	def_special BufferUnitSystemText
