@@ -116,10 +116,10 @@ static const u16 Craft_Recipes[][6] = {
 {ITEM_WATER_STONE, ITEM_LEAF_STONE, ITEM_CHERI_BERRY, ITEM_GREPA_BERRY, ITEM_EVERSTONE, 1}
 };
 
-static struct ListMenuItem sCraftRecipeBookItems[ARRAY_COUNT(Craft_Recipes)];
-static u16 sCraftRecipeBookScrollOffset;
-static u16 sCraftRecipeBookCursorPos;
-static u8 sCraftRecipeBookWindowId;
+EWRAM_DATA static struct ListMenuItem sCraftRecipeBookItems[ARRAY_COUNT(Craft_Recipes)] = {0};
+EWRAM_DATA static u16 sCraftRecipeBookScrollOffset = 0;
+EWRAM_DATA static u16 sCraftRecipeBookCursorPos = 0;
+EWRAM_DATA static u8 sCraftRecipeBookWindowId = 0;
 
 static const struct WindowTemplate sCraftRecipeBookWindowTemplate = {
     .bg = 0,
@@ -920,11 +920,11 @@ extern const u8 gBattlePalaceNatureToMoveGroupLikelihood[NUM_NATURES][4];
 extern const u8 gBattlePalaceNatureToMoveTarget[NUM_NATURES];
 extern const s8 gNatureStatTable[][5];
 
-// IWRAM is almost full in this project, so these live in EWRAM
-EWRAM_DATA static struct ListMenuItem sNatureTipsItems[NUM_NATURES] = {0};
-EWRAM_DATA static u16 sNatureTipsScrollOffset = 0;
-EWRAM_DATA static u16 sNatureTipsCursorPos = 0;
-EWRAM_DATA static u8 sNatureTipsWindowId = 0;
+// The recipe book and the nature tips are never open together, so they share the same RAM
+#define sNatureTipsItems sCraftRecipeBookItems
+#define sNatureTipsScrollOffset sCraftRecipeBookScrollOffset
+#define sNatureTipsCursorPos sCraftRecipeBookCursorPos
+#define sNatureTipsWindowId sCraftRecipeBookWindowId
 
 static const struct ListMenuTemplate sNatureTipsListMenuTemplate = {
     .items = sNatureTipsItems,
