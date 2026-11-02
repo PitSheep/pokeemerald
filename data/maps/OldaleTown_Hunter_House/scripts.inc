@@ -1036,9 +1036,35 @@ OldaleTown_Hunter_House_EventScript_AbilityChange_Text_DontHaveEnoughPoints:
 OldaleTown_Hunter_House_EventScript_AbilityChange_chose::
 	special ChoosePartyMon
 	waitstate
-	goto_if_ne VAR_0x8004, PARTY_NOTHING_CHOSEN, OldaleTown_Hunter_House_EventScript_AbilityChange_success
+	goto_if_ne VAR_0x8004, PARTY_NOTHING_CHOSEN, OldaleTown_Hunter_House_EventScript_AbilityChange_check
 	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, OldaleTown_Hunter_House_EventScript_AbilityChange_cancel
 	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_check::
+	specialvar VAR_RESULT, CanSwitchMonAbility
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Hunter_House_EventScript_AbilityChange_cannot
+	msgbox OldaleTown_Hunter_House_EventScript_AbilityChange_confirm_text, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_EventScript_AbilityChange_cancel
+	goto OldaleTown_Hunter_House_EventScript_AbilityChange_success
+	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_cannot::
+	lock
+	faceplayer
+	msgbox OldaleTown_Hunter_House_EventScript_AbilityChange_cannot_text, MSGBOX_DEFAULT
+	special CloseBattlePointsWindow
+	release
+	end
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_cannot_text:
+	.string "I'm sorry, but this Pokémon can't\n"
+	.string "switch its ability.\p"
+	.string "You won't be charged anything.$"
+
+OldaleTown_Hunter_House_EventScript_AbilityChange_confirm_text:
+	.string "{STR_VAR_1}'s ability will change\n"
+	.string "from {STR_VAR_2} to {STR_VAR_3}.\p"
+	.string "Do you want to proceed?$"
 
 OldaleTown_Hunter_House_EventScript_AbilityChange_cancel::
 	lock
@@ -1049,9 +1075,9 @@ OldaleTown_Hunter_House_EventScript_AbilityChange_cancel::
 	end
 
 OldaleTown_Hunter_House_EventScript_AbilityChange_cancel_text:
-	.string "Oh, have you cange idea?!\p"
-	.string "no problem...\n"
-	.string "come back any time.$"
+	.string "Oh, have you changed your mind?\p"
+	.string "No problem...\n"
+	.string "Come back any time.$"
 
 OldaleTown_Hunter_House_EventScript_AbilityChange_intro_text:
 	.string "Hi {PLAYER},\n"

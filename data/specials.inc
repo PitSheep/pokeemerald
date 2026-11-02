@@ -562,6 +562,7 @@ gSpecials::
 	def_special CloseDeptStoreElevatorWindow
 	def_special TrySetBattleTowerLinkType
 	def_special SwitchMonAbility
+	def_special CanSwitchMonAbility
 	def_special ShowCraftMenu
 	def_special ShowCraftRecipeBook
 	def_special ShowNatureTips

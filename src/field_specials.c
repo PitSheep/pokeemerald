@@ -4401,6 +4401,28 @@ u8 Script_TryGainNewFanFromCounter(void)
     return TryGainNewFanFromCounter(gSpecialVar_0x8004);
 }
 
+// Returns TRUE if the mon in gSpecialVar_0x8004 can switch ability, and buffers
+// the mon nickname (STR_VAR_1), current ability (STR_VAR_2) and new ability (STR_VAR_3)
+bool8 CanSwitchMonAbility(void)
+{
+    struct Pokemon *mon = &gPlayerParty[gSpecialVar_0x8004];
+    u16 species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG, NULL);
+    u8 currentAbilityNum;
+
+    if (species == SPECIES_NONE || species == SPECIES_EGG)
+        return FALSE;
+
+    if (gSpeciesInfo[species].abilities[1] == ABILITY_NONE
+     || gSpeciesInfo[species].abilities[0] == gSpeciesInfo[species].abilities[1])
+        return FALSE;
+
+    currentAbilityNum = GetMonData(mon, MON_DATA_ABILITY_NUM, NULL);
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    StringCopy(gStringVar2, gAbilityNames[gSpeciesInfo[species].abilities[currentAbilityNum != 0]]);
+    StringCopy(gStringVar3, gAbilityNames[gSpeciesInfo[species].abilities[currentAbilityNum == 0]]);
+    return TRUE;
+}
+
 void SwitchMonAbility(void)
 {
     u16 species = GetMonData(&gPlayerParty[gSpecialVar_0x8004], MON_DATA_SPECIES, NULL);
