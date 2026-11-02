@@ -2015,6 +2015,12 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
 
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
+    static const u16 sTournamentTeams[][PARTY_SIZE] = {
+        {SPECIES_SCEPTILE, SPECIES_BLAZIKEN, SPECIES_SWAMPERT, SPECIES_GARDEVOIR, SPECIES_AGGRON, SPECIES_FLYGON},
+        {SPECIES_MILOTIC, SPECIES_METAGROSS, SPECIES_SALAMENCE, SPECIES_MANECTRIC, SPECIES_BRELOOM, SPECIES_TROPIUS},
+        {SPECIES_ALAKAZAM, SPECIES_HARIYAMA, SPECIES_CAMERUPT, SPECIES_ALTARIA, SPECIES_ABSOL, SPECIES_WALREIN},
+        {SPECIES_CRAWDAUNT, SPECIES_CLAYDOL, SPECIES_ARCANINE, SPECIES_NINETALES, SPECIES_SHARPEDO, SPECIES_LUDICOLO}
+    };
     u32 nameHash = 0;
     u32 personalityValue;
     u8 fixedIV;
@@ -2026,7 +2032,24 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 max = 0;
     u8 range = 0;
     u8 rand = 0;
-    if(FlagGet(FLAG_BATTLE_GYM)){
+    bool8 isTournamentBattle = trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT
+        && (VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 1
+            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 3
+            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 5
+            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 7
+            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 9
+            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 11);
+    u8 tournamentTeam = VarGet(VAR_OLDALE_GYM_TOURNAMENT_TEAM);
+
+    if (isTournamentBattle)
+    {
+        u32 totalLevel = 0;
+        for (i = 0; i < gPlayerPartyCount; i++)
+            totalLevel += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
+        if (gPlayerPartyCount != 0)
+            fixedLVL = totalLevel / gPlayerPartyCount;
+    }
+    else if(FlagGet(FLAG_BATTLE_GYM)){
 	    if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
 	    	fixedLVL = (GetMonData(&gPlayerParty[0], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[1], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[2], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[3], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[4], MON_DATA_LEVEL) + GetMonData(&gPlayerParty[5], MON_DATA_LEVEL)) / 6;
 	    else if ((GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) == SPECIES_NONE) && (GetMonData(&gPlayerParty[4], MON_DATA_SPECIES) != SPECIES_NONE))
@@ -2051,7 +2074,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
 
-        if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        if (isTournamentBattle)
+        {
+            monsCount = gPlayerPartyCount;
+        }
+        else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
         {
             if (gTrainers[trainerNum].partySize > PARTY_SIZE / 2)
                 monsCount = PARTY_SIZE / 2;
@@ -2076,7 +2103,20 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             for (j = 0; gTrainers[trainerNum].trainerName[j] != EOS; j++)
                 nameHash += gTrainers[trainerNum].trainerName[j];
 
-            switch (gTrainers[trainerNum].partyFlags)
+            if (isTournamentBattle)
+            {
+                u16 species = sTournamentTeams[tournamentTeam][i];
+                for (j = 0; gSpeciesNames[species][j] != EOS; j++)
+                    nameHash += gSpeciesNames[species][j];
+
+                personalityValue += nameHash << 8;
+                fixedIV = MAX_PER_STAT_IVS;
+                reallevel = fixedLVL;
+                if (reallevel == 0)
+                    reallevel = 1;
+                CreateMon(&party[i], species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+            }
+            else switch (gTrainers[trainerNum].partyFlags)
             {
             case 0:
             {
@@ -2185,6 +2225,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         gBattleTypeFlags |= gTrainers[trainerNum].doubleBattle;
     }
 
+    if (isTournamentBattle)
+        return monsCount;
     return gTrainers[trainerNum].partySize;
 }
 

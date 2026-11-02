@@ -1,11 +1,22 @@
 OldaleTown_Gym_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, OldaleTown_Gym_OnLoad
 	.byte 0
+
+OldaleTown_Gym_OnLoad:
+	special RestoreOldaleGymTournamentParty
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_EXCLUDED_SLOT, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_TEAM, 0
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	clearflag FLAG_BATTLE_GYM
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	end
 
 OldaleTown_Gym_EventScript_MovePlayerBattle::
 	walk_down
 	face_down
 	step_end
-	
+
 OldaleTown_Gym_EventScript_MoveSingleIn::
 	walk_right
 	walk_down
@@ -2898,8 +2909,8 @@ OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Welcome::
 OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Welcome_Text:
 	.string "First of all,\n"
 	.string "you want to defend the gym from:\p"
-	.string "Classic Trainer?\n"
-	.string "or New Elite 4?$"
+	.string "Classic Trainer,\n"
+	.string "New Elite 4, or the 6 VS 1 Tournament?$"
 
 OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Choose::
 	special HealPlayerParty
@@ -2910,9 +2921,249 @@ OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Choose::
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_SingleBattle_Yes_No
 	case 1, OldaleTown_Gym_EventScript_SingleBattle_Yes_No_Elite
-	case 2, OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Esc
+	case 2, OldaleTown_Gym_EventScript_SixVsOneTournament_Rules
+	case 3, OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Esc
 	case MULTI_B_PRESSED, OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Esc
 	end
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_Rules::
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Rules, MSGBOX_DEFAULT
+	special HasSixNonEggPartyMons
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Gym_EventScript_SixVsOneTournament_NoFullParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Start, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_Gym_EventScript_SixVsOneTournament_Cancel
+	special HealPlayerParty
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 1
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	random 4
+	copyvar VAR_OLDALE_GYM_TOURNAMENT_TEAM, VAR_RESULT
+	setflag FLAG_BATTLE_GYM
+	setflag FLAG_BATTLE_GYM_OPPONENT
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Registered, MSGBOX_DEFAULT
+	followerintopokeball
+	closemessage
+	setvar VAR_CURRENT_TRAINER, 33
+	addobject VAR_CURRENT_TRAINER
+	applymovement 5, OldaleTown_Gym_EventScript_MoveSingleIn
+	applymovement 4, OldaleTown_Gym_EventScript_MoveDuoLeftIn
+	applymovement 6, OldaleTown_Gym_EventScript_MoveDuoRightIn
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentIn
+	waitmovement 0
+	applymovement OBJ_EVENT_ID_PLAYER, OldaleTown_Gym_EventScript_MovePlayerBattle
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_Battle
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_Battle::
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	trainerbattle_single TRAINER_OLDALE_GYM_TOURNAMENT, OldaleTown_Gym_Text_SixVsOneTournament_Intro, OldaleTown_Gym_Text_SixVsOneTournament_Lose, OldaleTown_Gym_EventScript_SixVsOneTournament_AfterBattle
+	releaseall
+	end
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_AfterBattle::
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 2, OldaleTown_Gym_EventScript_SixVsOneTournament_EndChoreography
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 12, OldaleTown_Gym_EventScript_SixVsOneTournament_EndChoreography
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_HandleResult
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_EndChoreography::
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentAway
+	waitmovement 0
+	removeobject VAR_CURRENT_TRAINER
+	applymovement 5, OldaleTown_Gym_EventScript_MoveSingleOut
+	applymovement 6, OldaleTown_Gym_EventScript_MoveDuoRightOut
+	applymovement 4, OldaleTown_Gym_EventScript_MoveDuoLeftOut
+	waitmovement 0
+	showfollower
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_HandleResult::
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 2, OldaleTown_Gym_EventScript_SixVsOneTournament_Lost
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 4, OldaleTown_Gym_EventScript_SixVsOneTournament_SecondWon
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 6, OldaleTown_Gym_EventScript_SixVsOneTournament_ThirdWon
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 8, OldaleTown_Gym_EventScript_SixVsOneTournament_FourthWon
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 10, OldaleTown_Gym_EventScript_SixVsOneTournament_FifthWon
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 12, OldaleTown_Gym_EventScript_SixVsOneTournament_FinalWon
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Win, MSGBOX_DEFAULT
+	special HealPlayerParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_ChooseMon, MSGBOX_DEFAULT
+OldaleTown_Gym_EventScript_SixVsOneTournament_ChooseMon::
+	special ChoosePartyMon
+	waitstate
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, OldaleTown_Gym_EventScript_SixVsOneTournament_ChooseMon
+	copyvar VAR_OLDALE_GYM_TOURNAMENT_EXCLUDED_SLOT, VAR_0x8004
+	special BufferMonNickname
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_MonExcluded, MSGBOX_DEFAULT
+	special PrepareOldaleGymTournamentParty
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Gym_EventScript_SixVsOneTournament_InvalidSelection
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 3, OldaleTown_Gym_EventScript_SixVsOneTournament_StartBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 6, OldaleTown_Gym_EventScript_SixVsOneTournament_FourthBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 8, OldaleTown_Gym_EventScript_SixVsOneTournament_FifthBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 10, OldaleTown_Gym_EventScript_SixVsOneTournament_FinalBattle
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 5
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_StartBattle
+OldaleTown_Gym_EventScript_SixVsOneTournament_FourthBattle::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 7
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_StartBattle
+OldaleTown_Gym_EventScript_SixVsOneTournament_FifthBattle::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 9
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_StartBattle
+OldaleTown_Gym_EventScript_SixVsOneTournament_FinalBattle::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 11
+OldaleTown_Gym_EventScript_SixVsOneTournament_StartBattle::
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_Battle
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_InvalidSelection::
+	special RestoreOldaleGymTournamentParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_InvalidSelection, MSGBOX_DEFAULT
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_EXCLUDED_SLOT, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_TEAM, 0
+	clearflag FLAG_BATTLE_GYM
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	releaseall
+	end
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_SecondWon::
+	special HealPlayerParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_SecondWon, MSGBOX_DEFAULT
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_ChooseMon
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_ThirdWon::
+	special HealPlayerParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_ThirdWon, MSGBOX_DEFAULT
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_ChooseMon
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_FourthWon::
+	special HealPlayerParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_FourthWon, MSGBOX_DEFAULT
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_ChooseMon
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_FifthWon::
+	special HealPlayerParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_FifthWon, MSGBOX_DEFAULT
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_ChooseMon
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_FinalWon::
+	special RestoreOldaleGymTournamentParty
+	special HealPlayerParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_FinalWon, MSGBOX_DEFAULT
+	giveitem ITEM_MASTER_BALL
+	goto_if_eq VAR_RESULT, FALSE, OldaleTown_Gym_EventScript_SixVsOneTournament_FinalWon_BagFull
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Prize, MSGBOX_DEFAULT
+	goto OldaleTown_Gym_EventScript_SixVsOneTournament_Finish
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_FinalWon_BagFull::
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_BagFull, MSGBOX_DEFAULT
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_Finish::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_EXCLUDED_SLOT, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_TEAM, 0
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	clearflag FLAG_BATTLE_GYM
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	releaseall
+	end
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_Lost::
+	special RestoreOldaleGymTournamentParty
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Lost, MSGBOX_DEFAULT
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_EXCLUDED_SLOT, 0
+	setvar VAR_OLDALE_GYM_TOURNAMENT_TEAM, 0
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	clearflag FLAG_BATTLE_GYM
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	releaseall
+	end
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_NoFullParty::
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_NoFullParty, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_EventScript_SixVsOneTournament_Cancel::
+	msgbox OldaleTown_Gym_Text_SixVsOneTournament_Cancel, MSGBOX_DEFAULT
+	release
+	end
+
+OldaleTown_Gym_Text_SixVsOneTournament_Rules:
+	.string "The 6 VS 1 Tournament has six battles.\p"
+	.string "You start with six POKéMON. After each\n"
+	.string "win, leave one behind before seeing\n"
+	.string "the next opponent.\p"
+	.string "The opponent's team matches yours,\n"
+	.string "down to the final 1 VS 1 battle.\p"
+	.string "Your POKéMON recover their HP and PP\n"
+	.string "after each battle. You get the prize\n"
+	.string "only after winning all six.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Start:
+	.string "Ready to register for the tournament?$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_NoFullParty:
+	.string "You need six POKéMON that can battle\n"
+	.string "to enter the tournament.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Cancel:
+	.string "Your tournament entry was canceled.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Registered:
+	.string "Your entry is confirmed!\p"
+	.string "Your first opponent is ready!$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Intro:
+	.string "Let's see what you've got!$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Lose:
+	.string "You fought well, but the tournament\n"
+	.string "ends here.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Win:
+	.string "You won the first battle!$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_ChooseMon:
+	.string "Choose one POKéMON to sit out the\n"
+	.string "next battle.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_MonExcluded:
+	.string "{STR_VAR_1} will sit out the next\n"
+	.string "battle. It will remain in your party.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_InvalidSelection:
+	.string "The tournament could not continue.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_SecondWon:
+	.string "You won the second battle!\p"
+	.string "Choose one POKéMON to sit out the\n"
+	.string "next battle.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_ThirdWon:
+	.string "You won the third battle!\p"
+	.string "Choose one POKéMON to sit out the\n"
+	.string "next battle.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_FourthWon:
+	.string "You won the fourth battle!\p"
+	.string "Choose one POKéMON to sit out the\n"
+	.string "next battle.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_FifthWon:
+	.string "You won the fifth battle!\p"
+	.string "Choose your final POKéMON for the\n"
+	.string "1 VS 1 battle.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_FinalWon:
+	.string "You won all six battles!\p"
+	.string "You are the tournament champion!$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Prize:
+	.string "You received a MASTER BALL!$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_BagFull:
+	.string "Your BAG is full. You couldn't\n"
+	.string "receive the MASTER BALL.$"
+
+OldaleTown_Gym_Text_SixVsOneTournament_Lost:
+	.string "You lost the battle.\p"
+	.string "The tournament is over.$"
 
 OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Esc::
 	msgbox OldaleTown_Gym_EventScript_SingleBattle_Normal_Elite_Esc_Text, MSGBOX_DEFAULT
@@ -3628,8 +3879,8 @@ OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Welcome::
 OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Welcome_Text:
 	.string "First of all,\n"
 	.string "you want to defend the gym from:\p"
-	.string "Classic Trainer?\n"
-	.string "or New Elite 4?$"
+	.string "Classic Trainer,\n"
+	.string "New Elite 4, or the 6 VS 1 Tournament?$"
 
 OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Choose::
 	special HealPlayerParty
@@ -3640,7 +3891,8 @@ OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Choose::
 	switch VAR_RESULT
 	case 0, OldaleTown_Gym_EventScript_DuoBattle_Yes_No
 	case 1, OldaleTown_Gym_EventScript_DuoBattle_Yes_No_Elite
-	case 2, OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Esc
+	case 2, OldaleTown_Gym_EventScript_SixVsOneTournament_Rules
+	case 3, OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Esc
 	case MULTI_B_PRESSED, OldaleTown_Gym_EventScript_DuoBattle_Normal_Elite_Esc
 	end
 

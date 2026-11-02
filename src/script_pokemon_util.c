@@ -27,6 +27,10 @@
 static void CB2_ReturnFromChooseHalfParty(void);
 static void CB2_ReturnFromChooseBattleFrontierParty(void);
 
+EWRAM_DATA static struct Pokemon sOldaleGymTournamentOriginalParty[PARTY_SIZE] = {0};
+EWRAM_DATA static bool8 sOldaleGymTournamentPartyIsSaved = FALSE;
+EWRAM_DATA static u8 sOldaleGymTournamentExcludedCount = 0;
+
 void HealPlayerParty(void)
 {
     u8 i, j;
@@ -55,6 +59,61 @@ void HealPlayerParty(void)
         arg[2] = 0;
         arg[3] = 0;
         SetMonData(&gPlayerParty[i], MON_DATA_STATUS, arg);
+    }
+}
+
+void HasSixNonEggPartyMons(void)
+{
+    u8 i;
+    u8 count = 0;
+    u8 partyCount = CalculatePlayerPartyCount();
+
+    for (i = 0; i < partyCount; i++)
+    {
+        if (GetMonData(&gPlayerParty[i], MON_DATA_SPECIES_OR_EGG) != SPECIES_EGG)
+            count++;
+    }
+
+    gSpecialVar_Result = (count == PARTY_SIZE);
+}
+
+void PrepareOldaleGymTournamentParty(void)
+{
+    u8 excludedSlot = VarGet(VAR_OLDALE_GYM_TOURNAMENT_EXCLUDED_SLOT);
+    u8 i;
+
+    gSpecialVar_Result = FALSE;
+    if (excludedSlot >= gPlayerPartyCount || sOldaleGymTournamentExcludedCount >= PARTY_SIZE - 1)
+        return;
+
+    if (!sOldaleGymTournamentPartyIsSaved)
+    {
+        if (gPlayerPartyCount != PARTY_SIZE)
+            return;
+        memcpy(sOldaleGymTournamentOriginalParty, gPlayerParty, sizeof(sOldaleGymTournamentOriginalParty));
+        sOldaleGymTournamentPartyIsSaved = TRUE;
+    }
+    else if (gPlayerPartyCount != PARTY_SIZE - sOldaleGymTournamentExcludedCount)
+    {
+        return;
+    }
+
+    for (i = excludedSlot; i < gPlayerPartyCount - 1; i++)
+        gPlayerParty[i] = gPlayerParty[i + 1];
+    ZeroMonData(&gPlayerParty[gPlayerPartyCount - 1]);
+    gPlayerPartyCount--;
+    sOldaleGymTournamentExcludedCount++;
+    gSpecialVar_Result = TRUE;
+}
+
+void RestoreOldaleGymTournamentParty(void)
+{
+    if (sOldaleGymTournamentPartyIsSaved)
+    {
+        memcpy(gPlayerParty, sOldaleGymTournamentOriginalParty, sizeof(sOldaleGymTournamentOriginalParty));
+        gPlayerPartyCount = PARTY_SIZE;
+        sOldaleGymTournamentPartyIsSaved = FALSE;
+        sOldaleGymTournamentExcludedCount = 0;
     }
 }
 

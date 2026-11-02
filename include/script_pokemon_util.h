@@ -7,5 +7,7 @@ void CreateScriptedWildMon(u16, u8, u16);
 void ScriptSetMonMoveSlot(u8, u16, u8);
 void ReducePlayerPartyToSelectedMons(void);
 void HealPlayerParty(void);
+void PrepareOldaleGymTournamentParty(void);
+void RestoreOldaleGymTournamentParty(void);
 
 #endif // GUARD_SCRIPT_POKEMON_UTIL_H

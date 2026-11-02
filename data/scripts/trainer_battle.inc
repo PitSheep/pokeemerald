@@ -125,10 +125,78 @@ EventScript_DoTrainerBattle::
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, EventScript_EndTrainerBattle
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, EventScript_EndTrainerBattle
 EventScript_EndTrainerBattle::
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 1, EventScript_EndOldaleGymTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 3, EventScript_EndOldaleGymTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 5, EventScript_EndOldaleGymTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 7, EventScript_EndOldaleGymTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 9, EventScript_EndOldaleGymTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 11, EventScript_EndOldaleGymTournamentBattle
 	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
 	goto_if_eq VAR_BATTLE_GYM_OPPONENT, 1, EventScript_GymLostNoPoints
 	frontier_givepoints
 	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_EndOldaleGymTournamentBattle::
+	goto_if_eq VAR_BATTLE_GYM_OPPONENT, 1, EventScript_OldaleGymTournamentLost
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 1, EventScript_OldaleGymTournamentFirstWin
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 3, EventScript_OldaleGymTournamentSecondWin
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 5, EventScript_OldaleGymTournamentThirdWin
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 7, EventScript_OldaleGymTournamentFourthWin
+	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 9, EventScript_OldaleGymTournamentFifthWin
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 12
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_OldaleGymTournamentFifthWin::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 10
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_OldaleGymTournamentFourthWin::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 8
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_OldaleGymTournamentThirdWin::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 6
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_OldaleGymTournamentSecondWin::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 4
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_OldaleGymTournamentFirstWin::
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 3
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_OldaleGymTournamentLost::
+	clearflag FLAG_BATTLE_GYM
+	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 2
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT
 	gotobeatenscript
 	releaseall
 	end

@@ -2396,7 +2396,7 @@ void ShowScrollableMultichoice(void)
         break;
     case SCROLL_MULTI_BF_EXCHANGE_NORMAL_ELITE:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 3;
+        task->tNumItems = 4;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2565,6 +2565,7 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
     {
         gText_NormalTrainer,
         gText_Elite4Trainer,
+        gText_SixVsOneTournament,
         gText_Exit
     },
     [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =

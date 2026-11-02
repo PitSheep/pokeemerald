@@ -12794,3 +12794,12 @@ static const struct TrainerMonItemCustomMoves sParty_Rick_D[] = {
     .moves = {MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_HIDDEN_POWER, MOVE_TOXIC}
     }
 };
+
+static const struct TrainerMonNoItemDefaultMoves sParty_OldaleGymTournament[] = {
+    {.iv = 100, .lvl = 50, .species = SPECIES_SCEPTILE},
+    {.iv = 100, .lvl = 50, .species = SPECIES_BLAZIKEN},
+    {.iv = 100, .lvl = 50, .species = SPECIES_SWAMPERT},
+    {.iv = 100, .lvl = 50, .species = SPECIES_GARDEVOIR},
+    {.iv = 100, .lvl = 50, .species = SPECIES_AGGRON},
+    {.iv = 100, .lvl = 50, .species = SPECIES_FLYGON}
+};
