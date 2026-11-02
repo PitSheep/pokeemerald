@@ -168,7 +168,7 @@ BerryTree_EventScript_WaterBerry::
 	waitstate
 	message BerryTree_Text_PlantIsDelighted
 	waitmessage
-	delay 90
+	delay 60
 	releaseall
 	end
 

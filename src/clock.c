@@ -14,7 +14,7 @@
 #include "random.h"
 #include "constants/items.h"
 
-#define OLDALE_GYM_FOLLOWER_REWARD_WAIT_MINUTES 30
+#define OLDALE_GYM_FOLLOWER_REWARD_WAIT_MINUTES 60
 
 static const u16 sOldaleGymFollowerRewardBalls[] =
 {
