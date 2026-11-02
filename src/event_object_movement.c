@@ -8638,8 +8638,9 @@ static bool8 AreElevationsCompatible(u8 a, u8 b)
 
 void GroundEffect_SpawnOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    if (IsOverworldWildMonObjEvent(objEvent->localId))
-        return;
+    // Tall grass animation disabled (slowdown fix). To restore, remove this return.
+    // if (IsOverworldWildMonObjEvent(objEvent->localId))
+    return;
 
     gFieldEffectArguments[0] = objEvent->currentCoords.x;
     gFieldEffectArguments[1] = objEvent->currentCoords.y;
@@ -8654,8 +8655,9 @@ void GroundEffect_SpawnOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *
 
 void GroundEffect_StepOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
-    if (IsOverworldWildMonObjEvent(objEvent->localId))
-        return;
+    // Tall grass animation disabled (slowdown fix). To restore, remove this return.
+    // if (IsOverworldWildMonObjEvent(objEvent->localId))
+    return;
 
     gFieldEffectArguments[0] = objEvent->currentCoords.x;
     gFieldEffectArguments[1] = objEvent->currentCoords.y;
@@ -8863,8 +8865,9 @@ void GroundEffect_JumpOnTallGrass(struct ObjectEvent *objEvent, struct Sprite *s
 {
     u8 spriteId;
 
-    if (IsOverworldWildMonObjEvent(objEvent->localId))
-        return;
+    // Tall grass animation disabled (slowdown fix). To restore, remove this return.
+    // if (IsOverworldWildMonObjEvent(objEvent->localId))
+    return;
 
     gFieldEffectArguments[0] = objEvent->currentCoords.x;
     gFieldEffectArguments[1] = objEvent->currentCoords.y;
