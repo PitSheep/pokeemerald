@@ -2015,11 +2015,45 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
 
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
-    static const u16 sTournamentTeams[][PARTY_SIZE] = {
-        {SPECIES_SCEPTILE, SPECIES_BLAZIKEN, SPECIES_SWAMPERT, SPECIES_GARDEVOIR, SPECIES_AGGRON, SPECIES_FLYGON},
-        {SPECIES_MILOTIC, SPECIES_METAGROSS, SPECIES_SALAMENCE, SPECIES_MANECTRIC, SPECIES_BRELOOM, SPECIES_TROPIUS},
-        {SPECIES_ALAKAZAM, SPECIES_HARIYAMA, SPECIES_CAMERUPT, SPECIES_ALTARIA, SPECIES_ABSOL, SPECIES_WALREIN},
-        {SPECIES_CRAWDAUNT, SPECIES_CLAYDOL, SPECIES_ARCANINE, SPECIES_NINETALES, SPECIES_SHARPEDO, SPECIES_LUDICOLO}
+    static const struct
+    {
+        u16 species;
+        u16 heldItem;
+        u16 moves[MAX_MON_MOVES];
+        u8 evs[NUM_STATS];
+    } sTournamentTeams[][PARTY_SIZE] = {
+        {
+            {SPECIES_SCEPTILE, ITEM_MIRACLE_SEED, {MOVE_LEAF_BLADE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_BRICK_BREAK}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_BLAZIKEN, ITEM_CHARCOAL, {MOVE_BLAZE_KICK, MOVE_SKY_UPPERCUT, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_SWAMPERT, ITEM_MYSTIC_WATER, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_TOXIC, MOVE_PROTECT}, {252, 0, 0, 6, 252, 0}},
+            {SPECIES_GARDEVOIR, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_CALM_MIND, MOVE_HYPNOSIS}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_AGGRON, ITEM_HARD_STONE, {MOVE_IRON_TAIL, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_DOUBLE_EDGE}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_FLYGON, ITEM_SOFT_SAND, {MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_ROCK_SLIDE, MOVE_CRUNCH}, {0, 252, 0, 252, 0, 6}},
+        },
+        {
+            {SPECIES_MILOTIC, ITEM_LEFTOVERS, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_TOXIC}, {252, 0, 0, 6, 252, 0}},
+            {SPECIES_METAGROSS, ITEM_SITRUS_BERRY, {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_BRICK_BREAK, MOVE_ROCK_SLIDE}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_SALAMENCE, ITEM_DRAGON_FANG, {MOVE_DRAGON_DANCE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_MANECTRIC, ITEM_MAGNET, {MOVE_THUNDERBOLT, MOVE_FLAMETHROWER, MOVE_PROTECT, MOVE_THUNDER_WAVE}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_BRELOOM, ITEM_BLACK_BELT, {MOVE_SPORE, MOVE_FOCUS_PUNCH, MOVE_SKY_UPPERCUT, MOVE_ROCK_SLIDE}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_TROPIUS, ITEM_LEFTOVERS, {MOVE_SUNNY_DAY, MOVE_SOLAR_BEAM, MOVE_SYNTHESIS, MOVE_GIGA_DRAIN}, {252, 0, 0, 6, 252, 0}},
+        },
+        {
+            {SPECIES_ALAKAZAM, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_CALM_MIND, MOVE_RECOVER, MOVE_SHOCK_WAVE}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_HARIYAMA, ITEM_BLACK_BELT, {MOVE_FAKE_OUT, MOVE_BRICK_BREAK, MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE}, {252, 252, 0, 0, 0, 6}},
+            {SPECIES_CAMERUPT, ITEM_CHARCOAL, {MOVE_FLAMETHROWER, MOVE_ERUPTION, MOVE_ANCIENT_POWER, MOVE_AMNESIA}, {252, 0, 0, 6, 252, 0}},
+            {SPECIES_ALTARIA, ITEM_DRAGON_FANG, {MOVE_DRAGON_DANCE, MOVE_AERIAL_ACE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_ABSOL, ITEM_SCOPE_LENS, {MOVE_SWORDS_DANCE, MOVE_BRICK_BREAK, MOVE_AERIAL_ACE, MOVE_RETURN}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_WALREIN, ITEM_NEVER_MELT_ICE, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_TOXIC, MOVE_REST}, {252, 0, 0, 6, 252, 0}},
+        },
+        {
+            {SPECIES_CRAWDAUNT, ITEM_BLACK_GLASSES, {MOVE_CRABHAMMER, MOVE_CRUNCH, MOVE_BRICK_BREAK, MOVE_SWORDS_DANCE}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_CLAYDOL, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_ICE_BEAM, MOVE_ANCIENT_POWER, MOVE_CALM_MIND}, {252, 0, 0, 6, 252, 0}},
+            {SPECIES_ARCANINE, ITEM_CHARCOAL, {MOVE_FLAMETHROWER, MOVE_EXTREME_SPEED, MOVE_CRUNCH, MOVE_IRON_TAIL}, {0, 252, 0, 126, 126, 6}},
+            {SPECIES_NINETALES, ITEM_CHARCOAL, {MOVE_FLAMETHROWER, MOVE_WILL_O_WISP, MOVE_CONFUSE_RAY, MOVE_SUNNY_DAY}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_SHARPEDO, ITEM_MYSTIC_WATER, {MOVE_SURF, MOVE_CRUNCH, MOVE_ICE_BEAM, MOVE_EARTHQUAKE}, {0, 126, 0, 252, 126, 6}},
+            {SPECIES_LUDICOLO, ITEM_MIRACLE_SEED, {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE}, {0, 0, 0, 252, 252, 6}},
+        }
     };
     u32 nameHash = 0;
     u32 personalityValue;
@@ -2105,7 +2139,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
             if (isTournamentBattle)
             {
-                u16 species = sTournamentTeams[tournamentTeam][i];
+                u16 species = sTournamentTeams[tournamentTeam][i].species;
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
 
@@ -2115,6 +2149,16 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 if (reallevel == 0)
                     reallevel = 1;
                 CreateMon(&party[i], species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &sTournamentTeams[tournamentTeam][i].heldItem);
+                for (j = 0; j < NUM_STATS; j++)
+                    SetMonData(&party[i], MON_DATA_HP_EV + j, &sTournamentTeams[tournamentTeam][i].evs[j]);
+                CalculateMonStats(&party[i]);
+                for (j = 0; j < MAX_MON_MOVES; j++)
+                {
+                    u16 move = sTournamentTeams[tournamentTeam][i].moves[j];
+                    SetMonData(&party[i], MON_DATA_MOVE1 + j, &move);
+                    SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[move].pp);
+                }
             }
             else switch (gTrainers[trainerNum].partyFlags)
             {
