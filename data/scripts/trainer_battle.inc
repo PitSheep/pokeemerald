@@ -126,8 +126,14 @@ EventScript_DoTrainerBattle::
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, EventScript_EndTrainerBattle
 EventScript_EndTrainerBattle::
 	goto_if_set FLAG_BATTLE_GYM, Flag_Battle_Gym_up
+	goto_if_eq VAR_BATTLE_GYM_OPPONENT, 1, EventScript_GymLostNoPoints
 	frontier_givepoints
 	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_GymLostNoPoints::
 	gotobeatenscript
 	releaseall
 	end

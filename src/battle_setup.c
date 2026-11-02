@@ -1337,10 +1337,17 @@ static void CB2_EndTrainerBattle(void)
     {
         if (InBattlePyramid() || InTrainerHillChallenge())
             SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-        else{
-            SetMainCallback2(CB2_WhiteOut);
+        else if (FlagGet(FLAG_BATTLE_GYM))
+        {
+            // Gym defeat: no white-out, the gym script resets the streak
+            VarSet(VAR_BATTLE_GYM_OPPONENT, 1);
             FlagClear(FLAG_BATTLE_GYM);
-            }
+            SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        }
+        else
+        {
+            SetMainCallback2(CB2_WhiteOut);
+        }
     }
     else
     {

@@ -88,6 +88,7 @@ OldaleTown_Gym_EventScript_MoveOpponentAway::
 	step_end
 
 OldaleTown_Gym_EventScript_MoveOpponentDisappear::
+	goto_if_eq VAR_BATTLE_GYM_OPPONENT, 1, OldaleTown_Gym_EventScript_GymDefeat
 	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentAway
 	waitmovement 0
 	removeobject VAR_CURRENT_TRAINER
@@ -96,6 +97,39 @@ OldaleTown_Gym_EventScript_MoveOpponentDisappear::
 	applymovement 4, OldaleTown_Gym_EventScript_MoveDuoLeftOut
 	showfollower
 	end
+
+OldaleTown_Gym_EventScript_GymDefeat::
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	clearflag FLAG_BATTLE_GYM_1
+	clearflag FLAG_BATTLE_GYM_2
+	clearflag FLAG_BATTLE_GYM_3
+	clearflag FLAG_BATTLE_GYM_4
+	clearflag FLAG_BATTLE_GYM_5
+	clearflag FLAG_BATTLE_GYM_6
+	clearflag FLAG_BATTLE_GYM_7
+	clearflag FLAG_BATTLE_GYM_8
+	clearflag FLAG_BATTLE_GYM_9
+	clearflag FLAG_BATTLE_GYM_REWARD
+	special HealPlayerParty
+	updatefollowerpokemongraphic
+	msgbox OldaleTown_Gym_Text_GymDefeat, MSGBOX_DEFAULT
+	closemessage
+	applymovement VAR_CURRENT_TRAINER, OldaleTown_Gym_EventScript_MoveOpponentAway
+	waitmovement 0
+	removeobject VAR_CURRENT_TRAINER
+	applymovement 5, OldaleTown_Gym_EventScript_MoveSingleOut
+	applymovement 6, OldaleTown_Gym_EventScript_MoveDuoRightOut
+	applymovement 4, OldaleTown_Gym_EventScript_MoveDuoLeftOut
+	waitmovement 0
+	showfollower
+	release
+	end
+
+OldaleTown_Gym_Text_GymDefeat:
+	.string "You lost the battle!\p"
+	.string "Your winning streak has been\n"
+	.string "reset to zero.\p"
+	.string "Your POKéMON have been healed.$"
 
 OldaleTown_Gym_EventScript_GymArtist::
 	lock
