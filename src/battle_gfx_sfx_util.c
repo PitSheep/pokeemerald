@@ -259,142 +259,154 @@ u16 ChooseMoveAndTargetInBattlePalace(void)
     return chosenMoveId;
 }
 
-//PIT RULES: Pokemon chooses move to use in All Battle rather than player
-u16 ChooseMoveAndTargetInBattleAll(void)
+#undef maxGroupNum
+#undef minGroupNum
+#undef selectedGroup
+#undef selectedMoves
+#undef moveTarget
+#undef validMoveFlags
+#undef numValidMoveGroups
+#undef validMoveGroup
+
+// Opponent chosen by the attacker's nature (e.g. Hardy: the one with more HP). Fainted/absent foes are skipped.
+static u8 GetPitNatureTarget(void)
 {
-    s32 i, var1, var2;
-    s32 chosenMoveId = -1;
-    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
-    u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
-    s32 percent = Random() % 100;
+    u8 opposing1, opposing2;
+    bool8 gone1, gone2;
 
-    // Heavy variable re-use here makes this hard to read without defines
-    // Possibly just optimization? might still match with additional vars
-    #define maxGroupNum var1
-    #define minGroupNum var2
-    #define selectedGroup percent
-    #define selectedMoves var2
-    #define moveTarget var1
-    #define validMoveFlags var1
-    #define numValidMoveGroups var2
-    #define validMoveGroup var2
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        return BATTLE_OPPOSITE(gActiveBattler);
 
-    // If battler is at or below 50% HP and not asleep, use the second set of move group likelihoods.
-    // Otherwise use the first set.
-    i = (gBattleMons[gActiveBattler].hp != 0
-      && gBattleMons[gActiveBattler].hp <= gBattleMons[gActiveBattler].maxHP / 2
-      && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)) ? 2 : 0;
-    minGroupNum = i;
-
-    maxGroupNum = i + 2; // + 2 because there are two percentages per set of likelihoods
-
-    // Each nature has a different percent chance to select a move from one of 3 move groups
-    // If percent is less than 1st check, use move from "Attack" group
-    // If percent is less than 2nd check, use move from "Defense" group
-    // Otherwise use move from "Support" group
-    for (; i < maxGroupNum; i++)
+    if (GetBattlerSide(gActiveBattler) == B_SIDE_PLAYER)
     {
-        if (gBattlePalaceNatureToMoveGroupLikelihood[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)][i] > percent)
-            break;
+        opposing1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        opposing2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
     }
-    selectedGroup = i - minGroupNum;
-    if (i == maxGroupNum)
-        selectedGroup = PALACE_MOVE_GROUP_SUPPORT;
+    else
+    {
+        opposing1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        opposing2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+    }
 
-    // Flag moves that match selected group, to be passed to AI
-    for (selectedMoves = 0, i = 0; i < MAX_MON_MOVES; i++)
+    gone1 = gBattleMons[opposing1].hp == 0 || (gAbsentBattlerFlags & gBitTable[opposing1]);
+    gone2 = gBattleMons[opposing2].hp == 0 || (gAbsentBattlerFlags & gBitTable[opposing2]);
+    if (gone2)
+        return opposing1;
+    if (gone1)
+        return opposing2;
+
+    if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
+        return (Random() & 1) ? opposing1 : opposing2;
+
+    switch (gBattlePalaceNatureToMoveTarget[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)])
+    {
+    case PALACE_TARGET_STRONGER:
+        return (gBattleMons[opposing1].hp > gBattleMons[opposing2].hp) ? opposing1 : opposing2;
+    case PALACE_TARGET_WEAKER:
+        return (gBattleMons[opposing1].hp < gBattleMons[opposing2].hp) ? opposing1 : opposing2;
+    default:
+        return (Random() & 1) ? opposing1 : opposing2;
+    }
+}
+
+// Moves (bitmask) of the given group that are inside allowedMoves
+static u8 GetPitMovesOfGroup(struct ChooseMoveStruct *moveInfo, u8 allowedMoves, u8 group)
+{
+    s32 i;
+    u8 mask = 0;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
         if (moveInfo->moves[i] == MOVE_NONE)
             break;
-        if (selectedGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]) && moveInfo->currentPp[i] != 0)
-            selectedMoves |= gBitTable[i];
+        if ((allowedMoves & gBitTable[i]) && GetBattlePalaceMoveGroup(moveInfo->moves[i]) == group)
+            mask |= gBitTable[i];
     }
+    return mask;
+}
 
-    // Pass selected moves to AI, pick one
-    if (selectedMoves != 0)
+//PIT RULES: Pokemon chooses move to use in All Battle rather than player
+// 1. the target is chosen by nature
+// 2. the move group is chosen by nature (other groups follow by likelihood if the group has no good move)
+// 3. moves the AI considers bad against that target are discarded
+// 4. the AI picks among the remaining moves; if every move is bad, the least bad one is used
+u16 ChooseMoveAndTargetInBattleAll(void)
+{
+    s32 i, j;
+    s32 chosenMoveId = -1;
+    struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleBufferA[gActiveBattler][4]);
+    u8 unusableMovesBits = CheckMoveLimitations(gActiveBattler, 0, MOVE_LIMITATIONS_ALL);
+    u8 usableMoves = 0;
+    u8 badMoves;
+    u8 groupOrder[3];
+    u8 groupChance[3];
+    u8 likelihoodBase, selectedGroup, candidates, target, moveTarget;
+    const u8 *likelihood;
+    s32 percent = Random() % 100;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
     {
-        gBattleStruct->palaceFlags &= 0xF;
-        gBattleStruct->palaceFlags |= (selectedMoves << 4);
-        BattleAI_SetupAIData(selectedMoves);
-        chosenMoveId = BattleAI_ChooseMoveOrAction();
+        if (moveInfo->moves[i] != MOVE_NONE && !(unusableMovesBits & gBitTable[i]))
+            usableMoves |= gBitTable[i];
     }
 
-    // If no moves matched the selected group, pick a new move from groups the pokemon has
-    // In this case the AI is not checked again, so the choice may be worse
-    // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
+    if (usableMoves == 0)
+    {
+        gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
+        return 0;
+    }
+
+    target = GetPitNatureTarget();
+    badMoves = BattleAI_GetBadMovesMask(target);
+
+    // If battler is at or below 50% HP and not asleep, use the second set of move group likelihoods.
+    likelihoodBase = (gBattleMons[gActiveBattler].hp != 0
+      && gBattleMons[gActiveBattler].hp <= gBattleMons[gActiveBattler].maxHP / 2
+      && !(gBattleMons[gActiveBattler].status1 & STATUS1_SLEEP)) ? 2 : 0;
+    likelihood = &gBattlePalaceNatureToMoveGroupLikelihood[GetNatureFromPersonality(gBattleMons[gActiveBattler].personality)][likelihoodBase];
+
+    // The table holds cumulative thresholds: attack < [0], defense < [1], support otherwise
+    groupChance[PALACE_MOVE_GROUP_ATTACK] = likelihood[0];
+    groupChance[PALACE_MOVE_GROUP_DEFENSE] = likelihood[1] - likelihood[0];
+    groupChance[PALACE_MOVE_GROUP_SUPPORT] = 100 - likelihood[1];
+
+    if (percent < likelihood[0])
+        selectedGroup = PALACE_MOVE_GROUP_ATTACK;
+    else if (percent < likelihood[1])
+        selectedGroup = PALACE_MOVE_GROUP_DEFENSE;
+    else
+        selectedGroup = PALACE_MOVE_GROUP_SUPPORT;
+
+    // Selected group first, then the others from the most to the least likely
+    groupOrder[0] = selectedGroup;
+    for (i = 0, j = 1; j < 3; i++)
+    {
+        if (i != selectedGroup)
+            groupOrder[j++] = i;
+    }
+    if (groupChance[groupOrder[1]] < groupChance[groupOrder[2]])
+    {
+        u8 tmp = groupOrder[1];
+        groupOrder[1] = groupOrder[2];
+        groupOrder[2] = tmp;
+    }
+
+    for (i = 0; i < 3; i++)
+    {
+        candidates = GetPitMovesOfGroup(moveInfo, usableMoves & ~badMoves, groupOrder[i]);
+        if (candidates != 0)
+        {
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+                chosenMoveId = BattleAI_ChooseMoveByDamageDoubles(candidates, target);
+            if (chosenMoveId == -1)
+                chosenMoveId = BattleAI_ChooseMoveAgainstTarget(candidates, target);
+            break;
+        }
+    }
+
+    // Every usable move is bad against this target: take the least bad one
     if (chosenMoveId == -1)
-    {
-        if (unusableMovesBits != 0xF)
-        {
-            validMoveFlags = 0, numValidMoveGroups = 0;
-
-            for (i = 0; i < MAX_MON_MOVES; i++)
-            {
-                // validMoveFlags is used here as a bitfield for which moves can be used for each move group type
-                // first 4 bits are for attack (1 for each move), then 4 bits for defense, and 4 for support
-                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_ATTACK && !(gBitTable[i] & unusableMovesBits))
-                    validMoveFlags += (1 << 0);
-                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_DEFENSE && !(gBitTable[i] & unusableMovesBits))
-                    validMoveFlags += (1 << 4);
-                if (GetBattlePalaceMoveGroup(moveInfo->moves[i]) == PALACE_MOVE_GROUP_SUPPORT && !(gBitTable[i] & unusableMovesBits))
-                    validMoveFlags += (1 << 8);
-            }
-
-            // Count the move groups the pokemon has
-            if ((validMoveFlags & 0xF) > 1)
-                numValidMoveGroups++;
-            if ((validMoveFlags & 0xF0) > 0x1F)
-                numValidMoveGroups++;
-            if ((validMoveFlags & 0xF00) > 0x1FF)
-                numValidMoveGroups++;
-
-
-            // If more than 1 possible move group, or no possible move groups
-            // then choose move randomly
-            if (numValidMoveGroups > 1 || numValidMoveGroups == 0)
-            {
-                do
-                {
-                    i = Random() % MAX_MON_MOVES;
-                    if (!(gBitTable[i] & unusableMovesBits))
-                        chosenMoveId = i;
-                } while (chosenMoveId == -1);
-            }
-            // Otherwise randomly choose move of only available move group
-            else
-            {
-                if ((validMoveFlags & 0xF) > 1)
-                    validMoveGroup = PALACE_MOVE_GROUP_ATTACK;
-                if ((validMoveFlags & 0xF0) > 0x1F)
-                    validMoveGroup = PALACE_MOVE_GROUP_DEFENSE;
-                if ((validMoveFlags & 0xF00) > 0x1FF)
-                    validMoveGroup = PALACE_MOVE_GROUP_SUPPORT;
-
-                do
-                {
-                    i = Random() % MAX_MON_MOVES;
-                    if (!(gBitTable[i] & unusableMovesBits) && validMoveGroup == GetBattlePalaceMoveGroup(moveInfo->moves[i]))
-                        chosenMoveId = i;
-                } while (chosenMoveId == -1);
-            }
-
-//PIT RULES: commento la logica qui sotto per evitare che le mosse non compatibili con la natura vengano messe nella lista di quelle
-//da non usare. Questo per evitare che il pokemon si colpisca da solo.
-
-            // If a move was selected (and in this case was not from the Nature-chosen group)
-            // then there's a 50% chance it won't be used anyway
-//            if (Random() % 100 > 49)
-//            {
-//                gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
-//                return 0;
-//            }
-        }
-        else
-        {
-            gProtectStructs[gActiveBattler].palaceUnableToUseMove = TRUE;
-            return 0;
-        }
-    }
+        chosenMoveId = BattleAI_ChooseMoveAgainstTarget(usableMoves, target);
 
     if (moveInfo->moves[chosenMoveId] == MOVE_CURSE)
     {
@@ -411,21 +423,12 @@ u16 ChooseMoveAndTargetInBattleAll(void)
     if (moveTarget & MOVE_TARGET_USER)
         chosenMoveId |= (gActiveBattler << 8);
     else if (moveTarget == MOVE_TARGET_SELECTED)
-        chosenMoveId |= GetBattlePalaceTarget();
+        chosenMoveId |= (target << 8);
     else
         chosenMoveId |= (GetBattlerAtPosition(BATTLE_OPPOSITE(GET_BATTLER_SIDE(gActiveBattler))) << 8);
 
     return chosenMoveId;
 }
-
-#undef maxGroupNum
-#undef minGroupNum
-#undef selectedGroup
-#undef selectedMoves
-#undef moveTarget
-#undef validMoveFlags
-#undef numValidMoveGroups
-#undef validMoveGroup
 
 static u8 GetBattlePalaceMoveGroup(u16 move)
 {

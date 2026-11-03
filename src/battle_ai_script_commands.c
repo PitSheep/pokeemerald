@@ -46,7 +46,9 @@ AI scripts.
 
 extern const u8 *const gBattleAI_ScriptsTable[];
 
-static u8 ChooseMoveOrAction_Singles(void);
+static u8 ChooseMoveOrAction_Singles(bool8 preferMostDamage);
+static u8 PickMostDamagingMove(const u8 *moveIndexes, u8 count);
+
 static u8 ChooseMoveOrAction_Doubles(void);
 static void RecordLastUsedMoveByTarget(void);
 static void BattleAI_DoAIProcessing(void);
@@ -389,7 +391,7 @@ u8 BattleAI_ChooseMoveOrAction(void)
     u8 ret;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
-        ret = ChooseMoveOrAction_Singles();
+        ret = ChooseMoveOrAction_Singles(FALSE);
     else
         ret = ChooseMoveOrAction_Doubles();
 
@@ -397,7 +399,127 @@ u8 BattleAI_ChooseMoveOrAction(void)
     return ret;
 }
 
-static u8 ChooseMoveOrAction_Singles(void)
+//PIT RULES: runs the AI for the active battler against a fixed target, regardless of battle type.
+// Moves not in allowedMoves are never chosen.
+static u8 RunAIOnFixedTarget(u8 allowedMoves, u8 target, u32 aiFlags)
+{
+    u16 savedCurrentMove = gCurrentMove;
+    u8 ret;
+
+    BattleAI_SetupAIData(allowedMoves);
+    gBattlerTarget = target;
+    AI_THINKING_STRUCT->aiFlags = aiFlags;
+    ret = ChooseMoveOrAction_Singles(TRUE);
+    gCurrentMove = savedCurrentMove;
+    return ret;
+}
+
+// Returns the bitmask of moves that the "check bad move" script penalizes against the target.
+u8 BattleAI_GetBadMovesMask(u8 target)
+{
+    s32 i;
+    u8 mask = 0;
+
+    RunAIOnFixedTarget(0xF, target, AI_SCRIPT_CHECK_BAD_MOVE);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (AI_THINKING_STRUCT->score[i] < 100)
+            mask |= gBitTable[i];
+    }
+    return mask;
+}
+
+// Full AI evaluation restricted to allowedMoves, against a fixed target.
+u8 BattleAI_ChooseMoveAgainstTarget(u8 allowedMoves, u8 target)
+{
+    return RunAIOnFixedTarget(allowedMoves, target,
+                              AI_SCRIPT_CHECK_BAD_MOVE | AI_SCRIPT_CHECK_VIABILITY | AI_SCRIPT_TRY_TO_FAINT);
+}
+
+// Damage the move would deal to defender, without any random factor (0 if it doesn't deal damage).
+static s32 GetPitMoveDamage(u16 move, u8 defender)
+{
+    if (gBattleMoves[move].power < 2)
+        return 0;
+
+    gDynamicBasePower = 0;
+    *(&gBattleStruct->dynamicMoveType) = 0;
+    gBattleScripting.dmgMultiplier = 1;
+    gMoveResultFlags = 0;
+    gCritMultiplier = 1;
+    gCurrentMove = move;
+    AI_CalcDmg(sBattler_AI, defender);
+    TypeCalc(move, sBattler_AI, defender);
+    if (gMoveResultFlags & MOVE_RESULT_DOESNT_AFFECT_FOE)
+        return 0;
+    return gBattleMoveDamage;
+}
+
+//PIT RULES: doubles move choice among allowedMoves.
+// 1. a move that KOs the nature-chosen target wins (most total damage among those)
+// 2. otherwise the move with the highest total damage wins: moves hitting both foes add up both
+//    damages, moves also hitting the ally subtract the damage dealt to it.
+// Returns -1 when no allowed move deals damage (the caller falls back to the regular AI).
+s32 BattleAI_ChooseMoveByDamageDoubles(u8 allowedMoves, u8 target)
+{
+    s32 i, b;
+    s32 bestKo = -1, bestKoTotal = -1;
+    s32 bestAny = -1, bestAnyTotal = 0;
+    u16 savedCurrentMove = gCurrentMove;
+    u8 attackerSide;
+
+    sBattler_AI = gActiveBattler;
+    attackerSide = GetBattlerSide(sBattler_AI);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = gBattleMons[sBattler_AI].moves[i];
+        u8 moveTarget = gBattleMoves[move].target;
+        s32 total;
+        bool8 ko;
+
+        if (!(allowedMoves & gBitTable[i]) || move == MOVE_NONE)
+            continue;
+
+        total = GetPitMoveDamage(move, target);
+        if (total == 0)
+            continue;
+
+        ko = total >= gBattleMons[target].hp;
+
+        if (moveTarget == MOVE_TARGET_BOTH || moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+        {
+            total = 0;
+            for (b = 0; b < gBattlersCount; b++)
+            {
+                bool8 alive = gBattleMons[b].hp != 0 && !(gAbsentBattlerFlags & gBitTable[b]);
+
+                if (b == sBattler_AI || !alive)
+                    continue;
+                if (GetBattlerSide(b) != attackerSide)
+                    total += GetPitMoveDamage(move, b);
+                else if (moveTarget == MOVE_TARGET_FOES_AND_ALLY)
+                    total -= GetPitMoveDamage(move, b);
+            }
+        }
+
+        if (ko && total > bestKoTotal)
+        {
+            bestKo = i;
+            bestKoTotal = total;
+        }
+        if (bestAny == -1 || total > bestAnyTotal)
+        {
+            bestAny = i;
+            bestAnyTotal = total;
+        }
+    }
+
+    gCurrentMove = savedCurrentMove;
+    return (bestKo != -1) ? bestKo : bestAny;
+}
+
+static u8 ChooseMoveOrAction_Singles(bool8 preferMostDamage)
 {
     u8 currentMoveArray[MAX_MON_MOVES];
     u8 consideredMoveArray[MAX_MON_MOVES];
@@ -446,7 +568,44 @@ static u8 ChooseMoveOrAction_Singles(void)
             }
         }
     }
+    if (preferMostDamage && numOfBestMoves > 1)
+        return PickMostDamagingMove(consideredMoveArray, numOfBestMoves);
+
     return consideredMoveArray[Random() % numOfBestMoves];
+}
+
+// Among equally scored moves (e.g. several that can KO) pick the one dealing the most damage,
+// so a KO that fails (potion, etc.) still leaves the target as hurt as possible.
+static u8 PickMostDamagingMove(const u8 *moveIndexes, u8 count)
+{
+    s32 i, bestDmg = -1;
+    u8 best = moveIndexes[0];
+
+    gDynamicBasePower = 0;
+    *(&gBattleStruct->dynamicMoveType) = 0;
+    gBattleScripting.dmgMultiplier = 1;
+    gCritMultiplier = 1;
+
+    for (i = 0; i < count; i++)
+    {
+        s32 dmg = 0;
+        u16 move = gBattleMons[sBattler_AI].moves[moveIndexes[i]];
+
+        if (gBattleMoves[move].power > 1)
+        {
+            gMoveResultFlags = 0;
+            gCurrentMove = move;
+            AI_CalcDmg(sBattler_AI, gBattlerTarget);
+            TypeCalc(gCurrentMove, sBattler_AI, gBattlerTarget);
+            dmg = gBattleMoveDamage;
+        }
+        if (dmg > bestDmg)
+        {
+            bestDmg = dmg;
+            best = moveIndexes[i];
+        }
+    }
+    return best;
 }
 
 static u8 ChooseMoveOrAction_Doubles(void)
