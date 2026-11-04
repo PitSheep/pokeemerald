@@ -2935,7 +2935,8 @@ OldaleTown_Gym_EventScript_SixVsOneTournament_Rules::
 	special HealPlayerParty
 	setvar VAR_OLDALE_GYM_TOURNAMENT_STATE, 1
 	setvar VAR_BATTLE_GYM_OPPONENT, 0
-	random 4
+	@ Encode one of four teams and one of its 720 possible orders in a single saved value.
+	random 2880
 	copyvar VAR_OLDALE_GYM_TOURNAMENT_TEAM, VAR_RESULT
 	setflag FLAG_BATTLE_GYM
 	setflag FLAG_BATTLE_GYM_OPPONENT

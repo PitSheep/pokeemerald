@@ -2073,11 +2073,31 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 7
             || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 9
             || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 11);
-    u8 tournamentTeam = VarGet(VAR_OLDALE_GYM_TOURNAMENT_TEAM);
+    u16 tournamentSelection = VarGet(VAR_OLDALE_GYM_TOURNAMENT_TEAM);
+    u8 tournamentTeam = tournamentSelection % ARRAY_COUNT(sTournamentTeams);
+    u16 tournamentOrderIndex = (tournamentSelection / ARRAY_COUNT(sTournamentTeams)) % 720;
+    u8 tournamentOrder[PARTY_SIZE];
 
     if (isTournamentBattle)
     {
+        u8 availableMons[PARTY_SIZE];
+        u16 factorial = 120;
         u32 totalLevel = 0;
+
+        for (i = 0; i < PARTY_SIZE; i++)
+            availableMons[i] = i;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            u8 selectedIndex = tournamentOrderIndex / factorial;
+
+            tournamentOrderIndex %= factorial;
+            tournamentOrder[i] = availableMons[selectedIndex];
+            for (j = selectedIndex; j < PARTY_SIZE - i - 1; j++)
+                availableMons[j] = availableMons[j + 1];
+            if (i < PARTY_SIZE - 1)
+                factorial /= PARTY_SIZE - i - 1;
+        }
+
         for (i = 0; i < gPlayerPartyCount; i++)
             totalLevel += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
         if (gPlayerPartyCount != 0)
@@ -2139,7 +2159,8 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
             if (isTournamentBattle)
             {
-                u16 species = sTournamentTeams[tournamentTeam][i].species;
+                u8 monIndex = tournamentOrder[i];
+                u16 species = sTournamentTeams[tournamentTeam][monIndex].species;
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
 
@@ -2149,13 +2170,13 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 if (reallevel == 0)
                     reallevel = 1;
                 CreateMon(&party[i], species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, &sTournamentTeams[tournamentTeam][i].heldItem);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &sTournamentTeams[tournamentTeam][monIndex].heldItem);
                 for (j = 0; j < NUM_STATS; j++)
-                    SetMonData(&party[i], MON_DATA_HP_EV + j, &sTournamentTeams[tournamentTeam][i].evs[j]);
+                    SetMonData(&party[i], MON_DATA_HP_EV + j, &sTournamentTeams[tournamentTeam][monIndex].evs[j]);
                 CalculateMonStats(&party[i]);
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    u16 move = sTournamentTeams[tournamentTeam][i].moves[j];
+                    u16 move = sTournamentTeams[tournamentTeam][monIndex].moves[j];
                     SetMonData(&party[i], MON_DATA_MOVE1 + j, &move);
                     SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[move].pp);
                 }
