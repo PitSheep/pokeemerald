@@ -4435,7 +4435,7 @@
       "id": "LAYOUT_OLDALE_TOWN_HOUSE2",
       "name": "OldaleTown_House2_Layout",
       "width": 17,
-      "height": 16,
+      "height": 22,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_CableClub",
       "border_filepath": "data/layouts/OldaleTown_House2/border.bin",
