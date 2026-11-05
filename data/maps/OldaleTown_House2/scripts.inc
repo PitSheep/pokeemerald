@@ -330,7 +330,16 @@ OldaleTown_House2_Text_Incubatore_NoBP:
 OldaleTown_House2_EventScript_Nature_Tips::
 	lock
 	faceplayer
+	msgbox OldaleTown_House2_Text_Nature_Tips_Prompt, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, OldaleTown_House2_EventScript_Nature_Tips_Cancel
 	special ShowNatureTips
 	waitstate
 	release
 	end
+
+OldaleTown_House2_EventScript_Nature_Tips_Cancel::
+	release
+	end
+
+OldaleTown_House2_Text_Nature_Tips_Prompt:
+	.string "Would you like to see the nature list?$"

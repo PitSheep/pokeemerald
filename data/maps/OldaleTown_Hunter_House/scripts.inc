@@ -1107,7 +1107,16 @@ OldaleTown_Hunter_House_EventScript_AbilityChange_success_text:
 OldaleTown_Hunter_House_EventScript_Craft_List::
     lock
     faceplayer
+    msgbox OldaleTown_Hunter_House_Text_Craft_List_Prompt, MSGBOX_YESNO
+    goto_if_eq VAR_RESULT, NO, OldaleTown_Hunter_House_EventScript_Craft_List_Cancel
     special ShowCraftRecipeBook
     waitstate
     release
     end
+
+OldaleTown_Hunter_House_EventScript_Craft_List_Cancel::
+    release
+    end
+
+OldaleTown_Hunter_House_Text_Craft_List_Prompt:
+    .string "Would you like to see the crafting list?$"
