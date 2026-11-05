@@ -250,17 +250,6 @@ static const struct SpriteTemplate sSpriteTemplate_Selector =
     .callback = SelectorCallback
 };
 
-// Begin Generic UI Initialization Code
-void Task_OpenStatEditorFromStartMenu(u8 taskId)
-{
-    if (!gPaletteFade.active)
-    {
-        CleanupOverworldWindowsAndTilemaps();
-        StatEditor_Init(CB2_ReturnToFieldWithOpenMenu);
-        DestroyTask(taskId);
-    }
-}
-
 // This is our main initialization function if you want to call the menu from elsewhere
 void StatEditor_Init(MainCallback callback)
 {
@@ -277,6 +266,17 @@ void StatEditor_Init(MainCallback callback)
     sStatEditorDataPtr->partyid = gSpecialVar_0x8004;
     
     SetMainCallback2(StatEditor_RunSetup);
+}
+
+void OpenStatEditorFromScript(void)
+{
+    u16 partyId = gSpecialVar_0x8004;
+
+    if (partyId >= gPlayerPartyCount || GetMonData(&gPlayerParty[partyId], MON_DATA_SPECIES) == SPECIES_NONE)
+        return;
+
+    ScriptContext_Stop();
+    StatEditor_Init(CB2_ReturnToFieldContinueScriptPlayMapMusic);
 }
 
 static void StatEditor_RunSetup(void)
@@ -1011,5 +1011,3 @@ static void Task_MenuEditingStat(u8 taskId) // This function should be refactore
         HandleEditingStatInput(EDIT_INPUT_MAX_DECREASE_STATE);
 
 }
-
-

@@ -73,13 +73,10 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
-#include "ui_stat_editor.h"
 #include "move_relearner.h"
 
 enum {
     MENU_SUMMARY,
-    MENU_MOVES,
-    MENU_STAT_EDIT,
     MENU_SWITCH,
     MENU_SET_FOLLOWER,
     MENU_CANCEL1,
@@ -465,8 +462,6 @@ static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, u8);
 static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, u8);
 static void BlitBitmapToPartyWindow_Equal(u8, u8, u8, u8, u8, u8); //Custom party menu
 static void CursorCb_Summary(u8);
-static void CursorCb_Moves(u8);
-static void CursorCb_StatEdit(u8);
 static void CursorCb_Switch(u8);
 static void CursorCb_Set_Follower(u8);
 static void CursorCb_Cancel1(u8);
@@ -2718,7 +2713,6 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
-    AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_STAT_EDIT);
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SET_FOLLOWER);
 
     // Add field moves to action list
@@ -2738,11 +2732,8 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     {
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SWITCH);
-	if (GetNumberOfRelearnableMoves(&mons[slotId]) != 0) {
-			AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MOVES);
-		}
-        if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
-            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MAIL);
+		if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
+			AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_MAIL);
         else
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_ITEM);
     }
@@ -2884,18 +2875,6 @@ static void CursorCb_Summary(u8 taskId)
 {
     PlaySE(SE_SELECT);
     sPartyMenuInternal->exitCallback = CB2_ShowPokemonSummaryScreen;
-    Task_ClosePartyMenu(taskId);
-}
-
-static void CursorCb_Moves(u8 taskId)
-{
-    PlaySE(SE_SELECT);
-	FlagSet(FLAG_PARTY_MOVES);
-    gSpecialVar_0x8004 = gPartyMenu.slotId;
-	gSpecialVar_0x8005 = GetNumberOfRelearnableMoves(&gPlayerParty[gSpecialVar_0x8004]);
-	DisplayPartyPokemonDataForRelearner(gSpecialVar_0x8004);
-	TeachMoveRelearnerMove();
-    sPartyMenuInternal->exitCallback = TeachMoveRelearnerMove;
     Task_ClosePartyMenu(taskId);
 }
 
@@ -4393,23 +4372,6 @@ static void UpdatePartyMonAilmentGfx(u8 status, struct PartyMenuBox *menuBox)
     }
 }
 
-
-static void ChangePokemonStatsPartyScreen_CB(void)
-{
-    CB2_ReturnToPartyMenuFromSummaryScreen();
-}
-
-static void ChangePokemonStatsPartyScreen(void)
-{
-    StatEditor_Init(ChangePokemonStatsPartyScreen_CB);
-}
-static void CursorCb_StatEdit(u8 taskId)
-{
-    PlaySE(SE_SELECT);
-    gSpecialVar_0x8004 = gPartyMenu.slotId;
-    sPartyMenuInternal->exitCallback = ChangePokemonStatsPartyScreen;
-    Task_ClosePartyMenu(taskId);
-}
 
 static void LoadPartyMenuAilmentGfx(void)
 {

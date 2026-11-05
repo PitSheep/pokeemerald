@@ -72,6 +72,8 @@
 
 #define TAG_ITEM_ICON 5500
 
+#define NUM_ALL_TUTOR_MOVES 30
+
 #define GFXTAG_MULTICHOICE_SCROLL_ARROWS 2000
 #define PALTAG_MULTICHOICE_SCROLL_ARROWS 100
 
@@ -2445,6 +2447,16 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
+    case SCROLL_MULTI_BF_MOVE_TUTOR_ALL:
+        task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
+        task->tNumItems = NUM_ALL_TUTOR_MOVES + 1;
+        task->tLeft = 15;
+        task->tTop = 1;
+        task->tWidth = 14;
+        task->tHeight = 12;
+        task->tKeepOpenAfterSelect = FALSE;
+        task->tTaskId = taskId;
+        break;
     case SCROLL_MULTI_SS_TIDAL_DESTINATION:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
         task->tNumItems = 7;
@@ -2471,6 +2483,37 @@ void ShowScrollableMultichoice(void)
         break;
     }
 }
+
+static const u8 sText_AllTutor_Softboiled[] = _("SOFTBOILED{CLEAR_TO 0x4E}16BP");
+static const u8 sText_AllTutor_SeismicToss[] = _("SEISMIC TOSS{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_DreamEater[] = _("DREAM EATER{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_MegaPunch[] = _("MEGA PUNCH{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_MegaKick[] = _("MEGA KICK{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_BodySlam[] = _("BODY SLAM{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_RockSlide[] = _("ROCK SLIDE{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_Counter[] = _("COUNTER{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_ThunderWave[] = _("THUNDER WAVE{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_SwordsDance[] = _("SWORDS DANCE{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_DefenseCurl[] = _("DEFENSE CURL{CLEAR_TO 0x4E}16BP");
+static const u8 sText_AllTutor_Snore[] = _("SNORE{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_MudSlap[] = _("MUD-SLAP{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_Swift[] = _("SWIFT{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_IcyWind[] = _("ICY WIND{CLEAR_TO 0x4E}24BP");
+static const u8 sText_AllTutor_Endure[] = _("ENDURE{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_PsychUp[] = _("PSYCH UP{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_IcePunch[] = _("ICE PUNCH{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_ThunderPunch[] = _("THUNDERPUNCH{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_FirePunch[] = _("FIRE PUNCH{CLEAR_TO 0x4E}48BP");
+static const u8 sText_AllTutor_Swagger[] = _("SWAGGER{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_Rollout[] = _("ROLLOUT{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_FuryCutter[] = _("FURY CUTTER{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_Mimic[] = _("MIMIC{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_Metronome[] = _("METRONOME{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_SleepTalk[] = _("SLEEP TALK{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_Substitute[] = _("SUBSTITUTE{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_DynamicPunch[] = _("DYNAMICPUNCH{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_DoubleEdge[] = _("DOUBLE-EDGE{CLEAR_TO 0x4E}50BP");
+static const u8 sText_AllTutor_Explosion[] = _("EXPLOSION{CLEAR_TO 0x4E}50BP");
 
 static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] =
 {
@@ -2635,6 +2678,40 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         gText_IcePunch48BP,
         gText_ThunderPunch48BP,
         gText_FirePunch48BP,
+        gText_Exit
+    },
+    [SCROLL_MULTI_BF_MOVE_TUTOR_ALL] =
+    {
+        sText_AllTutor_Softboiled,
+        sText_AllTutor_SeismicToss,
+        sText_AllTutor_DreamEater,
+        sText_AllTutor_MegaPunch,
+        sText_AllTutor_MegaKick,
+        sText_AllTutor_BodySlam,
+        sText_AllTutor_RockSlide,
+        sText_AllTutor_Counter,
+        sText_AllTutor_ThunderWave,
+        sText_AllTutor_SwordsDance,
+        sText_AllTutor_DefenseCurl,
+        sText_AllTutor_Snore,
+        sText_AllTutor_MudSlap,
+        sText_AllTutor_Swift,
+        sText_AllTutor_IcyWind,
+        sText_AllTutor_Endure,
+        sText_AllTutor_PsychUp,
+        sText_AllTutor_IcePunch,
+        sText_AllTutor_ThunderPunch,
+        sText_AllTutor_FirePunch,
+        sText_AllTutor_Swagger,
+        sText_AllTutor_Rollout,
+        sText_AllTutor_FuryCutter,
+        sText_AllTutor_Mimic,
+        sText_AllTutor_Metronome,
+        sText_AllTutor_SleepTalk,
+        sText_AllTutor_Substitute,
+        sText_AllTutor_DynamicPunch,
+        sText_AllTutor_DoubleEdge,
+        sText_AllTutor_Explosion,
         gText_Exit
     },
     [SCROLL_MULTI_SS_TIDAL_DESTINATION] =
@@ -3223,6 +3300,112 @@ void BufferBattleFrontierTutorMoveName(void)
         StringCopy(gStringVar1, gMoveNames[sBattleFrontier_TutorMoves1[gSpecialVar_0x8004]]);
 }
 
+static const u8 sText_AllTutorDesc_Swagger[] = _("Confuses the foe\nbut sharply raises\nits ATTACK.");
+static const u8 sText_AllTutorDesc_Rollout[] = _("A rolling attack\nthat gains power\nwith each hit.");
+static const u8 sText_AllTutorDesc_FuryCutter[] = _("Slashes the foe.\nPower doubles on\nconsecutive hits.");
+static const u8 sText_AllTutorDesc_Mimic[] = _("Copies the foe's\nlast move for the\nrest of the battle.");
+static const u8 sText_AllTutorDesc_Metronome[] = _("Waggles a finger\nto use a random\nmove.");
+static const u8 sText_AllTutorDesc_SleepTalk[] = _("Uses a random\nmove while the\nuser is asleep.");
+static const u8 sText_AllTutorDesc_Substitute[] = _("Creates a decoy\nusing some of\nthe user's HP.");
+static const u8 sText_AllTutorDesc_DynamicPunch[] = _("A powerful punch\nthat always\nconfuses the foe.");
+static const u8 sText_AllTutorDesc_DoubleEdge[] = _("A reckless tackle\nthat also hurts\nthe user.");
+static const u8 sText_AllTutorDesc_Explosion[] = _("A huge blast that\nmakes the user\nfaint.");
+
+// Same order as sScrollableMultichoiceOptions[SCROLL_MULTI_BF_MOVE_TUTOR_ALL]
+static const u8 *const sBattleFrontier_TutorMoveDescriptionsAll[] =
+{
+    BattleFrontier_Lounge7_Text_SoftboiledDesc,
+    BattleFrontier_Lounge7_Text_SeismicTossDesc,
+    BattleFrontier_Lounge7_Text_DreamEaterDesc,
+    BattleFrontier_Lounge7_Text_MegaPunchDesc,
+    BattleFrontier_Lounge7_Text_MegaKickDesc,
+    BattleFrontier_Lounge7_Text_BodySlamDesc,
+    BattleFrontier_Lounge7_Text_RockSlideDesc,
+    BattleFrontier_Lounge7_Text_CounterDesc,
+    BattleFrontier_Lounge7_Text_ThunderWaveDesc,
+    BattleFrontier_Lounge7_Text_SwordsDanceDesc,
+    BattleFrontier_Lounge7_Text_DefenseCurlDesc,
+    BattleFrontier_Lounge7_Text_SnoreDesc,
+    BattleFrontier_Lounge7_Text_MudSlapDesc,
+    BattleFrontier_Lounge7_Text_SwiftDesc,
+    BattleFrontier_Lounge7_Text_IcyWindDesc,
+    BattleFrontier_Lounge7_Text_EndureDesc,
+    BattleFrontier_Lounge7_Text_PsychUpDesc,
+    BattleFrontier_Lounge7_Text_IcePunchDesc,
+    BattleFrontier_Lounge7_Text_ThunderPunchDesc,
+    BattleFrontier_Lounge7_Text_FirePunchDesc,
+    sText_AllTutorDesc_Swagger,
+    sText_AllTutorDesc_Rollout,
+    sText_AllTutorDesc_FuryCutter,
+    sText_AllTutorDesc_Mimic,
+    sText_AllTutorDesc_Metronome,
+    sText_AllTutorDesc_SleepTalk,
+    sText_AllTutorDesc_Substitute,
+    sText_AllTutorDesc_DynamicPunch,
+    sText_AllTutorDesc_DoubleEdge,
+    sText_AllTutorDesc_Explosion,
+    gText_Exit,
+};
+
+static const struct
+{
+    u16 move;
+    u8 price;
+} sBattleFrontier_TutorMovesAll[NUM_ALL_TUTOR_MOVES] =
+{
+    {MOVE_SOFT_BOILED, 16},
+    {MOVE_SEISMIC_TOSS, 24},
+    {MOVE_DREAM_EATER, 24},
+    {MOVE_MEGA_PUNCH, 24},
+    {MOVE_MEGA_KICK, 48},
+    {MOVE_BODY_SLAM, 48},
+    {MOVE_ROCK_SLIDE, 48},
+    {MOVE_COUNTER, 48},
+    {MOVE_THUNDER_WAVE, 48},
+    {MOVE_SWORDS_DANCE, 48},
+    {MOVE_DEFENSE_CURL, 16},
+    {MOVE_SNORE, 24},
+    {MOVE_MUD_SLAP, 24},
+    {MOVE_SWIFT, 24},
+    {MOVE_ICY_WIND, 24},
+    {MOVE_ENDURE, 48},
+    {MOVE_PSYCH_UP, 48},
+    {MOVE_ICE_PUNCH, 48},
+    {MOVE_THUNDER_PUNCH, 48},
+    {MOVE_FIRE_PUNCH, 48},
+    {MOVE_SWAGGER, 50},
+    {MOVE_ROLLOUT, 50},
+    {MOVE_FURY_CUTTER, 50},
+    {MOVE_MIMIC, 50},
+    {MOVE_METRONOME, 50},
+    {MOVE_SLEEP_TALK, 50},
+    {MOVE_SUBSTITUTE, 50},
+    {MOVE_DYNAMIC_PUNCH, 50},
+    {MOVE_DOUBLE_EDGE, 50},
+    {MOVE_EXPLOSION, 50},
+};
+
+// Uses the selection in VAR_TEMP_D to buffer the move name in STR_VAR_1,
+// the price in VAR_0x8008 and the tutor move id (for ChooseMonForMoveTutor) in VAR_0x8005
+void SetBattleFrontierAllTutorMove(void)
+{
+    u8 i;
+    u16 selection = VarGet(VAR_TEMP_D);
+    u16 move = sBattleFrontier_TutorMovesAll[selection].move;
+
+    StringCopy(gStringVar1, gMoveNames[move]);
+    gSpecialVar_0x8008 = sBattleFrontier_TutorMovesAll[selection].price;
+    gSpecialVar_0x8005 = 0;
+    for (i = 0; i < TUTOR_MOVE_COUNT; i++)
+    {
+        if (gTutorMoves[i] == move)
+        {
+            gSpecialVar_0x8005 = i;
+            break;
+        }
+    }
+}
+
 static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
 {
     static const struct WindowTemplate sBattleFrontierTutor_WindowTemplate =
@@ -3236,7 +3419,7 @@ static void ShowBattleFrontierTutorWindow(u8 menu, u16 selection)
         .baseBlock = 28,
     };
 
-    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_ALL)
     {
         if (gSpecialVar_0x8006 == 0)
         {
@@ -3279,7 +3462,12 @@ static void ShowBattleFrontierTutorMoveDescription(u8 menu, u16 selection)
         gText_Exit,
     };
 
-    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
+    if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_ALL)
+    {
+        FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
+        AddTextPrinterParameterized(sTutorMoveAndElevatorWindowId, FONT_NORMAL, sBattleFrontier_TutorMoveDescriptionsAll[selection], 0, 1, 0, NULL);
+    }
+    else if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_1 || menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)
     {
         FillWindowPixelRect(sTutorMoveAndElevatorWindowId, PIXEL_FILL(1), 0, 0, 96, 48);
         if (menu == SCROLL_MULTI_BF_MOVE_TUTOR_2)

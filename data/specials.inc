@@ -513,6 +513,7 @@ gSpecials::
 	def_special ScrollableMultichoice_RedrawPersistentMenu
 	def_special ChooseMonForMoveTutor
 	def_special GetBattleFrontierTutorMoveIndex
+	def_special SetBattleFrontierAllTutorMove
 	def_special ScrollableMultichoice_ClosePersistentMenu
 	def_special DoDeoxysRockInteraction
 	def_special SetDeoxysRockPalette
@@ -567,3 +568,4 @@ gSpecials::
 	def_special ShowCraftRecipeBook
 	def_special ShowNatureTips
 	def_special BufferUnitSystemText
+	def_special OpenStatEditorFromScript
