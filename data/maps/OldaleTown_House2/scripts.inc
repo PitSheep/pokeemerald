@@ -10,18 +10,12 @@ OldaleTown_House2_EventScript_Woman::
 	msgbox OldaleTown_House2_Text_PokemonLevelUp, MSGBOX_NPC
 	end
 
-OldaleTown_House2_EventScript_Man::
-	msgbox OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon, MSGBOX_NPC
-	end
-
 OldaleTown_House2_Text_PokemonLevelUp:
 	.string "Welcome to the HUNTER CARE!\p"
 	.string "Put one POKéMON in each of the two\n"
 	.string "INCUBATORS on the left.\p"
 	.string "If they are compatible, an EGG can\n"
-	.string "be made from them.$"
-
-OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
+	.string "be made from them.\p"
 	.string "Then use the machine on the right.\n"
 	.string "Pay 8 BP and the EGG hatches at once!\p"
 	.string "Your POKéMON stay in the INCUBATORS,\n"
