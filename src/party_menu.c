@@ -2964,8 +2964,8 @@ static void CursorCb_Set_Follower(u8 taskId)
     PlaySE(SE_SELECT);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
-    DisplayPartyMenuStdMessage(PARTY_MSG_CHOOSE_MON);
-    gTasks[taskId].func = Task_HandleChooseMonInput;
+    DisplayPartyMenuMessage(gText_FollowerSet, FALSE);
+    gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
 }
 
 #define tSlot1Left     data[0]
