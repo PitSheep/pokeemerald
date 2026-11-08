@@ -73,6 +73,146 @@ static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
 static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer);
+static u8 sTournamentEliminatedMask;
+
+static u16 GetTournamentStat(u16 species, u8 stat, u8 ev, u8 level)
+{
+    u8 baseStat;
+    u32 value;
+
+    switch (stat)
+    {
+    case STAT_HP:
+        baseStat = gSpeciesInfo[species].baseHP;
+        break;
+    case STAT_ATK:
+        baseStat = gSpeciesInfo[species].baseAttack;
+        break;
+    case STAT_DEF:
+        baseStat = gSpeciesInfo[species].baseDefense;
+        break;
+    case STAT_SPATK:
+        baseStat = gSpeciesInfo[species].baseSpAttack;
+        break;
+    case STAT_SPDEF:
+        baseStat = gSpeciesInfo[species].baseSpDefense;
+        break;
+    default:
+        baseStat = gSpeciesInfo[species].baseSpeed;
+        break;
+    }
+
+    value = ((2 * baseStat + MAX_PER_STAT_IVS + ev / 4) * level) / 100;
+
+    if (stat == STAT_HP)
+        return value + level + 10;
+    return value + 5;
+}
+
+static u16 GetTournamentTypeMultiplier(u8 moveType, u16 targetSpecies, u8 targetAbility)
+{
+    u16 multiplier = TYPE_MUL_NORMAL;
+    u8 targetType1 = gSpeciesInfo[targetSpecies].types[0];
+    u8 targetType2 = gSpeciesInfo[targetSpecies].types[1];
+    s32 i;
+
+    if (targetAbility == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+        return 0;
+
+    for (i = 0; TYPE_EFFECT_ATK_TYPE(i) != TYPE_ENDTABLE; i += 3)
+    {
+        if (TYPE_EFFECT_ATK_TYPE(i) == TYPE_FORESIGHT || TYPE_EFFECT_ATK_TYPE(i) != moveType)
+            continue;
+        if (TYPE_EFFECT_DEF_TYPE(i) == targetType1)
+            multiplier = multiplier * TYPE_EFFECT_MULTIPLIER(i) / TYPE_MUL_NORMAL;
+        if (TYPE_EFFECT_DEF_TYPE(i) == targetType2 && targetType1 != targetType2)
+            multiplier = multiplier * TYPE_EFFECT_MULTIPLIER(i) / TYPE_MUL_NORMAL;
+    }
+
+    if (targetAbility == ABILITY_WONDER_GUARD && multiplier <= TYPE_MUL_NORMAL)
+        return 0;
+    return multiplier;
+}
+
+static s32 GetTournamentMoveDamagePercent(u16 move, u16 attackerSpecies, u8 attackerLevel,
+                                          u16 attackStat, u16 targetSpecies, u8 targetAbility,
+                                          u16 defenseStat, u16 targetMaxHp)
+{
+    s32 damage;
+    u16 typeMultiplier;
+
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || gBattleMoves[move].power == 0
+        || attackStat == 0 || defenseStat == 0 || targetMaxHp == 0)
+        return 0;
+
+    typeMultiplier = GetTournamentTypeMultiplier(gBattleMoves[move].type, targetSpecies, targetAbility);
+    if (typeMultiplier == 0)
+        return 0;
+
+    damage = (((2 * attackerLevel / 5 + 2) * gBattleMoves[move].power * attackStat / defenseStat) / 50) + 2;
+    damage *= typeMultiplier;
+    if (gSpeciesInfo[attackerSpecies].types[0] == gBattleMoves[move].type
+        || gSpeciesInfo[attackerSpecies].types[1] == gBattleMoves[move].type)
+        damage = damage * 15 / 10;
+    damage = damage * (gBattleMoves[move].accuracy == 0 ? 100 : gBattleMoves[move].accuracy) / 100;
+    return damage * 10 / targetMaxHp;
+}
+
+static s32 GetTournamentMatchupScore(u16 species, const u16 moves[MAX_MON_MOVES], const u8 evs[NUM_STATS],
+                                     u8 level, struct Pokemon *playerMon)
+{
+    u16 enemyAttack = GetTournamentStat(species, STAT_ATK, evs[STAT_ATK], level);
+    u16 enemyDefense = GetTournamentStat(species, STAT_DEF, evs[STAT_DEF], level);
+    u16 enemySpAttack = GetTournamentStat(species, STAT_SPATK, evs[STAT_SPATK], level);
+    u16 enemySpDefense = GetTournamentStat(species, STAT_SPDEF, evs[STAT_SPDEF], level);
+    u16 enemyMaxHp = GetTournamentStat(species, STAT_HP, evs[STAT_HP], level);
+    u16 playerSpecies = GetMonData(playerMon, MON_DATA_SPECIES);
+    u8 playerAbility = GetMonAbility(playerMon);
+    u8 enemyAbility = gSpeciesInfo[species].abilities[0];
+    u8 playerLevel = GetMonData(playerMon, MON_DATA_LEVEL);
+    u16 playerMaxHp = GetMonData(playerMon, MON_DATA_MAX_HP);
+    s32 enemyBestDamage = 0;
+    s32 playerBestDamage = 0;
+    u8 i;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = moves[i];
+        u16 attackStat;
+        u16 defenseStat;
+        s32 damage;
+
+        if (move == MOVE_NONE || gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
+            continue;
+        attackStat = IS_MOVE_PHYSICAL(move) ? enemyAttack : enemySpAttack;
+        defenseStat = IS_MOVE_PHYSICAL(move) ? GetMonData(playerMon, MON_DATA_DEF) : GetMonData(playerMon, MON_DATA_SPDEF);
+        damage = GetTournamentMoveDamagePercent(move, species, level, attackStat,
+                                                playerSpecies, playerAbility, defenseStat, playerMaxHp);
+
+        if (damage > enemyBestDamage)
+            enemyBestDamage = damage;
+    }
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u16 move = GetMonData(playerMon, MON_DATA_MOVE1 + i);
+        u16 attackStat;
+        u16 defenseStat;
+        s32 damage;
+
+        if (move == MOVE_NONE || gBattleMoves[move].category == MOVE_CATEGORY_STATUS)
+            continue;
+        attackStat = IS_MOVE_PHYSICAL(move) ? GetMonData(playerMon, MON_DATA_ATK) : GetMonData(playerMon, MON_DATA_SPATK);
+        defenseStat = IS_MOVE_PHYSICAL(move) ? enemyDefense : enemySpDefense;
+        damage = GetTournamentMoveDamagePercent(move, playerSpecies, playerLevel, attackStat,
+                                                species, enemyAbility, defenseStat, enemyMaxHp);
+        if (damage > playerBestDamage)
+            playerBestDamage = damage;
+    }
+
+    return enemyBestDamage - playerBestDamage;
+}
+
 static void BattleMainCB1(void);
 static void CB2_EndLinkBattle(void);
 static void EndLinkBattleInSteps(void);
@@ -2074,9 +2214,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 9
             || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 11);
     u16 tournamentSelection = VarGet(VAR_OLDALE_GYM_TOURNAMENT_TEAM);
+    u16 tournamentState = VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE);
     u8 tournamentTeam = tournamentSelection % ARRAY_COUNT(sTournamentTeams);
     u16 tournamentOrderIndex = (tournamentSelection / ARRAY_COUNT(sTournamentTeams)) % 720;
     u8 tournamentOrder[PARTY_SIZE];
+    u8 tournamentPartyOrder[PARTY_SIZE];
 
     if (isTournamentBattle)
     {
@@ -2102,6 +2244,59 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             totalLevel += GetMonData(&gPlayerParty[i], MON_DATA_LEVEL);
         if (gPlayerPartyCount != 0)
             fixedLVL = totalLevel / gPlayerPartyCount;
+
+        if (tournamentState == 1)
+        {
+            sTournamentEliminatedMask = 0;
+        }
+        else
+        {
+            s32 weakestScore = 0x7FFFFFFF;
+            u8 weakestMon = PARTY_SIZE;
+
+            for (i = 0; i < PARTY_SIZE; i++)
+            {
+                u8 monIndex = tournamentOrder[i];
+                s32 score = 0;
+
+                if (sTournamentEliminatedMask & (1 << monIndex))
+                    continue;
+                for (j = 0; j < gPlayerPartyCount; j++)
+                {
+                    score += GetTournamentMatchupScore(sTournamentTeams[tournamentTeam][monIndex].species,
+                                                       sTournamentTeams[tournamentTeam][monIndex].moves,
+                                                       sTournamentTeams[tournamentTeam][monIndex].evs,
+                                                       fixedLVL, &gPlayerParty[j]);
+                }
+                if (score < weakestScore)
+                {
+                    weakestScore = score;
+                    weakestMon = monIndex;
+                }
+            }
+            if (weakestMon < PARTY_SIZE)
+                sTournamentEliminatedMask |= 1 << weakestMon;
+        }
+
+        monsCount = 0;
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            u8 monIndex = tournamentOrder[i];
+
+            if (!(sTournamentEliminatedMask & (1 << monIndex)))
+            {
+                tournamentPartyOrder[monsCount++] = monIndex;
+                break;
+            }
+        }
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            u8 monIndex = tournamentOrder[i];
+
+            if (!(sTournamentEliminatedMask & (1 << monIndex))
+                && monIndex != tournamentPartyOrder[0])
+                tournamentPartyOrder[monsCount++] = monIndex;
+        }
     }
     else if(FlagGet(FLAG_BATTLE_GYM)){
 	    if (GetMonData(&gPlayerParty[5], MON_DATA_SPECIES) != SPECIES_NONE)
@@ -2128,18 +2323,14 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         if (firstTrainer == TRUE)
             ZeroEnemyPartyMons();
 
-        if (isTournamentBattle)
-        {
-            monsCount = gPlayerPartyCount;
-        }
-        else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        if (!isTournamentBattle && (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS))
         {
             if (gTrainers[trainerNum].partySize > PARTY_SIZE / 2)
                 monsCount = PARTY_SIZE / 2;
             else
                 monsCount = gTrainers[trainerNum].partySize;
         }
-        else
+        else if (!isTournamentBattle)
         {
             monsCount = gTrainers[trainerNum].partySize;
         }
@@ -2159,7 +2350,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
 
             if (isTournamentBattle)
             {
-                u8 monIndex = tournamentOrder[i];
+                u8 monIndex = tournamentPartyOrder[i];
                 u16 species = sTournamentTeams[tournamentTeam][monIndex].species;
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
