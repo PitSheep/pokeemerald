@@ -857,9 +857,8 @@
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
 
-// NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 9 additional trainers before trainer flag space overflows
-//       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
-//       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
+// The contiguous trainer flag range is full. Additional trainers need an
+// explicitly assigned flag to avoid shifting system flags in existing saves.
 
 //inizio aggiunta trainer di Pit
 #define TRAINER_PIT_S                         855
@@ -871,7 +870,8 @@
 #define TRAINER_RICK_S                        861
 #define TRAINER_RICK_D                        862
 #define TRAINER_OLDALE_GYM_TOURNAMENT         863
-#define TRAINERS_COUNT                      864
+#define TRAINER_OLDALE_GYM_TOURNAMENT_DUO     864
+#define TRAINERS_COUNT                      865
 //fine
 
 #define MAX_TRAINERS_COUNT                  864

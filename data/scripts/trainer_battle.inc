@@ -125,6 +125,11 @@ EventScript_DoTrainerBattle::
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE, EventScript_EndTrainerBattle
 	goto_if_eq VAR_RESULT, TRAINER_BATTLE_CONTINUE_SCRIPT_DOUBLE_NO_MUSIC, EventScript_EndTrainerBattle
 EventScript_EndTrainerBattle::
+	goto_if_eq VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 1, EventScript_EndOldaleGymDuoTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 3, EventScript_EndOldaleGymDuoTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 5, EventScript_EndOldaleGymDuoTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 7, EventScript_EndOldaleGymDuoTournamentBattle
+	goto_if_eq VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 9, EventScript_EndOldaleGymDuoTournamentBattle
 	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 1, EventScript_EndOldaleGymTournamentBattle
 	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 3, EventScript_EndOldaleGymTournamentBattle
 	goto_if_eq VAR_OLDALE_GYM_TOURNAMENT_STATE, 5, EventScript_EndOldaleGymTournamentBattle
@@ -135,6 +140,27 @@ EventScript_EndTrainerBattle::
 	goto_if_eq VAR_BATTLE_GYM_OPPONENT, 1, EventScript_GymLostNoPoints
 	frontier_givepoints
 	frontier_givepoints
+	gotobeatenscript
+	releaseall
+	end
+
+EventScript_EndOldaleGymDuoTournamentBattle::
+	goto_if_eq VAR_BATTLE_GYM_OPPONENT, 1, EventScript_OldaleGymDuoTournamentLost
+	goto_if_ne VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 1, EventScript_OldaleGymDuoTournamentAdvance
+	setvar VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 3
+	goto EventScript_OldaleGymDuoTournamentReturn
+
+EventScript_OldaleGymDuoTournamentAdvance::
+	addvar VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 1
+	goto EventScript_OldaleGymDuoTournamentReturn
+
+EventScript_OldaleGymDuoTournamentLost::
+	clearflag FLAG_BATTLE_GYM
+	setvar VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE, 2
+
+EventScript_OldaleGymDuoTournamentReturn::
+	setvar VAR_BATTLE_GYM_OPPONENT, 0
+	cleartrainerflag TRAINER_OLDALE_GYM_TOURNAMENT_DUO
 	gotobeatenscript
 	releaseall
 	end

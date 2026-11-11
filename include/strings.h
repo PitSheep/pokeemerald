@@ -726,6 +726,7 @@ extern const u8 gText_TutorExplosion50BP[];
 extern const u8 gText_NormalTrainer[];
 extern const u8 gText_Elite4Trainer[];
 extern const u8 gText_SixVsOneTournament[];
+extern const u8 gText_SixVsDuoTournament[];
 
 extern const u8 gText_Leftovers48BP[];
 extern const u8 gText_WhiteHerb48BP[];

@@ -2155,13 +2155,14 @@ static void SpriteCB_UnusedBattleInit_Main(struct Sprite *sprite)
 
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 firstTrainer)
 {
-    static const struct
+    struct TournamentMon
     {
         u16 species;
         u16 heldItem;
         u16 moves[MAX_MON_MOVES];
         u8 evs[NUM_STATS];
-    } sTournamentTeams[][PARTY_SIZE] = {
+    };
+    static const struct TournamentMon sTournamentTeams[][PARTY_SIZE] = {
         {
             {SPECIES_SCEPTILE, ITEM_MIRACLE_SEED, {MOVE_LEAF_BLADE, MOVE_EARTHQUAKE, MOVE_DRAGON_CLAW, MOVE_BRICK_BREAK}, {0, 252, 0, 252, 0, 6}},
             {SPECIES_BLAZIKEN, ITEM_CHARCOAL, {MOVE_BLAZE_KICK, MOVE_SKY_UPPERCUT, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE}, {0, 252, 0, 252, 0, 6}},
@@ -2195,6 +2196,41 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             {SPECIES_LUDICOLO, ITEM_MIRACLE_SEED, {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE}, {0, 0, 0, 252, 252, 6}},
         }
     };
+    static const struct TournamentMon sDuoTournamentTeams[][PARTY_SIZE] = {
+        {
+            {SPECIES_SWAMPERT, ITEM_MYSTIC_WATER, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_EARTHQUAKE, MOVE_PROTECT}, {200, 156, 0, 0, 152, 0}},
+            {SPECIES_FLYGON, ITEM_DRAGON_FANG, {MOVE_DRAGON_CLAW, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT}, {0, 252, 0, 252, 6, 0}},
+            {SPECIES_GARDEVOIR, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_PROTECT}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_BLAZIKEN, ITEM_CHARCOAL, {MOVE_BLAZE_KICK, MOVE_SKY_UPPERCUT, MOVE_ROCK_SLIDE, MOVE_PROTECT}, {0, 252, 0, 252, 6, 0}},
+            {SPECIES_SCEPTILE, ITEM_MIRACLE_SEED, {MOVE_LEAF_BLADE, MOVE_DRAGON_CLAW, MOVE_BRICK_BREAK, MOVE_PROTECT}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_AGGRON, ITEM_HARD_STONE, {MOVE_IRON_TAIL, MOVE_ROCK_SLIDE, MOVE_BRICK_BREAK, MOVE_PROTECT}, {252, 252, 0, 0, 0, 6}},
+        },
+        {
+            {SPECIES_METAGROSS, ITEM_SITRUS_BERRY, {MOVE_METEOR_MASH, MOVE_EARTHQUAKE, MOVE_ROCK_SLIDE, MOVE_PROTECT}, {252, 252, 0, 6, 0, 0}},
+            {SPECIES_SALAMENCE, ITEM_DRAGON_FANG, {MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE, MOVE_ROCK_SLIDE, MOVE_PROTECT}, {0, 252, 0, 252, 6, 0}},
+            {SPECIES_MANECTRIC, ITEM_MAGNET, {MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_ROAR, MOVE_PROTECT}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_MILOTIC, ITEM_LEFTOVERS, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_PROTECT}, {252, 0, 0, 0, 252, 6}},
+            {SPECIES_BRELOOM, ITEM_BLACK_BELT, {MOVE_STUN_SPORE, MOVE_SKY_UPPERCUT, MOVE_MACH_PUNCH, MOVE_PROTECT}, {0, 252, 0, 252, 0, 6}},
+            {SPECIES_ARCANINE, ITEM_CHARCOAL, {MOVE_FLAMETHROWER, MOVE_EXTREME_SPEED, MOVE_AERIAL_ACE, MOVE_PROTECT}, {0, 126, 0, 126, 252, 6}},
+        },
+        {
+            {SPECIES_HARIYAMA, ITEM_BLACK_BELT, {MOVE_FAKE_OUT, MOVE_BRICK_BREAK, MOVE_ROCK_SLIDE, MOVE_PROTECT}, {252, 252, 0, 0, 0, 6}},
+            {SPECIES_ALAKAZAM, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_SHOCK_WAVE, MOVE_PROTECT}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_CLAYDOL, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_ROCK_SLIDE, MOVE_ICE_BEAM, MOVE_PROTECT}, {252, 0, 0, 0, 252, 6}},
+            {SPECIES_ALTARIA, ITEM_DRAGON_FANG, {MOVE_DRAGON_CLAW, MOVE_AERIAL_ACE, MOVE_FLAMETHROWER, MOVE_PROTECT}, {252, 126, 0, 6, 126, 0}},
+            {SPECIES_WALREIN, ITEM_NEVER_MELT_ICE, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_TOXIC, MOVE_PROTECT}, {252, 0, 0, 0, 252, 6}},
+            {SPECIES_ABSOL, ITEM_BLACK_GLASSES, {MOVE_BITE, MOVE_AERIAL_ACE, MOVE_ROCK_SLIDE, MOVE_PROTECT}, {0, 252, 0, 252, 0, 6}},
+        },
+        {
+            {SPECIES_LUDICOLO, ITEM_MIRACLE_SEED, {MOVE_SURF, MOVE_GIGA_DRAIN, MOVE_ICE_BEAM, MOVE_RAIN_DANCE}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_KINGDRA, ITEM_MYSTIC_WATER, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RAIN_DANCE, MOVE_PROTECT}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_MANECTRIC, ITEM_MAGNET, {MOVE_THUNDER, MOVE_THUNDERBOLT, MOVE_THUNDER_WAVE, MOVE_PROTECT}, {0, 0, 0, 252, 252, 6}},
+            {SPECIES_CLAYDOL, ITEM_TWISTED_SPOON, {MOVE_PSYCHIC, MOVE_ROCK_SLIDE, MOVE_ICE_BEAM, MOVE_PROTECT}, {252, 0, 0, 0, 252, 6}},
+            {SPECIES_CRAWDAUNT, ITEM_MYSTIC_WATER, {MOVE_CRABHAMMER, MOVE_KNOCK_OFF, MOVE_BRICK_BREAK, MOVE_PROTECT}, {252, 252, 0, 6, 0, 0}},
+            {SPECIES_WALREIN, ITEM_NEVER_MELT_ICE, {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RAIN_DANCE, MOVE_PROTECT}, {252, 0, 0, 0, 252, 6}},
+        }
+    };
+    const struct TournamentMon *tournamentTeamMons;
     u32 nameHash = 0;
     u32 personalityValue;
     u8 fixedIV;
@@ -2206,17 +2242,18 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
     u8 max = 0;
     u8 range = 0;
     u8 rand = 0;
-    bool8 isTournamentBattle = trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT
-        && (VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 1
-            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 3
-            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 5
-            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 7
-            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 9
-            || VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE) == 11);
     u16 tournamentSelection = VarGet(VAR_OLDALE_GYM_TOURNAMENT_TEAM);
-    u16 tournamentState = VarGet(VAR_OLDALE_GYM_TOURNAMENT_STATE);
-    u8 tournamentTeam = tournamentSelection % ARRAY_COUNT(sTournamentTeams);
-    u16 tournamentOrderIndex = (tournamentSelection / ARRAY_COUNT(sTournamentTeams)) % 720;
+    u16 tournamentState = VarGet(trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT_DUO
+        ? VAR_OLDALE_GYM_DUO_TOURNAMENT_STATE : VAR_OLDALE_GYM_TOURNAMENT_STATE);
+    bool8 isTournamentBattle = (trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT
+                               || trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT_DUO)
+        && (tournamentState == 1 || tournamentState == 3 || tournamentState == 5
+            || tournamentState == 7 || tournamentState == 9
+            || (trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT && tournamentState == 11));
+    u8 tournamentTeamCount = trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT_DUO
+        ? ARRAY_COUNT(sDuoTournamentTeams) : ARRAY_COUNT(sTournamentTeams);
+    u8 tournamentTeam = tournamentSelection % tournamentTeamCount;
+    u16 tournamentOrderIndex = (tournamentSelection / tournamentTeamCount) % 720;
     u8 tournamentOrder[PARTY_SIZE];
     u8 tournamentPartyOrder[PARTY_SIZE];
 
@@ -2225,6 +2262,11 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
         u8 availableMons[PARTY_SIZE];
         u16 factorial = 120;
         u32 totalLevel = 0;
+
+        if (trainerNum == TRAINER_OLDALE_GYM_TOURNAMENT_DUO)
+            tournamentTeamMons = sDuoTournamentTeams[tournamentTeam];
+        else
+            tournamentTeamMons = sTournamentTeams[tournamentTeam];
 
         for (i = 0; i < PARTY_SIZE; i++)
             availableMons[i] = i;
@@ -2263,9 +2305,9 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                     continue;
                 for (j = 0; j < gPlayerPartyCount; j++)
                 {
-                    score += GetTournamentMatchupScore(sTournamentTeams[tournamentTeam][monIndex].species,
-                                                       sTournamentTeams[tournamentTeam][monIndex].moves,
-                                                       sTournamentTeams[tournamentTeam][monIndex].evs,
+                    score += GetTournamentMatchupScore(tournamentTeamMons[monIndex].species,
+                                                       tournamentTeamMons[monIndex].moves,
+                                                       tournamentTeamMons[monIndex].evs,
                                                        fixedLVL, &gPlayerParty[j]);
                 }
                 if (score < weakestScore)
@@ -2351,7 +2393,7 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
             if (isTournamentBattle)
             {
                 u8 monIndex = tournamentPartyOrder[i];
-                u16 species = sTournamentTeams[tournamentTeam][monIndex].species;
+                u16 species = tournamentTeamMons[monIndex].species;
                 for (j = 0; gSpeciesNames[species][j] != EOS; j++)
                     nameHash += gSpeciesNames[species][j];
 
@@ -2361,13 +2403,13 @@ static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum, bool8 fir
                 if (reallevel == 0)
                     reallevel = 1;
                 CreateMon(&party[i], species, reallevel, fixedIV, TRUE, personalityValue, OT_ID_RANDOM_NO_SHINY, 0);
-                SetMonData(&party[i], MON_DATA_HELD_ITEM, &sTournamentTeams[tournamentTeam][monIndex].heldItem);
+                SetMonData(&party[i], MON_DATA_HELD_ITEM, &tournamentTeamMons[monIndex].heldItem);
                 for (j = 0; j < NUM_STATS; j++)
-                    SetMonData(&party[i], MON_DATA_HP_EV + j, &sTournamentTeams[tournamentTeam][monIndex].evs[j]);
+                    SetMonData(&party[i], MON_DATA_HP_EV + j, &tournamentTeamMons[monIndex].evs[j]);
                 CalculateMonStats(&party[i]);
                 for (j = 0; j < MAX_MON_MOVES; j++)
                 {
-                    u16 move = sTournamentTeams[tournamentTeam][monIndex].moves[j];
+                    u16 move = tournamentTeamMons[monIndex].moves[j];
                     SetMonData(&party[i], MON_DATA_MOVE1 + j, &move);
                     SetMonData(&party[i], MON_DATA_PP1 + j, &gBattleMoves[move].pp);
                 }

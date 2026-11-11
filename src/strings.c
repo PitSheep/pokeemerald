@@ -1183,6 +1183,7 @@ const u8 gText_TutorExplosion50BP[] = _("EXPLOSION{CLEAR_TO 0x64}50BP");
 const u8 gText_NormalTrainer[] = _("CLASSIC TRAINER{CLEAR_TO 0x64}");
 const u8 gText_Elite4Trainer[] = _("NEW ELITE 4{CLEAR_TO 0x64}");
 const u8 gText_SixVsOneTournament[] = _("6 VS 1 CUP{CLEAR_TO 0x64}");
+const u8 gText_SixVsDuoTournament[] = _("6 VS DUO CUP{CLEAR_TO 0x64}");
 const u8 gText_Leftovers48BP[] = _("LEFTOVERS{CLEAR_TO 0x5E}48BP");
 const u8 gText_WhiteHerb48BP[] = _("WHITE HERB{CLEAR_TO 0x5E}48BP");
 const u8 gText_QuickClaw48BP[] = _("QUICK CLAW{CLEAR_TO 0x5E}48BP");

@@ -793,19 +793,19 @@
 	.byte 0x5f
 	.endm
 
-	@ Checks if the trainer has been defeated by the player (by comparing the flag 'trainer + TRAINER_FLAGS_START' to TRUE).
+	@ Checks if the trainer has been defeated by the player.
 	.macro checktrainerflag trainer:req
 	.byte 0x60
 	.2byte \trainer
 	.endm
 
-	@ Sets the trainer flag (trainer + TRAINER_FLAGS_START) to TRUE (defeated).
+	@ Sets the trainer flag to TRUE (defeated).
 	.macro settrainerflag trainer:req
 	.byte 0x61
 	.2byte \trainer
 	.endm
 
-	@ Sets the trainer flag (trainer + TRAINER_FLAGS_START) to FALSE (not defeated).
+	@ Sets the trainer flag to FALSE (not defeated).
 	.macro cleartrainerflag trainer:req
 	.byte 0x62
 	.2byte \trainer

@@ -984,14 +984,21 @@ static u8 TrainerBattleLoadArg8(const u8 *ptr)
     return T1_READ_8(ptr);
 }
 
+static u16 GetTrainerDefeatFlag(u16 trainerId)
+{
+    if (trainerId == TRAINER_OLDALE_GYM_TOURNAMENT_DUO)
+        return FLAG_DEFEATED_OLDALE_GYM_TOURNAMENT_DUO;
+    return TRAINER_FLAGS_START + trainerId;
+}
+
 static u16 GetTrainerAFlag(void)
 {
-    return TRAINER_FLAGS_START + gTrainerBattleOpponent_A;
+    return GetTrainerDefeatFlag(gTrainerBattleOpponent_A);
 }
 
 static u16 GetTrainerBFlag(void)
 {
-    return TRAINER_FLAGS_START + gTrainerBattleOpponent_B;
+    return GetTrainerDefeatFlag(gTrainerBattleOpponent_B);
 }
 
 static bool32 IsPlayerDefeated(u32 battleOutcome)
@@ -1218,7 +1225,7 @@ void SetUpTwoTrainersBattle(void)
 bool32 GetTrainerFlagFromScriptPointer(const u8 *data)
 {
     u32 flag = TrainerBattleLoadArg16(data + 2);
-    return FlagGet(TRAINER_FLAGS_START + flag);
+    return FlagGet(GetTrainerDefeatFlag(flag));
 }
 
 // Set trainer's movement type so they stop and remain facing that direction
@@ -1259,17 +1266,17 @@ static void SetBattledTrainerFlag(void)
 
 bool8 HasTrainerBeenFought(u16 trainerId)
 {
-    return FlagGet(TRAINER_FLAGS_START + trainerId);
+    return FlagGet(GetTrainerDefeatFlag(trainerId));
 }
 
 void SetTrainerFlag(u16 trainerId)
 {
-    FlagSet(TRAINER_FLAGS_START + trainerId);
+    FlagSet(GetTrainerDefeatFlag(trainerId));
 }
 
 void ClearTrainerFlag(u16 trainerId)
 {
-    FlagClear(TRAINER_FLAGS_START + trainerId);
+    FlagClear(GetTrainerDefeatFlag(trainerId));
 }
 
 void BattleSetup_StartTrainerBattle(void)
